@@ -7,4 +7,3 @@ SCOT web service
 - backend: nodejs express
 - frontend: react
 - db: mysql
-
