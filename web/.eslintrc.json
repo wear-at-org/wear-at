@@ -1,0 +1,16 @@
+{
+  "extends": ["react-app", "react-app/jest", "airbnb"],
+  "rules": {
+    "no-console": 0,
+    "no-underscore-dangle": 0,
+    "no-unused-vars": ["error", { "argsIgnorePattern": "next" }],
+    "no-use-before-define": ["error", { "variables": false }],
+    "no-multi-str": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+  },
+  "env": {
+    "node": true,
+    "es6": true,
+    "mocha": true
+  }
+}
