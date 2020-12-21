@@ -1,4 +1,15 @@
 {
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "jest", 
+    "import"
+  ],
+  "extends": [
+    "airbnb-base",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
   "rules": {
     "no-console": 0,
     "no-underscore-dangle": 0,
@@ -8,18 +19,8 @@
   },
   "env": {
     "node": true,
-    "mocha": true,
-    "es6": true
-  },
-  "parserOptions": {
-    "ecmaVersion": 2018
-  },
-  "extends": [
-    "airbnb-base",
-    "plugin:jest/recommended", 
-    "plugin:security/recommended",
-    "plugin:prettier/recommended"
-  ],
-  "plugins": ["jest", "security", "prettier"]
+    "es6": true,
+    "mocha": true
+  }
 }
 

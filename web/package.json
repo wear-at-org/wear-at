@@ -1,9 +1,11 @@
 {
-  "name": "scott",
+  "name": "scott-web",
+  "description": "scot web service",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.2",
+    "@testing-library/jest-dom": "^5.11.6",
     "immer": "^8.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -18,13 +20,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build && mv build ../server/public",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "eject": "react-scripts eject",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "browserslist": {
     "production": [
@@ -37,5 +35,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/react": "^11.2.2",
+    "eslint-config-airbnb": "^18.2.1"
   }
 }

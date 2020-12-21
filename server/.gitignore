@@ -3,14 +3,14 @@
 # dependencies
 /node_modules
 
-# public 
+# dist
 /public
 
 # testing
 /coverage
 
 # production
-/build
+/dist
 
 # misc
 .DS_Store
