@@ -1,26 +1,45 @@
-import express from 'express';
+import fastify from 'fastify';
 import path from 'path';
 import dotenv from 'dotenv';
+import cors from 'fastify-cors';
+import serveStatic from 'fastify-static';
+import log from 'pino';
 import route from './src/routes';
 
 dotenv.config();
 
-const app = express();
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
-
-// TODO add JWT
-app.use('/v1', route);
-
-// app.use((err, req, res, next) => {
-//   console.error(err);
-//   res.status(500).send("Server Error");
-// });
-
-const port = process.env.PORT;
-const env = process.env.NODE_ENV;
-app.listen(port, () => {
-  console.log(`server started on port ${port} (${env})`);
+const logger = log({
+  level: 'info',
+  serializers: {
+    req(request) {
+      return {
+        method: request.method,
+        url: request.url,
+        path: request.path,
+        headers: request.headers,
+      };
+    },
+  },
 });
+
+const app = fastify({ logger });
+app.register(cors, {});
+app.register(serveStatic, { root: path.join(__dirname, 'public') });
+
+app.setErrorHandler((error, req, res) => {
+  logger.error(error);
+  // TODO error handler
+  res.status(500).send({ ok: false });
+});
+
+app.register(route, { prefix: '/v1' });
+
+const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0', (err) => {
+  if (err) {
+    logger.error({ err }, 'server-error');
+    process.exit(1);
+  }
+});
+
+// TODO graceful shutdown
