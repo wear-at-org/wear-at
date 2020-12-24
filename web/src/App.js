@@ -1,28 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Container from '@material-ui/core/Container';
+import { Route } from 'react-router-dom';
+import Header from './components/Header';
+import Overview from './components/overview/Overview';
+import Subscribe from './components/subscribe/Subscribe';
+import Footer from './components/Footer';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit
-          {' '}
-          <code>src/App.js</code>
-          {' '}
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <CssBaseline />
+      <Container maxWidth="lg">
+        <Header />
+        <main>
+          <Route path="/" exact component={Overview} />
+          <Route path="/subscribe" exact component={Subscribe} />
+        </main>
+      </Container>
+      <Footer />
     </div>
   );
 }
