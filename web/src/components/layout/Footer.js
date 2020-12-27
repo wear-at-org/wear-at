@@ -25,7 +25,6 @@ export default function Footer() {
           <Link color="inherit" href="https://material-ui.com/">
             SCOT
           </Link>
-          {' '}
           {new Date().getFullYear()}
           {'.'}
         </Typography>
