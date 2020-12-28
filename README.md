@@ -5,5 +5,5 @@ SCOT web service
 
 ## spec
 - backend: nodejs fastify
-- frontend: react
+- frontend: react, redux
 - db: mysql or mongo
