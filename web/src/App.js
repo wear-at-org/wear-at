@@ -6,9 +6,10 @@ import Footer from 'components/layout/Footer';
 import Header from 'components/layout/Header';
 import Overview from 'views/Overview/Overview';
 import Subscribe from 'views/Subscribe/Subscribe';
-import './App.scss';
+import 'assets/scss/index.scss';
 import { Provider } from 'react-redux';
 import store from 'store';
+import Loader from 'components/layout/Spinner';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         </Container>
         <Footer />
       </div>
+      <Loader />
     </Provider>
   );
 }

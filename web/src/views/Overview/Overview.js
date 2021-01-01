@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -6,6 +6,7 @@ import Divider from '@material-ui/core/Divider';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
+import { useTestData } from 'hooks';
 import Sidebar from './Sidebar';
 import MainFeaturedPost from './MainFeaturedPost';
 import FeaturedPost from './FeaturedPost';
@@ -75,6 +76,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Main() {
   const classes = useStyles();
+  const [testData] = useTestData();
+
+  useEffect(() => {
+    console.debug(testData);
+  }, [testData]);
 
   return (
     <>

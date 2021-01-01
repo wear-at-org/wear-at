@@ -8,7 +8,9 @@
     "no-multi-str": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "object-curly-newline": 0,
-    "import/no-unresolved": "off"
+    "import/no-unresolved": "off",
+    "linebreak-style": 0,
+    "import/prefer-default-export": "off"
   },
   "env": {
     "node": true,

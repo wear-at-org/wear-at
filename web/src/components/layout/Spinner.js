@@ -5,7 +5,11 @@ import { spinnerName } from 'store';
 const Loader = () => {
   const { count } = useSelector((state) => state[spinnerName]);
   if (count > 0) {
-    return <div className="loading" />;
+    return (
+      <div className="loader-container">
+        <div className="loader" />
+      </div>
+    );
   }
   return null;
 };
