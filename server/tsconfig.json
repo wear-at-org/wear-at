@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
-    "target": "ES2019",
+    "target": "ES2020",
     "module": "commonjs",
     "rootDir": ".",
     "baseUrl": ".",
     "outDir": "dist",
+    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "importHelpers": true,
     "strict": true,
@@ -13,14 +14,21 @@
     "moduleResolution": "node",
     "strictNullChecks": true,
     "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
   },
   "include": [
-    "src", "index.ts",
+    "./src/**/*",
+    "index.ts",
   ],
   "exclude": [
-    ".vscode",
     "dist",
     "public",
     "node_modules"
-  ]
+  ],
+  "paths": {
+    "@config/*": ["src/config/*"],
+    "@models/*": ["src/models/*"],
+    "@controllers/*": ["src/controllers/*"],
+    "@services/*": ["src/services/*"],
+  }
 }
