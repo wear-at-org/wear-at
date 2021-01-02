@@ -10,6 +10,7 @@ import 'assets/scss/index.scss';
 import { Provider } from 'react-redux';
 import store from 'store';
 import Loader from 'components/layout/Spinner';
+import NotFound from 'views/NotFound';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <main>
             <Route path="/" exact component={Overview} />
             <Route path="/subscribe" exact component={Subscribe} />
+            <Route path="*" component={NotFound} />
           </main>
         </Container>
         <Footer />

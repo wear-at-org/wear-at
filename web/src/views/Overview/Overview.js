@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -7,6 +7,7 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import { useTestData } from 'hooks';
+import MainPopup from 'views/Popup/MainPopup';
 import Sidebar from './Sidebar';
 import MainFeaturedPost from './MainFeaturedPost';
 import FeaturedPost from './FeaturedPost';
@@ -77,13 +78,31 @@ const useStyles = makeStyles((theme) => ({
 export default function Main() {
   const classes = useStyles();
   const [testData] = useTestData();
+  const [popupStatus, setPopupStatus] = useState(false);
 
   useEffect(() => {
     console.debug(testData);
   }, [testData]);
 
+  const opentPop = () => {
+    document.querySelector('body').classList.remove('scroll');
+    document.querySelector('body').classList.add('noscroll');
+    setPopupStatus(true);
+  };
+
+  const closePopup = (event) => {
+    if (event.target.className === 'popup-container') {
+      document.querySelector('body').classList.remove('noscroll');
+      document.querySelector('body').classList.add('scroll');
+      setPopupStatus(false);
+    }
+  };
+
   return (
     <>
+      {
+        popupStatus && <MainPopup closePopup={closePopup} />
+      }
       <MainFeaturedPost post={mainFeaturedPost} />
       <Grid container spacing={4}>
         {featuredPosts.map((post) => (
@@ -101,6 +120,7 @@ export default function Main() {
               {post}
             </Markdown>
           ))}
+          <button type="button" onClick={opentPop}>팝업 테스트 버튼</button>
         </Grid>
         <Sidebar
           title={sidebar.title}

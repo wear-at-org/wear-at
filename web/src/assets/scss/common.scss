@@ -1,3 +1,87 @@
+// tast
+.toast {
+  position: fixed;
+  width: 200px;
+  background-color: rgba(0,0,0,0.5);
+}
+
+// 페이지를 찾을 수 없음
+.not-found {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20%;
+}
+
+// select-arrow
+.select-arrow {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  margin-top: -5px;
+  transform: rotate(45deg) translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-bottom: 1px solid rgb(0, 0, 0);
+  border-right: 1px solid rgb(0, 0, 0);
+  transition: 0.3s;
+}
+
+.select-arrow.open {
+  transform: rotate(225deg) translate(-50%);
+  transition: 0.3s;
+}
+
+// 팝업common
+.noscroll {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.scroll {
+  height: auto;
+  overflow: visible;
+}
+
+.dim {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 10;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.popup-wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 11;
+
+  .popup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    .inner {
+      width: 80%;
+      height: 80%;
+      background-color: white;
+      padding: 10% 15%;
+      overflow: scroll;
+
+      .row {
+        display: flex;
+      }
+    }
+  }
+}
+
+// loading
 .loader-container {
   width: 100%;
   height: 100vh;

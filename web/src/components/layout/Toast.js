@@ -8,7 +8,11 @@ const ToastAlertGroup = () => {
   const { alertList } = useSelector((state) => state[toastAlertName]);
 
   return (
-    alertList.map((key) => <div onKeyPress={() => dispatch(removeToast({ key }))} role="button" />)
+    alertList.map(({ key, title }) => (
+      <div className="toast" onClick={() => dispatch(removeToast({ key }))}>
+        { title}
+      </div>
+    ))
   );
 };
 export default ToastAlertGroup;
