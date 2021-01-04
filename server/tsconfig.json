@@ -15,6 +15,12 @@
     "strictNullChecks": true,
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "@config/*": ["src/config/*"],
+      "@models/*": ["src/models/*"],
+      "@controllers/*": ["src/controllers/*"],
+      "@services/*": ["src/services/*"],
+    }
   },
   "include": [
     "./src/**/*",
@@ -24,11 +30,5 @@
     "dist",
     "public",
     "node_modules"
-  ],
-  "paths": {
-    "@config/*": ["src/config/*"],
-    "@models/*": ["src/models/*"],
-    "@controllers/*": ["src/controllers/*"],
-    "@services/*": ["src/services/*"],
-  }
+  ]
 }

@@ -15,6 +15,8 @@ export type UserStatic = typeof Model & {
   new (values?: any, options?: BuildOptions): UserInstance;
 };
 
+export const test = () => console.log('xxxxaliastest')
+
 export const createUserModel = (sequelize: Sequelize): UserStatic => {
   const user = sequelize.define<UserInstance>('User', {
     ID: {

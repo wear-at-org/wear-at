@@ -1,3 +1,4 @@
+import 'module-alias/register';
 import fastify from 'fastify';
 import path from 'path';
 import dotenv from 'dotenv';
@@ -6,7 +7,6 @@ import serveStatic from 'fastify-static';
 import log from 'pino';
 import sequelize from 'sequelize';
 import { apiHandler } from './controllers';
-import 'module-alias/register';
 
 dotenv.config();
 
