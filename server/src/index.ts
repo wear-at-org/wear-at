@@ -9,6 +9,7 @@ import log from 'pino';
 import { createConnection } from 'typeorm';
 import { User } from '@models/user';
 import { UserService } from '@services/user';
+import { loadConfig } from '@config/index';
 import { apiHandler } from './controllers';
 
 (async function run() {
@@ -28,17 +29,19 @@ import { apiHandler } from './controllers';
     },
   });
 
+  const conf = loadConfig();
+
   let userService: UserService;
   try {
     const connection = await createConnection({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'scot',
-      password: 'scot123!@#',
-      database: 'scot',
+      type: conf.db.type,
+      host: conf.db.host,
+      port: conf.db.port,
+      username: conf.db.username,
+      password: conf.db.password,
+      database: conf.db.database,
+      synchronize: conf.db.synchronize,
       entities: [User],
-      synchronize: true,
     });
     const userRepository = connection.getRepository(User);
     userService = new UserService(userRepository);
@@ -76,7 +79,7 @@ import { apiHandler } from './controllers';
     logger.error({ error }, 'global.unhandledRejection');
   });
 
-  const port = process.env.PORT || 8080;
+  const port = conf.port || 8080;
   server.listen(port, '0.0.0.0', (err) => {
     if (err) {
       logger.error({ err }, 'server.error');
