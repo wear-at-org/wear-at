@@ -9,6 +9,7 @@
       "@models/*": ["src/models/*"],
       "@controllers/*": ["src/controllers/*"],
       "@services/*": ["src/services/*"],
+      "@utils/*": ["src/utils/*"],
     }
   },
   "include": [

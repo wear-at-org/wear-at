@@ -1,7 +1,7 @@
 import { User } from '@models/user';
-import { createConnection } from 'typeorm';
+import { createConnection, getConnection } from 'typeorm';
 
-export const setupDB = async (): Promise<void> => {
+export const setupMockDB = async (): Promise<void> => {
   process.env['NODE-ENV'] = 'test';
   await createConnection({
     type: 'sqljs',
@@ -13,6 +13,6 @@ export const setupDB = async (): Promise<void> => {
   });
 };
 
-export const teardownDB = (): void => {
-
+export const teardownMockDB = async (): Promise<void> => {
+  await getConnection().close();
 };
