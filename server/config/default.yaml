@@ -1,5 +1,5 @@
 global:
-  port: 8080
+  port: 8088
 db:
   type: "mysql"
   host: "localhost"
