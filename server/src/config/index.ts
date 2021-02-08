@@ -1,4 +1,5 @@
 import config from 'config';
+import dotenv from 'dotenv';
 
 export interface dbConfig {
   type: 'mysql' | 'mariadb';
@@ -15,7 +16,10 @@ export interface Config {
   db: dbConfig;
 }
 
-export const loadConfig = (): Config => ({
-  port: config.get<number>('global.port'),
-  db: config.get<dbConfig>('db'),
-});
+export const loadConfig = (): Config => {
+  dotenv.config();
+  return {
+    port: config.get<number>('global.port'),
+    db: config.get<dbConfig>('db'),
+  };
+};
