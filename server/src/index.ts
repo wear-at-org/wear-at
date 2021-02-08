@@ -30,8 +30,10 @@ interface muxOptions {
   userService: UserService;
 }
 
-async function initialize(conf: Config): Promise<muxOptions> {
+async function initialize(): Promise<muxOptions> {
   try {
+    const conf = loadConfig();
+
     const connection = await createConnection({
       type: conf.db.type,
       host: conf.db.host,
@@ -55,9 +57,7 @@ async function initialize(conf: Config): Promise<muxOptions> {
 
 (async function run() {
   try {
-    const conf = loadConfig();
-
-    const opts = await initialize(conf);
+    const opts = await initialize();
 
     const server = fastify({
       logger,
@@ -88,7 +88,7 @@ async function initialize(conf: Config): Promise<muxOptions> {
       logger.error({ error }, 'global.unhandledRejection');
     });
 
-    const port = conf.port || 8080;
+    const port = opts.config.port || 8080;
     server.listen(port, '0.0.0.0', (err) => {
       if (err) {
         logger.error({ err }, 'server.error');
