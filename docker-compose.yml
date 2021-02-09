@@ -1,0 +1,13 @@
+mysql:
+  image: mysql
+  ports:
+    - "3306:3306"
+  command: --init-file /data/application/init.sql
+  volumes:
+      - ./scripts/db_initialize.sql:/data/application/init.sql
+  environment:
+    MYSQL_ROOT_USER: root
+    MYSQL_ROOT_PASSWORD: scot123!@#
+    MYSQL_DATABASE: scot
+    MYSQL_USER: scot
+    MYSQL_PASSWORD: scot123!@#
