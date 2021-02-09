@@ -1,6 +1,6 @@
 import 'module-alias/register';
 import 'reflect-metadata';
-import fastify, { FastifyRequest } from 'fastify';
+import fastify, { FastifyInstance, FastifyRequest } from 'fastify';
 import path from 'path';
 import cors from 'fastify-cors';
 import serveStatic from 'fastify-static';
@@ -55,15 +55,8 @@ async function initialize(): Promise<muxOptions> {
   }
 }
 
-(async function run() {
+function setupRouter(server: FastifyInstance, opts: muxOptions): void {
   try {
-    const opts = await initialize();
-
-    const server = fastify({
-      logger,
-      disableRequestLogging: true,
-    });
-
     server.register(cors, {});
     server.register(serveStatic, { root: path.join(__dirname, '../public') });
     server.register((app, _, done) => {
@@ -75,11 +68,25 @@ async function initialize(): Promise<muxOptions> {
     server.get('/ping', (_, res) => {
       res.status(200).send({ result: 'ok' });
     });
-
     server.setErrorHandler((error, _req, res) => {
       logger.error({ error }, 'global.error');
       res.status(500).send({ error });
     });
+  } catch (e) {
+    logger.error(e, 'setupRouter');
+    throw e;
+  }
+}
+
+(async function run() {
+  try {
+    const opts = await initialize();
+
+    const server = fastify({
+      logger,
+      disableRequestLogging: true,
+    });
+    setupRouter(server, opts);
 
     process.on('uncaughtException', (error) => {
       logger.error({ error }, 'global.uncaughtException');
