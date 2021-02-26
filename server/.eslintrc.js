@@ -35,6 +35,7 @@ module.exports = {
         "tsx": "never"
       }
     ],
+    "class-methods-use-this": false,
     "@typescript-eslint/no-unsafe-assignment": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-empty-function": "off",

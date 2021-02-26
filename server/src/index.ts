@@ -9,7 +9,9 @@ import { createConnection } from 'typeorm';
 import { User } from '@models/user';
 import { UserService } from '@services/user';
 import { Config, loadConfig } from '@config/index';
-import { apiHandler } from './controllers';
+import { apiHandler } from './controllers/api';
+import { AuthService } from '@services/auth';
+import { tokenHandler } from '@controllers/auth';
 
 const logger = log({
   level: 'info',
@@ -28,6 +30,7 @@ const logger = log({
 interface muxOptions {
   config: Config;
   userService: UserService;
+  authService: AuthService;
 }
 
 async function initialize(): Promise<muxOptions> {
@@ -48,6 +51,7 @@ async function initialize(): Promise<muxOptions> {
     return {
       config: conf,
       userService: new UserService(userRepository),
+      authService: new AuthService(),
     };
   } catch (e) {
     logger.error(e, 'initialize');
@@ -59,11 +63,16 @@ function setupRouter(server: FastifyInstance, opts: muxOptions): void {
   try {
     server.register(cors, {});
     server.register(serveStatic, { root: path.join(__dirname, '../public') });
-    server.register((app, _, done) => {
-      app.decorateRequest('userService', opts.userService);
-      // app.addHook('preHandler', () => {});
-      app.post('/api/:method', apiHandler);
-      done();
+    server.register((app) => {
+      app.register((app) => {
+        app.decorateRequest('userService', opts.userService);
+        //app.addHook('preHandler', () => {});
+        app.post('/api/:method', apiHandler);
+      });
+      app.register((app) => {
+        app.decorateRequest('authService', opts.authService);
+        app.post('/auth/token', tokenHandler);
+      });
     }, { prefix: '/v1' });
     server.get('/ping', (_, res) => {
       res.status(200).send({ result: 'ok' });
