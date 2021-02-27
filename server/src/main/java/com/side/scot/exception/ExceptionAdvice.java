@@ -1,6 +1,5 @@
 package com.side.scot.exception;
 
-import com.side.scot.controller.UnAuthorizedException;
 import com.side.scot.model.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;

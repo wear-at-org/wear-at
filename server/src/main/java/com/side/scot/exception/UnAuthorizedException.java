@@ -1,4 +1,4 @@
-package com.side.scot.controller;
+package com.side.scot.exception;
 
 public class UnAuthorizedException extends RuntimeException {
     public UnAuthorizedException(String message) {

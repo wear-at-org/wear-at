@@ -1,6 +1,5 @@
 package com.side.scot.service;
 
-import com.side.scot.controller.UnAuthorizedException;
 import com.side.scot.entity.User;
 import com.side.scot.model.UserRequest;
 import com.side.scot.repository.UserRepository;
