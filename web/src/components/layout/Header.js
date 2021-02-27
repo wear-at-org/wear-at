@@ -1,75 +1,63 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
-import PersonIcon from '@material-ui/icons/Person';
-import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
-
-const sections = [
-  { title: 'Overview', url: '/' },
-  { title: 'Subscribe', url: '/subscribe' },
-  { title: 'Recommendation', url: '#' },
-  { title: 'Purchase', url: '#' },
-  { title: 'Delivery', url: '#' },
-  { title: 'Feedback', url: '#' },
-];
-
-const useStyles = makeStyles((theme) => ({
-  toolbar: {
-    borderBottom: `1px solid ${theme.palette.divider}`,
-  },
-  toolbarTitle: {
-    flex: 1,
-  },
-  toolbarSecondary: {
-    justifyContent: 'space-between',
-    overflowX: 'auto',
-  },
-  toolbarLink: {
-    padding: theme.spacing(1),
-    flexShrink: 0,
-  },
-}));
+import { Link } from 'react-router-dom';
+import Logo from 'assets/img/temp-logo.png';
 
 export default function Header() {
-  const classes = useStyles();
-
   return (
-    <>
-      <Toolbar className={classes.toolbar}>
-        <Typography
-          component="h2"
-          variant="h5"
-          color="inherit"
-          align="center"
-          noWrap
-          className={classes.toolbarTitle}
-        >
-          SCOT
-        </Typography>
-        <IconButton>
-          <SearchIcon />
-        </IconButton>
-        <IconButton>
-          <PersonIcon />
-        </IconButton>
-      </Toolbar>
-      <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
-        {sections.map((section) => (
-          <Link
-            color="inherit"
-            noWrap
-            key={section.title}
-            href={section.url}
-            variant="body2"
-            className={classes.toolbarLink}
-          >
-            {section.title}
-          </Link>
-        ))}
-      </Toolbar>
-    </>
+    <header className="col-12 d-flex nav-container">
+      <div className="left-nav">
+        <ul>
+          <li>
+            <Link to="/">
+              <h1>
+                <img src={Logo} alt="logo" />
+              </h1>
+            </Link>
+          </li>
+          <li>
+            <Link to="/intro">
+              서비스 소개
+            </Link>
+          </li>
+          <li>
+            <Link to="/intro">
+              STYLE TIP
+            </Link>
+          </li>
+          <li>
+            <Link to="/intro">
+              커뮤니티
+            </Link>
+          </li>
+          <li>
+            <Link to="/intro">
+              고객센터
+            </Link>
+          </li>
+        </ul>
+      </div>
+
+      <div className="right-nav">
+        <ul>
+          <li>
+            <Link to="/login">
+              로그인
+            </Link>
+          </li>
+          <li>
+            <Link to="/signup">
+              회원가입
+            </Link>
+          </li>
+          <li>
+            <Link to="/intro">
+              <div className="btn-style1">
+                스타일 테스트
+              </div>
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </header>
   );
 }

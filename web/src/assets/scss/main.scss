@@ -1,0 +1,18 @@
+.card-section {
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .inner {
+
+    img {
+      margin-bottom: 10px;
+    }
+
+    text-align: center;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+  }
+}

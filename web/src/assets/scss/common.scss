@@ -1,3 +1,12 @@
+.App {
+  min-height: calc(100vh - 80px);
+  padding-bottom: 80px;
+}
+
+.layout-sub {
+  max-width: 900px;
+  margin: 0 auto;
+}
 // tast
 .toast {
   position: fixed;
@@ -172,4 +181,43 @@
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
+}
+
+// nav
+header.nav-container {
+  justify-content: space-between;
+  padding: 10px;
+  ul {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    
+    li {
+      margin-right: 20px;
+      
+      h1 img {
+        width: 30px;
+        height: 30px;
+      }
+
+      a {
+        display: block;
+        font-size: 14px;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+
+footer {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 100%;
+  position: absolute;
+  bottom :0;
+  background-color: black;
 }
