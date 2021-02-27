@@ -5,6 +5,7 @@ SCOT web service
 
 ## spec
 - backend: spring boot
+  - openjdk version "15.0.2" 2021-01-19
 - frontend: react, redux
 - db: mysql
 
