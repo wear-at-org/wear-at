@@ -1,4 +1,0 @@
-db:
-  type: "sqljs"
-  location: "database"
-  synchronize: true
