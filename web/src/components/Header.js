@@ -7,6 +7,8 @@ import PersonIcon from '@material-ui/icons/Person';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 
+import scot from '../api/scot';
+
 const sections = [
   { title: 'Overview', url: '/' },
   { title: 'Subscribe', url: '/subscribe' },
@@ -36,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
 export default function Header() {
   const classes = useStyles();
 
+  const login = () => scot.login();
+  const logout = () => scot.logout();
+
   return (
     <>
       <Toolbar className={classes.toolbar}>
@@ -49,10 +54,10 @@ export default function Header() {
         >
           SCOT
         </Typography>
-        <IconButton>
+        <IconButton onClick={login}>
           <SearchIcon />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={logout}>
           <PersonIcon />
         </IconButton>
       </Toolbar>
