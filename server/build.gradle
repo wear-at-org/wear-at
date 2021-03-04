@@ -25,7 +25,6 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'junit:junit:4.12'
     compileOnly 'org.projectlombok:lombok'
     compile 'ch.qos.logback.contrib:logback-jackson:0.1.5'

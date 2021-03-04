@@ -5,6 +5,7 @@ mysql:
   command: --init-file /data/application/init.sql
   volumes:
       - ./scripts/db_initialize.sql:/data/application/init.sql
+      - /Users/kakao/data/scot:/var/lib/mysql
   environment:
     MYSQL_ROOT_USER: root
     MYSQL_ROOT_PASSWORD: scot123!@#
