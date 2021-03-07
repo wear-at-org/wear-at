@@ -1,12 +1,50 @@
-.btn-style1 {
-  background-color: red;
-  padding: 10px;
+[class*="btn-style"] {
   transition: 0.3s;
-  color: white;
-  border-radius: 5px;
+  display: inline-block;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.6;
+    transition: 0.2s;
+  }
+  box-sizing: border-box;
 }
 
-.btn-style1:hover {
-  background-color: wheat;
-  color: black
+.btn-style1 {
+  background-color: $mainColor;
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: 1px solid $mainColor;
+  &.large {
+    padding: 22px 32px;
+  }
+  .height32 {
+    height: 32px;
+  }
+  .height64 {
+    height: 64px;
+  }
+  .height40 {
+    height: 40px;
+  }
+}
+
+.btn-font-style1 {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+  color: white
+}
+
+.btn-style2 {
+  padding: 11px 24px;
+  border: 1px solid $btnGrayBorder;
+  border-radius: 6px;
+}
+
+.btn-font-style2 {
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 400;
+  color: $grayColor7979;
+
 }

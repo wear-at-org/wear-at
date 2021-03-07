@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Introservice from 'views/Introservice';
-import Login from 'views/Login';
-import Main from 'views/Main';
-import NotFound from 'views/NotFound';
-import Signup from 'views/Signup';
+import Introservice from 'views/introservice';
+import Login from 'views/login';
+import Main from 'views/main';
+import NotFound from 'views/notFound';
+import Signup from 'views/signup';
 
 export default function routers() {
   return (

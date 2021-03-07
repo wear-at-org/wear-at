@@ -1,12 +1,21 @@
 .App {
   min-height: calc(100vh - 80px);
-  padding-bottom: 80px;
+  padding-bottom: 75px;
+  position: relative;
+}
+
+.App.drawerActive {
+  position: fixed !important;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
 }
 
 .layout-sub {
   max-width: 900px;
   margin: 0 auto;
 }
+
 // tast
 .toast {
   position: fixed;
@@ -185,39 +194,160 @@
 
 // nav
 header.nav-container {
-  justify-content: space-between;
-  padding: 10px;
-  ul {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    
-    li {
-      margin-right: 20px;
+  padding-top: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid $grayeee;
+
+  .web {
+    ul {
+      height: 100%;
+      display: flex;
+      align-items: center;
       
-      h1 img {
-        width: 30px;
-        height: 30px;
-      }
+      li {
+        margin-right: 52px;
+        
+        h1.logo img {
+          width: 86px;
+          height: 56px;
+        }
 
-      a {
-        display: block;
-        font-size: 14px;
-      }
+        a {
+          display: block;
+          font-size: 14px;
+          line-height: 16px;
+          font-weight: 400;
+          transition: 0.2s;
+          color: $textGray;
 
+          &:hover {
+            color: $mainColor;
+            transition: 0.2s;
+          }
+        }
+
+        a.styleTip {
+          font-weight: 500;
+          color: $mainColor;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .right-nav {
+      ul > li {
+        margin-right: 24px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  .mobile {
+    display: none;
+  }
+}
+
+footer {
+  height: 92px;
+  width: 100%;
+  position: absolute;
+  bottom :0;
+  background-color: $black333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  ul {
+    display: flex;
+    margin-bottom: 10px;
+    & > li {
+      position: relative;
+      font-size: 10px;
+      line-height: 12px;
+      color: $gray8E8E;
+      padding-right: 32px;
+      &:after {
+        position: absolute;
+        right: 14px;
+        content: "|";
+      }
       &:last-child {
-        margin-right: 0;
+        &:after {
+          content: none;
+        }
+        padding-right: 0;
+      }
+    }
+  }
+
+  .copy-font {
+    font-size: 12px;
+    line-height: 18px;
+    color: $gray8E8E;
+  }
+}
+
+.icon-container {
+  img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media all and(max-width:768px) {
+  header.nav-container .web {
+    display: none;
+  }
+
+  header.nav-container {
+    .mobile {
+      display: block;
+      padding-left: 15px;
+      padding-right: 15px;
+      h1 img {
+        height: 56px;
+      }
+      
+      .menu img {
+        height: 25px;
       }
     }
   }
 }
 
+.checkbot-container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
 
-footer {
-  padding-top: 20px;
-  padding-bottom: 20px;
+.drawer-container {
+  position: fixed;
+  top: 0;
+  right: -200%;
   width: 100%;
-  position: absolute;
-  bottom :0;
-  background-color: black;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 100;
+  transition: 0.3s;
+
+  .drawer-inner {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    margin-top: 50px;
+    z-index: 101;
+    background-color: #ffffff;
+  }
+
+  &.active {
+    transition: 0.3s;
+    right: 0;
+  }
 }

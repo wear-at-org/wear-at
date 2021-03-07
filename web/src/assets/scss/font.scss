@@ -1,8 +1,31 @@
-h3 {
-  font-size: 40px;
-  line-height: 48px;
+h2 {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 47px;;
+  letter-spacing: -0.4px;
 }
 
-.d3-desc {
-  line-height: 40px;
+h3 {
+  font-size: 28px;
+  line-height: 42px;
+  letter-spacing: -0.2px;
+  font-weight: 700;
+}
+
+.visual-h3-desc {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+h4 {
+  font-size: 18px;
+  line-height: 26px;
+  letter-spacing: -0.2px;
+}
+
+h5 {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 300;
 }

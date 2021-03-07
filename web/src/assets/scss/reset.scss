@@ -2,7 +2,7 @@
 @font-face{font-family:'Helvetica-Neue'; src:url('../fonts/HelveticaNeueLTPro-Md.otf'); font-weight: normal; font-style: normal;}
 @font-face{font-family:'Helvetica-Neue'; src:url('../fonts/HelveticaNeueLTPro-Lt.otf'); font-weight: 300; font-style: normal;}
 @font-face{font-family:'Helvetica-Neue'; src:url('../fonts/HelveticaNeueLTPro-Bd.otf'); font-weight: bold; font-style: normal;}
-
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
 /* Reset */
 html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr,
 address, big, cite, code, del, dfn, em, font, img, ins,
@@ -11,8 +11,8 @@ u, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbo
 caption {text-indent:-10000px;}
 html { font-size: 10px; }
 html, body {margin: 0; padding: 0; width: 100%; position: relative;}
-body {background-color:#fff; color:#000; line-height: 1.2; font-weight: 300;
-    font-family: "Helvetica-Neue", arial, serif;
+body {background-color:#fff; color:#000; line-height: 1.2; font-weight: 400;
+    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
     letter-spacing: 0.03rem;
 }
 input, button, textarea {font-family: inherit; font-size:1.2rem; color:#000;}

@@ -7,7 +7,7 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import { useTestData } from 'hooks';
-import MainPopup from 'views/Popup/MainPopup';
+import MainPopup from 'views/popup/MainPopup';
 import Sidebar from './Sidebar';
 import MainFeaturedPost from './MainFeaturedPost';
 import FeaturedPost from './FeaturedPost';
