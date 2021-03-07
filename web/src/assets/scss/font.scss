@@ -1,3 +1,7 @@
+.font-color-grayAEAE {
+  color: $grayAEAE;
+}
+
 h2 {
   font-weight: 700;
   font-size: 36px;
@@ -28,4 +32,33 @@ h5 {
   font-size: 16px;
   line-height: 24px;
   font-weight: 300;
+}
+
+p.caption-font {
+  font-size: 10px;
+  line-height:12px;
+}
+
+.error-container {
+  margin-top: 6px;
+  padding-left: 32px;
+  padding-right: 40px;
+  position: relative;
+  &:after {
+    content: "";
+    position: absolute;
+    background-image: url('../img/error.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left center;
+    width: 16px;
+    height: 16px;
+    left: 8px;
+    top:3px;
+  }
+  .error-font {
+    font-size: 12px;
+    line-height: 18px;
+    color: $errorColor;
+  }
 }

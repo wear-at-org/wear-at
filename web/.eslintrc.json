@@ -13,6 +13,7 @@
         "argsIgnorePattern": "next"
       }
     ],
+    "jsx-a11y/label-has-associated-control": "off",
     "no-use-before-define": [
       "error",
       {

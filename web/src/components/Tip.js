@@ -1,6 +1,4 @@
 import React, { useState, useCallback } from 'react';
-import arrRightOnly from 'assets/img/arr-right-only.png';
-import xBtn from 'assets/img/x-btn.png';
 
 const Tip = ({ tipArray }) => {
   const [activeId, setActiveId] = useState(0);
@@ -17,7 +15,7 @@ const Tip = ({ tipArray }) => {
           tipArray.map((item) => {
             const { id, title, content } = item;
             return (
-              <div className="tip-item" key={`tip-${id}`} onClick={() => activeTip(id)}>
+              <div className={activeId === id ? 'tip-item active' : 'tip-item'} key={`tip-${id}`} onClick={() => activeTip(id)}>
                 <div className="tip-title">
                   <h4>
                     {title}

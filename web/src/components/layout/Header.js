@@ -2,8 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from 'assets/img/logo.png';
 import menu from 'assets/img/menu.png';
+import { useSelector } from 'react-redux';
+import user from 'assets/img/user.png';
+import { userInfoName } from '../../store';
 
 export default function Header({ setDrawerStatus }) {
+  const { isLogin } = useSelector((state) => state[userInfoName]);
+
   return (
     <>
       <header className="col-12 nav-container">
@@ -41,20 +46,33 @@ export default function Header({ setDrawerStatus }) {
           </div>
           <div className="right-nav">
             <ul>
-              <li>
-                <Link to="/login">
-                  로그인
-                </Link>
-              </li>
-              <li>
-                <Link to="/intro">
-                  <div className="btn-style1">
-                    <p className="btn-font-style1">
-                      지금 시작하기
-                    </p>
-                  </div>
-                </Link>
-              </li>
+              {
+                !isLogin ? (
+                  <>
+                    <li>
+                      <Link to="/login">
+                        로그인
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/intro">
+                        <div className="btn-style1">
+                          <p className="btn-font-style1">
+                            지금 시작하기
+                          </p>
+                        </div>
+                      </Link>
+                    </li>
+                  </>
+                ) : (
+                  <li className="mypage">
+                    <Link to="/mypage">
+                      <img src={user} alt="user-img" />
+                    </Link>
+                  </li>
+                )
+              }
+
             </ul>
           </div>
         </div>

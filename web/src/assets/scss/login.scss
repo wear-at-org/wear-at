@@ -1,0 +1,73 @@
+.login-container {
+  padding-top: 65px; 
+  padding-bottom: 96px;
+
+  .login-utils-container {
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid $grayeee;
+    ul > li a {
+      font-size: 10px;
+      line-height: 12px;
+      color: $grayAEAE;
+    }
+  }
+
+  .social-login-container {
+    ul {
+      display: flex;
+      justify-content: space-between;
+
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        &.kakao {
+          background-color: #FBE750;
+          img {
+            width: 27px;
+            height: 30px;
+          }
+        }
+
+        &.naver {
+          background-color: #5DC351;
+          img {
+            width: 14px;
+            height: 13px;
+          }
+        }
+
+        &.facebook {
+          background-color: #3878EA;
+          img {
+            width: 16px;
+            height: 16px;
+          }
+        }
+        &.google {
+          background-color: #F8F8F9;
+          img {
+            width: 26px;
+            height: 25px;
+          }          
+        }
+        &.apple {
+          background-color: #000000;
+          img {
+            margin-right: 2px;
+            width: 29px;
+            height: 27px;
+          }          
+        }
+      }
+    }
+  }
+}
+
+.signup-container {
+  padding: 64px 0px; 
+}
