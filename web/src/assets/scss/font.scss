@@ -39,11 +39,26 @@ p.caption-font {
   line-height:12px;
 }
 
+.signup-desc-text  {
+  padding-left: 8px;
+  padding-right: 40px;
+  p {
+    font-size: 12px;
+    line-height: 18px;
+    color: $grayAEAE;
+  }
+}
+
 .error-container {
+  display: none;
   margin-top: 6px;
   padding-left: 32px;
   padding-right: 40px;
   position: relative;
+
+  &.active {
+    display: block;
+  }
   &:after {
     content: "";
     position: absolute;

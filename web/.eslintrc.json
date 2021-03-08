@@ -20,6 +20,8 @@
         "variables": false
       }
     ],
+    "no-alert": "off",
+    "no-useless-escape": "off",
     "no-multi-str": 0,
     "react/jsx-filename-extension": [
       1,

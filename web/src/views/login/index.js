@@ -6,6 +6,7 @@ import naver from 'assets/img/naver.png';
 import facebook from 'assets/img/facebook.png';
 import google from 'assets/img/google.png';
 import apple from 'assets/img/apple.png';
+import { LoginError } from 'assets/common/error.json';
 
 const Login = () => {
   const [id, setId] = useState('');
@@ -14,14 +15,15 @@ const Login = () => {
 
   const loginProcess = async () => {
     setIsLogin(id, password).then((res) => {
-      console.log('res');
-      console.log(res);
+      if (!res) {
+        alert(LoginError.loginError);
+      }
     });
   };
 
   useEffect(() => {
     console.log(isLogin);
-  }, []);
+  }, [isLogin]);
 
   return (
     <div className="sub layout-sub">

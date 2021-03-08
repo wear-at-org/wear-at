@@ -3,19 +3,18 @@ import React, { useState, useCallback } from 'react';
 const Tip = ({ tipArray }) => {
   const [activeId, setActiveId] = useState(0);
   const activeTip = useCallback((id) => {
-    console.log(id);
     if (id === activeId) { setActiveId(0); } else {
       setActiveId(id);
     }
   }, [activeId]);
 
   return (
-    <>
+    <div>
       {
           tipArray.map((item) => {
             const { id, title, content } = item;
             return (
-              <div className={activeId === id ? 'tip-item active' : 'tip-item'} key={`tip-${id}`} onClick={() => activeTip(id)}>
+              <div className={activeId === id ? 'tip-item active' : 'tip-item'} onClick={() => activeTip(id)} key={id}>
                 <div className="tip-title">
                   <h4>
                     {title}
@@ -36,7 +35,7 @@ const Tip = ({ tipArray }) => {
             );
           })
         }
-    </>
+    </div>
   );
 };
 

@@ -138,12 +138,12 @@
   }
 
   .main-bottom-container {
-  .bottom-img {
-    padding-bottom: 220px;
-    &:after {
-      bottom: 0px;
-      left: 80px;
+    .bottom-img {
+      padding-bottom: 220px;
+      &:after {
+        bottom: -30px;
+        left: 80px;
+      }
     }
   }
-}
 }
