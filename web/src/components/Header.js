@@ -39,11 +39,11 @@ export default function Header() {
   const classes = useStyles();
 
   const login = async () => {
-    const urlStr = await scot.getCodeURL();
+    const urlStr = await scot.getAuthURL('kakao');
     window.location.href = urlStr;
   };
 
-  const logout = () => scot.logout();
+  const logout = () => scot.logout('kakao');
 
   return (
     <>

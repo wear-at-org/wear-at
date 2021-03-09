@@ -1,5 +1,7 @@
 package com.side.scot.service;
 
+import com.side.scot.api.auth.IProvider;
+import com.side.scot.api.auth.OAuthProvider;
 import com.side.scot.config.AuthConfig;
 import com.side.scot.exception.UnAuthorizedException;
 import com.side.scot.model.auth.AuthUserClaim;
@@ -29,60 +31,32 @@ public class AuthService {
 
     private final AuthConfig authConfig;
 
+    private final OAuthProvider oAuthProvider;
+
     @Autowired
-    public AuthService(AuthConfig authConfig) {
+    public AuthService(AuthConfig authConfig, OAuthProvider oAuthProvider) {
         this.authConfig = authConfig;
+        this.oAuthProvider = oAuthProvider;
     }
 
-    public String getCodeUrl() {
-        String redirectUrl = URLEncoder.encode(this.authConfig.getCallbackUrl(), StandardCharsets.UTF_8);
-        String urlStr = String.format("%s?client_id=%s&redirect_uri=%s&response_type=code", this.authConfig.getCodeUrl(), this.authConfig.getClientId(), redirectUrl);
-        return urlStr;
+    public String getCodeUrl(String provider) throws Exception {
+        IProvider iProvider = this.oAuthProvider.getProvider(provider);
+        return iProvider.getCodeUrl();
     }
 
-    public TokenResponse issueToken(String code) {
-        WebClient client = WebClient.builder()
-            .baseUrl(this.authConfig.getTokenUrl())
-            .build();
-
-        TokenResponse resp = client.post()
-                .header(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded;charset=utf-8")
-                .body(BodyInserters.fromFormData("grant_type","authorization_code")
-                        .with("client_id", this.authConfig.getClientId())
-                        .with("redirect_uri", this.authConfig.getCallbackUrl())
-                        .with("client_secret", this.authConfig.getClientSecret())
-                        .with("code", code)
-                )
-                .retrieve()
-                .onStatus(status -> status.is4xxClientError() || status.is5xxServerError()
-                        ,statusResp ->  statusResp.bodyToMono(String.class).map(b->new Exception(b)))
-                .bodyToMono(TokenResponse.class).block();
-        return resp;
+    public TokenResponse issueToken(String provider, String code) throws Exception {
+        IProvider iProvider = this.oAuthProvider.getProvider(provider);
+        return iProvider.issueToken(code);
     }
 
-    public AuthUserResponse getUser(String token) {
-        WebClient client = WebClient.builder()
-                .baseUrl(this.authConfig.getUserUrl())
-                .build();
-
-        AuthUserResponse resp = client.get()
-                .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", token))
-                .retrieve().bodyToMono(AuthUserResponse.class).block();
-        return resp;
+    public String revokeToken(String provider, String token) throws Exception {
+        IProvider iProvider = this.oAuthProvider.getProvider(provider);
+        return iProvider.revokeToken(token);
     }
 
-    public String logout(String token) {
-        WebClient client = WebClient.builder()
-                .baseUrl(this.authConfig.getLogoutUrl())
-                .build();
-
-        HashMap<String, Integer> resp = client.post()
-                .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", token))
-                .retrieve().bodyToMono(HashMap.class).block();
-        if (resp.containsKey("id")) {
-            return resp.get("id").toString();
-        }
-        return "";
+    public AuthUserResponse getUser(String provider, String token) throws Exception {
+        IProvider iProvider = this.oAuthProvider.getProvider(provider);
+        return iProvider.getUser(token);
     }
 
     public String generateJWTToken(AuthUserClaim claim) {

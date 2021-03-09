@@ -6,15 +6,15 @@ export default {
   login: async () => {
 
   },
-  logout: async () => {
-    const resp = await axios.get(`${scotUrl}/auth/logout`);
+  logout: async (provider) => {
+    const resp = await axios.get(`${scotUrl}/auth/logout?provider=${provider}`);
     if (resp.data) {
       return resp.data.id;
     }
     return '';
   },
-  getCodeURL: async () => {
-    const resp = await axios.get(`${scotUrl}/auth/url`);
+  getAuthURL: async (provider) => {
+    const resp = await axios.get(`${scotUrl}/auth/url?provider=${provider}`);
     if (resp.data) {
       return resp.data.url;
     }

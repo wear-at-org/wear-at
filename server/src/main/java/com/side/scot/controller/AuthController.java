@@ -36,10 +36,10 @@ public class AuthController {
     }
 
     @GetMapping(path = "/logout")
-    public ResponseEntity<String> logout(@CookieValue("token") String token, HttpServletResponse response) {
+    public ResponseEntity<String> logout(@RequestParam("provider") String provider, @CookieValue("token") String token, HttpServletResponse response) throws Exception {
         AuthUserClaim claim = this.authService.parseJWTToken(token);
 
-        String id = this.authService.logout(claim.getAccessToken());
+        String id = this.authService.revokeToken(provider, claim.getAccessToken());
 
         Cookie cookie = new Cookie("token", null);
         cookie.setMaxAge(0);
@@ -53,8 +53,8 @@ public class AuthController {
     }
 
     @GetMapping(path = "/url")
-    public ResponseEntity<String> getAuthCodeUrl() {
-        String urlStr = this.authService.getCodeUrl();
+    public ResponseEntity<String> getAuthCodeUrl(@RequestParam("provider") String provider) throws Exception {
+        String urlStr = this.authService.getCodeUrl(provider);
 
         JsonObject resp = new JsonObject();
         resp.addProperty("url", urlStr);
@@ -68,12 +68,14 @@ public class AuthController {
         @RequestParam(value="error", required = false) String error,
         @RequestParam(value="error_description", required = false) String errorDesc,
         HttpServletResponse response
-    ) {
+    ) throws Exception {
         // TODO error handling, access token을 DB에 관리, status정합성 체
 
-        TokenResponse token = this.authService.issueToken(code);
+        String provider = state;
 
-        AuthUserResponse user = this.authService.getUser(token.getAccessToken());
+        TokenResponse token = this.authService.issueToken(provider, code);
+
+        AuthUserResponse user = this.authService.getUser(provider, token.getAccessToken());
 
         AuthUserClaim claim = AuthUserClaim.builder()
                 .id(user.getId())
