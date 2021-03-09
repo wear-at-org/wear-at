@@ -38,7 +38,11 @@ const useStyles = makeStyles((theme) => ({
 export default function Header() {
   const classes = useStyles();
 
-  const login = () => scot.login();
+  const login = async () => {
+    const urlStr = await scot.getCodeURL();
+    window.location.href = urlStr;
+  };
+
   const logout = () => scot.logout();
 
   return (

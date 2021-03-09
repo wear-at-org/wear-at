@@ -1,7 +1,7 @@
 package com.side.scot.service;
 
 import com.side.scot.entity.User;
-import com.side.scot.model.UserRequest;
+import com.side.scot.model.user.UserRequest;
 
 import java.util.List;
 import java.util.Optional;

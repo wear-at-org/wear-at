@@ -1,7 +1,7 @@
 package com.side.scot.controller;
 
 import com.side.scot.entity.User;
-import com.side.scot.model.UserRequest;
+import com.side.scot.model.user.UserRequest;
 import com.side.scot.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

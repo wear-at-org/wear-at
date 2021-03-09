@@ -1,8 +1,10 @@
 package com.side.scot.service;
 
+import com.side.scot.context.ContextHolder;
 import com.side.scot.entity.User;
-import com.side.scot.model.UserRequest;
+import com.side.scot.model.user.UserRequest;
 import com.side.scot.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
