@@ -9,12 +9,12 @@ const Tip = ({ tipArray }) => {
   }, [activeId]);
 
   return (
-    <div>
+    <>
       {
           tipArray.map((item) => {
             const { id, title, content } = item;
             return (
-              <div className={activeId === id ? 'tip-item active' : 'tip-item'} onClick={() => activeTip(id)} key={id}>
+              <div className={activeId === id ? 'tip-item active' : 'tip-item'} onClick={() => activeTip(id)} key={`tip-item-${id}`}>
                 <div className="tip-title">
                   <h4>
                     {title}
@@ -35,7 +35,7 @@ const Tip = ({ tipArray }) => {
             );
           })
         }
-    </div>
+    </>
   );
 };
 

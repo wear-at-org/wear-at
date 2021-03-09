@@ -6,16 +6,17 @@ import Main from 'views/main';
 import Mypage from 'views/mypage';
 import NotFound from 'views/notFound';
 import Signup from 'views/signup';
+import ProvideAuth from './ProvideAuth';
 
 export default function routers() {
   return (
     <Switch>
       <Route path="/" exact component={Main} />
-      <Route path="/login" exact component={Login} />
-      <Route path="/signup" exact component={Signup} />
-      <Route path="/intro" exact component={Introservice} />
-      <Route path="/mypage" exact component={Mypage} />
-      <Route component={NotFound} />
+      <Route path="/login" component={Login} />
+      <Route path="/signup" component={Signup} />
+      <Route path="/intro" component={Introservice} />
+      <ProvideAuth path="/mypage" component={Mypage} />
+      <Route path="*" component={NotFound} />
     </Switch>
   );
 }

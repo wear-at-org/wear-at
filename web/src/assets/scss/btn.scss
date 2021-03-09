@@ -58,11 +58,13 @@
   font-size: 14px;
   line-height: 16px;
   color: $black333;
+  transition: 0.3s;
   &::placeholder {
     color: $grayD4D4;
   }
 
   &.error {
+    transition: 0.3s;
     color: $errorColor;
     border-color: $errorColor;
   }

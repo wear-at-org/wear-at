@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Logo from 'assets/img/logo.png';
 import menu from 'assets/img/menu.png';
 import { useSelector } from 'react-redux';
@@ -8,7 +8,8 @@ import { userInfoName } from '../../store';
 
 export default function Header({ setDrawerStatus }) {
   const { isLogin } = useSelector((state) => state[userInfoName]);
-
+  const { pathname } = useLocation();
+  console.log(pathname);
   return (
     <>
       <header className="col-12 nav-container">
@@ -22,7 +23,7 @@ export default function Header({ setDrawerStatus }) {
                   </h1>
                 </Link>
               </li>
-              <li>
+              <li className={pathname.includes('intro') ? 'active' : ''}>
                 <Link to="/intro">
                   서비스 소개
                 </Link>
