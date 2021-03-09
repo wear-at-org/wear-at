@@ -21,6 +21,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Date;
+import java.util.HashMap;
 
 @Slf4j
 @Service
@@ -75,10 +76,13 @@ public class AuthService {
                 .baseUrl(this.authConfig.getLogoutUrl())
                 .build();
 
-        Long resp = client.post()
+        HashMap<String, Integer> resp = client.post()
                 .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", token))
-                .retrieve().bodyToMono(Long.class).block();
-        return resp.toString();
+                .retrieve().bodyToMono(HashMap.class).block();
+        if (resp.containsKey("id")) {
+            return resp.get("id").toString();
+        }
+        return "";
     }
 
     public String generateJWTToken(AuthUserClaim claim) {

@@ -39,6 +39,8 @@ public class AuthInterceptor implements HandlerInterceptor {
 
             AuthUserClaim claim = this.authService.parseJWTToken(token);
 
+            // TODO token refresh
+
             ContextHolder.set(ContextHolder.ContextKey.UserID, claim.getId());
 
             return true;

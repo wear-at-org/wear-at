@@ -40,7 +40,8 @@ public class ExceptionAdvice {
 
             MDC.put("error", e.getMessage());
             MDC.put("stack", sw.toString());
-            log.error(status);
+            //log.error(status);
+            log.error(e.getMessage());
         } catch (Exception ex) {
         }
     }

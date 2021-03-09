@@ -21,3 +21,5 @@ export default {
     return '';
   },
 };
+
+axios.defaults.withCredentials = true;

@@ -35,9 +35,11 @@ public class AuthController {
     public void login() {
     }
 
-    @PostMapping(path = "/logout")
-    public ResponseEntity<String> logout(@RequestHeader("Authorization") String token, HttpServletResponse response) {
-        String id = this.authService.logout(token);
+    @GetMapping(path = "/logout")
+    public ResponseEntity<String> logout(@CookieValue("token") String token, HttpServletResponse response) {
+        AuthUserClaim claim = this.authService.parseJWTToken(token);
+
+        String id = this.authService.logout(claim.getAccessToken());
 
         Cookie cookie = new Cookie("token", null);
         cookie.setMaxAge(0);
