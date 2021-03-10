@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URLEncoder;
 
 @Slf4j
 @RestController
@@ -41,11 +42,8 @@ public class AuthController {
 
         String id = this.authService.revokeToken(provider, claim.getAccessToken());
 
-        Cookie cookie = new Cookie("token", null);
-        cookie.setMaxAge(0);
-        cookie.setPath("/");
-        cookie.setHttpOnly(true);
-        response.addCookie(cookie);
+        this.removeTokenCookie(response);
+        this.removeUserCookie(response);
 
         JsonObject resp = new JsonObject();
         resp.addProperty("id", id);
@@ -79,20 +77,52 @@ public class AuthController {
 
         AuthUserClaim claim = AuthUserClaim.builder()
                 .id(user.getId())
-                .nickName(user.getKakaoAccount().getProfile().getNickName())
+                .nickName(user.getNickName())
                 .accessToken(token.getAccessToken())
                 .refreshToken(token.getRefreshToken())
                 .build();
         String jwtToken = this.authService.generateJWTToken(claim);
 
-        Cookie cookie = new Cookie("token", jwtToken);
-        cookie.setMaxAge(60*60*24);
-        cookie.setPath("/");
-        cookie.setHttpOnly(true);
-        response.addCookie(cookie);
+        this.createTokenCookie(response, jwtToken);
+        this.createUserCookie(response, user);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", this.authConfig.getClientRedirectUrl());
         return new ResponseEntity<>(headers,HttpStatus.TEMPORARY_REDIRECT);
+    }
+
+    private void createTokenCookie(HttpServletResponse response, String token) {
+        Cookie tokenCookie = new Cookie("token", token);
+        tokenCookie.setMaxAge(60*60*24);
+        tokenCookie.setPath("/");
+        tokenCookie.setHttpOnly(true);
+        response.addCookie(tokenCookie);
+    }
+
+    private void removeTokenCookie(HttpServletResponse response) {
+        Cookie cookie = new Cookie("token", null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        cookie.setHttpOnly(true);
+        response.addCookie(cookie);
+    }
+
+    private void createUserCookie(HttpServletResponse response, AuthUserResponse user) throws Exception {
+        JsonObject userInfo = new JsonObject();
+        userInfo.addProperty("id", user.getId());
+        userInfo.addProperty("nickname", user.getNickName());
+
+        Cookie userCookie = new Cookie("user", URLEncoder.encode(userInfo.toString(), "UTF-8"));
+        userCookie.setMaxAge(60*60*24);
+        userCookie.setPath("/");
+        response.addCookie(userCookie);
+    }
+
+    private void removeUserCookie(HttpServletResponse response) {
+        Cookie cookie = new Cookie("user", null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        cookie.setHttpOnly(true);
+        response.addCookie(cookie);
     }
 }

@@ -1,5 +1,6 @@
 package com.side.scot.api.auth;
 
+import com.side.scot.api.auth.kakao.KakaoProvider;
 import com.side.scot.config.AuthConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

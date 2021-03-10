@@ -1,8 +1,12 @@
-package com.side.scot.api.auth;
+package com.side.scot.api.auth.kakao;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.side.scot.api.auth.IProvider;
 import com.side.scot.config.AuthConfig;
 import com.side.scot.model.auth.AuthUserResponse;
 import com.side.scot.model.auth.TokenResponse;
+import lombok.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -68,9 +72,74 @@ public class KakaoProvider implements IProvider {
                 .baseUrl(this.authConfig.getUserUrl())
                 .build();
 
-        AuthUserResponse resp = client.get()
+        KakaoAuthResponse resp = client.get()
                 .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", token))
-                .retrieve().bodyToMono(AuthUserResponse.class).block();
-        return resp;
+                .retrieve().bodyToMono(KakaoAuthResponse.class).block();
+
+        AuthUserResponse user = AuthUserResponse.builder()
+                .id(resp.getId())
+                .nickName(resp.getKakaoAccount().getProfile().getNickName())
+                .email(resp.getKakaoAccount().getEmail())
+                .ageRange(resp.getKakaoAccount().getAgeRange())
+                .birthDay(resp.getKakaoAccount().getBirthDay())
+                .birthYear(resp.getKakaoAccount().getBirthYear())
+                .gender(resp.getKakaoAccount().getGender())
+                .profileImage(resp.getKakaoAccount().getProfile().getProfileImage())
+                .build();
+        return user;
     }
+}
+
+@Data
+@Builder
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@JsonIgnoreProperties(ignoreUnknown = true)
+class KakaoAuthResponse {
+    @JsonProperty("id")
+    private String id;
+
+    @JsonProperty("kakao_account")
+    private KakaoAuthAccount kakaoAccount;
+}
+
+@Data
+@Builder
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@JsonIgnoreProperties(ignoreUnknown = true)
+class KakaoAuthAccount {
+    @JsonProperty("profile")
+    private KakaoAuthProfile profile;
+
+    @JsonProperty("email")
+    private String email;
+
+    @JsonProperty("age_range")
+    private String ageRange;
+
+    @JsonProperty("birthyear")
+    private String birthYear;
+
+    @JsonProperty("birthday")
+    private String birthDay;
+
+    @JsonProperty("gender")
+    private String gender;
+}
+
+@Data
+@Builder
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@JsonIgnoreProperties(ignoreUnknown = true)
+class KakaoAuthProfile {
+    @JsonProperty("nickname")
+    private String nickName;
+
+    @JsonProperty("thumbnail_image_url")
+    private String thumbnailImageUrl;
+
+    @JsonProperty("profile_image_url")
+    private String profileImage;
 }
