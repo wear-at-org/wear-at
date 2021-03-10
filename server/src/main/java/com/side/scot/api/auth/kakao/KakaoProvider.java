@@ -26,22 +26,22 @@ public class KakaoProvider implements IProvider {
     @Override
     public String getCodeUrl() {
         String redirectUrl = URLEncoder.encode(this.authConfig.getCallbackUrl(), StandardCharsets.UTF_8);
-        String urlStr = String.format("%s?client_id=%s&redirect_uri=%s&response_type=code&state=kakao", this.authConfig.getCodeUrl(), this.authConfig.getClientId(), redirectUrl);
+        String urlStr = String.format("%s?client_id=%s&redirect_uri=%s&response_type=code&state=kakao", this.authConfig.getKakao().getCodeUrl(), this.authConfig.getKakao().getClientId(), redirectUrl);
         return urlStr;
     }
 
     @Override
     public TokenResponse issueToken(String code) {
         WebClient client = WebClient.builder()
-                .baseUrl(this.authConfig.getTokenUrl())
+                .baseUrl(this.authConfig.getKakao().getTokenUrl())
                 .build();
 
         TokenResponse resp = client.post()
                 .header(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded;charset=utf-8")
                 .body(BodyInserters.fromFormData("grant_type","authorization_code")
-                        .with("client_id", this.authConfig.getClientId())
+                        .with("client_id", this.authConfig.getKakao().getClientId())
                         .with("redirect_uri", this.authConfig.getCallbackUrl())
-                        .with("client_secret", this.authConfig.getClientSecret())
+                        .with("client_secret", this.authConfig.getKakao().getClientSecret())
                         .with("code", code)
                 )
                 .retrieve()
@@ -54,7 +54,7 @@ public class KakaoProvider implements IProvider {
     @Override
     public String revokeToken(String token) {
         WebClient client = WebClient.builder()
-                .baseUrl(this.authConfig.getLogoutUrl())
+                .baseUrl(this.authConfig.getKakao().getLogoutUrl())
                 .build();
 
         HashMap<String, Integer> resp = client.post()
@@ -69,7 +69,7 @@ public class KakaoProvider implements IProvider {
     @Override
     public AuthUserResponse getUser(String token) {
         WebClient client = WebClient.builder()
-                .baseUrl(this.authConfig.getUserUrl())
+                .baseUrl(this.authConfig.getKakao().getUserUrl())
                 .build();
 
         KakaoAuthResponse resp = client.get()
