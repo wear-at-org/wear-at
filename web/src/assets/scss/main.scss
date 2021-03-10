@@ -1,12 +1,38 @@
-.card-section {
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid $mainColor;
-  width: 270px;
-  height: 270px;
+
+.card-wrap {
+  position: relative;
+
+  .detail-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 270px;
+    height: 270px;
+    border-radius: 50%;
+    opacity: 0;
+    position: absolute;
+    background-color: $mainColor;
+    transition: 0.1s;
+  }
+
+  &:hover .detail-text {
+    transition: 0.1s;
+    opacity: 1;
+  }  
+
+  .card-section {
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $mainColor;
+    width: 270px;
+    height: 270px;
+    box-sizing: border-box;
+  }
 }
+
 
 
 .main-visual {

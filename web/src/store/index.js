@@ -1,8 +1,6 @@
 import { configureStore, combineReducers, getDefaultMiddleware } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
-import {
-  persistReducer,
-} from 'redux-persist';
+import { persistReducer } from 'redux-persist';
 import spinner, { name as spinnerName } from './spinner-store';
 import toast, { name as toastName } from './toast-store';
 import userinfo, { name as userInfoName } from './userinfo-store';

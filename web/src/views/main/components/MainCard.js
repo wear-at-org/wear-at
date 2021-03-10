@@ -14,19 +14,37 @@ const MainCard = () => (
     </div>
 
     <div className="col-12 d-flex f-wrap mb64">
-      <div className="col-12 col-sm-4 mb40 mb-sm-0 d-flex x-center">
+      <div className="col-12 col-sm-4 mb40 mb-sm-0 d-flex x-center card-wrap">
         <div className="card-section">
           <img src={mainIcon1} alt="mainIcon1" style={{ width: '52px', height: '37px' }} />
         </div>
+        <div className="detail-text">
+          <h4>취향을 완벽하게 분석하는</h4>
+          <h5>
+            이것이 저것이 이것이 저것이
+          </h5>
+        </div>
       </div>
-      <div className="col-12 col-sm-4 mb40 mb-sm-0 d-flex x-center">
+      <div className="col-12 col-sm-4 mb40 mb-sm-0 d-flex x-center card-wrap">
         <div className="card-section">
           <img src={mainIcon2} alt="mainIcon2" style={{ width: '36px', height: '28px' }} />
         </div>
+        <div className="detail-text">
+          <h4>취향을 완벽하게 분석하는</h4>
+          <h5>
+            이것이 저것이 이것이 저것이
+          </h5>
+        </div>
       </div>
-      <div className="col-12 col-sm-4 d-flex x-center">
+      <div className="col-12 col-sm-4 d-flex x-center card-wrap">
         <div className="card-section">
           <img src={mainIcon3} alt="mainIcon3" style={{ width: '66px', height: '37px' }} />
+        </div>
+        <div className="detail-text">
+          <h4>취향을 완벽하게 분석하는</h4>
+          <h5>
+            이것이 저것이 이것이 저것이
+          </h5>
         </div>
       </div>
     </div>

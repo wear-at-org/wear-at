@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const { name, reducer, actions } = createSlice({
   name: 'userinfo',
@@ -8,6 +8,9 @@ const { name, reducer, actions } = createSlice({
       console.log(payload);
       return { ...state, isLogin: true, info: payload.info };
     },
+  },
+  extraReducers: {
+
   },
 });
 
