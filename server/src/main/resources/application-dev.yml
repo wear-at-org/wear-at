@@ -1,0 +1,10 @@
+spring:
+  config:
+    activate:
+      on-profile: "dev"
+  properties:
+    name: "dev"
+    age:
+      - 10
+      - 11
+      - 12

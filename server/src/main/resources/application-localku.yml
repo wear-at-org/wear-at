@@ -1,0 +1,29 @@
+spring:
+  config:
+    activate:
+      on-profile: "localku"
+  datasource:
+    driver-class-name: "org.h2.Driver"
+    url: "jdbc:h2:mem:scot"
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        ddl-auto: create-drop
+    database: h2
+    database-platform: org.hibernate.dialect.H2Dialect
+    generate-ddl: true
+    show-sql: true
+  auth:
+    jwt-key: "scot_secret_j21j5j3k5i53g46g56u63g3u4h43h435ugh3"
+    jwt-expire-in-seconds: 120
+    callback-url: "http://localhost:8089/v1/auth/callback"
+    client-redirect-url: "http://localhost:3000"
+    kakao:
+      code-url: "https://kauth.kakao.com/oauth/authorize"
+      token-url: "https://kauth.kakao.com/oauth/token"
+      user-url: "https://kapi.kakao.com/v2/user/me"
+      logout-url: "https://kapi.kakao.com/v1/user/logout"
+      client-id: "d27b18e9bec54a03247b4f05fa805d3f"
+      client-secret: "NNKvZ5HylMXGdlJ3sgQ55UwG7nXp3zLy"
+
