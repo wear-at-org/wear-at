@@ -19,7 +19,7 @@ export const reducer = combineReducers({
 
 const persistedReducer = persistReducer(persistConfig, reducer);
 
-export { spinnerName, userInfoName };
+export { spinnerName, userInfoName, toastName };
 
 export default configureStore({
   reducer: persistedReducer,

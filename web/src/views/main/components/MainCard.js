@@ -41,9 +41,11 @@ const MainCard = () => (
           <img src={mainIcon3} alt="mainIcon3" style={{ width: '66px', height: '37px' }} />
         </div>
         <div className="detail-text">
-          <h4>취향을 완벽하게 분석하는</h4>
+          <h4>좋은 정보는 서로 나눠요</h4>
           <h5>
-            이것이 저것이 이것이 저것이
+            커뮤니티를 통해 다양한
+            <br />
+            패션 정보를 확인하실 수 있어요.
           </h5>
         </div>
       </div>

@@ -2,16 +2,13 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const { name, reducer, actions } = createSlice({
   name: 'toast',
-  initialState: { list: [] },
+  initialState: { isActive: false, type: '', content: '' },
   reducers: {
     addToast(state, { payload }) {
-      const data = { list: [...state.list, payload] };
-      return data;
+      return { isActive: true, ...payload };
     },
-    removeToast(state, { payload }) {
-      return {
-        list: [...state.list.filter((el) => el.key !== payload.key)],
-      };
+    removeToast(state) {
+      return { isActive: false, type: '', content: '' };
     },
   },
 });

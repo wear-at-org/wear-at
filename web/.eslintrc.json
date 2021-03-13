@@ -1,8 +1,7 @@
 {
   "extends": [
     "react-app",
-    "react-app/jest",
-    "airbnb"
+    "react-app/jest"
   ],
   "rules": {
     "no-console": 0,

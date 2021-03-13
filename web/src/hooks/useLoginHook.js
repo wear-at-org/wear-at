@@ -12,11 +12,14 @@ const LoginHook = () => {
     if (dummyData.login.id === id && dummyData.login.password === password) {
       const loginObj = { id, password };
       return new Promise((res) => {
-        api.get('breeds/list/all').then((item) => {
-          dispatch(loginProcess(loginObj));
-        }).then(() => {
-          res(true);
-        });
+        api
+          .get('breeds/list/all')
+          .then((item) => {
+            dispatch(loginProcess(loginObj));
+          })
+          .then(() => {
+            res(true);
+          });
       });
     }
     return new Promise((res) => {

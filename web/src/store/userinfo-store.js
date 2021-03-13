@@ -8,12 +8,13 @@ const { name, reducer, actions } = createSlice({
       console.log(payload);
       return { ...state, isLogin: true, info: payload.info };
     },
+    logoutProcess(state) {
+      return { ...state, isLogin: false, info: { name: '', email: '' } };
+    },
   },
-  extraReducers: {
-
-  },
+  extraReducers: {},
 });
 
-const { loginProcess } = actions;
+const { loginProcess, logoutProcess } = actions;
 export default reducer;
-export { name, loginProcess };
+export { name, loginProcess, logoutProcess };

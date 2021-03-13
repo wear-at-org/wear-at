@@ -5,14 +5,24 @@ import { userInfoName } from '../store';
 
 const ProvideAuth = ({ children, ...rest }) => {
   const { isLogin } = useSelector((state) => state[userInfoName]);
+  console.log(children);
+  console.log(rest);
+  console.log('isLogin');
+  console.log(isLogin);
   return (
-    isLogin ? null : (
-      <Redirect
-        to={{
-          pathname: '/login',
-        }}
-      />
-    )
+    <Route
+      render={({ location }) =>
+        isLogin ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: '/login',
+            }}
+          />
+        )
+      }
+    />
   );
 };
 

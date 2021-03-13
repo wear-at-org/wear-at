@@ -1,0 +1,15 @@
+.mypage-container {
+  display: flex;
+
+  .left-router {
+    width: 256px;
+    padding-right: 46px;
+  }
+
+  .right-container {
+    border: 1px solid $grayeee;
+    width: calc(100% - 256px);
+    padding: 40px 70px;
+    box-sizing: border-box;
+  }
+}

@@ -1,24 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import LoginHook from 'hooks/useLoginHook';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import kakao from 'assets/img/kakao.png';
 import naver from 'assets/img/naver.png';
 import facebook from 'assets/img/facebook.png';
 import google from 'assets/img/google.png';
 import apple from 'assets/img/apple.png';
 import { LoginError } from 'assets/common/error.json';
+import toastHook from 'hooks/useToastHook';
 
 const Login = () => {
+  const history = useHistory();
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [isLogin, setIsLogin] = LoginHook();
-
+  const [showToast, hideToast] = toastHook({ type: '', content: '' });
   const loginProcess = async () => {
+    hideToast();
     setIsLogin(id, password).then((res) => {
       if (!res) {
-        alert(LoginError.loginError);
+        showToast({ type: 'error', content: LoginError.loginError });
+      } else {
+        hideToast();
+        history.push('/');
       }
     });
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      loginProcess();
+    }
   };
 
   useEffect(() => {
@@ -36,13 +48,29 @@ const Login = () => {
           <div>
             <div className="mb20">
               <div className="mb16">
-                <input type="email" placeholder="이메일 아이디" onChange={(e) => setId(e.target.value)} className="input-style1" />
+                <input
+                  type="email"
+                  placeholder="이메일 아이디"
+                  onChange={(e) => setId(e.target.value)}
+                  className="input-style1"
+                />
               </div>
               <div className="mb24">
-                <input type="password" placeholder="비밀번호" onChange={(e) => setPassword(e.target.value)} className="input-style1" />
+                <input
+                  type="password"
+                  placeholder="비밀번호"
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="input-style1"
+                  onKeyPress={handleKeyPress}
+                />
               </div>
               <div className="">
-                <input type="submit" value="로그인" onClick={loginProcess} className="btn-style1 wid100 btn-font-style1 tc middle" />
+                <input
+                  type="submit"
+                  value="로그인"
+                  onClick={loginProcess}
+                  className="btn-style1 wid100 btn-font-style1 tc middle"
+                />
               </div>
             </div>
             <div className="d-flex x-eq y-center pl8 pr8 login-utils-container">
@@ -52,7 +80,7 @@ const Login = () => {
               </div>
               <ul className="d-flex">
                 <li className="mr10">
-                  <Link to="/">아이디/비밀번호 찾기</Link>
+                  <Link to="/findIdPassword">아이디/비밀번호 찾기</Link>
                 </li>
                 <li>
                   <Link to="/signup">회원가입</Link>
@@ -97,10 +125,8 @@ const Login = () => {
               </ul>
             </div>
           </div>
-
         </div>
       </div>
-
     </div>
   );
 };
