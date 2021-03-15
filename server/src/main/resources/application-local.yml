@@ -4,9 +4,9 @@ spring:
       on-profile: "local"
   datasource:
     driver-class-name: "com.mysql.cj.jdbc.Driver"
-    url: "jdbc:mysql://localhost:3306/scot?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC"
-    username: "scot"
-    password: "scot123!@#"
+    url: "jdbc:mysql://localhost:3306/wearat?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false"
+    username: "wearat"
+    password: "wearat123!@#"
   jpa:
     properties:
       hibernate:
@@ -17,7 +17,7 @@ spring:
     generate-ddl: true
     show-sql: true
   auth:
-    jwt-key: "scot_secret_j21j5j3k5i53g46g56u63g3u4h43h435ugh3"
+    jwt-key: "wearat_secret_j21j5j3k5i53g46g56u63g3u4h43h435ugh3"
     jwt-expire-in-seconds: 120
     callback-url: "http://localhost:8089/v1/auth/callback"
     client-redirect-url: "http://localhost:3000"
