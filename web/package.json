@@ -1,6 +1,6 @@
 {
-  "name": "scott-web",
-  "description": "scot web service",
+  "name": "wearat",
+  "description": "wearat web service",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -56,6 +56,6 @@
     "node-sass": "^4.14.1"
   },
   "engines": {
-    "node": "12.13.0"
+    "node": "12.x"
   }
 }
