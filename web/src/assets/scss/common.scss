@@ -11,6 +11,10 @@
   height: 100%;
 }
 
+.width-per-33 {
+  width: 33.33%;
+}
+
 .sub {
   padding: 64px 0;
 }
@@ -508,4 +512,19 @@ footer {
 
 .date-birth-container {
   display: flex;
+  width: calc(100% + 8px);
+  margin-left: -4px;  
 }
+
+.adress-container {
+  width: calc(100% - 186px);
+}
+
+.address-btn-container {
+  width: 186px;
+}
+
+.width-100 {
+  width: 100%;
+}
+

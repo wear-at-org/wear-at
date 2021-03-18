@@ -14,6 +14,19 @@
   padding: 10px 16px;
   border-radius: 6px;
   border: 1px solid $mainColor;
+  &.white {
+    color: white;
+  }
+  &:disabled {
+    background-color: $grayD4D4;
+    border-color: $grayD4D4;
+    color: $gray7979;
+
+    &:hover {
+      cursor: not-allowed;
+      opacity: 1;
+    }
+  }
   &.large {
     padding: 22px 32px;
   }
@@ -42,7 +55,7 @@
   font-size: 14px;
   line-height: 16px;
   font-weight: 400;
-  color: $grayColor7979;
+  color: $gray7979;
 }
 
 
@@ -77,7 +90,6 @@
     line-height: 16px;
   }
 }
-
 
 .chkbox-con {
   input[type="checkbox"] {
@@ -197,3 +209,24 @@ input.active + .slider:before {
   transform: translateX(17px);
   background-color: white;
 }
+
+.select-style1 {
+  width: 100%;
+  padding: 0 8px 0 16px;
+  border-radius: 4px;
+  border: 1px solid $grayD4D4;
+  box-sizing: border-box;
+  height: 40px;
+  font-size: 14px;
+  line-height: 20px;
+}
+select:invalid {
+  color: $grayD4D4;
+}
+option[value=""][disabled] {
+  display: none;
+}
+option {
+  color: black;
+}
+
