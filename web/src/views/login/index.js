@@ -50,7 +50,7 @@ const Login = () => {
               <div className="mb16">
                 <input
                   type="email"
-                  placeholder="이메일 아이디"
+                  placeholder="test"
                   onChange={(e) => setId(e.target.value)}
                   className="input-style1"
                 />
@@ -58,7 +58,7 @@ const Login = () => {
               <div className="mb24">
                 <input
                   type="password"
-                  placeholder="비밀번호"
+                  placeholder="123 입력시 임시 로그인"
                   onChange={(e) => setPassword(e.target.value)}
                   className="input-style1"
                   onKeyPress={handleKeyPress}
