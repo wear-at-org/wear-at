@@ -4,7 +4,7 @@ import DaumPostcode from 'react-daum-postcode';
 import defaultProfile from 'assets/img/profile.svg';
 
 const Mypage = () => {
-  const [showPost, setShowPost] = useState(false)
+  const [showPost, setShowPost] = useState(false);
   const inputRef = useRef(null);
   const handleComplete = (data) => {
     let fullAddress = data.address;
@@ -24,10 +24,10 @@ const Mypage = () => {
   };
   const [profileImage, setProfileImage] = useState(defaultProfile);
   const uploadImage = (event) => {
-    console.log(event)
+    console.log(event);
     let reader = new FileReader();
     let file = event.target.files[0];
-    if(file) {
+    if (file) {
       reader.onloadend = () => {
         setProfileImage(reader.result);
       };
@@ -57,7 +57,13 @@ const Mypage = () => {
               <div className="profile-container" onMouseUpCapture={(e) => inputRef.current.click()}>
                 <img src={profileImage} alt="defaultProfile" />
               </div>
-              <input className="file-input" type="file" name="docx" ref={inputRef} onChange={uploadImage}/>
+              <input
+                className="file-input"
+                type="file"
+                name="docx"
+                ref={inputRef}
+                onChange={uploadImage}
+              />
             </div>
 
             <div className="left-link-container">
@@ -77,7 +83,7 @@ const Mypage = () => {
                 <li>
                   <Link>비밀번호 변경</Link>
                 </li>
-                <li className='logout'>로그아웃</li>
+                <li className="logout">로그아웃</li>
               </ul>
             </div>
           </div>
@@ -93,7 +99,12 @@ const Mypage = () => {
               </div>
 
               <div className="mb6">
-                <input type="text" className="input-style1" id="name" placeholder="scot@sample.com"/>
+                <input
+                  type="text"
+                  className="input-style1"
+                  id="name"
+                  placeholder="scot@sample.com"
+                />
               </div>
             </div>
 
@@ -105,9 +116,9 @@ const Mypage = () => {
               </div>
 
               <div className="mb6">
-                <input type="text" className="input-style1" id="name" placeholder="홍길동"/>
+                <input type="text" className="input-style1" id="name" placeholder="홍길동" />
               </div>
-            </div>     
+            </div>
 
             <div className="mb20">
               <div className="label-container">
@@ -119,19 +130,25 @@ const Mypage = () => {
               <div className="date-birth-container">
                 <div className="width-per-33 pl4 pr4">
                   <select className="select-style1" name="" id="" required>
-                     <option value="" disabled selected hidden>년도</option>
+                    <option value="" disabled selected hidden>
+                      년도
+                    </option>
                     <option value="aa">aa</option>
                   </select>
                 </div>
                 <div className="width-per-33 pl4 pr4">
                   <select className="select-style1" name="" id="" required>
-                    <option value="" disabled selected hidden>월</option>
+                    <option value="" disabled selected hidden>
+                      월
+                    </option>
                     <option value="bb">bb</option>
                   </select>
                 </div>
                 <div className="width-per-33 pl4 pr4">
                   <select className="select-style1" name="" id="" required>
-                    <option value="" disabled selected hidden>일</option>
+                    <option value="" disabled selected hidden>
+                      일
+                    </option>
                     <option value="cc">cc</option>
                     <option value="cc">cc</option>
                     <option value="cc">cc</option>
@@ -139,7 +156,7 @@ const Mypage = () => {
                   </select>
                 </div>
               </div>
-            </div>                     
+            </div>
 
             <div className="mb40">
               <div className="label-container">
@@ -149,7 +166,7 @@ const Mypage = () => {
               </div>
               <div className="radio-wrap">
                 <div className="radio-btn-con">
-                  <input type="radio" id="woman" className="radio-style-0" name="gender" checked/>
+                  <input type="radio" id="woman" className="radio-style-0" name="gender" checked />
                   <label htmlFor="woman">여자</label>
                 </div>
                 <div className="radio-btn-con">
@@ -174,10 +191,14 @@ const Mypage = () => {
                 </div>
 
                 <div className="mb6">
-                  <input type="text" className="input-style1" id="name" placeholder="소소한다람쥐"/>
+                  <input
+                    type="text"
+                    className="input-style1"
+                    id="name"
+                    placeholder="소소한다람쥐"
+                  />
                 </div>
               </div>
-
 
               <div className="mb20">
                 <div className="label-container">
@@ -188,46 +209,73 @@ const Mypage = () => {
 
                 <div className="d-flex">
                   <div className="adress-container pr8">
-                    <input type="text" className="input-style1" id="name" placeholder="우편번호" readOnly/>
+                    <input
+                      type="text"
+                      className="input-style1"
+                      id="name"
+                      placeholder="우편번호"
+                      readOnly
+                    />
                   </div>
 
                   <div className="address-btn-container">
                     <div className="width-100 btn-style1">
-                      <p className="btn-font-style1 tc" onClick={() => setShowPost(!showPost)}>주소검색</p>
+                      <p className="btn-font-style1 tc" onClick={() => setShowPost(!showPost)}>
+                        주소검색
+                      </p>
                     </div>
                   </div>
                 </div>
-              </div>                            
+              </div>
             </div>
-            {
-              showPost && <div className="mt10 mb16" ><DaumPostcode onComplete={handleComplete} width="400px"/></div>
-            }
+            {showPost && (
+              <div className="mt10 mb16">
+                <DaumPostcode onComplete={handleComplete} width="400px" />
+              </div>
+            )}
 
             <div className="mb64">
               <div className="mb16">
-                <input type="text" className="input-style1" id="name" placeholder="검색버튼을 눌러 주소를 검색해주세요." readOnly/>
+                <input
+                  type="text"
+                  className="input-style1"
+                  id="name"
+                  placeholder="검색버튼을 눌러 주소를 검색해주세요."
+                  readOnly
+                />
               </div>
               <div>
-                <input type="text" className="input-style1" id="name" placeholder="상세주소를 입력해주세요."/>
-              </div>                            
+                <input
+                  type="text"
+                  className="input-style1"
+                  id="name"
+                  placeholder="상세주소를 입력해주세요."
+                />
+              </div>
             </div>
 
             <div className="mb36">
               <h5 className="mb28 fontweight700">마케팅 수신 동의에 동의합니다. </h5>
               <div className="chkbox-con mb20">
                 <input type="checkbox" id="agreeInfo" className="input-style-checkbox" />
-                <label htmlFor="agreeInfo">스콧에서 진행하는 이벤트, 프로모션에 관한 광고를 수신하겠습니다.</label>
-              </div>              
+                <label htmlFor="agreeInfo">
+                  스콧에서 진행하는 이벤트, 프로모션에 관한 광고를 수신하겠습니다.
+                </label>
+              </div>
             </div>
 
             <div className="mb15">
-              <input disabled type="button" className="width-100 btn-style1 tc white" value="정보 수정 완료" /> 
+              <input
+                disabled
+                type="button"
+                className="width-100 btn-style1 tc white"
+                value="정보 수정 완료"
+              />
             </div>
 
             <div>
               <p className="secession-font">탈퇴하기</p>
             </div>
-                      
           </div>
         </form>
       </div>
