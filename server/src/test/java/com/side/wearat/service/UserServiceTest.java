@@ -1,7 +1,7 @@
 package com.side.wearat.service;
 
 import com.side.wearat.entity.User;
-import com.side.wearat.model.user.UserRequest;
+import com.side.wearat.model.user.CreateUserRequest;
 import com.side.wearat.repository.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,10 +31,10 @@ public class UserServiceTest {
 
         List<User> users1 = userService.listUsers();
 
-        UserRequest req = new UserRequest("test", "testemail");
+        CreateUserRequest req = new CreateUserRequest("test", "testemail");
         var user1 = userService.createUser(req);
 
-        UserRequest req2 = new UserRequest("test2", "testemail2");
+        CreateUserRequest req2 = new CreateUserRequest("test2", "testemail2");
         var user2 = userService.createUser(req2);
 
         List<User> users = userService.listUsers();

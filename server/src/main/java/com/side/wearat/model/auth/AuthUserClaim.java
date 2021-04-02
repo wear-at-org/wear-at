@@ -11,10 +11,13 @@ import lombok.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AuthUserClaim {
     @JsonProperty("id")
-    private String id;
+    private Long id;
 
     @JsonProperty("nick_name")
     private String nickName;
+
+    @JsonProperty("email")
+    private String email;
 
     @JsonProperty("access_token")
     private String accessToken;
