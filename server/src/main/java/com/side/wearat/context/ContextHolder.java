@@ -7,6 +7,8 @@ public class ContextHolder {
 
     public enum ContextKey {
         UserID,
+        NickName,
+        Email,
     }
 
     public static Object get(ContextKey key) {

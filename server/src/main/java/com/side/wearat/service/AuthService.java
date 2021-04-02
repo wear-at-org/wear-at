@@ -6,6 +6,7 @@ import com.side.wearat.config.AuthConfig;
 import com.side.wearat.exception.UnAuthorizedException;
 import com.side.wearat.model.auth.AuthUserClaim;
 import com.side.wearat.model.auth.AuthUserResponse;
+import com.side.wearat.model.auth.SignInRequest;
 import com.side.wearat.model.auth.TokenResponse;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.SignatureException;
@@ -15,6 +16,9 @@ import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.security.Keys;
 
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Date;
@@ -22,6 +26,8 @@ import java.util.Date;
 @Slf4j
 @Service
 public class AuthService {
+
+    private static final String PASSWORD_SALT = "fjawliefjl769qlehw5665";
 
     private final AuthConfig authConfig;
 
@@ -79,8 +85,9 @@ public class AuthService {
             AuthUserClaim user = AuthUserClaim.builder()
                     .accessToken(claim.get("accessToken", String.class))
                     .refreshToken(claim.get("refreshToken", String.class))
-                    .id(claim.get("id", String.class))
+                    .id(claim.get("id", Long.class))
                     .nickName(claim.get("nickName", String.class))
+                    .email(claim.get("email", String.class))
                     .build();
             return user;
 
@@ -97,5 +104,16 @@ public class AuthService {
         } catch (Exception ex) {
             throw new UnAuthorizedException("parse jwt token exception", ex);
         }
+    }
+
+    public String encryptPassword(String password) throws Exception{
+        MessageDigest md = MessageDigest.getInstance("SHA-512");
+        md.update(PASSWORD_SALT.getBytes(StandardCharsets.UTF_8));
+        byte[] bytes = md.digest(password.getBytes(StandardCharsets.UTF_8));
+        StringBuilder sb = new StringBuilder();
+        for(int i=0; i< bytes.length ;i++){
+            sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+        }
+        return sb.toString();
     }
 }

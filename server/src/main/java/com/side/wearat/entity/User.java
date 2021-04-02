@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Setter
 @Getter
 @ToString
 @AllArgsConstructor
@@ -16,10 +17,29 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    private String provider;
+
+    private String providerId;
+
     private String name;
 
+    @Column(unique = true, nullable = false)
     private String email;
+
+    @Column(nullable = false)
+    private String nickname;
+
+    private String password;
+
+    private String gender;
+
+    private String birthday;
+
+    private Boolean checkServiceTerms;
+
+    private Boolean checkPrivacyPolicy;
+
+    private Boolean checkReceivingConsent;
 
     private LocalDateTime createAt;
 
@@ -28,5 +48,4 @@ public class User {
     private LocalDateTime updateAt;
 
     private String updateUser;
-
 }

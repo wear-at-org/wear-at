@@ -1,7 +1,8 @@
 package com.side.wearat.controller;
 
 import com.side.wearat.entity.User;
-import com.side.wearat.model.user.UserRequest;
+import com.side.wearat.model.user.CreateUserRequest;
+import com.side.wearat.service.AuthService;
 import com.side.wearat.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,16 @@ public class UserController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @PostMapping(path = "/find")
+    public void find() {
+    }
+
+    @PostMapping(path = "/find-password")
+    public void findPassword() {
+    }
+
     @PutMapping(path = "")
-    public User createUser(@RequestBody UserRequest req) {
+    public User updateUser(@RequestBody CreateUserRequest req) {
         return this.userService.createUser(req);
     }
 }

@@ -80,9 +80,8 @@ public class KakaoProvider implements IProvider {
                 .id(resp.getId())
                 .nickName(resp.getKakaoAccount().getProfile().getNickName())
                 .email(resp.getKakaoAccount().getEmail())
-                .ageRange(resp.getKakaoAccount().getAgeRange())
-                .birthDay(resp.getKakaoAccount().getBirthDay())
-                .birthYear(resp.getKakaoAccount().getBirthYear())
+                .age(resp.getKakaoAccount().getAgeRange())
+                .birthday(resp.getKakaoAccount().getBirthYear()+resp.getKakaoAccount().getBirthDay())
                 .gender(resp.getKakaoAccount().getGender())
                 .profileImage(resp.getKakaoAccount().getProfile().getProfileImage())
                 .build();
@@ -97,7 +96,7 @@ public class KakaoProvider implements IProvider {
 @JsonIgnoreProperties(ignoreUnknown = true)
 class KakaoAuthResponse {
     @JsonProperty("id")
-    private String id;
+    private Long id;
 
     @JsonProperty("kakao_account")
     private KakaoAuthAccount kakaoAccount;
