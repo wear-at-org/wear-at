@@ -1,4 +1,4 @@
-package com.side.wearat;
+package com.side.wearat.config;
 
 import com.side.wearat.interceptor.AuthInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
