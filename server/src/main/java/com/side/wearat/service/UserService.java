@@ -16,6 +16,10 @@ public interface UserService {
 
     Optional<User> getUserByProvider(String provider, String providerId);
 
+    boolean existsByEmail(String email);
+
+    boolean existsByNickname(String nickname);
+
     User createUser(CreateUserRequest req);
 
     void updateUser(UpdateUserRequest req);

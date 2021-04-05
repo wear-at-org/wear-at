@@ -45,6 +45,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean existsByEmail(String email) {
+        return this.userRepository.existsByEmail(email);
+    }
+
+    @Override
+    public boolean existsByNickname(String nickname) {
+        return this.userRepository.existsByNickname(nickname);
+    }
+
+    @Override
     public User createUser(CreateUserRequest req) {
         User user = User.builder()
                 .name(req.getName())

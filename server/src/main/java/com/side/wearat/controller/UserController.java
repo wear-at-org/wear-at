@@ -6,6 +6,7 @@ import com.side.wearat.service.AuthService;
 import com.side.wearat.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +35,26 @@ public class UserController {
         Optional<User> user = this.userService.getUser(userId);
         return user.map(u -> ResponseEntity.ok().body(u))
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping(path = "check-email")
+    public ResponseEntity<Void> checkEmailRegistered(@PathVariable("email") String email) {
+        boolean exists = this.userService.existsByEmail(email);
+        if (exists) {
+            return ResponseEntity.ok().build();
+        } else {
+            return new ResponseEntity(HttpStatus.CONFLICT);
+        }
+    }
+
+    @GetMapping(path = "check-nickname")
+    public ResponseEntity<User> checkNicknameRegistered(@PathVariable("nickname") String nickname) {
+        boolean exists = this.userService.existsByNickname(nickname);
+        if (exists) {
+            return ResponseEntity.ok().build();
+        } else {
+            return new ResponseEntity(HttpStatus.CONFLICT);
+        }
     }
 
     @PostMapping(path = "/find")
