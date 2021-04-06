@@ -6,36 +6,38 @@ import naver from 'assets/img/naver.png';
 import facebook from 'assets/img/facebook.png';
 import google from 'assets/img/google.png';
 import apple from 'assets/img/apple.png';
-import { LoginError } from 'assets/common/error.json';
 import toastHook from 'hooks/useToastHook';
+import Cookies from 'universal-cookie';
 
 const Login = () => {
-  const history = useHistory();
-  const [id, setId] = useState('');
+  const [saveId, setSaveId] = useState(false);
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLogin, setIsLogin] = LoginHook();
   const [showToast, hideToast] = toastHook({ type: '', content: '' });
-  const loginProcess = async () => {
+  const loginProcess = async (e) => {
+    console.log(saveId);
+    e.preventDefault();
     hideToast();
-    setIsLogin(id, password).then((res) => {
-      if (!res) {
-        showToast({ type: 'error', content: LoginError.loginError });
-      } else {
-        hideToast();
-        history.push('/');
-      }
-    });
+    setIsLogin(email, password, saveId);
   };
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      loginProcess();
+      loginProcess(e);
     }
   };
 
   useEffect(() => {
-    console.log(isLogin);
-  }, [isLogin]);
+    const cookies = new Cookies();
+    const saveEmailCookie = cookies.get('saveEmail');
+    console.log(saveEmailCookie);
+    if (saveEmailCookie) {
+      console.log('saveEmailCookie');
+      setSaveId(true);
+      setEmail(saveEmailCookie);
+    }
+  }, []);
 
   return (
     <div className="sub layout-sub">
@@ -45,37 +47,48 @@ const Login = () => {
             <h3>로그인</h3>
           </div>
 
-          <div>
+          <form onSubmit={loginProcess}>
             <div className="mb20">
               <div className="mb16">
                 <input
+                  value={email}
                   type="email"
-                  placeholder="test"
-                  onChange={(e) => setId(e.target.value)}
+                  placeholder="이메일 아이디"
+                  onChange={(e) => setEmail(e.target.value)}
                   className="input-style1"
+                  autoComplete="on"
                 />
               </div>
               <div className="mb24">
                 <input
+                  value={password}
                   type="password"
-                  placeholder="123 입력시 임시 로그인"
+                  placeholder="비밀번호"
                   onChange={(e) => setPassword(e.target.value)}
                   className="input-style1"
                   onKeyPress={handleKeyPress}
+                  autoComplete="off"
                 />
               </div>
               <div className="">
                 <input
                   type="submit"
                   value="로그인"
-                  onClick={loginProcess}
                   className="btn-style1 wid100 btn-font-style1 tc middle"
                 />
               </div>
             </div>
             <div className="d-flex x-eq y-center pl8 pr8 login-utils-container">
               <div className="chkbox-con">
-                <input type="checkbox" id="saveId" className="input-style-checkbox" />
+                <input
+                  type="checkbox"
+                  id="saveId"
+                  className="input-style-checkbox"
+                  checked={saveId}
+                  onChange={() => {
+                    setSaveId(!saveId);
+                  }}
+                />
                 <label htmlFor="saveId">아이디 저장</label>
               </div>
               <ul className="d-flex">
@@ -124,7 +137,7 @@ const Login = () => {
                 </li>
               </ul>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

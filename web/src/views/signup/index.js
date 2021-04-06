@@ -5,8 +5,10 @@ import facebook from 'assets/img/facebook.png';
 import google from 'assets/img/google.png';
 import apple from 'assets/img/apple.png';
 import errorJSON from 'assets/common/error.json';
+import useSignup from 'hooks/useSignup'
 
 const Signup = () => {
+  const [signupProcess, result] = useSignup()
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('');
@@ -51,9 +53,12 @@ const Signup = () => {
       return true;
     }).length;
     if (name !== '' && errorCnt === 0) {
+      signupProcess({
+        name, password, email, isAgree
+      })
       console.log('ok');
     }
-  }, [error, name]);
+  }, [error, name, password, email, isAgree, signupProcess]);
 
   return (
     <div className="sub layout-sub">

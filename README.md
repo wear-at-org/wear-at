@@ -1,7 +1,7 @@
-# scot
-SCOT web service
+# Wear'At
+Wear'At web service
 
-- SCOT community: https://scotscot.atlassian.net/wiki/spaces/SCOT/overview?homepageId=294914
+- Wear'At community: https://www.notion.so/e761b4d3d09d4dc7a509338a80c70e87?v=5e7494b1a7dd4ac1925fe31ec591b06f
 
 ## spec
 - backend: spring boot

@@ -1,9 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import DaumPostcode from 'react-daum-postcode';
 import defaultProfile from 'assets/img/profile.svg';
+import api from 'api';
 
 const Mypage = () => {
+  useEffect(() => {}, []);
   const [showPost, setShowPost] = useState(false);
   const inputRef = useRef(null);
   const handleComplete = (data) => {
