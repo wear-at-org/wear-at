@@ -10,7 +10,6 @@ import com.side.wearat.model.user.UpdateUserRequest;
 import com.side.wearat.service.AuthService;
 import com.side.wearat.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.sql.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -139,11 +138,11 @@ public class AuthController {
 
         AuthUserResponse authUser = this.authService.getUser(provider, token.getAccessToken());
 
-        Optional<User> user = this.userService.getUserByProvider(provider, authUser.getId().toString());
+        Optional<User> user = this.userService.getUserByProvider(provider, authUser.getId());
         if (user.isEmpty()) {
             CreateUserRequest req = CreateUserRequest.builder()
                     .provider(provider)
-                    .providerID(authUser.getId().toString())
+                    .providerID(authUser.getId())
                     .email(authUser.getEmail())
                     .nickname(authUser.getNickName())
                     .gender(authUser.getGender())
@@ -161,7 +160,7 @@ public class AuthController {
 
         String jwtToken = this.createJWTFromUser(user.get());
         this.createTokenCookie(response, jwtToken);
-        this.createUserCookie(response, authUser.getId().toString(), authUser.getNickName());
+        this.createUserCookie(response, u.getId().toString(), u.getNickname());
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", this.authConfig.getClientRedirectUrl() + "/test");

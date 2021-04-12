@@ -8,8 +8,6 @@ import com.side.wearat.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
-import java.security.MessageDigest;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -65,6 +63,9 @@ public class UserServiceImpl implements UserService {
                 .password(req.getPassword())
                 .gender(req.getGender())
                 .birthday(req.getBirthday())
+                .zipCode(req.getZipCode())
+                .address(req.getAddress())
+                .detailAddress(req.getDetailAddress())
                 .checkReceivingConsent(req.getCheckReceivingConsent())
                 .checkPrivacyPolicy(req.getCheckPrivacyPolicy())
                 .checkServiceTerms(req.getCheckServiceTerms())
@@ -94,6 +95,15 @@ public class UserServiceImpl implements UserService {
             }
             if (!req.getBirthday().isEmpty()) {
                 user.setBirthday(req.getBirthday());
+            }
+            if (!req.getZipCode().isEmpty()) {
+                user.setZipCode(req.getZipCode());
+            }
+            if (!req.getAddress().isEmpty()) {
+                user.setAddress(req.getAddress());
+            }
+            if (!req.getDetailAddress().isEmpty()) {
+                user.setDetailAddress(req.getDetailAddress());
             }
             user.setCheckServiceTerms(req.getCheckServiceTerms());
             user.setCheckPrivacyPolicy(req.getCheckPrivacyPolicy());

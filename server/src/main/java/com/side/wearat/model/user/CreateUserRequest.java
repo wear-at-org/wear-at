@@ -24,6 +24,12 @@ public class CreateUserRequest {
 
     private String birthday;
 
+    private String zipCode;
+
+    private String address;
+
+    private String detailAddress;
+
     private Boolean checkServiceTerms;
 
     private Boolean checkPrivacyPolicy;

@@ -12,7 +12,7 @@ import lombok.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AuthUserResponse {
     @JsonProperty("id")
-    private Long id;
+    private String id;
 
     @JsonProperty("nickname")
     private String nickName;

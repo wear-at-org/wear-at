@@ -13,4 +13,5 @@ public class AuthConfig {
     private String callbackUrl;
     private String clientRedirectUrl;
     private AuthKakaoConfig kakao;
+    private AuthNaverConfig naver;
 }

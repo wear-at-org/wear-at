@@ -1,6 +1,7 @@
 package com.side.wearat.api.auth;
 
 import com.side.wearat.api.auth.kakao.KakaoProvider;
+import com.side.wearat.api.auth.naver.NaverProvider;
 import com.side.wearat.config.AuthConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,6 +20,7 @@ public class OAuthProvider {
 
         this.providerMap = new HashMap<>();
         this.providerMap.put("kakao", new KakaoProvider(this.authConfig));
+        this.providerMap.put("naver", new NaverProvider(this.authConfig));
     }
 
     public IProvider getProvider(String provider) throws Exception{

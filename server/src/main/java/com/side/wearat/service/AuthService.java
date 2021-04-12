@@ -6,7 +6,6 @@ import com.side.wearat.config.AuthConfig;
 import com.side.wearat.exception.UnAuthorizedException;
 import com.side.wearat.model.auth.AuthUserClaim;
 import com.side.wearat.model.auth.AuthUserResponse;
-import com.side.wearat.model.auth.SignInRequest;
 import com.side.wearat.model.auth.TokenResponse;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.SignatureException;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.security.Keys;
 
-import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.time.LocalDateTime;
