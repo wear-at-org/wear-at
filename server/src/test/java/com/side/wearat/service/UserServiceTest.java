@@ -31,10 +31,10 @@ public class UserServiceTest {
 
         List<User> users1 = userService.listUsers();
 
-        CreateUserRequest req = new CreateUserRequest("test", "testemail");
+        CreateUserRequest req = CreateUserRequest.builder().name("test1").email("test1@mail.com").build();
         var user1 = userService.createUser(req);
 
-        CreateUserRequest req2 = new CreateUserRequest("test2", "testemail2");
+        CreateUserRequest req2 = CreateUserRequest.builder().name("test2").email("test2@mail.com").build();
         var user2 = userService.createUser(req2);
 
         List<User> users = userService.listUsers();
