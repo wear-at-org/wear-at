@@ -1,52 +1,26 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import DaumPostcode from 'react-daum-postcode';
-import defaultProfile from 'assets/img/profile.svg';
+import Address from './Address';
 import api from 'api';
+import ImageUpload from 'components/ImageUpload';
 
 const Mypage = () => {
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const data = api.get('user');
+  }, []);
   const [showPost, setShowPost] = useState(false);
-  const inputRef = useRef(null);
-  const handleComplete = (data) => {
-    let fullAddress = data.address;
-    let extraAddress = '';
-    let zoneCode = data.zonecode;
-    if (data.addressType === 'R') {
-      if (data.bname !== '') {
-        extraAddress += data.bname;
-      }
-      if (data.buildingName !== '') {
-        extraAddress += extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
-      }
-      fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
-    }
-
-    console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
-  };
-  const [profileImage, setProfileImage] = useState(defaultProfile);
-  const uploadImage = (event) => {
-    console.log(event);
-    let reader = new FileReader();
-    let file = event.target.files[0];
-    if (file) {
-      reader.onloadend = () => {
-        setProfileImage(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const user = {
-    nickName: '닉네임',
-    email: 'test@test.com',
-    name: '홍길동',
-    gender: 1,
-    postNumber: 13123,
-    post1: '',
-    post2: '',
-    agreeMarketing: true,
-  };
+  const [post, setPost] = useState({});
+  const [user, setUser] = useState({});
+  // const user = {
+  //   nickName: '닉네임',
+  //   email: 'test@test.com',
+  //   name: '홍길동',
+  //   gender: 1,
+  //   postNumber: 13123,
+  //   post1: '',
+  //   post2: '',
+  //   agreeMarketing: true,
+  // };
 
   return (
     <div className="sub layout-sub">
@@ -55,18 +29,7 @@ const Mypage = () => {
           <div className="left-router">
             <h4 className="mb24 fontweight700">안녕하세요 {user.nickName}</h4>
 
-            <div className="">
-              <div className="profile-container" onMouseUpCapture={(e) => inputRef.current.click()}>
-                <img src={profileImage} alt="defaultProfile" />
-              </div>
-              <input
-                className="file-input"
-                type="file"
-                name="docx"
-                ref={inputRef}
-                onChange={uploadImage}
-              />
-            </div>
+            <ImageUpload />
 
             <div className="left-link-container">
               <ul>
@@ -222,7 +185,7 @@ const Mypage = () => {
 
                   <div className="address-btn-container">
                     <div className="width-100 btn-style1">
-                      <p className="btn-font-style1 tc" onClick={() => setShowPost(!showPost)}>
+                      <p className="btn-font font-white tc" onClick={() => setShowPost(!showPost)}>
                         주소검색
                       </p>
                     </div>
@@ -230,11 +193,14 @@ const Mypage = () => {
                 </div>
               </div>
             </div>
-            {showPost && (
-              <div className="mt10 mb16">
-                <DaumPostcode onComplete={handleComplete} width="400px" />
-              </div>
-            )}
+
+            <Address
+              showPost={showPost}
+              setShowPost={setShowPost}
+              onChange={(value) => {
+                console.log(value);
+              }}
+            />
 
             <div className="mb64">
               <div className="mb16">

@@ -23,8 +23,6 @@ const LoginHook = () => {
         .then((item) => {
           hideToast();
           if (item.status === 200) {
-            console.log(item.status);
-            console.log(saveId);
             if (saveId) {
               const cookies = new Cookies();
               cookies.set('saveEmail', email, { path: '/' });

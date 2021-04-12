@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import LoginHook from 'hooks/useLoginHook';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import kakao from 'assets/img/kakao.png';
 import naver from 'assets/img/naver.png';
 import facebook from 'assets/img/facebook.png';
 import google from 'assets/img/google.png';
 import apple from 'assets/img/apple.png';
-import toastHook from 'hooks/useToastHook';
 import Cookies from 'universal-cookie';
 
 const Login = () => {
@@ -14,11 +13,9 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLogin, setIsLogin] = LoginHook();
-  const [showToast, hideToast] = toastHook({ type: '', content: '' });
   const loginProcess = async (e) => {
     console.log(saveId);
     e.preventDefault();
-    hideToast();
     setIsLogin(email, password, saveId);
   };
 
@@ -31,9 +28,7 @@ const Login = () => {
   useEffect(() => {
     const cookies = new Cookies();
     const saveEmailCookie = cookies.get('saveEmail');
-    console.log(saveEmailCookie);
     if (saveEmailCookie) {
-      console.log('saveEmailCookie');
       setSaveId(true);
       setEmail(saveEmailCookie);
     }
@@ -74,7 +69,7 @@ const Login = () => {
                 <input
                   type="submit"
                   value="로그인"
-                  className="btn-style1 wid100 btn-font-style1 tc middle"
+                  className="btn-style1 wid100 btn-font font-white middle"
                 />
               </div>
             </div>

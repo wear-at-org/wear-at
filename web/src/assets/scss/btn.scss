@@ -1,4 +1,5 @@
-[class*="btn-style"] {
+[class*='btn-style'] {
+  text-align: center;
   transition: 0.3s;
   display: inline-block;
   cursor: pointer;
@@ -36,13 +37,31 @@
   &.wid100 {
     width: 100%;
   }
+
+  &.type-black {
+    background-color: $black333;
+    border-color: $black333;
+  }
+
+  &.type-white {
+    background-color: white;
+    border-color: $black333;
+  }
 }
 
-.btn-font-style1 {
+.btn-font {
   font-size: 14px;
   line-height: 18px;
   font-weight: 400;
-  color: white
+  &.font-white {
+    color: white;
+  }
+  &.font-black333 {
+    color: $black333;
+  }
+  &.font-gray7979 {
+    color: $gray7979;
+  }
 }
 
 .btn-style2 {
@@ -50,14 +69,6 @@
   border: 1px solid $grayD4D4;
   border-radius: 6px;
 }
-
-.btn-font-style2 {
-  font-size: 14px;
-  line-height: 16px;
-  font-weight: 400;
-  color: $gray7979;
-}
-
 
 .input-style1 {
   width: 100%;
@@ -92,7 +103,7 @@
 }
 
 .chkbox-con {
-  input[type="checkbox"] {
+  input[type='checkbox'] {
     width: 20px;
     height: 20px;
     border-radius: 4px;
@@ -122,7 +133,7 @@
       background-position: center center;
       border: 1px solid $mainColor;
       &:after {
-        content: "";
+        content: '';
         position: absolute;
         width: 7px;
         height: 2px;
@@ -132,7 +143,7 @@
         transform: rotate(45deg);
       }
       &:before {
-        content: "";
+        content: '';
         position: absolute;
         width: 11px;
         height: 2px;
@@ -140,7 +151,7 @@
         top: 8px;
         right: 1px;
         transform: rotate(130deg);
-      }      
+      }
     }
   }
 }
@@ -148,14 +159,15 @@
 .social-btn {
   cursor: pointer;
   display: flex;
-  align-items: center;justify-content: center;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 40px;
   border-radius: 4px;
 
   p {
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 500;
   }
 }
 
@@ -188,8 +200,8 @@
 
 .slider:before {
   position: absolute;
-  content: "";
-  height:24px;
+  content: '';
+  height: 24px;
   width: 24px;
   left: 10px;
   bottom: 4px;
@@ -223,10 +235,9 @@ input.active + .slider:before {
 select:invalid {
   color: $grayD4D4;
 }
-option[value=""][disabled] {
+option[value=''][disabled] {
   display: none;
 }
 option {
   color: black;
 }
-
