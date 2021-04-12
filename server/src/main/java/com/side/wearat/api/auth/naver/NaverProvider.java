@@ -1,4 +1,4 @@
-package com.side.wearat.api.auth.kakao;
+package com.side.wearat.api.auth.naver;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,48 +13,45 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
 
-public class KakaoProvider implements IProvider {
+public class NaverProvider implements IProvider {
 
     private final AuthConfig authConfig;
 
-    public KakaoProvider(AuthConfig authConfig) {
+    public NaverProvider(AuthConfig authConfig) {
         this.authConfig = authConfig;
     }
 
     @Override
     public String getCodeUrl() {
         String redirectUrl = URLEncoder.encode(this.authConfig.getCallbackUrl(), StandardCharsets.UTF_8);
-        String urlStr = String.format("%s?client_id=%s&redirect_uri=%s&response_type=code&state=kakao", this.authConfig.getKakao().getCodeUrl(), this.authConfig.getKakao().getClientId(), redirectUrl);
+        String urlStr = String.format("%s?client_id=%s&redirect_uri=%s&response_type=code&state=naver", this.authConfig.getNaver().getCodeUrl(), this.authConfig.getNaver().getClientId(), redirectUrl);
         return urlStr;
     }
 
     @Override
     public TokenResponse issueToken(String code) {
         WebClient client = WebClient.builder()
-                .baseUrl(this.authConfig.getKakao().getTokenUrl())
+                .baseUrl(this.authConfig.getNaver().getTokenUrl())
                 .build();
 
-        KakaoTokenResponse resp = client.post()
+        NaverTokenResponse resp = client.post()
                 .header(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded;charset=utf-8")
                 .body(BodyInserters.fromFormData("grant_type","authorization_code")
-                        .with("client_id", this.authConfig.getKakao().getClientId())
-                        .with("redirect_uri", this.authConfig.getCallbackUrl())
-                        .with("client_secret", this.authConfig.getKakao().getClientSecret())
+                        .with("client_id", this.authConfig.getNaver().getClientId())
+                        .with("client_secret", this.authConfig.getNaver().getClientSecret())
                         .with("code", code)
                 )
                 .retrieve()
                 .onStatus(status -> status.is4xxClientError() || status.is5xxServerError()
                         ,statusResp ->  statusResp.bodyToMono(String.class).map(b->new Exception(b)))
-                .bodyToMono(KakaoTokenResponse.class).block();
+                .bodyToMono(NaverTokenResponse.class).block();
 
         TokenResponse tResp = TokenResponse.builder()
                 .accessToken(resp.getAccessToken())
                 .refreshToken(resp.getRefreshToken())
                 .tokenType(resp.getTokenType())
                 .expiresIn(resp.getExpiresIn())
-                .refreshTokenExpiresIn(resp.getRefreshTokenExpiresIn())
                 .build();
         return tResp;
     }
@@ -62,36 +59,43 @@ public class KakaoProvider implements IProvider {
     @Override
     public String revokeToken(String token) {
         WebClient client = WebClient.builder()
-                .baseUrl(this.authConfig.getKakao().getLogoutUrl())
+                .baseUrl(this.authConfig.getNaver().getLogoutUrl())
                 .build();
 
-        HashMap<String, Integer> resp = client.post()
-                .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", token))
-                .retrieve().bodyToMono(HashMap.class).block();
-        if (resp.containsKey("id")) {
-            return resp.get("id").toString();
-        }
+        NaverTokenResponse resp = client.post()
+                .header(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded;charset=utf-8")
+                .body(BodyInserters.fromFormData("grant_type","delete")
+                        .with("client_id", this.authConfig.getNaver().getClientId())
+                        .with("client_secret", this.authConfig.getNaver().getClientSecret())
+                        .with("access_token", token)
+                        .with("service_provider", "NAVER")
+                )
+                .retrieve()
+                .onStatus(status -> status.is4xxClientError() || status.is5xxServerError()
+                        ,statusResp ->  statusResp.bodyToMono(String.class).map(b->new Exception(b)))
+                .bodyToMono(NaverTokenResponse.class).block();
+        // TODO resp error handle
         return "";
     }
 
     @Override
     public AuthUserResponse getUser(String token) {
         WebClient client = WebClient.builder()
-                .baseUrl(this.authConfig.getKakao().getUserUrl())
+                .baseUrl(this.authConfig.getNaver().getUserUrl())
                 .build();
 
-        KakaoAuthResponse resp = client.get()
+        NaverAuthResponse resp = client.get()
                 .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", token))
-                .retrieve().bodyToMono(KakaoAuthResponse.class).block();
+                .retrieve().bodyToMono(NaverAuthResponse.class).block();
 
         AuthUserResponse user = AuthUserResponse.builder()
-                .id(resp.getId().toString())
-                .nickName(resp.getKakaoAccount().getProfile().getNickName())
-                .email(resp.getKakaoAccount().getEmail())
-                .age(resp.getKakaoAccount().getAgeRange())
-                .birthday(resp.getKakaoAccount().getBirthYear()+resp.getKakaoAccount().getBirthDay())
-                .gender(resp.getKakaoAccount().getGender())
-                .profileImage(resp.getKakaoAccount().getProfile().getProfileImage())
+                .id(resp.getPayload().getId())
+                .nickName(resp.getPayload().getNickname())
+                .email(resp.getPayload().getEmail())
+                .age(resp.getPayload().getAge())
+                .birthday(resp.getPayload().getBirthYear()+resp.getPayload().getBirthDay())
+                .gender(resp.getPayload().getGender())
+                .profileImage(resp.getPayload().getProfileImage())
                 .build();
         return user;
     }
@@ -102,12 +106,15 @@ public class KakaoProvider implements IProvider {
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @JsonIgnoreProperties(ignoreUnknown = true)
-class KakaoAuthResponse {
-    @JsonProperty("id")
-    private Long id;
+class NaverAuthResponse {
+    @JsonProperty("resultcode")
+    private String resultCode;
 
-    @JsonProperty("kakao_account")
-    private KakaoAuthAccount kakaoAccount;
+    @JsonProperty("message")
+    private String message;
+
+    @JsonProperty("response")
+    private NaverAuthResponsePayload payload;
 }
 
 @Data
@@ -115,15 +122,21 @@ class KakaoAuthResponse {
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @JsonIgnoreProperties(ignoreUnknown = true)
-class KakaoAuthAccount {
-    @JsonProperty("profile")
-    private KakaoAuthProfile profile;
+class NaverAuthResponsePayload {
+    @JsonProperty("id")
+    private String id;
+
+    @JsonProperty("nickname")
+    private String nickname;
+
+    @JsonProperty("name")
+    private String name;
 
     @JsonProperty("email")
     private String email;
 
-    @JsonProperty("age_range")
-    private String ageRange;
+    @JsonProperty("age")
+    private String age;
 
     @JsonProperty("birthyear")
     private String birthYear;
@@ -133,21 +146,8 @@ class KakaoAuthAccount {
 
     @JsonProperty("gender")
     private String gender;
-}
 
-@Data
-@Builder
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@JsonIgnoreProperties(ignoreUnknown = true)
-class KakaoAuthProfile {
-    @JsonProperty("nickname")
-    private String nickName;
-
-    @JsonProperty("thumbnail_image_url")
-    private String thumbnailImageUrl;
-
-    @JsonProperty("profile_image_url")
+    @JsonProperty("profile_image")
     private String profileImage;
 }
 
@@ -156,7 +156,7 @@ class KakaoAuthProfile {
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @JsonIgnoreProperties(ignoreUnknown = true)
-class KakaoTokenResponse {
+class NaverTokenResponse {
     @JsonProperty("token_type")
     private String tokenType;
 
@@ -169,9 +169,9 @@ class KakaoTokenResponse {
     @JsonProperty("refresh_token")
     private String refreshToken;
 
-    @JsonProperty("refresh_token_expires_in")
-    private Integer refreshTokenExpiresIn;
+    @JsonProperty("error")
+    private String error;
 
-    @JsonProperty("scope")
-    private String scope;
+    @JsonProperty("error_description")
+    private String errorDescription;
 }
