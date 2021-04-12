@@ -2,7 +2,6 @@ package com.side.wearat.controller;
 
 import com.side.wearat.entity.User;
 import com.side.wearat.model.user.CreateUserRequest;
-import com.side.wearat.service.AuthService;
 import com.side.wearat.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

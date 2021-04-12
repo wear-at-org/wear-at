@@ -65,6 +65,7 @@ public class UserServiceImpl implements UserService {
                 .password(req.getPassword())
                 .gender(req.getGender())
                 .birthday(req.getBirthday())
+                .address(req.getAddress())
                 .checkReceivingConsent(req.getCheckReceivingConsent())
                 .checkPrivacyPolicy(req.getCheckPrivacyPolicy())
                 .checkServiceTerms(req.getCheckServiceTerms())

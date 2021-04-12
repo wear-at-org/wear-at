@@ -26,7 +26,6 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
 
-    @Column(nullable = false)
     private String nickname;
 
     private String password;
@@ -34,6 +33,8 @@ public class User {
     private String gender;
 
     private String birthday;
+
+    private String address;
 
     private Boolean checkServiceTerms;
 
