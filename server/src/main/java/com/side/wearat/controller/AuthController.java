@@ -10,7 +10,6 @@ import com.side.wearat.model.user.UpdateUserRequest;
 import com.side.wearat.service.AuthService;
 import com.side.wearat.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.sql.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
