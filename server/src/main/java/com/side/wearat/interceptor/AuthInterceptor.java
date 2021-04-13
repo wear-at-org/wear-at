@@ -1,9 +1,12 @@
 package com.side.wearat.interceptor;
 
+import com.side.wearat.config.AuthConfig;
 import com.side.wearat.context.ContextHolder;
+import com.side.wearat.entity.User;
 import com.side.wearat.exception.UnAuthorizedException;
 import com.side.wearat.model.auth.AuthUserClaim;
 import com.side.wearat.service.AuthService;
+import com.side.wearat.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,6 +17,7 @@ import org.springframework.web.util.WebUtils;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @Slf4j
@@ -22,12 +26,18 @@ public class AuthInterceptor implements HandlerInterceptor {
     private static final String AUTH_HEADER = "Authorization";
     private static final String AUTH_PREFIX = "Bearer ";
     private static final String AUTH_MASTER_TOKEN = "wearat_master";
+    private static final String COOKIE_TOKEN = "_watt";
 
-    private AuthService authService;
+    private final AuthService authService;
+    private final UserService userService;
+
+    private final AuthConfig authConfig;
 
     @Autowired
-    public AuthInterceptor(AuthService authService) {
+    public AuthInterceptor(AuthService authService, UserService userService, AuthConfig authConfig) {
         this.authService = authService;
+        this.userService = userService;
+        this.authConfig = authConfig;
     }
 
     @Override
@@ -40,14 +50,23 @@ public class AuthInterceptor implements HandlerInterceptor {
 
             if (AUTH_MASTER_TOKEN.equals(token)) {
                 ContextHolder.set(ContextHolder.ContextKey.UserID, -1);
-                ContextHolder.set(ContextHolder.ContextKey.NickName, "root");
-                ContextHolder.set(ContextHolder.ContextKey.Email, "root@sample.com");
             } else {
                 AuthUserClaim claim = this.authService.parseJWTToken(token);
-                // TODO token refresh
+
+                Optional<User> user = this.userService.getUser(claim.getId());
+                if (user.isEmpty()) {
+                    throw new UnAuthorizedException("User data doesn't exist");
+                }
+
+                User u = user.get();
+                if (StringUtils.hasText(claim.getProvider()) && !isSNSAuthCompletely(u)) {
+                    String redirectUrl = String.format("%s/sns-login", this.authConfig.getClientRedirectUrl());
+                    response.sendRedirect(redirectUrl);
+                    return false;
+                }
+
                 ContextHolder.set(ContextHolder.ContextKey.UserID, claim.getId());
-                ContextHolder.set(ContextHolder.ContextKey.NickName, claim.getNickName());
-                ContextHolder.set(ContextHolder.ContextKey.Email, claim.getEmail());
+                // TODO token refresh
             }
 
             return true;
@@ -59,7 +78,7 @@ public class AuthInterceptor implements HandlerInterceptor {
     private String extractToken(HttpServletRequest request) {
         String token = request.getHeader(AUTH_HEADER);
         if (!StringUtils.hasText(token)) {
-            Optional<Cookie> cookie = Optional.ofNullable(WebUtils.getCookie(request, "token"));
+            Optional<Cookie> cookie = Optional.ofNullable(WebUtils.getCookie(request, COOKIE_TOKEN));
             if (cookie.isPresent()) {
                 token = cookie.get().getValue();
             }
@@ -69,4 +88,9 @@ public class AuthInterceptor implements HandlerInterceptor {
         }
         return token;
     }
+
+    private boolean isSNSAuthCompletely(User u) {
+        return StringUtils.hasText(u.getEmail()) && StringUtils.hasText(u.getName()) && StringUtils.hasText(u.getNickname());
+    }
+
 }

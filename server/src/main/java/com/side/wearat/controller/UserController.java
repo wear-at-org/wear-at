@@ -1,5 +1,6 @@
 package com.side.wearat.controller;
 
+import com.side.wearat.context.ContextHolder;
 import com.side.wearat.entity.User;
 import com.side.wearat.model.user.CreateUserRequest;
 import com.side.wearat.service.UserService;
@@ -9,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -25,12 +25,15 @@ public class UserController {
     }
 
     @GetMapping(path = "")
-    public List<User> listUsers() {
-        return this.userService.listUsers();
+    public ResponseEntity<User> getUser() {
+        Long userId = ContextHolder.getUserID();
+        Optional<User> user = this.userService.getUser(userId);
+        return user.map(u -> ResponseEntity.ok().body(u))
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping(path = "/{userId}")
-    public ResponseEntity<User> getUser(@PathVariable("userId") Long userId) {
+    public ResponseEntity<User> getUserByID(@PathVariable("userId") Long userId) {
         Optional<User> user = this.userService.getUser(userId);
         return user.map(u -> ResponseEntity.ok().body(u))
                 .orElse(ResponseEntity.notFound().build());

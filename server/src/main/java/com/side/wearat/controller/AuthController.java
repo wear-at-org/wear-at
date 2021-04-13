@@ -26,6 +26,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/v1/auth")
 public class AuthController {
+    private static final String COOKIE_TOKEN = "_watt";
+    private static final String COOKIE_USER = "_watu";
 
     private final AuthService authService;
     private final UserService userService;
@@ -64,8 +66,8 @@ public class AuthController {
         return this.userService.createUser(req);
     }
 
-    @PostMapping(path = "/sns-sign-in")
-    public ResponseEntity<Void> snsSignIn(@RequestBody SnsSignInRequest req, HttpServletResponse response) throws Exception {
+    @PostMapping(path = "/sns-sign-up")
+    public ResponseEntity<Void> snsSignUp(@RequestBody SnsSignUpRequest req, HttpServletResponse response) throws Exception {
         Optional<User> userOpt = this.userService.getUser(req.getId());
         if (userOpt.isEmpty()) {
             throw new UnAuthorizedException("가입된 사용자 찾을 수 없습니다.");
@@ -89,8 +91,6 @@ public class AuthController {
                 .build();
         this.userService.updateUser(updateReq);
 
-        String jwtToken = this.createJWTFromUser(user);
-        this.createTokenCookie(response, jwtToken);
         this.createUserCookie(response, user.getId().toString(), user.getNickname());
 
         return ResponseEntity.ok().build();
@@ -151,33 +151,36 @@ public class AuthController {
             user = Optional.of(this.userService.createUser(req));
         }
         User u = user.get();
-        if (!StringUtils.hasText(u.getEmail()) || !StringUtils.hasText(u.getName()) || !StringUtils.hasText(u.getNickname())) {
-            HttpHeaders headers = new HttpHeaders();
-            String redirectUrl = String.format("%s/sns-test?id=%s",this.authConfig.getClientRedirectUrl(), provider, user.get().getId());
-            headers.add("Location", redirectUrl);
-            return new ResponseEntity<>(headers,HttpStatus.TEMPORARY_REDIRECT);
-        }
 
         String jwtToken = this.createJWTFromUser(user.get());
         this.createTokenCookie(response, jwtToken);
         this.createUserCookie(response, u.getId().toString(), u.getNickname());
 
+        if (!isSNSAuthCompletely(u)) {
+            HttpHeaders headers = new HttpHeaders();
+            String redirectUrl = String.format("%s/sns-login", this.authConfig.getClientRedirectUrl());
+            headers.add("Location", redirectUrl);
+            return new ResponseEntity<>(headers,HttpStatus.TEMPORARY_REDIRECT);
+        }
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", this.authConfig.getClientRedirectUrl() + "/test");
         return new ResponseEntity<>(headers,HttpStatus.TEMPORARY_REDIRECT);
     }
 
+    private boolean isSNSAuthCompletely(User u) {
+        return StringUtils.hasText(u.getEmail()) && StringUtils.hasText(u.getName()) && StringUtils.hasText(u.getNickname());
+    }
+
     private String createJWTFromUser(User user) {
         AuthUserClaim claim = AuthUserClaim.builder()
                 .id(user.getId())
-                .nickName(user.getNickname())
-                .email(user.getEmail())
+                .provider(user.getProvider())
                 .build();
         return this.authService.generateJWTToken(claim);
     }
 
     private void createTokenCookie(HttpServletResponse response, String token) {
-        Cookie tokenCookie = new Cookie("token", token);
+        Cookie tokenCookie = new Cookie(COOKIE_TOKEN, token);
         tokenCookie.setMaxAge(60*60*24);
         tokenCookie.setPath("/");
         tokenCookie.setHttpOnly(true);
@@ -185,7 +188,7 @@ public class AuthController {
     }
 
     private void removeTokenCookie(HttpServletResponse response) {
-        Cookie cookie = new Cookie("token", null);
+        Cookie cookie = new Cookie(COOKIE_TOKEN, null);
         cookie.setMaxAge(0);
         cookie.setPath("/");
         cookie.setHttpOnly(true);
@@ -197,14 +200,14 @@ public class AuthController {
         userInfo.addProperty("id", userId);
         userInfo.addProperty("nickname", nickname);
 
-        Cookie userCookie = new Cookie("user", URLEncoder.encode(userInfo.toString(), "UTF-8"));
+        Cookie userCookie = new Cookie(COOKIE_USER, URLEncoder.encode(userInfo.toString(), "UTF-8"));
         userCookie.setMaxAge(60*60*24);
         userCookie.setPath("/");
         response.addCookie(userCookie);
     }
 
     private void removeUserCookie(HttpServletResponse response) {
-        Cookie cookie = new Cookie("user", null);
+        Cookie cookie = new Cookie(COOKIE_USER, null);
         cookie.setMaxAge(0);
         cookie.setPath("/");
         cookie.setHttpOnly(true);

@@ -62,10 +62,8 @@ public class AuthService {
         String token = Jwts.builder()
             .setHeaderParam("typ","JWT")
             .setHeaderParam("alg", "HS256")
-            .claim("accessToken", claim.getAccessToken())
-            .claim("refreshToken", claim.getRefreshToken())
             .claim("id", claim.getId())
-            .claim("nickName", claim.getNickName())
+            .claim("provider", claim.getProvider())
             .setExpiration(Date.from(expiredAt.toInstant(ZoneOffset.UTC)))
             .signWith(Keys.hmacShaKeyFor(this.authConfig.getJwtKey().getBytes()))
             .compact()
@@ -81,11 +79,8 @@ public class AuthService {
                     .parseClaimsJws(token)
                     .getBody();
             AuthUserClaim user = AuthUserClaim.builder()
-                    .accessToken(claim.get("accessToken", String.class))
-                    .refreshToken(claim.get("refreshToken", String.class))
                     .id(claim.get("id", Long.class))
-                    .nickName(claim.get("nickName", String.class))
-                    .email(claim.get("email", String.class))
+                    .provider(claim.get("provider", String.class))
                     .build();
             return user;
 
