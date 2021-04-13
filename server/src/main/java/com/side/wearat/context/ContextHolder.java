@@ -7,12 +7,15 @@ public class ContextHolder {
 
     public enum ContextKey {
         UserID,
-        NickName,
-        Email,
     }
 
     public static Object get(ContextKey key) {
         return context.get().get(key);
+    }
+
+    public static Long getUserID() {
+        Object userID = context.get().get(ContextKey.UserID);
+        return Long.parseLong(userID.toString());
     }
 
     public static void set(ContextKey key, Object value) {
