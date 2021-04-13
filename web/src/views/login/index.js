@@ -7,14 +7,14 @@ import facebook from 'assets/img/facebook.png';
 import google from 'assets/img/google.png';
 import apple from 'assets/img/apple.png';
 import Cookies from 'universal-cookie';
+import api from 'api';
 
 const Login = () => {
   const [saveId, setSaveId] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLogin, setIsLogin] = LoginHook();
+  const [_, setIsLogin] = LoginHook();
   const loginProcess = async (e) => {
-    console.log(saveId);
     e.preventDefault();
     setIsLogin(email, password, saveId);
   };
@@ -33,6 +33,13 @@ const Login = () => {
       setEmail(saveEmailCookie);
     }
   }, []);
+
+  const snsLogin = async (provider) => {
+    const {
+      data: { url },
+    } = await api.get(`auth/url?provider=${provider}`);
+    window.location.href = url;
+  };
 
   return (
     <div className="sub layout-sub">
@@ -70,6 +77,7 @@ const Login = () => {
                   type="submit"
                   value="로그인"
                   className="btn-style1 wid100 btn-font font-white middle"
+                  disabled={!(email && password)}
                 />
               </div>
             </div>
@@ -102,27 +110,39 @@ const Login = () => {
 
             <div className="social-login-container">
               <ul>
-                <li className="kakao">
-                  <Link to="/">
-                    <img src={kakao} alt="kakao" />
-                  </Link>
+                <li
+                  className="kakao"
+                  onClick={() => {
+                    snsLogin('kakao');
+                  }}
+                >
+                  <img src={kakao} alt="kakao" />
                 </li>
-                <li className="naver">
-                  <Link to="/">
-                    <img src={naver} alt="naver" />
-                  </Link>
+                <li
+                  className="naver"
+                  onClick={() => {
+                    snsLogin('naver');
+                  }}
+                >
+                  <img src={naver} alt="naver" />
                 </li>
 
-                <li className="facebook">
-                  <Link to="/">
-                    <img src={facebook} alt="facebook" />
-                  </Link>
+                <li
+                  className="facebook"
+                  onClick={() => {
+                    snsLogin('facebook');
+                  }}
+                >
+                  <img src={facebook} alt="facebook" />
                 </li>
 
-                <li className="google">
-                  <Link to="/">
-                    <img src={google} alt="google" />
-                  </Link>
+                <li
+                  className="google"
+                  onClick={() => {
+                    snsLogin('google');
+                  }}
+                >
+                  <img src={google} alt="google" />
                 </li>
 
                 <li className="apple">

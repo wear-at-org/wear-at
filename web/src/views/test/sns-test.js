@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import scot from 'api/scot';
+import api from 'api';
 
 const SNSLogin = () => {
   const history = useHistory();
@@ -10,16 +10,10 @@ const SNSLogin = () => {
   const [nickname, setNickname] = useState('');
   const [gender, setGender] = useState('');
 
-  const snsLogin = async () => {
-    try {
-      await scot.snsLogin(id, email);
-    } catch (e) {
-      console.log(e);
-    }
-  };
- 
   useEffect(() => {
-    console.log("sns login with id");
+    const data = api.get('user');
+    console.log(data);
+    console.log('sns login with id');
   });
 
   return (
@@ -40,12 +34,11 @@ const SNSLogin = () => {
                   className="input-style1"
                 />
               </div>
-              
+
               <div className="">
                 <input
                   type="submit"
                   value="로그인"
-                  onClick={snsLogin}
                   className="btn-style1 wid100 btn-font-style1 tc middle"
                 />
               </div>

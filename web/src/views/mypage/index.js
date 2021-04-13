@@ -6,21 +6,15 @@ import ImageUpload from 'components/ImageUpload';
 
 const Mypage = () => {
   useEffect(() => {
-    const data = api.get('user');
+    const getMydata = async () => {
+      const { data } = await api.get('user');
+      console.log(data);
+    };
+    getMydata();
   }, []);
   const [showPost, setShowPost] = useState(false);
   const [post, setPost] = useState({});
   const [user, setUser] = useState({});
-  // const user = {
-  //   nickName: '닉네임',
-  //   email: 'test@test.com',
-  //   name: '홍길동',
-  //   gender: 1,
-  //   postNumber: 13123,
-  //   post1: '',
-  //   post2: '',
-  //   agreeMarketing: true,
-  // };
 
   return (
     <div className="sub layout-sub">
