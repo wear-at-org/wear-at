@@ -29,10 +29,13 @@ const LoginHook = () => {
             }
             const info = {
               email,
+              prividerType: 'web',
             };
             dispatch(loginProcess(info));
-            history.push('/');
           }
+        })
+        .then(() => {
+          history.push('/');
         })
         .catch((e) => {
           showToast({ type: 'error', content: LoginError.loginError });
