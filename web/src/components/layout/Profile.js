@@ -7,7 +7,7 @@ const Profile = () => {
   const history = useHistory();
   const [activeMenu, setActiveMenu] = useState(false);
   const nickName = '소소한다람쥐님';
-  const [setLogout] = LogoutHook();
+  const [logout] = LogoutHook();
   return (
     <ul
       className={activeMenu ? 'profile-container active' : 'profile-container'}
@@ -30,10 +30,8 @@ const Profile = () => {
         </li>
         <li
           className="logout"
-          onMouseUpCapture={() => {
-            setLogout();
-            history.push('/');
-          }}
+          onMouseUpCapture={() => logout()}
+          onClick={() => logout()}
         >
           로그아웃
         </li>

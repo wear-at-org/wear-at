@@ -97,7 +97,7 @@ public class AuthController {
     }
 
     @GetMapping(path = "/logout")
-    public ResponseEntity<String> logout(@RequestParam("provider") Optional<String> provider, @CookieValue("token") String token, HttpServletResponse response) throws Exception {
+    public ResponseEntity<String> logout(@RequestParam("provider") Optional<String> provider, @CookieValue("_watt") String token, HttpServletResponse response) throws Exception {
         AuthUserClaim claim = this.authService.parseJWTToken(token);
 
         // TODO kakao 401원인파악 및 주석해제
@@ -163,7 +163,8 @@ public class AuthController {
             return new ResponseEntity<>(headers,HttpStatus.TEMPORARY_REDIRECT);
         }
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Location", this.authConfig.getClientRedirectUrl() + "/test");
+        String redirectUrl = this.authConfig.getClientRedirectUrl();
+        headers.add("Location", redirectUrl);
         return new ResponseEntity<>(headers,HttpStatus.TEMPORARY_REDIRECT);
     }
 

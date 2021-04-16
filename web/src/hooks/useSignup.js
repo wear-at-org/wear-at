@@ -1,27 +1,34 @@
 import React, { useState } from 'react';
 import api from 'api';
 import { Link, useHistory } from 'react-router-dom';
+import toastHook from 'hooks/useToastHook';
 
 const useSignup = () => {
   const history = useHistory();
-  const [result, setResult] = useState(false);
-  const errorType = useState('');
+  const [result] = useState(false);
+  const [showToast] = toastHook({ type: '', content: '' });
   const signupProcess = async ({ name, password, email, isAgree }) => {
-    const result = await api.post('auth/sign-up', {
-      checkReceivingConsent: isAgree,
-      email,
-      name,
-      password,
-
-      gender: null,
-      nickname: null,
-      birthday: null,
-      checkPrivacyPolicy: false,
-      checkServiceTerms: false,
-    });
-
-    if (result.status === 200) {
+    try {
+      await api.post('auth/sign-up', {
+        checkReceivingConsent: isAgree,
+        email,
+        name,
+        password,
+  
+        gender: null,
+        nickname: null,
+        birthday: null,
+        checkPrivacyPolicy: false,
+        checkServiceTerms: false,
+      });
+      
       history.push('/');
+    } catch (e) {
+      if (e.response && e.response.data) {
+        showToast({ type: 'error', content: e.response.data.message });  
+      } else {
+        showToast({ type: 'error', content: e.message });
+      }
     }
   };
 

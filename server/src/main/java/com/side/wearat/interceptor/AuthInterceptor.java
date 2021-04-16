@@ -53,18 +53,6 @@ public class AuthInterceptor implements HandlerInterceptor {
             } else {
                 AuthUserClaim claim = this.authService.parseJWTToken(token);
 
-                Optional<User> user = this.userService.getUser(claim.getId());
-                if (user.isEmpty()) {
-                    throw new UnAuthorizedException("User data doesn't exist");
-                }
-
-                User u = user.get();
-                if (StringUtils.hasText(claim.getProvider()) && !isSNSAuthCompletely(u)) {
-                    String redirectUrl = String.format("%s/sns-login", this.authConfig.getClientRedirectUrl());
-                    response.sendRedirect(redirectUrl);
-                    return false;
-                }
-
                 ContextHolder.set(ContextHolder.ContextKey.UserID, claim.getId());
                 // TODO token refresh
             }
