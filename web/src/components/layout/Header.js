@@ -48,7 +48,7 @@ export default function Header({ setDrawerStatus }) {
                 <li>
                   <Link to="/intro">
                     <div className="btn-style1">
-                      <p className="btn-font-style1">지금 시작하기</p>
+                      <p className="btn-font font-white">지금 시작하기</p>
                     </div>
                   </Link>
                 </li>

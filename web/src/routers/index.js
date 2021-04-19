@@ -10,6 +10,7 @@ import Signup from 'views/signup';
 import Test from 'views/test';
 import SnsTest from 'views/test/sns-test';
 import ProvideAuth from './ProvideAuth';
+import SnsLogin from 'views/login/SnsLogin';
 
 export default function routers() {
   return (
@@ -21,6 +22,7 @@ export default function routers() {
       <Route path="/findIdPassword" component={FindIdPassword} />
       <Route path="/test" component={Test} />
       <Route path="/sns-test" component={SnsTest} />
+      <Route path="/sns-login" component={SnsLogin} />
       <ProvideAuth path="/mypage">
         <Mypage />
       </ProvideAuth>

@@ -8,6 +8,7 @@ const { dispatch } = store;
 const Axios = axios.create({
   baseURL: BASE_URL,
   timeout: 5000,
+  withCredentials: true,
 });
 
 // axios 함수 호출 전 실행되는 함수

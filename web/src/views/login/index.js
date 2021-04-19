@@ -1,41 +1,45 @@
 import React, { useEffect, useState } from 'react';
 import LoginHook from 'hooks/useLoginHook';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import kakao from 'assets/img/kakao.png';
 import naver from 'assets/img/naver.png';
 import facebook from 'assets/img/facebook.png';
 import google from 'assets/img/google.png';
 import apple from 'assets/img/apple.png';
-import { LoginError } from 'assets/common/error.json';
-import toastHook from 'hooks/useToastHook';
+import Cookies from 'universal-cookie';
+import api from 'api';
 
 const Login = () => {
-  const history = useHistory();
-  const [id, setId] = useState('');
+  const [saveId, setSaveId] = useState(false);
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLogin, setIsLogin] = LoginHook();
-  const [showToast, hideToast] = toastHook({ type: '', content: '' });
-  const loginProcess = async () => {
-    hideToast();
-    setIsLogin(id, password).then((res) => {
-      if (!res) {
-        showToast({ type: 'error', content: LoginError.loginError });
-      } else {
-        hideToast();
-        history.push('/');
-      }
-    });
+  const [_, setIsLogin] = LoginHook();
+  const loginProcess = async (e) => {
+    e.preventDefault();
+    setIsLogin(email, password, saveId);
   };
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      loginProcess();
+      loginProcess(e);
     }
   };
 
   useEffect(() => {
-    console.log(isLogin);
-  }, [isLogin]);
+    const cookies = new Cookies();
+    const saveEmailCookie = cookies.get('saveEmail');
+    if (saveEmailCookie) {
+      setSaveId(true);
+      setEmail(saveEmailCookie);
+    }
+  }, []);
+
+  const snsLogin = async (provider) => {
+    const {
+      data: { url },
+    } = await api.get(`auth/url?provider=${provider}`);
+    window.location.href = url;
+  };
 
   return (
     <div className="sub layout-sub">
@@ -45,37 +49,49 @@ const Login = () => {
             <h3>로그인</h3>
           </div>
 
-          <div>
+          <form onSubmit={loginProcess}>
             <div className="mb20">
               <div className="mb16">
                 <input
+                  value={email}
                   type="email"
                   placeholder="이메일 아이디"
-                  onChange={(e) => setId(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="input-style1"
+                  autoComplete="on"
                 />
               </div>
               <div className="mb24">
                 <input
+                  value={password}
                   type="password"
                   placeholder="비밀번호"
                   onChange={(e) => setPassword(e.target.value)}
                   className="input-style1"
                   onKeyPress={handleKeyPress}
+                  autoComplete="off"
                 />
               </div>
               <div className="">
                 <input
                   type="submit"
                   value="로그인"
-                  onClick={loginProcess}
-                  className="btn-style1 wid100 btn-font-style1 tc middle"
+                  className="btn-style1 wid100 btn-font font-white middle"
+                  disabled={!(email && password)}
                 />
               </div>
             </div>
             <div className="d-flex x-eq y-center pl8 pr8 login-utils-container">
               <div className="chkbox-con">
-                <input type="checkbox" id="saveId" className="input-style-checkbox" />
+                <input
+                  type="checkbox"
+                  id="saveId"
+                  className="input-style-checkbox"
+                  checked={saveId}
+                  onChange={() => {
+                    setSaveId(!saveId);
+                  }}
+                />
                 <label htmlFor="saveId">아이디 저장</label>
               </div>
               <ul className="d-flex">
@@ -94,27 +110,39 @@ const Login = () => {
 
             <div className="social-login-container">
               <ul>
-                <li className="kakao">
-                  <Link to="/">
-                    <img src={kakao} alt="kakao" />
-                  </Link>
+                <li
+                  className="kakao"
+                  onClick={() => {
+                    snsLogin('kakao');
+                  }}
+                >
+                  <img src={kakao} alt="kakao" />
                 </li>
-                <li className="naver">
-                  <Link to="/">
-                    <img src={naver} alt="naver" />
-                  </Link>
+                <li
+                  className="naver"
+                  onClick={() => {
+                    snsLogin('naver');
+                  }}
+                >
+                  <img src={naver} alt="naver" />
                 </li>
 
-                <li className="facebook">
-                  <Link to="/">
-                    <img src={facebook} alt="facebook" />
-                  </Link>
+                <li
+                  className="facebook"
+                  onClick={() => {
+                    snsLogin('facebook');
+                  }}
+                >
+                  <img src={facebook} alt="facebook" />
                 </li>
 
-                <li className="google">
-                  <Link to="/">
-                    <img src={google} alt="google" />
-                  </Link>
+                <li
+                  className="google"
+                  onClick={() => {
+                    snsLogin('google');
+                  }}
+                >
+                  <img src={google} alt="google" />
                 </li>
 
                 <li className="apple">
@@ -124,7 +152,7 @@ const Login = () => {
                 </li>
               </ul>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

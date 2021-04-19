@@ -15,20 +15,17 @@ const MainVisual = () => (
         </div>
 
         <div className="mb16">
-          <p className="visual-h3-desc">
-            사용자의 취향분석을 통해 최적의 코디를 추천해드립니다.
-          </p>
+          <p className="visual-h3-desc">사용자의 취향분석을 통해 최적의 코디를 추천해드립니다.</p>
         </div>
 
         <div className="">
           <div className="btn-style1 large">
-            <p className="btn-font-style1">
+            <p className="btn-font font-white d-flex y-center">
               무료 테스트 바로 해보세요
               <i className="icon-container ml12">
                 <img src={arrRight} alt="arrow-right" />
               </i>
             </p>
-
           </div>
         </div>
       </div>

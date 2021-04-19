@@ -7,11 +7,14 @@ import { userInfoName } from '../../store';
 
 const Drawer = ({ drawerStatus, setDrawerStatus }) => {
   const { isLogin } = useSelector((state) => state[userInfoName]);
-  const clickDrawerEvent = useCallback((e) => {
-    if (e.target.classList.contains('drawer-container')) {
-      setDrawerStatus(false);
-    }
-  }, [setDrawerStatus]);
+  const clickDrawerEvent = useCallback(
+    (e) => {
+      if (e.target.classList.contains('drawer-container')) {
+        setDrawerStatus(false);
+      }
+    },
+    [setDrawerStatus],
+  );
   return (
     <div
       className={drawerStatus ? 'drawer-container active' : 'drawer-container'}
@@ -28,9 +31,7 @@ const Drawer = ({ drawerStatus, setDrawerStatus }) => {
               </Link>
             </li>
             <li>
-              <Link to="/intro">
-                서비스 소개
-              </Link>
+              <Link to="/intro">서비스 소개</Link>
             </li>
             <li>
               <Link to="/intro" className="styleTip">
@@ -38,45 +39,35 @@ const Drawer = ({ drawerStatus, setDrawerStatus }) => {
               </Link>
             </li>
             <li>
-              <Link to="/intro">
-                커뮤니티
-              </Link>
+              <Link to="/intro">커뮤니티</Link>
             </li>
             <li>
-              <Link to="/intro">
-                고객센터
-              </Link>
+              <Link to="/intro">고객센터</Link>
             </li>
           </ul>
         </div>
         <div className="right-nav">
           <ul>
-            {
-              !isLogin ? (
-                <>
-                  <li>
-                    <Link to="/login">
-                      로그인
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/intro">
-                      <div className="btn-style1">
-                        <p className="btn-font-style1">
-                          지금 시작하기
-                        </p>
-                      </div>
-                    </Link>
-                  </li>
-                </>
-              ) : (
-                <li className="mypage">
-                  <Link to="/mypage">
-                    <img src={user} alt="user-img" />
+            {!isLogin ? (
+              <>
+                <li>
+                  <Link to="/login">로그인</Link>
+                </li>
+                <li>
+                  <Link to="/intro">
+                    <div className="btn-style1">
+                      <p className="btn-font font-white">지금 시작하기</p>
+                    </div>
                   </Link>
                 </li>
-              )
-            }
+              </>
+            ) : (
+              <li className="mypage">
+                <Link to="/mypage">
+                  <img src={user} alt="user-img" />
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       </div>

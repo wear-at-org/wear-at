@@ -4,6 +4,7 @@
   .left-router {
     width: 256px;
     padding-right: 46px;
+    box-sizing: border-box;
   }
 
   .right-container {
@@ -11,5 +12,55 @@
     width: calc(100% - 256px);
     padding: 40px 70px;
     box-sizing: border-box;
+  }
+
+  .profile-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    position: relative;
+    &:after {
+      position: absolute;
+      content: '';
+      background-image: url('../img/camea.svg');
+      background-size: 17px 15px;
+      background-repeat: no-repeat;
+      background-position: center;
+      border-radius: 50%;
+      background-color: $grayeee;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+      width: 42px;
+      height: 42px;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(10px);
+    }
+    img {
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  .left-link-container {
+    ul > li {
+      padding-top: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid $grayeee;
+      &.active {
+        font-weight: bold;;
+      }
+      &.logout {
+        font-size: 16px;
+        line-height: 24px;
+        color: $black333;
+      }
+      a{
+        font-size: 16px;
+        line-height: 24px;
+        color: $black333;
+      }
+    }
   }
 }

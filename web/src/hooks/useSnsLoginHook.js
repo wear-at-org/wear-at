@@ -7,13 +7,13 @@ import { LoginError } from 'assets/common/error.json';
 import { useHistory } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
-const LoginHook = () => {
+const SnsLoginHook = () => {
   const history = useHistory();
   const login = useSelector((state) => state[userInfoName]);
   const { isLogin } = login;
   const { dispatch } = store;
   const [showToast, hideToast] = toastHook({ type: '', content: '' });
-  const setIsLogin = (email, password, saveId) => {
+  const setIsSnsLogin = (email, password, saveId) => {
     return new Promise((res) => {
       api
         .post('auth/sign-in', {
@@ -29,20 +29,17 @@ const LoginHook = () => {
             }
             const info = {
               email,
-              prividerType: 'web',
             };
             dispatch(loginProcess(info));
+            history.push('/');
           }
-        })
-        .then(() => {
-          history.push('/');
         })
         .catch((e) => {
           showToast({ type: 'error', content: LoginError.loginError });
         });
     });
   };
-  return [isLogin, setIsLogin];
+  return [isLogin, setIsSnsLogin];
 };
 
-export default LoginHook;
+export default SnsLoginHook;

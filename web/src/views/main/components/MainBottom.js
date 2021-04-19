@@ -13,16 +13,14 @@ const MainBottom = () => (
 
       <div className="d-flex x-center">
         <div className="btn-style1 mr10">
-          <p className="btn-font-style1">무료 스타일테스트 할래요</p>
+          <p className="btn-font font-white">무료 스타일테스트 할래요</p>
         </div>
         <div className="btn-style2">
-          <p className="btn-font-style2">궁금한게 있어요</p>
+          <p className="btn-font font-black333">궁금한게 있어요</p>
         </div>
-
       </div>
     </div>
   </div>
-
 );
 
 export default MainBottom;
