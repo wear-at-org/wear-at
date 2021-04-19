@@ -8,7 +8,7 @@ import errorJSON from 'assets/common/error.json';
 import useSignup from 'hooks/useSignup';
 
 const Signup = () => {
-  const [signupProcess] = useSignup();
+  const [signup] = useSignup();
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('');
@@ -58,21 +58,22 @@ const Signup = () => {
   const signupEvent = useCallback(
     (e) => {
       e.preventDefault();
-      const errorCnt = Object.entries(error).filter((item) => {
-        if (item[1] === false) return false;
-        return true;
-      }).length;
-      if (name !== '' && errorCnt === 0) {
-        signupProcess({
-          name,
-          password,
-          email,
-          isAgree,
-        });
-        console.log('ok');
+
+      if (!name) {
+        return;
       }
+      if (Object.entries(error).some((item) => item[1])) {
+        return;
+      }
+
+      signup({
+        name,
+        password,
+        email,
+        isAgree,
+      });
     },
-    [error, name, password, email, isAgree, signupProcess],
+    [error, name, password, email, isAgree, signup],
   );
 
   return (

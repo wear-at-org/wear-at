@@ -13,10 +13,11 @@ const Login = () => {
   const [saveId, setSaveId] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [_, setIsLogin] = LoginHook();
+  const [_, login] = LoginHook();
+
   const loginProcess = async (e) => {
     e.preventDefault();
-    setIsLogin(email, password, saveId);
+    login(email, password, saveId);
   };
 
   const handleKeyPress = (e) => {
