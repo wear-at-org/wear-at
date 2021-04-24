@@ -11,33 +11,43 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity
+@Entity(name="user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length=20)
     private String provider;
 
+    @Column(length=20)
     private String providerId;
 
+    @Column(length=20)
     private String name;
 
-    @Column(unique = true, nullable = false)
+    @Column(length=100, unique = true, nullable = false)
     private String email;
 
+    @Column(length=50)
     private String nickname;
 
+    @Column(length=100)
     private String password;
 
+    @Column(length=10)
     private String gender;
 
+    @Column(length=20)
     private String birthday;
 
+    @Column(length=10)
     private String zipCode;
 
+    @Column(length=255)
     private String address;
 
+    @Column(length=255)
     private String detailAddress;
 
     private Boolean checkServiceTerms;
@@ -48,9 +58,11 @@ public class User {
 
     private LocalDateTime createAt;
 
+    @Column(length=100)
     private String createUser;
 
     private LocalDateTime updateAt;
 
+    @Column(length=100)
     private String updateUser;
 }
