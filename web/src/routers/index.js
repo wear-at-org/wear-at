@@ -9,6 +9,8 @@ import NotFound from 'views/notFound';
 import Signup from 'views/signup';
 import ProvideAuth from './ProvideAuth';
 import SnsLogin from 'views/login/SnsLogin';
+import Styletest from 'views/styletest/index';
+import SignupSuccess from 'views/signup/signupSuccess';
 
 export default function routers() {
   return (
@@ -19,6 +21,8 @@ export default function routers() {
       <Route path="/intro" component={Introservice} />
       <Route path="/findIdPassword" component={FindIdPassword} />
       <Route path="/sns-login" component={SnsLogin} />
+      <Route path="/styletest" component={Styletest} />
+      <Route path="/sucess" component={SignupSuccess} />
       <ProvideAuth path="/mypage">
         <Mypage />
       </ProvideAuth>

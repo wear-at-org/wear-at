@@ -10,14 +10,14 @@ const LogoutHook = () => {
   const { dispatch } = store;
   const login = useSelector((state) => state[userInfoName]);
   const {
-    info: { provider },
+    info,
   } = login;
   const [showToast] = toastHook({ type: '', content: '' });
 
   const logout = async () => {
     try {
       await api.get(`auth/logout`, {
-        provider,
+        provider: info.provider,
       });
 
       dispatch(logoutProcess());

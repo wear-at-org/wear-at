@@ -6,6 +6,7 @@ import google from 'assets/img/google.png';
 import apple from 'assets/img/apple.png';
 import errorJSON from 'assets/common/error.json';
 import useSignup from 'hooks/useSignup';
+import {regCheckPassword, regCheckEmail} from 'utils'
 
 const Signup = () => {
   const [signup] = useSignup();
@@ -22,7 +23,6 @@ const Signup = () => {
 
   const checkEmail = useCallback(
     (val) => {
-      const regCheckEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
       if (regCheckEmail.test(val)) {
         setError({ ...error, emailError: false });
       } else {
@@ -34,7 +34,6 @@ const Signup = () => {
 
   const checkPassword = useCallback(
     (val) => {
-      const regCheckPassword = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
       if (regCheckPassword.test(val)) {
         setError({ ...error, passwordError: false });
       } else {

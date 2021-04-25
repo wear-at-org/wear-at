@@ -20,9 +20,12 @@ const useSignup = () => {
         birthday: null,
         checkPrivacyPolicy: false,
         checkServiceTerms: false,
+        zipCode: null,
+        address: null,
+        detailAddress: null,
       });
 
-      history.push('/');
+      history.push('/success');
     } catch (e) {
       if (e.response && e.response.data) {
         showToast({ type: 'error', content: e.response.data.message });

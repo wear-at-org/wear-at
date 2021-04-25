@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import user from 'assets/img/user.png';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import LogoutHook from 'hooks/useLogoutHook';
 
 const Profile = () => {
@@ -19,7 +19,7 @@ const Profile = () => {
 
       <ul className="hover-menu">
         <li>
-          <Link to="/mypage">스타일테스트 내역</Link>
+          <Link to="/styletest">스타일테스트 내역</Link>
         </li>
         <li>
           <Link to="/mypage">북마크</Link>

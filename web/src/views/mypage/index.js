@@ -1,52 +1,17 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import Address from './Address';
-import api from 'api';
-import ImageUpload from 'components/ImageUpload';
+import useEditUserInfo from 'hooks/useEditUserInfo';
+import Lnb from 'components/layout/Lnb';
 
 const Mypage = () => {
-  useEffect(() => {
-    const getMydata = async () => {
-      const { data } = await api.get('user');
-      console.log(data);
-    };
-    getMydata();
-  }, []);
   const [showPost, setShowPost] = useState(false);
-  const [post, setPost] = useState({});
-  const [user, setUser] = useState({});
+  const [user, dispatch, putUser] = useEditUserInfo();
 
   return (
     <div className="sub layout-sub">
       <div className="col-12 col-center mw-1034">
         <form className="mypage-container pr15 pl15">
-          <div className="left-router">
-            <h4 className="mb24 fontweight700">안녕하세요 {user.nickName}</h4>
-
-            <ImageUpload />
-
-            <div className="left-link-container">
-              <ul>
-                <li>
-                  <Link>스타일테스트 내역</Link>
-                </li>
-                <li>
-                  <Link>북마크</Link>
-                </li>
-                <li>
-                  <Link>작성한 글</Link>
-                </li>
-                <li className="active">
-                  <Link>프로필 수정</Link>
-                </li>
-                <li>
-                  <Link>비밀번호 변경</Link>
-                </li>
-                <li className="logout">로그아웃</li>
-              </ul>
-            </div>
-          </div>
-
+          <Lnb />
           <div className="right-container">
             <h5 className="mb20 fontweight700">기본정보</h5>
 
@@ -59,10 +24,14 @@ const Mypage = () => {
 
               <div className="mb6">
                 <input
+                  value={user.email}
                   type="text"
                   className="input-style1"
                   id="name"
                   placeholder="scot@sample.com"
+                  onChange={(e) => {
+                    dispatch({ type: 'CHANGE_EMAIL', email: e.target.value });
+                  }}
                 />
               </div>
             </div>
@@ -75,7 +44,16 @@ const Mypage = () => {
               </div>
 
               <div className="mb6">
-                <input type="text" className="input-style1" id="name" placeholder="홍길동" />
+                <input
+                  type="text"
+                  className="input-style1"
+                  id="name"
+                  placeholder="홍길동"
+                  value={user.name}
+                  onChange={(e) => {
+                    dispatch({ type: 'CHANGE_NAME', name: e.target.value });
+                  }}
+                />
               </div>
             </div>
 
@@ -125,15 +103,33 @@ const Mypage = () => {
               </div>
               <div className="radio-wrap">
                 <div className="radio-btn-con">
-                  <input type="radio" id="woman" className="radio-style-0" name="gender" checked />
+                  <input
+                    type="radio"
+                    id="woman"
+                    className="radio-style-0"
+                    name="gender"
+                    checked={user.gender === 'w'}
+                  />
                   <label htmlFor="woman">여자</label>
                 </div>
                 <div className="radio-btn-con">
-                  <input type="radio" id="man" className="radio-style-0" name="gender" />
+                  <input
+                    type="radio"
+                    id="man"
+                    className="radio-style-0"
+                    name="gender"
+                    checked={user.gender === 'm'}
+                  />
                   <label htmlFor="man">남자</label>
                 </div>
                 <div className="radio-btn-con">
-                  <input type="radio" id="none" className="radio-style-0" name="gender" />
+                  <input
+                    type="radio"
+                    id="none"
+                    className="radio-style-0"
+                    name="gender"
+                    checked={user.gender === 'n' || true}
+                  />
                   <label htmlFor="none">선택안함</label>
                 </div>
               </div>
@@ -154,7 +150,8 @@ const Mypage = () => {
                     type="text"
                     className="input-style1"
                     id="name"
-                    placeholder="소소한다람쥐"
+                    placeholder="닉네임을 입력해주세요."
+                    value={user.nickname}
                   />
                 </div>
               </div>
@@ -174,6 +171,7 @@ const Mypage = () => {
                       id="name"
                       placeholder="우편번호"
                       readOnly
+                      value={user.zipCode}
                     />
                   </div>
 
@@ -204,6 +202,7 @@ const Mypage = () => {
                   id="name"
                   placeholder="검색버튼을 눌러 주소를 검색해주세요."
                   readOnly
+                  value={user.address}
                 />
               </div>
               <div>
@@ -212,6 +211,7 @@ const Mypage = () => {
                   className="input-style1"
                   id="name"
                   placeholder="상세주소를 입력해주세요."
+                  value={user.detailAddress}
                 />
               </div>
             </div>
@@ -219,7 +219,12 @@ const Mypage = () => {
             <div className="mb36">
               <h5 className="mb28 fontweight700">마케팅 수신 동의에 동의합니다. </h5>
               <div className="chkbox-con mb20">
-                <input type="checkbox" id="agreeInfo" className="input-style-checkbox" />
+                <input
+                  type="checkbox"
+                  id="agreeInfo"
+                  className="input-style-checkbox"
+                  checked={user.checkReceivingConsent}
+                />
                 <label htmlFor="agreeInfo">
                   스콧에서 진행하는 이벤트, 프로모션에 관한 광고를 수신하겠습니다.
                 </label>

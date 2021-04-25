@@ -15,16 +15,15 @@ function App() {
   const [logout] = LogoutHook();
   const {
     loginStatus,
-    info: { nickName, provider },
+    info,
   } = useSelector((state) => state[userInfoName]);
   const [drawerStatus, setDrawerStatus] = useState(false);
 
   useEffect(() => {
-    console.log(loginStatus, nickName, provider);
-    if (loginStatus === 'ing' && nickName === null) {
+    if (loginStatus === 'ing' && info.nickName === null) {
       logout();
     }
-  }, [loginStatus, nickName, provider, logout]);
+  }, [loginStatus, logout, info]);
 
   return (
     <div className={drawerStatus ? 'App drawerActive' : 'App'}>
