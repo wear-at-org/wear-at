@@ -4,7 +4,6 @@ import { Link, useHistory } from 'react-router-dom';
 import LogoutHook from 'hooks/useLogoutHook';
 
 const Profile = () => {
-  const history = useHistory();
   const [activeMenu, setActiveMenu] = useState(false);
   const nickName = '소소한다람쥐님';
   const [logout] = LogoutHook();
@@ -28,11 +27,7 @@ const Profile = () => {
         <li>
           <Link to="/mypage">개인정보</Link>
         </li>
-        <li
-          className="logout"
-          onMouseUpCapture={() => logout()}
-          onClick={() => logout()}
-        >
+        <li className="logout" onMouseUpCapture={() => logout()} onClick={() => logout()}>
           로그아웃
         </li>
       </ul>

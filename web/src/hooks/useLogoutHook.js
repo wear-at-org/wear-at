@@ -9,18 +9,22 @@ const LogoutHook = () => {
   const history = useHistory();
   const { dispatch } = store;
   const login = useSelector((state) => state[userInfoName]);
-  const { info } = login;
+  const {
+    info: { provider },
+  } = login;
   const [showToast] = toastHook({ type: '', content: '' });
 
   const logout = async () => {
     try {
-      await api.get(`auth/logout`);
+      await api.get(`auth/logout`, {
+        provider,
+      });
 
-      dispatch(logoutProcess(info));
+      dispatch(logoutProcess());
       history.push('/');
     } catch (e) {
       if (e.response && e.response.data) {
-        showToast({ type: 'error', content: e.response.data.message });  
+        showToast({ type: 'error', content: e.response.data.message });
       } else {
         showToast({ type: 'error', content: e.message });
       }

@@ -2,33 +2,39 @@ import React, { useState } from 'react';
 import Footer from 'components/layout/Footer';
 import Header from 'components/layout/Header';
 import 'assets/scss/index.scss';
-import { Provider } from 'react-redux';
-import store from 'store';
 import Loader from 'components/layout/Spinner';
 import Routers from 'routers';
 import Checkbot from 'views/checkbot';
-import { PersistGate } from 'redux-persist/integration/react';
-import {
-  persistStore,
-} from 'redux-persist';
 import Drawer from 'components/layout/Drawer';
+import { useSelector } from 'react-redux';
+import { userInfoName } from './store';
+import { useEffect } from 'react';
+import LogoutHook from 'hooks/useLogoutHook';
 
 function App() {
+  const [logout] = LogoutHook();
+  const {
+    loginStatus,
+    info: { nickName, provider },
+  } = useSelector((state) => state[userInfoName]);
   const [drawerStatus, setDrawerStatus] = useState(false);
-  const persistor = persistStore(store);
+
+  useEffect(() => {
+    console.log(loginStatus, nickName, provider);
+    if (loginStatus === 'ing' && nickName === null) {
+      logout();
+    }
+  }, [loginStatus, nickName, provider, logout]);
+
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <div className={drawerStatus ? 'App drawerActive' : 'App'}>
-          <Drawer drawerStatus={drawerStatus} setDrawerStatus={setDrawerStatus} />
-          <Header setDrawerStatus={setDrawerStatus} />
-          <Routers />
-          <Checkbot />
-          <Footer />
-        </div>
-        <Loader />
-      </PersistGate>
-    </Provider>
+    <div className={drawerStatus ? 'App drawerActive' : 'App'}>
+      <Drawer drawerStatus={drawerStatus} setDrawerStatus={setDrawerStatus} />
+      <Header setDrawerStatus={setDrawerStatus} />
+      <Routers />
+      <Checkbot />
+      <Footer />
+      <Loader />
+    </div>
   );
 }
 

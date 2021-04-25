@@ -55,7 +55,7 @@ const Signup = () => {
     [error, password],
   );
 
-  const signupEvent = useCallback(
+  const signupProcess = useCallback(
     (e) => {
       e.preventDefault();
 
@@ -197,7 +197,7 @@ const Signup = () => {
                 type="submit"
                 value="동의하고 회원가입"
                 className="btn-style1 wid100 btn-font font-white middle"
-                onClick={(e) => signupEvent(e)}
+                onClick={(e) => signupProcess(e)}
                 disabled={!(name && password && passwordCheck)}
               />
             </div>

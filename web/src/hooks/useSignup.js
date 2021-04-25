@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import api from 'api';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import toastHook from 'hooks/useToastHook';
 
 const useSignup = () => {
@@ -14,18 +14,18 @@ const useSignup = () => {
         email,
         name,
         password,
-  
+
         gender: null,
-        nickname: null,
+        nickname: 'test',
         birthday: null,
         checkPrivacyPolicy: false,
         checkServiceTerms: false,
       });
-      
+
       history.push('/');
     } catch (e) {
       if (e.response && e.response.data) {
-        showToast({ type: 'error', content: e.response.data.message });  
+        showToast({ type: 'error', content: e.response.data.message });
       } else {
         showToast({ type: 'error', content: e.message });
       }

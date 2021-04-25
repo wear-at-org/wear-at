@@ -2,13 +2,13 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from 'assets/img/logo.png';
 import menu from 'assets/img/menu.png';
-import { useSelector } from 'react-redux';
 import Toast from 'components/Toast';
+import { useSelector } from 'react-redux';
 import { userInfoName } from '../../store';
 import Profile from './Profile';
 
 export default function Header({ setDrawerStatus }) {
-  const { isLogin } = useSelector((state) => state[userInfoName]);
+  const { loginStatus } = useSelector((state) => state[userInfoName]);
   const { pathname } = useLocation();
   return (
     <>
@@ -40,7 +40,7 @@ export default function Header({ setDrawerStatus }) {
             </ul>
           </div>
           <div className="right-nav">
-            {!isLogin ? (
+            {loginStatus !== 'login' ? (
               <ul>
                 <li>
                   <Link to="/login">로그인</Link>
