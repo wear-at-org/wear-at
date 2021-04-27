@@ -3,6 +3,7 @@ package com.side.wearat.interceptor;
 import com.side.wearat.config.AuthConfig;
 import com.side.wearat.context.ContextHolder;
 import com.side.wearat.entity.User;
+import com.side.wearat.exception.ForbiddenException;
 import com.side.wearat.exception.UnAuthorizedException;
 import com.side.wearat.model.auth.AuthUserClaim;
 import com.side.wearat.service.AuthService;
@@ -42,25 +43,26 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws UnAuthorizedException {
-        try {
-            String token = this.extractToken(request);
-            if (!StringUtils.hasText(token)) {
-                throw new UnAuthorizedException("Token is empty");
-            }
-
-            if (AUTH_MASTER_TOKEN.equals(token)) {
-                ContextHolder.set(ContextHolder.ContextKey.UserID, -1);
-            } else {
-                AuthUserClaim claim = this.authService.parseJWTToken(token);
-
-                ContextHolder.set(ContextHolder.ContextKey.UserID, claim.getId());
-                // TODO token refresh
-            }
-
-            return true;
-        } catch (Exception e) {
-            throw new UnAuthorizedException("Token is invalid", e);
+        String token = this.extractToken(request);
+        if (!StringUtils.hasText(token)) {
+            throw new UnAuthorizedException("Token is empty");
         }
+
+        if (AUTH_MASTER_TOKEN.equals(token)) {
+            ContextHolder.set(ContextHolder.ContextKey.UserID, -1);
+        } else {
+            AuthUserClaim claim = this.authService.parseJWTToken(token);
+
+            ContextHolder.set(ContextHolder.ContextKey.UserID, claim.getId());
+
+            Optional<User> userOpt = this.userService.getUser(claim.getId());
+            if (userOpt.isEmpty() || !isSNSAuthCompletely(userOpt.get())) {
+                throw new ForbiddenException("SNS user must required input.");
+            }
+            // TODO token refresh
+        }
+
+        return true;
     }
 
     private String extractToken(HttpServletRequest request) {
@@ -78,7 +80,10 @@ public class AuthInterceptor implements HandlerInterceptor {
     }
 
     private boolean isSNSAuthCompletely(User u) {
-        return StringUtils.hasText(u.getEmail()) && StringUtils.hasText(u.getName()) && StringUtils.hasText(u.getNickname());
+        if (!StringUtils.hasText(u.getProvider())) {
+            return true;
+        }
+        return StringUtils.hasText(u.getEmail()) && StringUtils.hasText(u.getNickname());
     }
 
 }
