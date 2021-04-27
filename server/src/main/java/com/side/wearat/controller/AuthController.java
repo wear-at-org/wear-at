@@ -91,6 +91,8 @@ public class AuthController {
                 .build();
         this.userService.updateUser(updateReq);
 
+        String jwtToken = this.createJWTFromUser(user);
+        this.createTokenCookie(response, jwtToken);
         this.createUserCookie(response, user.getId().toString(), user.getNickname());
 
         return ResponseEntity.ok().build();
@@ -120,6 +122,26 @@ public class AuthController {
         JsonObject resp = new JsonObject();
         resp.addProperty("url", urlStr);
         return new ResponseEntity(resp.toString(), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/user/{userId}")
+    public ResponseEntity<User> getUserByID(@PathVariable("userId") Long userId) {
+        Optional<User> user = this.userService.getUser(userId);
+        if (user.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        User u = user.get();
+        User result = User.builder()
+                .id(u.getId())
+                .provider(u.getProvider())
+                .providerId(u.getProviderId())
+                .name(u.getName())
+                .email(u.getEmail())
+                .nickname(u.getNickname())
+                .gender(u.getGender())
+                .birthday(u.getBirthday())
+                .build();
+        return ResponseEntity.ok().body(result);
     }
 
     @GetMapping(path = "/callback")
@@ -152,24 +174,20 @@ public class AuthController {
         }
         User u = user.get();
 
-        String jwtToken = this.createJWTFromUser(user.get());
-        this.createTokenCookie(response, jwtToken);
-        this.createUserCookie(response, u.getId().toString(), u.getNickname());
-
-        if (!isSNSAuthCompletely(u)) {
-            HttpHeaders headers = new HttpHeaders();
-            String redirectUrl = String.format("%s/sns-login", this.authConfig.getClientRedirectUrl());
-            headers.add("Location", redirectUrl);
-            return new ResponseEntity<>(headers,HttpStatus.TEMPORARY_REDIRECT);
+        if (isSNSAuthCompletely(u)) {
+            String jwtToken = this.createJWTFromUser(user.get());
+            this.createTokenCookie(response, jwtToken);
+            this.createUserCookie(response, u.getId().toString(), u.getNickname());
         }
+
         HttpHeaders headers = new HttpHeaders();
-        String redirectUrl = this.authConfig.getClientRedirectUrl();
+        String redirectUrl = String.format("%s/sns-login?id=%d", this.authConfig.getClientRedirectUrl(), u.getId());
         headers.add("Location", redirectUrl);
         return new ResponseEntity<>(headers,HttpStatus.TEMPORARY_REDIRECT);
     }
 
     private boolean isSNSAuthCompletely(User u) {
-        return StringUtils.hasText(u.getEmail()) && StringUtils.hasText(u.getName()) && StringUtils.hasText(u.getNickname());
+        return StringUtils.hasText(u.getEmail()) && StringUtils.hasText(u.getNickname());
     }
 
     private String createJWTFromUser(User user) {

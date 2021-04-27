@@ -26,7 +26,7 @@ public class User {
     @Column(length=20)
     private String name;
 
-    @Column(length=100, unique = true, nullable = false)
+    @Column(length=255, unique = true, nullable = false)
     private String email;
 
     @Column(length=50)
@@ -44,10 +44,10 @@ public class User {
     @Column(length=10)
     private String zipCode;
 
-    @Column(length=255)
+    @Column(length=500)
     private String address;
 
-    @Column(length=255)
+    @Column(length=500)
     private String detailAddress;
 
     private Boolean checkServiceTerms;

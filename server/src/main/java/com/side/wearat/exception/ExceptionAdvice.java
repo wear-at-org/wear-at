@@ -28,6 +28,13 @@ public class ExceptionAdvice {
         return new ResponseEntity(resp, HttpStatus.UNAUTHORIZED);
     }
 
+    @ExceptionHandler(value = ForbiddenException.class)
+    public ResponseEntity<ErrorResponse> handleForbiddenException(Exception e) {
+        this.log("forbidden", e);
+        var resp = this.makeErrorResponse("forbidden", e);
+        return new ResponseEntity(resp, HttpStatus.FORBIDDEN);
+    }
+
     private ErrorResponse makeErrorResponse(String status, Exception e) {
         return new ErrorResponse(status, e.getMessage());
     }
