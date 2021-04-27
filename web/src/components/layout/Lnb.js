@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 const Lnb = () => {
   return (
     <div className="left-router">
-      <h4 className="mb24 fontweight700">안녕하세요 </h4>
-
       <ImageUpload />
 
       <div className="left-link-container">

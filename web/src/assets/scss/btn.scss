@@ -9,6 +9,9 @@
   }
   box-sizing: border-box;
 }
+.with-button {
+  flex: 1;
+}
 
 .btn-style1 {
   background-color: $mainColor;
@@ -240,4 +243,20 @@ option[value=''][disabled] {
 }
 option {
   color: black;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+}
+
+.check-button-style1 {
+  width: 102px;
+  height: 40px;
+  padding: 12px 24px;
+  border-radius: 6px;
+  background-color: #ff9800;
+  color: #f8fafb;
+  font-size: 14px;
+  box-sizing: border-box;
 }

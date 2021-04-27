@@ -1,6 +1,7 @@
 import axios from 'axios';
 import store from 'store';
 import { addAsyncCountValue, minusAsyncCountValue } from 'store/spinner-store';
+import toastHook from 'hooks/useToastHook';
 
 const BASE_URL = process.env.REACT_APP_API;
 const { dispatch } = store;
@@ -28,9 +29,16 @@ Axios.interceptors.response.use(
     return response;
   },
   (error) => {
+    const [showToast, hideToast] = toastHook({ type: '', content: '' });
     // 추후 403, 400, 500등 에러 발생시 에러처리
     // 토큰 재발급도 이곳에서
     dispatch(minusAsyncCountValue());
+    const errorStatus = error.response.status;
+    if (errorStatus === 401) {
+      showToast({ type: 'error', content: '필수 입력 항목을 입력해주세요.' });
+      window.location = '/';
+    }
+
     return Promise.reject(error);
   },
 );

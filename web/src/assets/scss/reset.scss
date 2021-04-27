@@ -1,29 +1,185 @@
 /* helveticaneue main font */
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
 /* Reset */
-html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr,
-address, big, cite, code, del, dfn, em, font, img, ins,
-q, s, samp, small, strike, strong, sub, sup, tt, var, b,
-u, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {margin: 0; padding: 0; border: none 0;}
-caption {text-indent:-10000px;}
-html { font-size: 10px; }
-html, body {margin: 0; padding: 0; width: 100%; position: relative;}
-body {background-color:#fff; color:#000; line-height: 1.2; font-weight: 400;
-    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
-    letter-spacing: 0.03rem;
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: none 0;
 }
-input, button, textarea {font-family: inherit; font-size:1.2rem; color:#000;}
-h1, h2, h3, h4, h5, h6 {letter-spacing: 0; font-weight:normal;}
-img, fieldset, iframe {border:0 none;}
-table {border-collapse: collapse;}
-select, textarea {font-family: inherit; border: 1px solid #B7B6B6; background: #FFFFFF; font-size: 12px; font-size: 1.2rem; vertical-align: middle;}
-textarea {overflow:auto;}
-select, input, img, li {vertical-align: middle; text-align:inherit;}
-address, caption, cite, code, dfn, em, strong, th, var {font-style : normal; font-weight : 900;}
-ul, li, ol {list-style-type: none;}
-legend,  caption {display: none;}
-hr {border-collapse:collapse; margin: 0; border: none;}
-a:link, a:visited {text-decoration:none; color:inherit;}
-a:hover {text-decoration:none;}
-input, textarea, button, select {-webkit-appearance:none; -moz-appearance:none; appearance:none; -webkit-border-radius:0; -moz-border-radius:0; -o-border-radius:0; border-radius:0;
-outline: none;}
+caption {
+  text-indent: -10000px;
+}
+html {
+  font-size: 10px;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  position: relative;
+}
+body {
+  background-color: #fff;
+  color: #000;
+  line-height: 1.2;
+  font-weight: 400;
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  letter-spacing: 0.03rem;
+}
+input,
+button,
+textarea {
+  font-family: inherit;
+  font-size: 1.2rem;
+  color: #000;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: 0;
+  font-weight: normal;
+}
+img,
+fieldset,
+iframe {
+  border: 0 none;
+}
+table {
+  border-collapse: collapse;
+}
+select,
+textarea {
+  font-family: inherit;
+  border: 1px solid #b7b6b6;
+  background: #ffffff;
+  font-size: 12px;
+  font-size: 1.2rem;
+  vertical-align: middle;
+}
+textarea {
+  overflow: auto;
+}
+select,
+input,
+img,
+li {
+  vertical-align: middle;
+  text-align: inherit;
+}
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var {
+  font-style: normal;
+  font-weight: 900;
+}
+ul,
+li,
+ol {
+  list-style-type: none;
+}
+legend,
+caption {
+  display: none;
+}
+hr {
+  border-collapse: collapse;
+  margin: 0;
+  border: none;
+}
+a:link,
+a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+a:hover {
+  text-decoration: none;
+}
+input,
+textarea,
+button,
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
+  outline: none;
+}
+button {
+  background: inherit;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  overflow: visible;
+  cursor: pointer;
+}

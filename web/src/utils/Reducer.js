@@ -1,4 +1,40 @@
-export const userReducer = (state, action) => {
+import { regCheckPassword, regCheckEmail } from 'utils';
+import api from 'api';
+
+export const initData = {
+  email: '',
+  password: '',
+  passwordConfirm: '',
+  nickname: '',
+  birthday: null,
+  checkEamil: false,
+  checkNickName: false,
+  checkPrivacyPolicy: false,
+  checkServiceTerms: false,
+  zipCode: null,
+  address: null,
+  detailAddress: null,
+  error: {
+    emailError: {
+      content: '',
+      isError: false,
+    },
+    passwordError: {
+      content: '',
+      isError: false,
+    },
+    checkPasswordError: {
+      content: '',
+      isError: false,
+    },
+    nicknameError: {
+      content: '',
+      isError: false,
+    },
+  },
+};
+
+export const userReducer = async (state, action) => {
   switch (action.type) {
     case 'INIT':
       return {
@@ -15,12 +51,26 @@ export const userReducer = (state, action) => {
         ...state,
         name: action.name,
       };
-    case 'CHANGE_YEAR':
-      return state - 1;
-    case 'CHANGE_MONTH':
-      return state - 1;
-    case 'CHANGE_DAY':
-      return state - 1;
+    case 'CHANGE_PASSWORD':
+      return {
+        ...state,
+        password: action.password,
+      };
+    case 'CHANGE_PASSWORD_CONFIRM':
+      return {
+        ...state,
+        passwordConfirm: action.passwordConfirm,
+      };
+    case 'CHANGE_NICKNAME':
+      return {
+        ...state,
+        nickname: action.nickname,
+      };
+    case 'CHANGE_CKECKEMAIL':
+      return {
+        ...state,
+        checkEmail: true,
+      };
     case 'CHANGE_NICKNAME':
       return state - 1;
     case 'CHANGE_ZIPCODE':
@@ -34,4 +84,16 @@ export const userReducer = (state, action) => {
     default:
       return state;
   }
+};
+
+const checkEmail = (val) => {
+  return regCheckEmail.test(val);
+};
+
+const checkPassword = (val) => {
+  return regCheckPassword.test(val);
+};
+
+const checkPasswordEqual = (val, checkPassword) => {
+  return checkPassword === val;
 };

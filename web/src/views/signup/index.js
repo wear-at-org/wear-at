@@ -6,7 +6,7 @@ import google from 'assets/img/google.png';
 import apple from 'assets/img/apple.png';
 import errorJSON from 'assets/common/error.json';
 import useSignup from 'hooks/useSignup';
-import {regCheckPassword, regCheckEmail} from 'utils'
+import { regCheckPassword, regCheckEmail } from 'utils';
 
 const Signup = () => {
   const [signup] = useSignup();
@@ -16,9 +16,22 @@ const Signup = () => {
   const [email, setEamil] = useState('');
   const [isAgree, setIsAgree] = useState(false);
   const [error, setError] = useState({
-    emailError: null,
-    passwordError: null,
-    checkPasswordError: null,
+    emailError: {
+      content: '',
+      isError: false,
+    },
+    passwordError: {
+      content: '',
+      isError: false,
+    },
+    checkPasswordError: {
+      content: '',
+      isError: false,
+    },
+    nicknameError: {
+      content: '',
+      isError: false,
+    },
   });
 
   const checkEmail = useCallback(
@@ -44,14 +57,14 @@ const Signup = () => {
   );
 
   const checkPasswordEqual = useCallback(
-    (val) => {
-      if (password === val) {
+    (val, checkPassword) => {
+      if (checkPassword === val) {
         setError({ ...error, checkPasswordError: false });
       } else {
         setError({ ...error, checkPasswordError: true });
       }
     },
-    [error, password],
+    [error],
   );
 
   const signupProcess = useCallback(
@@ -77,7 +90,7 @@ const Signup = () => {
 
   return (
     <div className="sub layout-sub">
-      <div className="col-12 col-center mw-350">
+      <div className="col-12 col-center mw-430">
         <form className="pr15 pl15 signup-container">
           <div className="mb32 tc">
             <h3>회원가입</h3>
@@ -113,16 +126,26 @@ const Signup = () => {
               </div>
 
               <div className="mb16">
-                <input
-                  type="email"
-                  className={error.emailError ? 'input-style1 error' : 'input-style1'}
-                  id="email"
-                  placeholder="scot@sample.com"
-                  onChange={(e) => {
-                    checkEmail(e.target.value);
-                    setEamil(e.target.value);
-                  }}
-                />
+                <div className="input-container">
+                  <input
+                    type="email"
+                    className={
+                      error.emailError
+                        ? 'input-style1 with-button error'
+                        : 'input-style1 with-button'
+                    }
+                    id="email"
+                    placeholder="scot@sample.com"
+                    onChange={(e) => {
+                      checkEmail(e.target.value);
+                      setEamil(e.target.value);
+                    }}
+                  />
+
+                  <button className="ml16 check-button-style1" onClick={(e) => e.preventDefault()}>
+                    중복확인
+                  </button>
+                </div>
               </div>
 
               <div className={error.emailError ? 'error-container active' : 'error-container'}>
@@ -146,6 +169,7 @@ const Signup = () => {
                     checkPassword(e.target.value);
                     setPassword(e.target.value);
                   }}
+                  autoComplete="off"
                 />
               </div>
 
@@ -167,9 +191,10 @@ const Signup = () => {
                   className={error.checkPasswordError ? 'input-style1 error' : 'input-style1'}
                   id="passwordCheck"
                   onChange={(e) => {
-                    checkPasswordEqual(e.target.value);
+                    checkPasswordEqual(e.target.value, password);
                     setPasswordCheck(e.target.value);
                   }}
+                  autoComplete="off"
                 />
               </div>
 
