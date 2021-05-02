@@ -124,26 +124,6 @@ public class AuthController {
         return new ResponseEntity(resp.toString(), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/user/{userId}")
-    public ResponseEntity<User> getUserByID(@PathVariable("userId") Long userId) {
-        Optional<User> user = this.userService.getUser(userId);
-        if (user.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        User u = user.get();
-        User result = User.builder()
-                .id(u.getId())
-                .provider(u.getProvider())
-                .providerId(u.getProviderId())
-                .name(u.getName())
-                .email(u.getEmail())
-                .nickname(u.getNickname())
-                .gender(u.getGender())
-                .birthday(u.getBirthday())
-                .build();
-        return ResponseEntity.ok().body(result);
-    }
-
     @GetMapping(path = "/callback")
     public ResponseEntity<String> callback(
         @RequestParam("code") String code,

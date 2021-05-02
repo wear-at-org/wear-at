@@ -30,6 +30,13 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authInterceptor)
                 .addPathPatterns("/v1/**")
-                .excludePathPatterns("/v1/auth/**");
+                .excludePathPatterns(
+                    "/v1/auth/**",
+                    "/v1/user/*/partial",
+                    "/v1/user/check-email",
+                    "/v1/user/check-nickname",
+                    "/v1/user/find-id",
+                    "/v1/user/find-password"
+                );
     }
 }
