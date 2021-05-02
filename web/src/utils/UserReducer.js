@@ -7,7 +7,7 @@ export const initData = {
   passwordConfirm: '',
   nickname: '',
   birthday: null,
-  checkEamil: false,
+  checkEmail: false,
   checkNickName: false,
   checkPrivacyPolicy: false,
   checkServiceTerms: false,
@@ -34,7 +34,7 @@ export const initData = {
   },
 };
 
-export const userReducer = async (state, action) => {
+export const userReducer = (state, action) => {
   switch (action.type) {
     case 'INIT':
       return {
@@ -66,21 +66,28 @@ export const userReducer = async (state, action) => {
         ...state,
         nickname: action.nickname,
       };
-    case 'CHANGE_CKECKEMAIL':
+    case 'CHANGE_CKECK_EMAIL':
       return {
         ...state,
-        checkEmail: true,
+        error: {
+          ...state.error,
+          emailError: {
+            content: action.content,
+            isError: action.isError,
+          },
+        },
       };
-    case 'CHANGE_NICKNAME':
-      return state - 1;
-    case 'CHANGE_ZIPCODE':
-      return state - 1;
-    case 'CHANGE_ADDRESS':
-      return state - 1;
-    case 'CHANGE_ADDRESS_DETAIL':
-      return state - 1;
-    case 'CHANGE_GENDER':
-      return state - 1;
+    case 'CHANGE_CHECK_NICKNAME':
+      return {
+        ...state,
+        error: {
+          ...state.error,
+          nicknameError: {
+            content: action.content,
+            isError: action.isError,
+          },
+        },
+      };
     default:
       return state;
   }

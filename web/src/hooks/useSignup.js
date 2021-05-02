@@ -7,7 +7,7 @@ const useSignup = () => {
   const history = useHistory();
   const [result] = useState(false);
   const [showToast] = toastHook({ type: '', content: '' });
-  const signupProcess = async ({ name, password, email, isAgree }) => {
+  const signupProcess = async ({ name, password, email, isAgree, nickname }) => {
     try {
       await api.post('auth/sign-up', {
         checkReceivingConsent: isAgree,
@@ -16,7 +16,7 @@ const useSignup = () => {
         password,
 
         gender: null,
-        nickname: 'test',
+        nickname: nickname,
         birthday: null,
         checkPrivacyPolicy: false,
         checkServiceTerms: false,

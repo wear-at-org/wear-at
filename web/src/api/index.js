@@ -34,7 +34,7 @@ Axios.interceptors.response.use(
     // 토큰 재발급도 이곳에서
     dispatch(minusAsyncCountValue());
     const errorStatus = error.response.status;
-    if (errorStatus === 401) {
+    if (errorStatus === 403) {
       showToast({ type: 'error', content: '필수 입력 항목을 입력해주세요.' });
       window.location = '/';
     }

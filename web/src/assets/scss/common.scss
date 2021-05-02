@@ -353,6 +353,10 @@ header.nav-container {
       background-color: $errorColor;
     }
 
+    &.change {
+      background-color: $changeColor;
+    }
+
     .content {
       display: flex;
       align-items: center;

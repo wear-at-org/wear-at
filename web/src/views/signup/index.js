@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useReducer, useEffect } from 'react';
 import kakao from 'assets/img/kakao.png';
 import naver from 'assets/img/naver.png';
 import facebook from 'assets/img/facebook.png';
@@ -7,8 +7,11 @@ import apple from 'assets/img/apple.png';
 import errorJSON from 'assets/common/error.json';
 import useSignup from 'hooks/useSignup';
 import { regCheckPassword, regCheckEmail } from 'utils';
+import { userReducer, initData } from 'utils/UserReducer';
+import api from 'api';
 
 const Signup = () => {
+  const [user, dispatch] = useReducer(userReducer, initData);
   const [signup] = useSignup();
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -33,17 +36,6 @@ const Signup = () => {
       isError: false,
     },
   });
-
-  const checkEmail = useCallback(
-    (val) => {
-      if (regCheckEmail.test(val)) {
-        setError({ ...error, emailError: false });
-      } else {
-        setError({ ...error, emailError: true });
-      }
-    },
-    [error],
-  );
 
   const checkPassword = useCallback(
     (val) => {
@@ -88,6 +80,11 @@ const Signup = () => {
     [error, name, password, email, isAgree, signup],
   );
 
+  const checkEmailApi = useCallback(async (email) => {
+    const result = await api.get('user/check-email', { email });
+    console.log(result);
+  }, []);
+
   return (
     <div className="sub layout-sub">
       <div className="col-12 col-center mw-430">
@@ -109,7 +106,7 @@ const Signup = () => {
                   type="text"
                   className="input-style1"
                   id="name"
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => dispatch({ type: 'CHANGE_EMAIL', email: e.target.value })}
                 />
               </div>
 
@@ -130,26 +127,34 @@ const Signup = () => {
                   <input
                     type="email"
                     className={
-                      error.emailError
+                      user.error.emailError.isError
                         ? 'input-style1 with-button error'
                         : 'input-style1 with-button'
                     }
                     id="email"
                     placeholder="scot@sample.com"
-                    onChange={(e) => {
-                      checkEmail(e.target.value);
-                      setEamil(e.target.value);
-                    }}
+                    onChange={(e) => dispatch({ type: 'CHANGE_EMAIL', email: e.target.value })}
+                    value={user.email}
                   />
 
-                  <button className="ml16 check-button-style1" onClick={(e) => e.preventDefault()}>
+                  <button
+                    className="ml16 check-button-style1"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      checkEmailApi(user.email);
+                    }}
+                  >
                     중복확인
                   </button>
                 </div>
               </div>
 
-              <div className={error.emailError ? 'error-container active' : 'error-container'}>
-                <p className="error-font">{errorJSON.SignupError.emailError}</p>
+              <div
+                className={
+                  user.error.emailError.isError ? 'error-container active' : 'error-container'
+                }
+              >
+                <p className="error-font">{user.error.emailError.isError.content}</p>
               </div>
             </div>
 

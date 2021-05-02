@@ -1,6 +1,6 @@
 import api from 'api';
 import { useEffect, useReducer } from 'react';
-import { userReducer } from 'utils/Reducer';
+import { userReducer } from 'utils/UserReducer';
 
 const useEditUserInfo = () => {
   const [user, dispatch] = useReducer(userReducer, {});
