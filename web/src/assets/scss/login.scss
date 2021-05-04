@@ -6,35 +6,35 @@
     padding-bottom: 16px;
     border-bottom: 1px solid $grayeee;
     ul > li a {
-      font-size: 10px;
-      line-height: 12px;
+      font-size: 12px;
+      line-height: 18px;
       color: $grayAEAE;
     }
   }
+}
 
-  .social-login-container {
-    ul {
+.social-login-container {
+  ul {
+    display: flex;
+    justify-content: space-between;
+
+    li {
       display: flex;
-      justify-content: space-between;
-
-      li {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        cursor: pointer;
-      }
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      cursor: pointer;
     }
   }
 }
 
 .kakao {
-  background-color: #FBE750;
+  background-color: #fbe750;
   p {
-    color: rgb(62, 64, 66)
-  }  
+    color: rgb(62, 64, 66);
+  }
   img {
     width: 27px;
     height: 30px;
@@ -42,10 +42,10 @@
 }
 
 .naver {
-  background-color: #5DC351;
+  background-color: #5dc351;
   p {
-    color: white
-  }  
+    color: white;
+  }
   img {
     width: 14px;
     height: 13px;
@@ -53,9 +53,9 @@
 }
 
 .facebook {
-  background-color: #3878EA;
+  background-color: #3878ea;
   p {
-    color: white
+    color: white;
   }
   img {
     width: 16px;
@@ -63,25 +63,25 @@
   }
 }
 .google {
-  background-color: #F8F8F9;
+  background-color: #f8f8f9;
   p {
     color: black;
   }
   img {
     width: 26px;
     height: 25px;
-  }          
+  }
 }
 .apple {
   background-color: #000000;
   p {
-    color: white
+    color: white;
   }
   img {
     margin-right: 2px;
     width: 29px;
     height: 27px;
-  }          
+  }
 }
 
 .signup-container {
@@ -89,4 +89,21 @@
     padding-bottom: 24px;
     border-bottom: 1px solid $grayeee;
   }
+
+  .signup-btn-wrap {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+.sucess-form {
+  margin: 0 auto;
+  max-width: 430px;
+  padding-left: 15px;
+  padding-right: 15px;
+  height: calc(100vh - 173px);
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
 }

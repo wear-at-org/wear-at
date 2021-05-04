@@ -5,7 +5,7 @@ const Address = ({ showPost, onChange, setShowPost }) => {
   const handleComplete = (data) => {
     let fullAddress = data.address;
     let extraAddress = '';
-    let zoneCode = data.zonecode;
+    let zipCode = data.zonecode;
     if (data.addressType === 'R') {
       if (data.bname !== '') {
         extraAddress += data.bname;
@@ -15,13 +15,13 @@ const Address = ({ showPost, onChange, setShowPost }) => {
       }
       fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
     }
-    onChange({ fullAddress, zoneCode });
+    onChange({ address: fullAddress, zipCode });
     setShowPost(false);
   };
 
   return showPost ? (
     <div className="mt10 mb16">
-      <DaumPostcode onComplete={handleComplete} width="400px" />
+      <DaumPostcode onComplete={handleComplete} width="400px" height="480px" style={{ border: '1px solid #d4d4d4' }} />
     </div>
   ) : (
     <></>

@@ -3,13 +3,13 @@
 
   .left-router {
     width: 256px;
-    padding-right: 46px;
     box-sizing: border-box;
   }
 
   .right-container {
     border: 1px solid $grayeee;
-    width: calc(100% - 256px);
+    margin-left: 24px;
+    width: calc(100% - 280px);
     padding: 40px 70px;
     box-sizing: border-box;
   }
@@ -45,22 +45,142 @@
 
   .left-link-container {
     ul > li {
-      padding-top: 20px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid $grayeee;
-      &.active {
-        font-weight: bold;;
-      }
       &.logout {
         font-size: 16px;
         line-height: 24px;
         color: $black333;
       }
-      a{
+      a,
+      div {
+        &.active {
+          background-color: #f5f8fa;
+          font-weight: bold;
+        }
+        display: block;
+        cursor: pointer;
+        padding-left: 24px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid $grayeee;
+        position: relative;
+        &:after {
+          content: '';
+          position: absolute;
+          width: 24px;
+          height: 24px;
+          background-image: url('../img/right-arr-black.svg');
+          right: 24px;
+        }
         font-size: 16px;
         line-height: 24px;
         color: $black333;
+
+        &:hover {
+          background-color: #f5f8fa;
+        }
       }
+    }
+  }
+}
+
+.item-list {
+}
+
+.item-container {
+  padding-top: 30px;
+  padding-left: 40px;
+  padding-right: 33px;
+  padding-bottom: 33px;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12);
+  background-color: #ffffff;
+  position: relative;
+  margin-bottom: 22px;
+
+  .inner {
+    .status {
+      padding: 4px 16px;
+      border-radius: 24px;
+      border: solid 1px $optionBlue;
+      .status-txt {
+        color: $optionBlue;
+        font-size: 14px;
+      }
+
+      &.complete {
+        background-color: black;
+        border-color: black;
+
+        .status-txt {
+          color: white;
+        }
+      }
+    }
+
+    .percent-txt {
+      font-size: 14px;
+      .percent {
+        color: $optionBlue;
+      }
+    }
+
+    .date-txt {
+      font-size: 12px;
+      color: $gray8E8E;
+    }
+
+    .item-content {
+      position: relative;
+      padding-right: 35px;
+      p {
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 13px;
+        line-height: 20px;
+      }
+      &:after {
+        top: 50%;
+        right: 0;
+        content: '';
+        position: absolute;
+        background-image: url('../img/right-arr-gray.svg');
+        width: 24px;
+        height: 24px;
+        transform: translateY(-50%);
+      }
+    }
+  }
+}
+
+.progress-conitaner {
+  left: 0;
+  top: 0;
+  width: 100%;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  height: 6px;
+  position: absolute;
+  .progress-back {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    height: 100%;
+    width: 100%;
+    background-color: $grayD9D9;
+  }
+
+  .progress {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: $optionBlue;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+
+    &.complate {
+      background-color: black;
     }
   }
 }

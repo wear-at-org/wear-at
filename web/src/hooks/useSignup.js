@@ -7,22 +7,11 @@ const useSignup = () => {
   const history = useHistory();
   const [result] = useState(false);
   const [showToast] = toastHook({ type: '', content: '' });
-  const signupProcess = async ({ name, password, email, isAgree, nickname }) => {
+  const signupProcess = async (userInfo) => {
+    console.log(userInfo);
     try {
       await api.post('auth/sign-up', {
-        checkReceivingConsent: isAgree,
-        email,
-        name,
-        password,
-
-        gender: null,
-        nickname: nickname,
-        birthday: null,
-        checkPrivacyPolicy: false,
-        checkServiceTerms: false,
-        zipCode: null,
-        address: null,
-        detailAddress: null,
+        ...userInfo,
       });
 
       history.push('/success');

@@ -1,89 +1,15 @@
-import React, { useCallback, useState, useReducer, useEffect } from 'react';
-import kakao from 'assets/img/kakao.png';
-import naver from 'assets/img/naver.png';
-import facebook from 'assets/img/facebook.png';
-import google from 'assets/img/google.png';
-import apple from 'assets/img/apple.png';
-import errorJSON from 'assets/common/error.json';
+import React, { useReducer } from 'react';
+import { userReducer, initData, checkEmailApi, checkNicknameApi } from 'utils/UserReducer';
+import SnsLoginComponent from 'components/SnsLoginComponent';
 import useSignup from 'hooks/useSignup';
-import { regCheckPassword, regCheckEmail } from 'utils';
-import { userReducer, initData } from 'utils/UserReducer';
-import api from 'api';
 
 const Signup = () => {
-  const [user, dispatch] = useReducer(userReducer, initData);
   const [signup] = useSignup();
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordCheck, setPasswordCheck] = useState('');
-  const [email, setEamil] = useState('');
-  const [isAgree, setIsAgree] = useState(false);
-  const [error, setError] = useState({
-    emailError: {
-      content: '',
-      isError: false,
-    },
-    passwordError: {
-      content: '',
-      isError: false,
-    },
-    checkPasswordError: {
-      content: '',
-      isError: false,
-    },
-    nicknameError: {
-      content: '',
-      isError: false,
-    },
-  });
-
-  const checkPassword = useCallback(
-    (val) => {
-      if (regCheckPassword.test(val)) {
-        setError({ ...error, passwordError: false });
-      } else {
-        setError({ ...error, passwordError: true });
-      }
-    },
-    [error],
-  );
-
-  const checkPasswordEqual = useCallback(
-    (val, checkPassword) => {
-      if (checkPassword === val) {
-        setError({ ...error, checkPasswordError: false });
-      } else {
-        setError({ ...error, checkPasswordError: true });
-      }
-    },
-    [error],
-  );
-
-  const signupProcess = useCallback(
-    (e) => {
-      e.preventDefault();
-
-      if (!name) {
-        return;
-      }
-      if (Object.entries(error).some((item) => item[1])) {
-        return;
-      }
-
-      signup({
-        name,
-        password,
-        email,
-        isAgree,
-      });
-    },
-    [error, name, password, email, isAgree, signup],
-  );
-
-  const checkEmailApi = useCallback(async (email) => {
-    const result = await api.get('user/check-email', { email });
-    console.log(result);
-  }, []);
+  const [user, dispatch] = useReducer(userReducer, initData);
+  const signupProcess = (e) => {
+    e.preventDefault();
+    signup(user);
+  };
 
   return (
     <div className="sub layout-sub">
@@ -106,7 +32,8 @@ const Signup = () => {
                   type="text"
                   className="input-style1"
                   id="name"
-                  onChange={(e) => dispatch({ type: 'CHANGE_EMAIL', email: e.target.value })}
+                  onChange={(e) => dispatch({ type: 'CHANGE_NAME', name: e.target.value })}
+                  value={user.name || ''}
                 />
               </div>
 
@@ -132,16 +59,17 @@ const Signup = () => {
                         : 'input-style1 with-button'
                     }
                     id="email"
-                    placeholder="scot@sample.com"
+                    placeholder="wearAt@sample.com"
                     onChange={(e) => dispatch({ type: 'CHANGE_EMAIL', email: e.target.value })}
-                    value={user.email}
+                    value={user.email || ''}
                   />
 
                   <button
-                    className="ml16 check-button-style1"
+                    disabled={user.email === '' || user.error.emailError.isError || user.checkEmail}
+                    className="ml16 check-btn-style1"
                     onClick={(e) => {
                       e.preventDefault();
-                      checkEmailApi(user.email);
+                      checkEmailApi(user.email, dispatch);
                     }}
                   >
                     중복확인
@@ -154,7 +82,41 @@ const Signup = () => {
                   user.error.emailError.isError ? 'error-container active' : 'error-container'
                 }
               >
-                <p className="error-font">{user.error.emailError.isError.content}</p>
+                <p className="error-font">{user.error.emailError.content}</p>
+              </div>
+            </div>
+
+            <div className="mb20">
+              <div className="label-container">
+                <label htmlFor="email" className="input-label-style1">
+                  닉네임
+                </label>
+              </div>
+
+              <div className="mb16">
+                <div className="input-container">
+                  <input
+                    type="nickname"
+                    className={'input-style1 with-button'}
+                    id="nickname"
+                    placeholder="wearAt"
+                    onChange={(e) =>
+                      dispatch({ type: 'CHANGE_NICKNAME', nickname: e.target.value })
+                    }
+                    value={user.nickname || ''}
+                  />
+
+                  <button
+                    disabled={user.nickname === '' || user.checkNickName}
+                    className="ml16 check-btn-style1"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      checkNicknameApi(user.nickname, dispatch);
+                    }}
+                  >
+                    중복확인
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -167,19 +129,26 @@ const Signup = () => {
 
               <div className="mb16">
                 <input
+                  placeholder="8자 이상~20자 이하 / 영문 대 소문자, 숫자, 특수문자"
                   type="password"
-                  className={error.passwordError ? 'input-style1 error' : 'input-style1'}
+                  className={
+                    user.error.passwordError.isError ? 'input-style1 error' : 'input-style1'
+                  }
                   id="password"
                   onChange={(e) => {
-                    checkPassword(e.target.value);
-                    setPassword(e.target.value);
+                    dispatch({ type: 'CHANGE_PASSWORD', password: e.target.value });
                   }}
                   autoComplete="off"
+                  value={user.password || ''}
                 />
               </div>
 
-              <div className={error.passwordError ? 'error-container active' : 'error-container'}>
-                <p className="error-font">{errorJSON.SignupError.passwordError}</p>
+              <div
+                className={
+                  user.error.passwordError.isError ? 'error-container active' : 'error-container'
+                }
+              >
+                <p className="error-font">{user.error.passwordError.content}</p>
               </div>
             </div>
 
@@ -192,33 +161,112 @@ const Signup = () => {
 
               <div className="mb16">
                 <input
+                  placeholder="8자 이상~20자 이하 / 영문 대 소문자, 숫자, 특수문자"
                   type="password"
-                  className={error.checkPasswordError ? 'input-style1 error' : 'input-style1'}
+                  className={
+                    user.error.passwordConfirmError.isError ? 'input-style1 error' : 'input-style1'
+                  }
                   id="passwordCheck"
                   onChange={(e) => {
-                    checkPasswordEqual(e.target.value, password);
-                    setPasswordCheck(e.target.value);
+                    dispatch({
+                      type: 'CHANGE_PASSWORD_CONFIRM',
+                      passwordConfirm: e.target.value,
+                      password: user.password,
+                    });
                   }}
                   autoComplete="off"
+                  value={user.passwordConfirm || ''}
                 />
               </div>
 
               <div
-                className={error.checkPasswordError ? 'error-container active' : 'error-container'}
+                className={
+                  user.error.passwordConfirmError.isError
+                    ? 'error-container active'
+                    : 'error-container'
+                }
               >
-                <p className="error-font">{errorJSON.SignupError.checkPasswordError}</p>
+                <p className="error-font">{user.error.passwordConfirmError.content}</p>
               </div>
             </div>
 
-            <div className="chkbox-con mb20">
-              <input
-                type="checkbox"
-                id="agreeInfo"
-                className="input-style-checkbox"
-                value={isAgree}
-                onClick={() => setIsAgree(!isAgree)}
-              />
-              <label htmlFor="agreeInfo">(선택) 마케팅 목적 혜택/정보 수신 동의합니다</label>
+            <div className="signup-btn-wrap">
+              <div className="chkbox-con mb12">
+                <input
+                  type="checkbox"
+                  id="agreeInfoAll"
+                  className="input-style-checkbox"
+                  checked={user.allCheck}
+                  onChange={(e) => dispatch({ type: 'CHANGE_CHECK_ALL', allCheck: !user.allCheck })}
+                />
+                <div className="chk-label-container">
+                  <label htmlFor="agreeInfoAll" className="all">
+                    전체 약관에 동의합니다.
+                  </label>
+                </div>
+              </div>
+
+              <div className="chkbox-con mb12">
+                <input
+                  type="checkbox"
+                  id="agreeInfoServiceTerms"
+                  className="input-style-checkbox"
+                  checked={user.checkServiceTerms}
+                  onChange={() =>
+                    dispatch({
+                      type: 'CHAHNE_SERVICE_TERMS',
+                      checkServiceTerms: !user.checkServiceTerms,
+                    })
+                  }
+                />
+                <div className="chk-label-container">
+                  <label htmlFor="agreeInfoServiceTerms">
+                    <span className="option-font">(필수)</span> 이용약관 동의
+                  </label>
+                  <p className="more-font">상세 보기</p>
+                </div>
+              </div>
+
+              <div className="chkbox-con mb12">
+                <input
+                  type="checkbox"
+                  id="agreeInfoPrivacyPolicy"
+                  className="input-style-checkbox"
+                  checked={user.checkPrivacyPolicy}
+                  onChange={() =>
+                    dispatch({
+                      type: 'CHAHNE_PRIVACY_POLICY',
+                      checkPrivacyPolicy: !user.checkPrivacyPolicy,
+                    })
+                  }
+                />
+                <div className="chk-label-container">
+                  <label htmlFor="agreeInfoPrivacyPolicy">
+                    <span className="option-font">(필수)</span> 개인정보처리방침 동의
+                  </label>
+                  <p className="more-font">상세 보기</p>
+                </div>
+              </div>
+
+              <div className="chkbox-con mb12">
+                <input
+                  type="checkbox"
+                  id="agreeInfoReciving"
+                  className="input-style-checkbox"
+                  checked={user.checkReceivingConsent}
+                  onChange={() =>
+                    dispatch({
+                      type: 'CHAHNE_RECEIVING_CONSENT',
+                      checkReceivingConsent: !user.checkReceivingConsent,
+                    })
+                  }
+                />
+                <div className="chk-label-container">
+                  <label htmlFor="agreeInfoReciving">
+                    <span className="option-font">(선택)</span> 마케팅 목적 혜택/정보 수신 동의
+                  </label>
+                </div>
+              </div>
             </div>
 
             <div className="mb20">
@@ -227,7 +275,17 @@ const Signup = () => {
                 value="동의하고 회원가입"
                 className="btn-style1 wid100 btn-font font-white middle"
                 onClick={(e) => signupProcess(e)}
-                disabled={!(name && password && passwordCheck)}
+                disabled={
+                  !(
+                    user.name &&
+                    user.nickname &&
+                    !user.error.emailError.isError &&
+                    !user.error.passwordError.isError &&
+                    !user.error.passwordConfirmError.isError &&
+                    user.checkPrivacyPolicy &&
+                    user.checkServiceTerms
+                  )
+                }
               />
             </div>
 
@@ -236,42 +294,9 @@ const Signup = () => {
                 이용약관, 개인정보 수집 및 이용을 확인하였고 동의합니다.
               </p>
             </div>
-
-            <div className="social-btn kakao mb8">
-              <div className="mr10">
-                <img src={kakao} alt="kakao" />
-              </div>
-              <p>카카오로 시작하기</p>
-            </div>
-
-            <div className="social-btn naver mb8">
-              <div className="mr10">
-                <img src={naver} alt="naver" />
-              </div>
-              <p>네이버로 시작하기</p>
-            </div>
-
-            <div className="social-btn facebook mb8">
-              <div className="mr10">
-                <img src={facebook} alt="facebook" />
-              </div>
-              <p>페이스북으로 시작하기</p>
-            </div>
-
-            <div className="social-btn google mb8">
-              <div className="mr10">
-                <img src={google} alt="google" />
-              </div>
-              <p>구글으로 시작하기</p>
-            </div>
-
-            <div className="social-btn apple">
-              <div className="mr10">
-                <img src={apple} alt="apple" />
-              </div>
-              <p>애플로 시작하기</p>
-            </div>
           </div>
+
+          <SnsLoginComponent />
         </form>
       </div>
     </div>

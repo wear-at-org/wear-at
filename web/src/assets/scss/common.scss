@@ -1,3 +1,12 @@
+* {
+  box-sizing: border-box;
+}
+
+.link-width-100 {
+  width: 100%;
+  display: block;
+}
+
 .App {
   min-height: calc(100vh - 92px);
   padding-bottom: 92px;
@@ -16,6 +25,7 @@
 }
 
 .sub {
+  min-height: calc(100vh - 173px);
   padding: 64px 0;
 }
 
@@ -23,7 +33,7 @@
 .toast {
   position: fixed;
   width: 200px;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 // 페이지를 찾을 수 없음
@@ -68,7 +78,7 @@
   position: fixed;
   width: 100%;
   height: 100vh;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 10;
   top: 0;
   left: 0;
@@ -112,7 +122,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 .loader {
   color: #ffffff;
@@ -208,7 +218,7 @@ header.nav-container {
       display: flex;
       align-items: center;
       position: relative;
-      
+
       &.profile-container {
         &.active {
           .hover-menu {
@@ -232,7 +242,7 @@ header.nav-container {
         top: 50px;
         background-color: white;
         border-radius: 4px;
-        box-shadow: 0 6px 12px 0 rgba(117, 119, 123, 0.3);        
+        box-shadow: 0 6px 12px 0 rgba(117, 119, 123, 0.3);
         padding: 12px 16px;
         box-sizing: border-box;
 
@@ -242,7 +252,7 @@ header.nav-container {
           &.logout {
             cursor: pointer;
             font-size: 14px;
-            line-height: 40px;            
+            line-height: 40px;
             color: $grayColorCDCD;
           }
           a {
@@ -251,17 +261,16 @@ header.nav-container {
             color: $black333;
           }
         }
-
       }
 
       li {
         margin-right: 52px;
         &.active {
           a {
-            color: $mainColor
+            color: $mainColor;
           }
         }
-        
+
         &.mypage {
           display: flex;
           align-items: center;
@@ -272,7 +281,7 @@ header.nav-container {
             font-size: 14px;
             color: $grayAEAE;
             margin-right: 8px;
-          }          
+          }
           img {
             height: 40px;
             width: 40px;
@@ -333,10 +342,10 @@ header.nav-container {
     left: 50%;
     transform: translateX(-50%);
     z-index: 20;
-    position: absolute;
+    position: fixed;
     padding: 10px 15px;
     border-radius: 6px;
-    box-shadow: 0 6px 12px 0 rgba(117, 119, 123, 0.3);  
+    box-shadow: 0 6px 12px 0 rgba(117, 119, 123, 0.3);
     background-color: $errorColor;
     box-sizing: border-box;
     max-width: 500px;
@@ -353,7 +362,7 @@ header.nav-container {
       background-color: $errorColor;
     }
 
-    &.change {
+    &.info {
       background-color: $changeColor;
     }
 
@@ -371,7 +380,6 @@ header.nav-container {
         color: white;
       }
     }
-
   }
 }
 
@@ -379,7 +387,7 @@ footer {
   height: 92px;
   width: 100%;
   position: absolute;
-  bottom :0;
+  bottom: 0;
   background-color: $black333;
   display: flex;
   flex-direction: column;
@@ -391,14 +399,14 @@ footer {
     margin-bottom: 10px;
     & > li {
       position: relative;
-      font-size: 10px;
-      line-height: 12px;
+      font-size: 12px;
+      line-height: 18px;
       color: $gray8E8E;
       padding-right: 32px;
       &:after {
         position: absolute;
         right: 14px;
-        content: "|";
+        content: '|';
       }
       &:last-child {
         &:after {
@@ -423,8 +431,6 @@ footer {
   }
 }
 
-
-
 .checkbot-container {
   position: fixed;
   bottom: 0;
@@ -437,7 +443,7 @@ footer {
   right: -200%;
   width: 100%;
   height: 100vh;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 100;
   transition: 0.45s;
 
@@ -453,60 +459,60 @@ footer {
   }
 }
 
-
 .radio-wrap {
   display: flex;
-  .radio-btn-con { 
+  .radio-btn-con {
     margin-right: 60px;
-    position:relative;
+    position: relative;
 
     .radio-style-0 {
-      position: absolute; 
-      top: calc(50% - 20px); 
-      left: 0; cursor: 
-      pointer; width: 20px; 
-      height: 20px; 
+      position: absolute;
+      top: calc(50% - 20px);
+      left: 0;
+      cursor: pointer;
+      width: 20px;
+      height: 20px;
       opacity: 0;
 
       + label {
-        font-size:10px; 
-        line-height:20px; 
-        padding-left: 28px; 
-        cursor: pointer; 
-        display: inline-block; 
-        position: relative; 
-        color:$black4A4A;
+        font-size: 14px;
+        line-height: 20px;
+        padding-left: 28px;
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        color: $black4A4A;
 
         &:before {
-          content: ''; 
-          position: absolute; 
-          width: 20px; 
-          height: 20px; 
-          left: 0; 
-          border-radius: 50%; 
+          content: '';
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          left: 0;
+          border-radius: 50%;
           box-sizing: border-box;
-          border:1px solid #e8e9ea;
+          border: 1px solid #e8e9ea;
         }
-      } 
+      }
 
       &:checked {
         + label:before {
           background-color: $mainColor;
           border-color: $mainColor;
-        }        
+        }
         + label:after {
-          content : '';
-          position: absolute; 
-          background-color: white; 
-          width: 8px; 
+          content: '';
+          position: absolute;
+          background-color: white;
+          width: 8px;
           height: 8px;
           border-radius: 50%;
           left: 6px;
           top: 50%;
           transform: translateY(-50%);
-        }        
+        }
       }
-    }  
+    }
   }
 }
 
@@ -517,7 +523,7 @@ footer {
 .date-birth-container {
   display: flex;
   width: calc(100% + 8px);
-  margin-left: -4px;  
+  margin-left: -4px;
 }
 
 .adress-container {
@@ -532,3 +538,6 @@ footer {
   width: 100%;
 }
 
+.option-font {
+  color: $optionBlue;
+}

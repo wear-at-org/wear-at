@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import Address from './Address';
 import useEditUserInfo from 'hooks/useEditUserInfo';
 import Lnb from 'components/layout/Lnb';
+import { checkNicknameApi } from 'utils/UserReducer';
+import dayjs from 'dayjs';
 
 const Mypage = () => {
   const [showPost, setShowPost] = useState(false);
-  const [user, dispatch, putUser] = useEditUserInfo();
-
+  const [user, dispatch] = useEditUserInfo();
   return (
     <div className="sub layout-sub">
       <div className="col-12 col-center mw-1034">
@@ -23,16 +24,7 @@ const Mypage = () => {
               </div>
 
               <div className="mb6">
-                <input
-                  value={user.email}
-                  type="text"
-                  className="input-style1"
-                  id="name"
-                  placeholder="scot@sample.com"
-                  onChange={(e) => {
-                    dispatch({ type: 'CHANGE_EMAIL', email: e.target.value });
-                  }}
-                />
+                <input readOnly={true} value={user.email || ''} type="text" className="input-style1" id="name" placeholder="scot@sample.com" />
               </div>
             </div>
 
@@ -49,7 +41,7 @@ const Mypage = () => {
                   className="input-style1"
                   id="name"
                   placeholder="홍길동"
-                  value={user.name}
+                  value={user.name || ''}
                   onChange={(e) => {
                     dispatch({ type: 'CHANGE_NAME', name: e.target.value });
                   }}
@@ -66,30 +58,52 @@ const Mypage = () => {
 
               <div className="date-birth-container">
                 <div className="width-per-33 pl4 pr4">
-                  <select className="select-style1" name="" id="" required>
+                  <select className="select-style1" name="" id="" required onChange={(e) => console.log(e.target.value)}>
                     <option value="" disabled selected hidden>
                       년도
                     </option>
-                    <option value="aa">aa</option>
+                    {Array(60)
+                      .fill(0)
+                      .map((n, i) => {
+                        const startYear = new Date().getFullYear();
+                        return (
+                          <option value={startYear - i} key={startYear - i + 'year'}>
+                            {startYear - i}
+                          </option>
+                        );
+                      })}
                   </select>
                 </div>
                 <div className="width-per-33 pl4 pr4">
-                  <select className="select-style1" name="" id="" required>
+                  <select className="select-style1" name="" id="" required onChange={(e) => console.log(e.target.value)}>
                     <option value="" disabled selected hidden>
                       월
                     </option>
-                    <option value="bb">bb</option>
+                    {Array(12)
+                      .fill(0)
+                      .map((n, i) => {
+                        return (
+                          <option value={i + 1} key={i + 1 + 'moment'}>
+                            {i + 1}
+                          </option>
+                        );
+                      })}
                   </select>
                 </div>
                 <div className="width-per-33 pl4 pr4">
-                  <select className="select-style1" name="" id="" required>
+                  <select className="select-style1" name="" id="" required onChange={(e) => console.log(e.target.value)}>
                     <option value="" disabled selected hidden>
                       일
                     </option>
-                    <option value="cc">cc</option>
-                    <option value="cc">cc</option>
-                    <option value="cc">cc</option>
-                    <option value="cc">cc</option>
+                    {Array(31)
+                      .fill(0)
+                      .map((n, i) => {
+                        return (
+                          <option value={i + 1} key={i + 1 + 'day'}>
+                            {i + 1}
+                          </option>
+                        );
+                      })}
                   </select>
                 </div>
               </div>
@@ -109,6 +123,10 @@ const Mypage = () => {
                     className="radio-style-0"
                     name="gender"
                     checked={user.gender === 'w'}
+                    value={'w'}
+                    onChange={(e) => {
+                      dispatch({ type: 'CHANGE_GENDER', gender: 'w' });
+                    }}
                   />
                   <label htmlFor="woman">여자</label>
                 </div>
@@ -119,6 +137,10 @@ const Mypage = () => {
                     className="radio-style-0"
                     name="gender"
                     checked={user.gender === 'm'}
+                    value={'m'}
+                    onChange={(e) => {
+                      dispatch({ type: 'CHANGE_GENDER', gender: 'm' });
+                    }}
                   />
                   <label htmlFor="man">남자</label>
                 </div>
@@ -128,7 +150,11 @@ const Mypage = () => {
                     id="none"
                     className="radio-style-0"
                     name="gender"
-                    checked={user.gender === 'n' || true}
+                    checked={user.gender === 'none'}
+                    value={'none'}
+                    onChange={(e) => {
+                      dispatch({ type: 'CHANGE_GENDER', gender: 'none' });
+                    }}
                   />
                   <label htmlFor="none">선택안함</label>
                 </div>
@@ -140,19 +166,33 @@ const Mypage = () => {
 
               <div className="mb20">
                 <div className="label-container">
-                  <label htmlFor="name" className="input-label-style1">
+                  <label htmlFor="email" className="input-label-style1">
                     닉네임 변경
                   </label>
                 </div>
 
-                <div className="mb6">
-                  <input
-                    type="text"
-                    className="input-style1"
-                    id="name"
-                    placeholder="닉네임을 입력해주세요."
-                    value={user.nickname}
-                  />
+                <div className="mb16">
+                  <div className="input-container">
+                    <input
+                      type="nickname"
+                      className={'input-style1 with-button'}
+                      id="nickname"
+                      placeholder="wearAt"
+                      onChange={(e) => dispatch({ type: 'CHANGE_NICKNAME', nickname: e.target.value })}
+                      value={user.nickname || ''}
+                    />
+
+                    <button
+                      disabled={user.nickname === '' || user.checkNickName}
+                      className="ml16 check-btn-style1"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        checkNicknameApi(user.nickname, dispatch);
+                      }}
+                    >
+                      중복확인
+                    </button>
+                  </div>
                 </div>
               </div>
 
@@ -165,22 +205,11 @@ const Mypage = () => {
 
                 <div className="d-flex">
                   <div className="adress-container pr8">
-                    <input
-                      type="text"
-                      className="input-style1"
-                      id="name"
-                      placeholder="우편번호"
-                      readOnly
-                      value={user.zipCode}
-                    />
+                    <input type="text" className="input-style1" id="name" placeholder="우편번호" readOnly value={user.zipCode} />
                   </div>
 
                   <div className="address-btn-container">
-                    <div className="width-100 btn-style1">
-                      <p className="btn-font font-white tc" onClick={() => setShowPost(!showPost)}>
-                        주소검색
-                      </p>
-                    </div>
+                    <input type="submit" value="주소검색" className="btn-style1 wid100 btn-font font-white" onClick={() => setShowPost(!showPost)} />
                   </div>
                 </div>
               </div>
@@ -189,21 +218,15 @@ const Mypage = () => {
             <Address
               showPost={showPost}
               setShowPost={setShowPost}
-              onChange={(value) => {
-                console.log(value);
+              onChange={({ address, zipCode }) => {
+                dispatch({ type: 'CHANGE_ADDRESS', address });
+                dispatch({ type: 'CHANGE_ZIPCODE', zipCode });
               }}
             />
 
             <div className="mb64">
               <div className="mb16">
-                <input
-                  type="text"
-                  className="input-style1"
-                  id="name"
-                  placeholder="검색버튼을 눌러 주소를 검색해주세요."
-                  readOnly
-                  value={user.address}
-                />
+                <input type="text" className="input-style1" id="name" placeholder="검색버튼을 눌러 주소를 검색해주세요." readOnly value={user.address} />
               </div>
               <div>
                 <input
@@ -211,7 +234,10 @@ const Mypage = () => {
                   className="input-style1"
                   id="name"
                   placeholder="상세주소를 입력해주세요."
-                  value={user.detailAddress}
+                  value={user.detailAddress || ''}
+                  onChange={(e) => {
+                    dispatch({ type: 'CHANGE_DETAIL_ADDRESS', detailAddress: e.target.value });
+                  }}
                 />
               </div>
             </div>
@@ -221,27 +247,28 @@ const Mypage = () => {
               <div className="chkbox-con mb20">
                 <input
                   type="checkbox"
-                  id="agreeInfo"
+                  id="agreeInfoReciving"
                   className="input-style-checkbox"
                   checked={user.checkReceivingConsent}
+                  onChange={() =>
+                    dispatch({
+                      type: 'CHAHNE_RECEIVING_CONSENT',
+                      checkReceivingConsent: !user.checkReceivingConsent,
+                    })
+                  }
                 />
-                <label htmlFor="agreeInfo">
-                  스콧에서 진행하는 이벤트, 프로모션에 관한 광고를 수신하겠습니다.
-                </label>
+                <div className="chk-label-container">
+                  <label htmlFor="agreeInfoReciving">스콧에서 진행하는 이벤트, 프로모션에 관한 광고를 수신하겠습니다.</label>
+                </div>
               </div>
             </div>
 
             <div className="mb15">
-              <input
-                disabled
-                type="button"
-                className="width-100 btn-style1 tc white"
-                value="정보 수정 완료"
-              />
+              <input disabled type="button" className="width-100 btn-style1 tc white" value="정보 수정 완료" />
             </div>
 
             <div>
-              <p className="secession-font">탈퇴하기</p>
+              <p className="more-font">탈퇴하기</p>
             </div>
           </div>
         </form>

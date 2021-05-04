@@ -13,9 +13,7 @@ const useEditUserInfo = () => {
     getMydata();
   }, []);
 
-  const putUser = () => {};
-
-  return [user, dispatch, putUser];
+  return [user, dispatch];
 };
 
 export default useEditUserInfo;

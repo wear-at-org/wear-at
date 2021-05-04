@@ -4,9 +4,10 @@ import { useHistory } from 'react-router-dom';
 
 const Styletest = () => {
   const history = useHistory();
+  const [stepArray, setStepArray] = useState([]);
   useEffect(() => {
     api.get('subscribe/query').then((res) => {
-      console.log(res);
+      setStepArray(res);
     });
   }, []);
 

@@ -11,7 +11,7 @@ import ProvideAuth from './ProvideAuth';
 import SnsLogin from 'views/login/SnsLogin';
 import Styletest from 'views/styletest/index';
 import SignupSuccess from 'views/signup/signupSuccess';
-
+import StyleTestList from 'views/styletest/list';
 export default function routers() {
   return (
     <Switch>
@@ -22,7 +22,8 @@ export default function routers() {
       <Route path="/findIdPassword" component={FindIdPassword} />
       <Route path="/sns-login" component={SnsLogin} />
       <Route path="/styletest" component={Styletest} />
-      <Route path="/sucess" component={SignupSuccess} />
+      <Route path="/styletestList" component={StyleTestList} />
+      <Route path="/success" component={SignupSuccess} />
       <ProvideAuth path="/mypage">
         <Mypage />
       </ProvideAuth>

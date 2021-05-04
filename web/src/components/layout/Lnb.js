@@ -1,5 +1,5 @@
 import ImageUpload from 'components/ImageUpload';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const Lnb = () => {
@@ -10,7 +10,12 @@ const Lnb = () => {
       <div className="left-link-container">
         <ul>
           <li>
-            <Link to="/styletest">스타일테스트 내역</Link>
+            <Link to="/mypage" className={'active'}>
+              프로필 수정
+            </Link>
+          </li>
+          <li>
+            <Link to="/styletestList">스타일테스트 내역</Link>
           </li>
           <li>
             <Link to="/mypage">북마크</Link>
@@ -18,13 +23,12 @@ const Lnb = () => {
           <li>
             <Link to="/mypage">작성한 글</Link>
           </li>
-          <li className="active">
-            <Link to="/mypage">프로필 수정</Link>
-          </li>
           <li>
             <Link to="/mypage">비밀번호 변경</Link>
           </li>
-          <li className="logout">로그아웃</li>
+          <li className="logout">
+            <div className="">로그아웃</div>
+          </li>
         </ul>
       </div>
     </div>

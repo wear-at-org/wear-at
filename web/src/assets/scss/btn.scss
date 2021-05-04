@@ -1,4 +1,5 @@
-[class*='btn-style'] {
+button[class*='btn-style'],
+input[class*='btn-style'] {
   text-align: center;
   transition: 0.3s;
   display: inline-block;
@@ -8,6 +9,16 @@
     transition: 0.2s;
   }
   box-sizing: border-box;
+  &:disabled {
+    background-color: $grayD4D4;
+    border-color: $grayD4D4;
+    color: $gray7979;
+
+    &:hover {
+      cursor: not-allowed;
+      opacity: 1;
+    }
+  }
 }
 .with-button {
   flex: 1;
@@ -20,16 +31,6 @@
   border: 1px solid $mainColor;
   &.white {
     color: white;
-  }
-  &:disabled {
-    background-color: $grayD4D4;
-    border-color: $grayD4D4;
-    color: $gray7979;
-
-    &:hover {
-      cursor: not-allowed;
-      opacity: 1;
-    }
   }
   &.large {
     padding: 22px 32px;
@@ -95,6 +96,10 @@
     color: $errorColor;
     border-color: $errorColor;
   }
+
+  &:read-only {
+    color: $grayD4D4;
+  }
 }
 
 .label-container {
@@ -106,6 +111,30 @@
 }
 
 .chkbox-con {
+  display: flex;
+  align-items: center;
+
+  .chk-label-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+
+    label {
+      font-size: 12px;
+      cursor: pointer;
+      vertical-align: middle;
+      margin-left: 8px;
+      color: $black4A4A;
+
+      &.all {
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 500;
+      }
+    }
+  }
+
   input[type='checkbox'] {
     width: 20px;
     height: 20px;
@@ -116,17 +145,7 @@
     outline: none;
     cursor: pointer;
     margin: 0;
-    display: inline-block;
     vertical-align: middle;
-
-    + label {
-      font-size: 10px;
-      cursor: pointer;
-      display: inline-block;
-      vertical-align: middle;
-      margin-left: 8px;
-      color: $black4A4A;
-    }
 
     &:checked {
       position: relative;
@@ -250,7 +269,7 @@ option {
   align-items: center;
 }
 
-.check-button-style1 {
+.check-btn-style1 {
   width: 102px;
   height: 40px;
   padding: 12px 24px;
@@ -259,4 +278,21 @@ option {
   color: #f8fafb;
   font-size: 14px;
   box-sizing: border-box;
+}
+
+.select-style2 {
+  text-align: center;
+  width: 104px;
+  height: 38px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: solid 1px #e0e0e0;
+  position: relative;
+  background-image: url('../img/arr-bottom.png');
+  background-repeat: no-repeat;
+  background-position: right 7px center;
+  background-size: 9px;
+  option {
+    text-align: center;
+  }
 }

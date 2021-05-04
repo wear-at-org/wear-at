@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import LoginHook from 'hooks/useLoginHook';
 import { Link } from 'react-router-dom';
-import kakao from 'assets/img/kakao.png';
-import naver from 'assets/img/naver.png';
-import facebook from 'assets/img/facebook.png';
-import google from 'assets/img/google.png';
-import apple from 'assets/img/apple.png';
 import Cookies from 'universal-cookie';
-import api from 'api';
+import SnsLoginComponent from 'components/SnsLoginComponent';
 
 const Login = () => {
   const [saveId, setSaveId] = useState(false);
@@ -35,16 +30,9 @@ const Login = () => {
     }
   }, []);
 
-  const snsLogin = async (provider) => {
-    const {
-      data: { url },
-    } = await api.get(`auth/url?provider=${provider}`);
-    window.location.href = url;
-  };
-
   return (
     <div className="sub layout-sub">
-      <div className="col-12 col-center mw-350">
+      <div className="col-12 col-center mw-430 login-wrap">
         <div className="pr15 pl15 login-container">
           <div className="mb32 tc">
             <h3>로그인</h3>
@@ -93,7 +81,9 @@ const Login = () => {
                     setSaveId(!saveId);
                   }}
                 />
-                <label htmlFor="saveId">아이디 저장</label>
+                <div className="chk-label-container">
+                  <label htmlFor="saveId">아이디 저장</label>
+                </div>
               </div>
               <ul className="d-flex">
                 <li className="mr10">
@@ -105,54 +95,7 @@ const Login = () => {
               </ul>
             </div>
 
-            <div className="tc mb24">
-              <p className="caption-font font-color-grayAEAE">소셜 계정으로 간편 로그인</p>
-            </div>
-
-            <div className="social-login-container">
-              <ul>
-                <li
-                  className="kakao"
-                  onClick={() => {
-                    snsLogin('kakao');
-                  }}
-                >
-                  <img src={kakao} alt="kakao" />
-                </li>
-                <li
-                  className="naver"
-                  onClick={() => {
-                    snsLogin('naver');
-                  }}
-                >
-                  <img src={naver} alt="naver" />
-                </li>
-
-                <li
-                  className="facebook"
-                  onClick={() => {
-                    snsLogin('facebook');
-                  }}
-                >
-                  <img src={facebook} alt="facebook" />
-                </li>
-
-                <li
-                  className="google"
-                  onClick={() => {
-                    snsLogin('google');
-                  }}
-                >
-                  <img src={google} alt="google" />
-                </li>
-
-                <li className="apple">
-                  <Link to="/">
-                    <img src={apple} alt="apple" />
-                  </Link>
-                </li>
-              </ul>
-            </div>
+            <SnsLoginComponent />
           </form>
         </div>
       </div>
