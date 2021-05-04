@@ -14,7 +14,7 @@ public class QueryCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="query_id")
+    @Column(name="query_id", nullable = false)
     private Long queryId;
 
     @Column(length=500)
