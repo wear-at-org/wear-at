@@ -2,6 +2,7 @@ package com.side.wearat.controller;
 
 import com.side.wearat.context.ContextHolder;
 import com.side.wearat.entity.User;
+import com.side.wearat.model.user.UpdateUserRequest;
 import com.side.wearat.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,13 @@ public class UserController {
         Optional<User> user = this.userService.getUser(userId);
         return user.map(u -> ResponseEntity.ok().body(u))
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping(path = "")
+    public ResponseEntity<Void> updateUser(@RequestBody UpdateUserRequest req) {
+        req.setId(ContextHolder.getUserID());
+        this.userService.updateUser(req);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping(path = "/{userId}/partial")
