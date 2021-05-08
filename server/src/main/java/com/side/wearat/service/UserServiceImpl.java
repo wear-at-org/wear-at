@@ -7,6 +7,7 @@ import com.side.wearat.model.user.UpdateUserRequest;
 import com.side.wearat.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -78,37 +79,43 @@ public class UserServiceImpl implements UserService {
     }
 
     public void updateUser(UpdateUserRequest req) {
-        String userId = ContextHolder.get(ContextHolder.ContextKey.UserID).toString();
+        Long userId = ContextHolder.getUserID();
         Optional<User> userOpt = this.getUser(req.getId());
         userOpt.ifPresent(user -> {
-            if (!req.getName().isEmpty()) {
+            if (StringUtils.hasText(req.getName())) {
                 user.setName(req.getName());
             }
-            if (!req.getEmail().isEmpty()) {
+            if (StringUtils.hasText(req.getEmail())) {
                 user.setEmail(req.getEmail());
             }
-            if (!req.getNickname().isEmpty()) {
+            if (StringUtils.hasText(req.getNickname())) {
                 user.setNickname(req.getNickname());
             }
-            if (!req.getGender().isEmpty()) {
+            if (StringUtils.hasText(req.getGender())) {
                 user.setGender(req.getGender());
             }
-            if (!req.getBirthday().isEmpty()) {
+            if (StringUtils.hasText(req.getBirthday())) {
                 user.setBirthday(req.getBirthday());
             }
-            if (!req.getZipCode().isEmpty()) {
+            if (StringUtils.hasText(req.getZipCode())) {
                 user.setZipCode(req.getZipCode());
             }
-            if (!req.getAddress().isEmpty()) {
+            if (StringUtils.hasText(req.getAddress())) {
                 user.setAddress(req.getAddress());
             }
-            if (!req.getDetailAddress().isEmpty()) {
+            if (StringUtils.hasText(req.getDetailAddress())) {
                 user.setDetailAddress(req.getDetailAddress());
             }
-            user.setCheckServiceTerms(req.getCheckServiceTerms());
-            user.setCheckPrivacyPolicy(req.getCheckPrivacyPolicy());
-            user.setCheckReceivingConsent(req.getCheckReceivingConsent());
-            user.setUpdateUser(userId);
+            if (req.getCheckServiceTerms() != null) {
+                user.setCheckServiceTerms(req.getCheckServiceTerms());
+            }
+            if (req.getCheckPrivacyPolicy() != null) {
+                user.setCheckPrivacyPolicy(req.getCheckPrivacyPolicy());
+            }
+            if (req.getCheckServiceTerms() != null) {
+                user.setCheckReceivingConsent(req.getCheckReceivingConsent());
+            }
+            user.setUpdateUser(userId.toString());
             user.setUpdateAt(LocalDateTime.now());
             this.userRepository.save(user);
         });
