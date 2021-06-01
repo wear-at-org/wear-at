@@ -35,7 +35,9 @@
     "eject": "react-scripts eject",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "docker": "cd ../server && docker-compose up",
+    "server": "cd ../server && gradle bootrun -Dspring.profiles.active=local"
   },
   "browserslist": {
     "production": [

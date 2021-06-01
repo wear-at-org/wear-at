@@ -8,9 +8,6 @@ const SnsLogin = () => {
   useEffect(() => {
     const getUserData = async () => {
       const { data } = await api.get('user');
-      setEmail(data.email);
-      setNickName(data.nickname);
-      preSnsLogin({ provider: data.provider });
       console.log(data);
     };
 
