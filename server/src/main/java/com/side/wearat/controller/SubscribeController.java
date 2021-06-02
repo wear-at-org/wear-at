@@ -37,7 +37,7 @@ public class SubscribeController {
     }
 
     @GetMapping(path = "/temp")
-    public ResponseEntity<List<Subscribe>> getTemps() {
+    public ResponseEntity<List<Subscribe>> listTemps() {
         List<Subscribe> subs = this.subscribeService.getTempSubscribes();
         return ResponseEntity.ok().body(subs);
     }

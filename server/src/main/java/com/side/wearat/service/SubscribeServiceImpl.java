@@ -56,6 +56,9 @@ public class SubscribeServiceImpl implements SubscribeService{
                     .queryItemId(sar.getQueryItemId())
                     .answer(sar.getAnswer())
                     .build();
+            if (sar.getId() != null) {
+                sa.setId(sar.getId());
+            }
             return sa;
         }).collect(Collectors.toList());
 
@@ -69,12 +72,14 @@ public class SubscribeServiceImpl implements SubscribeService{
                 .updateAt(LocalDateTime.now())
                 .updateUser(userId)
                 .build();
-
-        return this.subscribeRepository.save(s);
+        if (req.getId() != null) {
+            s.setId(req.getId());
+        }
+        return subscribeRepository.save(s);
     }
 
     @Override
     public void deleteSubscribe(Long id) {
-        this.subscribeRepository.deleteById(id);
+        subscribeRepository.deleteById(id);
     }
 }

@@ -1,4 +1,4 @@
-package com.side.wearat.model.subscribe;
+package com.side.wearat.model.recommend;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
@@ -8,12 +8,16 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SubscribeAnswerRequest {
+public class RecommendItemRequest {
     private Long id;
 
-    private Long queryId;
+    private String title;
 
-    private Long queryItemId;
+    private String imageUrl;
 
-    private String answer;
+    private String linkUrl;
+
+    private String brand;
+
+    private Long price;
 }
