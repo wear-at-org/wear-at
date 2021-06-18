@@ -16,10 +16,7 @@ const Drawer = ({ drawerStatus, setDrawerStatus }) => {
     [setDrawerStatus],
   );
   return (
-    <div
-      className={drawerStatus ? 'drawer-container active' : 'drawer-container'}
-      onClick={(e) => clickDrawerEvent(e)}
-    >
+    <div className={drawerStatus ? 'drawer-container active' : 'drawer-container'} onClick={(e) => clickDrawerEvent(e)}>
       <div className="drawer-inner">
         <div className="left-nav">
           <ul>
@@ -35,7 +32,7 @@ const Drawer = ({ drawerStatus, setDrawerStatus }) => {
             </li>
             <li>
               <Link to="/intro" className="styleTip">
-                STYLE TIP
+                스타일 팁
               </Link>
             </li>
             <li>

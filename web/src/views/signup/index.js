@@ -13,7 +13,7 @@ const Signup = () => {
 
   return (
     <div className="sub layout-sub">
-      <div className="col-12 col-center mw-430">
+      <div className="col-12 col-center mw-610">
         <form className="pr15 pl15 signup-container">
           <div className="mb32 tc">
             <h3>회원가입</h3>
@@ -28,13 +28,7 @@ const Signup = () => {
               </div>
 
               <div className="mb6">
-                <input
-                  type="text"
-                  className="input-style1"
-                  id="name"
-                  onChange={(e) => dispatch({ type: 'CHANGE_NAME', name: e.target.value })}
-                  value={user.name || ''}
-                />
+                <input type="text" className="input-style1" id="name" onChange={(e) => dispatch({ type: 'CHANGE_NAME', name: e.target.value })} value={user.name || ''} />
               </div>
 
               <div className="signup-desc-text">
@@ -53,11 +47,7 @@ const Signup = () => {
                 <div className="input-container">
                   <input
                     type="email"
-                    className={
-                      user.error.emailError.isError
-                        ? 'input-style1 with-button error'
-                        : 'input-style1 with-button'
-                    }
+                    className={user.error.emailError.isError ? 'input-style1 with-button error' : 'input-style1 with-button'}
                     id="email"
                     placeholder="wearAt@sample.com"
                     onChange={(e) => dispatch({ type: 'CHANGE_EMAIL', email: e.target.value })}
@@ -77,11 +67,7 @@ const Signup = () => {
                 </div>
               </div>
 
-              <div
-                className={
-                  user.error.emailError.isError ? 'error-container active' : 'error-container'
-                }
-              >
+              <div className={user.error.emailError.isError ? 'error-container active' : 'error-container'}>
                 <p className="error-font">{user.error.emailError.content}</p>
               </div>
             </div>
@@ -100,9 +86,7 @@ const Signup = () => {
                     className={'input-style1 with-button'}
                     id="nickname"
                     placeholder="wearAt"
-                    onChange={(e) =>
-                      dispatch({ type: 'CHANGE_NICKNAME', nickname: e.target.value })
-                    }
+                    onChange={(e) => dispatch({ type: 'CHANGE_NICKNAME', nickname: e.target.value })}
                     value={user.nickname || ''}
                   />
 
@@ -131,9 +115,7 @@ const Signup = () => {
                 <input
                   placeholder="8자 이상~20자 이하 / 영문 대 소문자, 숫자, 특수문자"
                   type="password"
-                  className={
-                    user.error.passwordError.isError ? 'input-style1 error' : 'input-style1'
-                  }
+                  className={user.error.passwordError.isError ? 'input-style1 error' : 'input-style1'}
                   id="password"
                   onChange={(e) => {
                     dispatch({ type: 'CHANGE_PASSWORD', password: e.target.value });
@@ -143,16 +125,12 @@ const Signup = () => {
                 />
               </div>
 
-              <div
-                className={
-                  user.error.passwordError.isError ? 'error-container active' : 'error-container'
-                }
-              >
+              <div className={user.error.passwordError.isError ? 'error-container active' : 'error-container'}>
                 <p className="error-font">{user.error.passwordError.content}</p>
               </div>
             </div>
 
-            <div className="mb20">
+            <div className="mb32">
               <div className="label-container">
                 <label htmlFor="passwordCheck" className="input-label-style1">
                   비밀번호 확인
@@ -163,9 +141,7 @@ const Signup = () => {
                 <input
                   placeholder="8자 이상~20자 이하 / 영문 대 소문자, 숫자, 특수문자"
                   type="password"
-                  className={
-                    user.error.passwordConfirmError.isError ? 'input-style1 error' : 'input-style1'
-                  }
+                  className={user.error.passwordConfirmError.isError ? 'input-style1 error' : 'input-style1'}
                   id="passwordCheck"
                   onChange={(e) => {
                     dispatch({
@@ -179,26 +155,14 @@ const Signup = () => {
                 />
               </div>
 
-              <div
-                className={
-                  user.error.passwordConfirmError.isError
-                    ? 'error-container active'
-                    : 'error-container'
-                }
-              >
+              <div className={user.error.passwordConfirmError.isError ? 'error-container active' : 'error-container'}>
                 <p className="error-font">{user.error.passwordConfirmError.content}</p>
               </div>
             </div>
 
-            <div className="signup-btn-wrap">
-              <div className="chkbox-con mb12">
-                <input
-                  type="checkbox"
-                  id="agreeInfoAll"
-                  className="input-style-checkbox"
-                  checked={user.allCheck}
-                  onChange={(e) => dispatch({ type: 'CHANGE_CHECK_ALL', allCheck: !user.allCheck })}
-                />
+            <div className="signup-btn-wrap mb32">
+              <div className="chkbox-con mb20">
+                <input type="checkbox" id="agreeInfoAll" className="input-style-checkbox" checked={user.allCheck} onChange={(e) => dispatch({ type: 'CHANGE_CHECK_ALL', allCheck: !user.allCheck })} />
                 <div className="chk-label-container">
                   <label htmlFor="agreeInfoAll" className="all">
                     전체 약관에 동의합니다.
@@ -206,7 +170,7 @@ const Signup = () => {
                 </div>
               </div>
 
-              <div className="chkbox-con mb12">
+              <div className="chkbox-con mb20">
                 <input
                   type="checkbox"
                   id="agreeInfoServiceTerms"
@@ -227,7 +191,7 @@ const Signup = () => {
                 </div>
               </div>
 
-              <div className="chkbox-con mb12">
+              <div className="chkbox-con mb20">
                 <input
                   type="checkbox"
                   id="agreeInfoPrivacyPolicy"
@@ -248,7 +212,7 @@ const Signup = () => {
                 </div>
               </div>
 
-              <div className="chkbox-con mb12">
+              <div className="chkbox-con">
                 <input
                   type="checkbox"
                   id="agreeInfoReciving"
@@ -269,7 +233,7 @@ const Signup = () => {
               </div>
             </div>
 
-            <div className="mb20">
+            <div>
               <input
                 type="submit"
                 value="동의하고 회원가입"
@@ -288,15 +252,7 @@ const Signup = () => {
                 }
               />
             </div>
-
-            <div className="tc mb24 agree-bottom-border">
-              <p className="caption-font font-color-grayAEAE">
-                이용약관, 개인정보 수집 및 이용을 확인하였고 동의합니다.
-              </p>
-            </div>
           </div>
-
-          <SnsLoginComponent />
         </form>
       </div>
     </div>

@@ -10,14 +10,13 @@ import { useSelector } from 'react-redux';
 import { userInfoName } from './store';
 import { useEffect } from 'react';
 import LogoutHook from 'hooks/useLogoutHook';
+import SearchHeader from 'components/layout/SearchHeader';
 
 function App() {
   const [logout] = LogoutHook();
-  const {
-    loginStatus,
-    info,
-  } = useSelector((state) => state[userInfoName]);
+  const { loginStatus, info } = useSelector((state) => state[userInfoName]);
   const [drawerStatus, setDrawerStatus] = useState(false);
+  const [searchStatus, setSearchStatus] = useState(false);
 
   useEffect(() => {
     if (loginStatus === 'ing' && info.nickName === null) {
@@ -28,7 +27,8 @@ function App() {
   return (
     <div className={drawerStatus ? 'App drawerActive' : 'App'}>
       <Drawer drawerStatus={drawerStatus} setDrawerStatus={setDrawerStatus} />
-      <Header setDrawerStatus={setDrawerStatus} />
+      <Header setDrawerStatus={setDrawerStatus} searchStatus={searchStatus} setSearchStatus={setSearchStatus} />
+      <SearchHeader searchStatus={searchStatus} setSearchStatus={setSearchStatus} />
       <Routers />
       <Checkbot />
       <Footer />

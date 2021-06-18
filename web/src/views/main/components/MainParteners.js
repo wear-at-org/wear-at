@@ -14,13 +14,8 @@ const MainParteners = () => {
 
   return (
     <div className="partners-container">
-      <h4 className="tc mb32">
-        <span className="fontweight700">
-          Our Partners
-        </span>
-      </h4>
       <Swiper
-        autoplay={{ delay: 5000 }}
+        autoplay={{ delay: 2000 }}
         spaceBetween={50}
         slidesPerView={10}
         breakpoints={{

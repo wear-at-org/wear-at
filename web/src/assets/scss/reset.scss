@@ -1,5 +1,9 @@
 /* helveticaneue main font */
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+@font-face {
+  font-family: 'Georgia';
+  src: url('../fonts/Georgia-Regular-font.ttf') format('ttf');
+}
 /* Reset */
 html,
 body,

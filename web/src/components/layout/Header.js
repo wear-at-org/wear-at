@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { userInfoName } from '../../store';
 import Profile from './Profile';
 
-export default function Header({ setDrawerStatus }) {
+export default function Header({ setDrawerStatus, setSearchStatus, searchStatus }) {
   const { loginStatus } = useSelector((state) => state[userInfoName]);
   const { pathname } = useLocation();
   return (
@@ -26,10 +26,8 @@ export default function Header({ setDrawerStatus }) {
               <li className={pathname.includes('intro') ? 'active' : ''}>
                 <Link to="/intro">서비스 소개</Link>
               </li>
-              <li>
-                <Link to="/intro" className="styleTip">
-                  STYLE TIP
-                </Link>
+              <li className={pathname.includes('styleTip') ? 'active' : ''}>
+                <Link to="/styleTip">스타일 팁</Link>
               </li>
               <li>
                 <Link to="/intro">커뮤니티</Link>
@@ -48,13 +46,13 @@ export default function Header({ setDrawerStatus }) {
                 <li>
                   <Link to="/intro">
                     <div className="btn-style1">
-                      <p className="btn-font font-white">지금 시작하기</p>
+                      <p className="btn-font font-white small">지금 시작하기</p>
                     </div>
                   </Link>
                 </li>
               </ul>
             ) : (
-              <Profile />
+              <Profile setSearchStatus={setSearchStatus} searchStatus={searchStatus} />
             )}
           </div>
         </div>

@@ -18,15 +18,15 @@ const MainTip = () => {
   ];
   return (
     <div className="tip-container">
-      <h4 className="tc mb32">SCOT 이용팁</h4>
+      <h4 className="tc mb32">웨어앳 이용꿀팁</h4>
       <div className="col-12 col-center mw-670">
         <div className="pr15 pl15">
-          <div className="mb24">
+          <div className="mb32">
             <Tip tipArray={tipArray} />
           </div>
-          <div className="tc">
-            <div className="btn-style2">
-              <p className="btn-font font-black333">FAQ 더보기</p>
+          <div className="d-flex x-center">
+            <div className="width-320">
+              <input type="button" className="btn-style2 width-100 type-white" value="이용팁 더보기" />
             </div>
           </div>
         </div>

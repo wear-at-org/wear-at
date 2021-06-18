@@ -1,20 +1,31 @@
 import React, { useState } from 'react';
 import user from 'assets/img/user.png';
+import search from 'assets/img/search.png';
+import alam from 'assets/img/alam.png';
 import { Link } from 'react-router-dom';
 import LogoutHook from 'hooks/useLogoutHook';
 
-const Profile = () => {
+const Profile = ({ setSearchStatus, searchStatus }) => {
   const [activeMenu, setActiveMenu] = useState(false);
-  const nickName = '소소한다람쥐님';
   const [logout] = LogoutHook();
   return (
-    <ul
-      className={activeMenu ? 'profile-container active' : 'profile-container'}
-      onMouseUpCapture={() => setActiveMenu(!activeMenu)}
-    >
+    <ul className={activeMenu ? 'profile-container active' : 'profile-container'}>
       <li className="mypage">
-        <p className="mypage-nickname">{nickName}</p>
-        <img src={user} alt="user-img" />
+        <div
+          className="mr19"
+          onMouseUpCapture={() => {
+            console.log(searchStatus);
+            setSearchStatus(!searchStatus);
+          }}
+        >
+          <img src={search} alt="search" style={{ width: '24px', height: '24px' }} />
+        </div>
+        <div className="mr19">
+          <img src={alam} alt="search" style={{ width: '24px', height: '24px' }} />
+        </div>
+        <div onMouseUpCapture={() => setActiveMenu(!activeMenu)}>
+          <img src={user} alt="user-img" />
+        </div>
       </li>
 
       <ul className="hover-menu">

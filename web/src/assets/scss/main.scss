@@ -1,5 +1,7 @@
-
 .card-wrap {
+  text-align: center;
+  flex-direction: column;
+  display: flex;
   position: relative;
 
   .detail-text {
@@ -7,55 +9,27 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 270px;
-    height: 270px;
     border-radius: 50%;
-    opacity: 0;
-    position: absolute;
-    background-color: $mainColor;
-    transition: 0.1s;
-
-    h4 {
-      font-size: 18px;
-      color: #f8fafb;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    h5 {
-      font-size: 14px;
-      color: #f8fafb;
-      text-align: center;
-    }
   }
-
-  &:hover {
-    .card-section {
-      box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.11);
-    }
-    .detail-text {
-      transition: 0.1s;
-      opacity: 1;
-    } 
-  } 
 
   .card-section {
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid $mainColor;
-    width: 270px;
-    height: 270px;
     box-sizing: border-box;
+    margin-bottom: 50px;
+  }
+
+  h4 {
+    font-weight: 600;
+    margin-bottom: 10px;
   }
 }
 
-
-
 .main-visual {
-  padding-top: 70px;
-  background-color: $grayFAFA;
+  padding-top: 91px;
+  padding-bottom: 91px;
 
   .inner {
     display: flex;
@@ -70,42 +44,31 @@
 }
 
 .partners-container {
-  background-color: $grayFAFA;
   padding-top: 64px;
   padding-bottom: 60px;
 }
 
 .tip-container {
-  padding-top: 72px;
-  padding-bottom: 64px;
-
+  padding: 36px 0px;
   .tip-item {
     position: relative;
     cursor: pointer;
-    padding-left: 48px;
-    padding-bottom: 24px;
+    padding-left: 73px;
+    padding-top: 16px;
+    padding-bottom: 16px;
     margin-bottom: 24px;
     border-bottom: 1px solid $grayeee;
-
-    &.active {
-      &:after {
-        background-size: 10px 10px;
-        background-image: url('../img/x-btn.png');
-      }      
-    }
     &:after {
-      content : "";
-      background-image: url('../img/arr-right-only.png');
-      background-size: 6px 10px;
-      background-color: $grayeee;
+      font-size: 24px;
+      content: 'Q.';
+      color: $gray8282;
       background-repeat: no-repeat;
       background-position: center;
-      width: 24px;
-      height: 24px;
       position: absolute;
-      left: 16px;
-      top: 0;
-      border-radius: 50%;
+      left: 24px;
+      top: calc(50%);
+      font-family: 'Georgia';
+      transform: translateY(-50%);
     }
     &:last-child {
       margin-bottom: 0;
@@ -114,7 +77,7 @@
     .tip-content {
       height: 0px;
       opacity: 0;
-      transition:  0.25s;
+      transition: 0.25s;
       transform-origin: top;
       h5 {
         display: none;
@@ -133,25 +96,8 @@
 }
 
 .main-bottom-container {
-  background-color: $grayColorF9F9;
-
-  .bottom-img {
-    padding-top: 110px;
-    padding-bottom: 140px;
-    position: relative;
-    &:after {
-      content : '';
-      position: absolute;
-      background-image: url('../img/main-bottom.png');
-      background-position: bottom right;
-      background-repeat: no-repeat;
-      background-size: contain;
-      bottom: 0;
-      right: -215px;
-      height: 248px;
-      width: 215px;
-    }
-  }
+  padding-top: 110px;
+  padding-bottom: 80px;
 }
 
 .visual-text {
@@ -159,4 +105,3 @@
   flex-direction: column;
   justify-content: center;
 }
-

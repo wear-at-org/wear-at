@@ -18,7 +18,7 @@ const SnsLoginComponent = () => {
   return (
     <div className="social-login-container">
       <div className="tc mb24">
-        <p className="caption-font font-color-grayAEAE">소셜 계정으로 간편 로그인</p>
+        <p className="caption-font color-grayAEAE">소셜 계정으로 간편 로그인</p>
       </div>
       <ul>
         <li

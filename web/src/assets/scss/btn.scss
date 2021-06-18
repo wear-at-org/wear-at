@@ -1,5 +1,7 @@
 button[class*='btn-style'],
 input[class*='btn-style'] {
+  height: 56px;
+  cursor: pointer;
   text-align: center;
   transition: 0.3s;
   display: inline-block;
@@ -10,9 +12,9 @@ input[class*='btn-style'] {
   }
   box-sizing: border-box;
   &:disabled {
-    background-color: $grayD4D4;
-    border-color: $grayD4D4;
-    color: $gray7979;
+    background-color: $grayf2f2;
+    border-color: $graye0e0;
+    color: $graye0e0;
 
     &:hover {
       cursor: not-allowed;
@@ -24,11 +26,23 @@ input[class*='btn-style'] {
   flex: 1;
 }
 
+.btn-row {
+  display: flex;
+
+  & > [class*='btn-style'] {
+    flex: 1;
+  }
+}
+
 .btn-style1 {
+  cursor: pointer;
   background-color: $mainColor;
   padding: 10px 16px;
   border-radius: 6px;
   border: 1px solid $mainColor;
+  &.small {
+    height: 48px;
+  }
   &.white {
     color: white;
   }
@@ -41,42 +55,56 @@ input[class*='btn-style'] {
   &.wid100 {
     width: 100%;
   }
-
   &.type-black {
     background-color: $black333;
     border-color: $black333;
   }
-
   &.type-white {
     background-color: white;
     border-color: $black333;
   }
+  &.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .btn-font {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 18px;
   font-weight: 400;
+  &.small {
+    font-size: 14px;
+  }
   &.font-white {
     color: white;
-  }
-  &.font-black333 {
-    color: $black333;
-  }
-  &.font-gray7979 {
-    color: $gray7979;
   }
 }
 
 .btn-style2 {
-  padding: 11px 24px;
+  cursor: pointer;
+  padding: 16px;
   border: 1px solid $grayD4D4;
   border-radius: 6px;
+
+  &.middle {
+    height: 48px;
+  }
+  &.type-white {
+    background-color: white;
+    color: $graybdbd;
+  }
+  &.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .input-style1 {
   width: 100%;
-  height: 40px;
+  height: 56px;
   padding: 12px 16px;
   box-sizing: border-box;
   border: 1px solid $grayD4D4;
@@ -87,6 +115,11 @@ input[class*='btn-style'] {
   line-height: 16px;
   color: $black333;
   transition: 0.3s;
+
+  &.small {
+    height: 48px;
+  }
+
   &::placeholder {
     color: $grayD4D4;
   }
@@ -121,7 +154,7 @@ input[class*='btn-style'] {
     flex-grow: 1;
 
     label {
-      font-size: 12px;
+      font-size: 14px;
       cursor: pointer;
       vertical-align: middle;
       margin-left: 8px;
@@ -253,7 +286,14 @@ input.active + .slider:before {
   height: 40px;
   font-size: 14px;
   line-height: 20px;
+  position: relative;
+
+  background-image: url('../img/arr-bottom.png');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 10px;
 }
+
 select:invalid {
   color: $grayD4D4;
 }
@@ -271,13 +311,19 @@ option {
 
 .check-btn-style1 {
   width: 102px;
-  height: 40px;
+  height: 56px;
   padding: 12px 24px;
   border-radius: 6px;
   background-color: #ff9800;
   color: #f8fafb;
   font-size: 14px;
   box-sizing: border-box;
+}
+
+[class*='select-style'] {
+  &.no-border {
+    border: none;
+  }
 }
 
 .select-style2 {
@@ -295,4 +341,20 @@ option {
   option {
     text-align: center;
   }
+}
+
+.input-type-header {
+  width: 100%;
+  padding: 15px 50px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid white;
+  color: white;
+  font-size: 18px;
+  line-height: 24px;
+
+  background-image: url('../img/search-white.png');
+  background-size: 27px;
+  background-position: left center;
+  background-repeat: no-repeat;
 }

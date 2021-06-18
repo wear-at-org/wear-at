@@ -1,5 +1,20 @@
-.font-color-grayAEAE {
+.color-grayAEAE {
   color: $grayAEAE;
+}
+.color-8282 {
+  color: $gray8282;
+}
+.color-black333 {
+  color: $black333;
+}
+.color-gray7979 {
+  color: $gray7979;
+}
+.color-graya6a {
+  color: $graya6a6a6;
+}
+.color-white {
+  color: white;
 }
 
 h2 {
@@ -31,11 +46,15 @@ h4 {
 h5 {
   font-size: 16px;
   line-height: 24px;
-  font-weight: 300;
+}
+
+h5.small {
+  font-size: 14px;
+  line-height: 18px;
 }
 
 p.caption-font {
-  font-size: 12px;
+  font-size: 14px;
   line-height: 18px;
 }
 
@@ -83,8 +102,8 @@ p.secession-font {
   display: inline-block;
   font-size: 12px;
   line-height: 1.5;
-  color: $gray8E8E;
-  border-bottom: 1px solid $gray8E8E;
+  color: $gray8282;
+  border-bottom: 1px solid $gray8282;
 }
 
 p.more-font {

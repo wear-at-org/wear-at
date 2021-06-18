@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react';
-import api from 'api';
+import IntroVisual from './components/IntroVisual';
+import BottomStyle from 'views/main/components/BottomStyle';
+import IntroList from './components/IntroList';
 
 const Introservice = () => {
-  useEffect(() => {
-    const data = api.get('user');
-    console.log(data);
-  }, []);
-
-  return <div className="">Introservice</div>;
+  return (
+    <div className="">
+      <IntroVisual />
+      <IntroList />
+      <BottomStyle />
+    </div>
+  );
 };
 
 export default Introservice;

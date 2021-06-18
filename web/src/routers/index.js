@@ -12,6 +12,8 @@ import SnsLogin from 'views/login/SnsLogin';
 import Styletest from 'views/styletest/index';
 import SignupSuccess from 'views/signup/signupSuccess';
 import StyleTestList from 'views/styletest/list';
+import ChangePassword from 'views/changePassword';
+import StyleTipList from 'views/styleTip';
 export default function routers() {
   return (
     <Switch>
@@ -23,10 +25,12 @@ export default function routers() {
       <Route path="/sns-login" component={SnsLogin} />
       <Route path="/styletest" component={Styletest} />
       <Route path="/styletestList" component={StyleTestList} />
-      <Route path="/success" component={SignupSuccess} />
+      <Route path="/changePassword" component={ChangePassword} />
+      <Route path="/styleTip" component={StyleTipList} />
       <ProvideAuth path="/mypage">
         <Mypage />
       </ProvideAuth>
+      <Route path="/success" component={SignupSuccess} />
       <Route path="*" component={NotFound} />
     </Switch>
   );

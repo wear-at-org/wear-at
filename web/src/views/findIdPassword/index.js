@@ -6,25 +6,37 @@ const FindIdPassword = () => {
   const findPassword = () => {};
   return (
     <div className="sub layout-sub">
-      <div className="col-12 col-center mw-350">
+      <div className="col-12 col-center mw-430 pl15 pr15">
         <div className="pr15 pl15 find-container">
           <div className="mb48 tc">
             <h3>이메일/비밀번호 찾기</h3>
           </div>
 
-          <form onSubmit={findPassword}>
-            <div className="date-birth-container">
+          <form onSubmit={findPassword} className="mb40">
+            <div className="mb24">
+              <h5 className="fontweight700">이메일(아이디) 찾기</h5>
+            </div>
+
+            <div className="mb8">
+              <h5>이름</h5>
+            </div>
+
+            <div className="mb8">
+              <input type="text" class="input-style1 small" id="name" value="" />
+            </div>
+
+            <div className="mb8">
+              <h5>생년월일</h5>
+            </div>
+
+            <div className="date-birth-container mb24">
               <div className="width-per-33 pl4 pr4">
                 <select className="select-style1" name="" id="" required>
                   <option value="" disabled selected hidden>
                     년도
                   </option>
                   {[...Array(60)].map((_, index) => {
-                    return (
-                      <option value={new Date().getFullYear() - index}>
-                        {new Date().getFullYear() - index}년
-                      </option>
-                    );
+                    return <option value={new Date().getFullYear() - index}>{new Date().getFullYear() - index}년</option>;
                   })}
                 </select>
               </div>
@@ -50,21 +62,26 @@ const FindIdPassword = () => {
               </div>
             </div>
             <div className="">
-              <input
-                type="submit"
-                value="이메일 확인"
-                className="btn-style1 wid100 middle type-black btn-font font-white"
-              />
+              <input type="submit" value="이메일(아이디) 확인" className="btn-style1 small wid100 type-black btn-font font-white" />
             </div>
           </form>
 
-          <div className="">
-            <input
-              type="submit"
-              value="비밀번호 확인"
-              className="btn-style1 wid100 tc middle type-white btn-font font-black333"
-            />
-          </div>
+          <form action="">
+            <div className="mb24">
+              <h5 className="fontweight700">비밀번호 찾기</h5>
+            </div>
+
+            <div className="mb8">
+              <h5>이메일</h5>
+            </div>
+
+            <div className="mb24">
+              <input type="text" class="input-style1 small" id="name" value="" placeholder="가입 시 등록한 이메일 주소를 입력해주세요." />
+            </div>
+            <div className="">
+              <input type="submit" value="비밀번호 확인" className="btn-style1 wid100 small tc type-white btn-font color-black333 fontweight700" />
+            </div>
+          </form>
         </div>
       </div>
     </div>
