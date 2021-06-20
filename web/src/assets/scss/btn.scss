@@ -83,13 +83,23 @@ input[class*='btn-style'] {
 }
 
 .btn-style2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  padding: 16px;
   border: 1px solid $grayD4D4;
   border-radius: 6px;
+  padding-left: 16px;
+  padding-right: 16px;
 
+  &.small {
+    height: 32px;
+  }
   &.middle {
     height: 48px;
+  }
+  &.large {
+    height: 60px;
   }
   &.type-white {
     background-color: white;
@@ -99,6 +109,10 @@ input[class*='btn-style'] {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  &.narrow {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 
@@ -322,7 +336,9 @@ option {
 
 [class*='select-style'] {
   &.no-border {
+    font-size: 14px;
     border: none;
+    color: $graya6a6a6;
   }
 }
 
@@ -357,4 +373,36 @@ option {
   background-size: 27px;
   background-position: left center;
   background-repeat: no-repeat;
+}
+
+.save-btn-container {
+  position: relative;
+}
+
+.reg-btn {
+  cursor: pointer;
+  position: absolute;
+  color: $mainColor;
+  font-size: 14px;
+  line-height: 18px;
+  right: 24px;
+  bottom: 16px;
+}
+
+.textarea-style {
+  width: 100%;
+  resize: none;
+  padding: 24px;
+  font-size: 14px;
+  line-height: 18px;
+  border: 1px solid $graye0e0;
+  border-radius: 8px;
+}
+
+.textarea-style::-webkit-scrollbar {
+  display: none;
+}
+
+.textarea-style::placeholder {
+  color: $graybdbd;
 }

@@ -4,10 +4,10 @@ const { name, reducer, actions } = createSlice({
   name: 'toast',
   initialState: { isActive: false, type: '', content: '' },
   reducers: {
-    addToast(state, { payload }) {
+    addToast(_, { payload }) {
       return { isActive: true, ...payload };
     },
-    removeToast(state) {
+    removeToast(_) {
       return { isActive: false, type: '', content: '' };
     },
   },

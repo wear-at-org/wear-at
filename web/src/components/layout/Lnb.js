@@ -15,7 +15,7 @@ const Lnb = () => {
             </Link>
           </li>
           <li>
-            <Link to="/styletestList">스타일테스트 내역</Link>
+            <Link to="/testInfo">스타일테스트 내역</Link>
           </li>
           <li>
             <Link to="/mypage">북마크</Link>
@@ -24,7 +24,7 @@ const Lnb = () => {
             <Link to="/mypage">작성한 글</Link>
           </li>
           <li>
-            <Link to="/mypage">비밀번호 변경</Link>
+            <Link to="/changePassword">비밀번호 변경</Link>
           </li>
           <li className="logout">
             <div className="">로그아웃</div>

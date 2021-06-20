@@ -54,22 +54,70 @@
   }
 }
 
-.style-tip-wrap {
+.card-style-wrap {
   width: calc(100% + 26px);
   margin-left: -16px;
   display: flex;
   flex-wrap: wrap;
 
-  .style-tip-card {
+  .card-style {
+    cursor: pointer;
     margin: 0px 13px 24px 13px;
     width: calc(100% / 3 - 26px);
     border: 1px solid $grayf2f2;
     border-radius: 10px;
     .img-container {
+      position: relative;
       height: 306px;
       text-align: center;
+
       img {
         height: 100%;
+      }
+
+      .bookmark-container {
+        top: 31px;
+        right: 34px;
+        cursor: pointer;
+        position: absolute;
+
+        img {
+          width: 20px;
+          height: 17px;
+        }
+      }
+
+      .view-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        position: absolute;
+        bottom: 16px;
+        .inner {
+          display: flex;
+          border-radius: 4px;
+          background-color: rgba(0, 0, 0, 0.8);
+          padding: 8px;
+
+          .cnt-item {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+            p {
+              font-size: 14px;
+              line-height: 20px;
+              color: white;
+            }
+            img {
+              width: 13px;
+              height: 13px;
+            }
+
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+        }
       }
     }
 
@@ -88,11 +136,45 @@
     display: flex;
     flex-wrap: wrap;
     .tip-item {
+      cursor: pointer;
       margin-right: 10px;
       margin-bottom: 10px;
-      padding: 12px 16px;
+      padding: 10px 16px;
       border: 1px solid $black333;
       border-radius: 20px;
+
+      &.active {
+        background-color: $black333;
+        color: white;
+      }
+    }
+  }
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+  .circle-gray {
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+    border: 1px solid $grayf2f2;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 12px;
+    margin-right: 12px;
+
+    h6 {
+      color: $graye0e0;
+    }
+    &.active {
+      h6 {
+        color: $mainColor;
+      }
     }
   }
 }

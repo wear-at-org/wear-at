@@ -44,7 +44,7 @@ export default function Header({ setDrawerStatus, setSearchStatus, searchStatus 
                   <Link to="/login">로그인</Link>
                 </li>
                 <li>
-                  <Link to="/intro">
+                  <Link to="/styleTestIntro">
                     <div className="btn-style1">
                       <p className="btn-font font-white small">지금 시작하기</p>
                     </div>

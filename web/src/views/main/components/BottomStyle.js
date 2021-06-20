@@ -14,7 +14,7 @@ const MainBottom = () => (
           <p className="btn-font font-white">무료 스타일테스트 할래요</p>
         </div>
         <div className="btn-style2 center ml12">
-          <p className="btn-font color-black333 fontweight600">궁금한게 있어요</p>
+          <p className="btn-font color-black333 bold">궁금한게 있어요</p>
         </div>
       </div>
     </div>

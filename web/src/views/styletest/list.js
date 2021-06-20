@@ -63,7 +63,7 @@ const StyleTestList = () => {
           <div className="right-container">
             <div className="d-flex x-eq y-center mb30">
               <h5 className="fontweight400">
-                <span className="fontweight600">곰돌이</span> 님의 스타일 테스트 내역입니다.
+                <span className="bold">곰돌이</span> 님의 스타일 테스트 내역입니다.
               </h5>
               <div className="">
                 <select className="select-style2" name="" id="" required onChange={(e) => console.log(e.target.value)}>

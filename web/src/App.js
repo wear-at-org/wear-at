@@ -11,12 +11,14 @@ import { userInfoName } from './store';
 import { useEffect } from 'react';
 import LogoutHook from 'hooks/useLogoutHook';
 import SearchHeader from 'components/layout/SearchHeader';
+import { useLocation } from 'react-router-dom';
 
 function App() {
   const [logout] = LogoutHook();
   const { loginStatus, info } = useSelector((state) => state[userInfoName]);
   const [drawerStatus, setDrawerStatus] = useState(false);
   const [searchStatus, setSearchStatus] = useState(false);
+  const { pathname } = useLocation();
 
   useEffect(() => {
     if (loginStatus === 'ing' && info.nickName === null) {
@@ -25,13 +27,14 @@ function App() {
   }, [loginStatus, logout, info]);
 
   return (
-    <div className={drawerStatus ? 'App drawerActive' : 'App'}>
-      <Drawer drawerStatus={drawerStatus} setDrawerStatus={setDrawerStatus} />
-      <Header setDrawerStatus={setDrawerStatus} searchStatus={searchStatus} setSearchStatus={setSearchStatus} />
+    <div className={`App ${drawerStatus && 'drawerActive'}`}>
+      {drawerStatus && <Drawer drawerStatus={drawerStatus} setDrawerStatus={setDrawerStatus} />}
+      {!pathname.includes('styletest') && <Header setDrawerStatus={setDrawerStatus} searchStatus={searchStatus} setSearchStatus={setSearchStatus} />}
       <SearchHeader searchStatus={searchStatus} setSearchStatus={setSearchStatus} />
       <Routers />
-      <Checkbot />
-      <Footer />
+      {/* <Checkbot /> */}
+      {!pathname.includes('styletest') && <Footer />}
+
       <Loader />
     </div>
   );

@@ -8,9 +8,11 @@
 }
 
 .App {
-  min-height: calc(100vh - 108px);
-  padding-bottom: 108px;
   position: relative;
+  &.style-test {
+    min-height: 100vh;
+    padding-bottom: 0;
+  }
 }
 
 .App.drawerActive {
@@ -26,7 +28,7 @@
 
 .sub {
   min-height: calc(100vh - 173px);
-  padding: 64px 0;
+  padding: 80px 0;
 }
 
 // tast
@@ -208,8 +210,8 @@
 
 // nav
 header.nav-container {
-  padding-top: 14px;
-  padding-bottom: 10px;
+  padding-top: 26px;
+  padding-bottom: 26px;
   position: relative;
 
   .web {
@@ -264,7 +266,7 @@ header.nav-container {
       }
 
       li {
-        margin-right: 52px;
+        margin-right: 45px;
         &.active {
           a {
             color: $mainColor;
@@ -289,13 +291,13 @@ header.nav-container {
           }
         }
         h1.logo img {
-          width: 77px;
-          height: 23px;
+          width: 69px;
+          height: 18px;
         }
 
         a {
           display: block;
-          font-size: 14px;
+          font-size: 16px;
           line-height: 16px;
           font-weight: 400;
           transition: 0.2s;
@@ -395,9 +397,8 @@ header.nav-container {
   z-index: 999;
   opacity: 0;
   transform: scale(0);
-  transform-origin: none;
   &.active {
-    top: 65px;
+    top: 92px;
     transition: opacity 0.5s;
     opacity: 1;
     transform: scale(1);
@@ -413,8 +414,6 @@ footer {
   padding-top: 32px;
   padding-bottom: 32px;
   width: 100%;
-  position: absolute;
-  bottom: 0;
   background-color: #f5f8fa;
   display: flex;
   flex-direction: column;
@@ -568,8 +567,20 @@ footer {
   width: calc(100% - 186px);
 }
 
+.drag-upload {
+}
+
 .address-btn-container {
   width: 186px;
+}
+
+.b-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.width-110 {
+  width: 110px;
 }
 
 .width-100 {
@@ -578,6 +589,14 @@ footer {
 
 .width-320 {
   width: 320px !important;
+}
+
+.width-380 {
+  width: 380px !important;
+}
+
+.width-280 {
+  width: 280px !important;
 }
 
 .width-260 {
@@ -590,4 +609,153 @@ footer {
 
 .option-font {
   color: $optionBlue;
+}
+
+.replay-wrap {
+  padding-top: 24px;
+  padding-bottom: 24px;
+
+  .btn-container {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 24px;
+  }
+  .info-img {
+    margin-right: 15px;
+    img {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  .re-replay-container {
+    display: flex;
+    align-items: center;
+    .anser {
+      p {
+        cursor: pointer;
+        font-size: 12px;
+        color: $textGray;
+        margin-right: 8px;
+      }
+    }
+
+    .dot-container {
+      position: relative;
+      cursor: pointer;
+      img {
+        width: 20px;
+        height: 20px;
+      }
+
+      .dot-mod-item {
+        display: none;
+        padding: 8px 18px;
+        position: absolute;
+        background: #ffffff;
+        opacity: 0.8;
+        border: 1px solid $graye0e0;
+        box-sizing: border-box;
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+        border-radius: 4px;
+        &.active {
+          display: block;
+        }
+        &:hover {
+          background-color: $grayf5f8fa;
+        }
+        p {
+          width: 23px;
+          font-size: 12px;
+          line-height: 18px;
+          color: $black333;
+        }
+      }
+    }
+  }
+  .me {
+    padding-top: 18px;
+    padding-bottom: 18px;
+    background-color: $grayf5f8fa;
+  }
+  .replay-container {
+    padding-left: 8px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+
+    & .left-contnet {
+      display: flex;
+      flex: 1;
+      padding-right: 20px;
+      .text-wrap {
+        flex: 1;
+      }
+      .top-container {
+        display: flex;
+        margin-bottom: 2px;
+      }
+    }
+  }
+}
+
+.mb120 {
+  margin-bottom: 120px;
+}
+
+.DragDrop {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &-File {
+    background-color: white;
+    width: 480px;
+    height: 240px;
+    border: 2px dashed $graybdbd;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    &.dragging {
+      border-color: black;
+    }
+
+    &.hidden {
+      display: none;
+    }
+
+    &-Dragging {
+      background-color: black;
+      color: white;
+    }
+  }
+
+  &-Files {
+    margin-top: 1rem;
+
+    & > div {
+      width: 300px;
+      padding: 8px;
+      border: 1px solid black;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &-Filter {
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
 }

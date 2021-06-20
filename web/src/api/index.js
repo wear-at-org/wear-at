@@ -34,10 +34,20 @@ Axios.interceptors.response.use(
     // 토큰 재발급도 이곳에서
     dispatch(minusAsyncCountValue());
     const errorStatus = error.response.status;
+    console.log(errorStatus);
+    console.log(error.response);
+
+    // 소셜 로그인 후 필수 항목을 입력 하지 않았을 경우
     if (errorStatus === 403) {
       showToast({ type: 'error', content: '필수 입력 항목을 입력해주세요.' });
       window.location = '/';
     }
+
+    // 로그인 필요 시
+    // if (errorStatus === 401) {
+    //   showToast({ type: 'error', content: '로그인이 필요합니다.' });
+    //   window.location = '/';
+    // }
 
     return Promise.reject(error);
   },

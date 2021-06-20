@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import user from 'assets/img/user.png';
 import search from 'assets/img/search.png';
 import alam from 'assets/img/alam.png';
 import { Link } from 'react-router-dom';
 import LogoutHook from 'hooks/useLogoutHook';
+import defaultProfile from 'assets/img/default-user.png';
 
 const Profile = ({ setSearchStatus, searchStatus }) => {
   const [activeMenu, setActiveMenu] = useState(false);
@@ -24,13 +24,13 @@ const Profile = ({ setSearchStatus, searchStatus }) => {
           <img src={alam} alt="search" style={{ width: '24px', height: '24px' }} />
         </div>
         <div onMouseUpCapture={() => setActiveMenu(!activeMenu)}>
-          <img src={user} alt="user-img" />
+          <img src={defaultProfile} alt="user-img" />
         </div>
       </li>
 
       <ul className="hover-menu">
         <li>
-          <Link to="/styletest">스타일테스트 내역</Link>
+          <Link to="/testInfo">스타일테스트 내역</Link>
         </li>
         <li>
           <Link to="/mypage">북마크</Link>

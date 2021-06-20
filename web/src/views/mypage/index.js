@@ -14,7 +14,7 @@ const Mypage = () => {
         <form className="mypage-container pr15 pl15">
           <Lnb />
           <div className="right-container">
-            <h5 className="mb20 fontweight700">기본정보</h5>
+            <h5 className="mb20 bold">기본정보</h5>
 
             <div className="mb20">
               <div className="label-container">
@@ -162,7 +162,7 @@ const Mypage = () => {
             </div>
 
             <div className="">
-              <h5 className="mb20 fontweight700">추가정보</h5>
+              <h5 className="mb20 bold">추가정보</h5>
 
               <div className="mb20">
                 <div className="label-container">
@@ -243,7 +243,7 @@ const Mypage = () => {
             </div>
 
             <div className="mb36">
-              <h5 className="mb28 fontweight700">마케팅 수신 동의에 동의합니다. </h5>
+              <h5 className="mb28 bold">마케팅 수신 동의에 동의합니다. </h5>
               <div className="chkbox-con mb20">
                 <input
                   type="checkbox"

@@ -1,20 +1,38 @@
 .color-grayAEAE {
-  color: $grayAEAE;
+  color: $grayAEAE !important;
 }
 .color-8282 {
-  color: $gray8282;
+  color: $gray8282 !important;
 }
 .color-black333 {
-  color: $black333;
+  color: $black333 !important;
 }
 .color-gray7979 {
-  color: $gray7979;
+  color: $gray7979 !important;
 }
 .color-graya6a {
-  color: $graya6a6a6;
+  color: $graya6a6a6 !important;
 }
 .color-white {
-  color: white;
+  color: white !important;
+}
+.color-blue {
+  color: $optionBlue !important;
+}
+.color-graybdbd {
+  color: $graybdbd !important;
+}
+.color-graye0e0 {
+  color: $graye0e0 !important;
+}
+.color-red {
+  color: $errorColor !important;
+}
+.font-Georgia {
+  font-family: 'Georgia';
+}
+.bold {
+  font-weight: bold !important;
 }
 
 h2 {
@@ -37,6 +55,11 @@ h3 {
   font-weight: 400;
 }
 
+h4.big {
+  font-size: 20px;
+  line-height: 28px;
+}
+
 h4 {
   font-size: 18px;
   line-height: 26px;
@@ -50,6 +73,11 @@ h5 {
 
 h5.small {
   font-size: 14px;
+  line-height: 18px;
+}
+
+h6 {
+  font-size: 12px;
   line-height: 18px;
 }
 

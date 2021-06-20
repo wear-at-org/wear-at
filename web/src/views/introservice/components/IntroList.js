@@ -35,7 +35,7 @@ const IntroList = () => {
           <div className="intro-list-item" key={item.key}>
             <div className="">
               <div className="mb16">
-                <h3 className="fontweight700">{item.title}</h3>
+                <h3 className="bold">{item.title}</h3>
               </div>
               <div className="mb25">
                 <h5 className="color-black333">
@@ -44,8 +44,8 @@ const IntroList = () => {
                   })}
                 </h5>
               </div>
-              <div className="btn-style2 center width-260">
-                <p className="btn-font color-black333 fontweight600">{item.btnTxt}</p>
+              <div className="btn-style2 middle center width-260">
+                <p className="btn-font color-black333 bold">{item.btnTxt}</p>
               </div>
             </div>
             <div className="">

@@ -1,21 +1,24 @@
-import { styleTipArray } from 'assets/common/dummyData';
 import React from 'react';
-import StyleCard from './components/StyleCard';
+import StyleCard from 'components/CardStyle';
+import { styleTipArray, tipStyleTag } from 'assets/common/dummyData';
 
 const StyleTipList = () => {
   return (
-    <div className="col-12 col-center">
+    <div className="sub">
       <div className="mw-1280 col-center">
-        <div className="mb40 mt40">
+        <div className="mb40">
           <h3>STYLETIP</h3>
         </div>
 
         <div className="tip-wrap mb32">
           <div className="tip-item-container">
-            <div className="tip-item">#겨울패션</div>
-            <div className="tip-item">#아우터</div>
-            <div className="tip-item">#데일리룩</div>
-            <div className="tip-item">#연말룩</div>
+            {tipStyleTag.map((item) => {
+              return (
+                <div className={`tip-item ${item.active ? 'active' : ''}`} key={item.label}>
+                  <h5 className="small">#{item.label}</h5>
+                </div>
+              );
+            })}
           </div>
           <div className="">
             <select name="" className="select-style2 no-border">
@@ -26,9 +29,9 @@ const StyleTipList = () => {
             </select>
           </div>
         </div>
-        <div className="style-tip-wrap">
+        <div className="card-style-wrap">
           {styleTipArray.map((item) => {
-            return <StyleCard item={item} />;
+            return <StyleCard key={item.key} item={item} />;
           })}
         </div>
       </div>

@@ -9,7 +9,7 @@ const IntroVisual = () => (
           <h3 className="fontweight400 tc">
             전문 스타일리스트가 당신을 위해 퍼스널 스타일링
             <br />
-            <span className="fontweight700">퍼스널 스타일링</span> 을 선물 드립니다.
+            <span className="bold">퍼스널 스타일링</span> 을 선물 드립니다.
           </h3>
         </div>
 

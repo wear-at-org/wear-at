@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import defaultProfile from 'assets/img/profile.svg';
+import defaultProfile from 'assets/img/default-user.png';
 
 const ImageUpload = () => {
   const inputRef = useRef(null);

@@ -14,19 +14,24 @@ import SignupSuccess from 'views/signup/signupSuccess';
 import StyleTestList from 'views/styletest/list';
 import ChangePassword from 'views/changePassword';
 import StyleTipList from 'views/styleTip';
+import StyleTipDetail from 'views/styleTip/detail';
+import StyleTestIntro from 'views/styletest/intro';
+
 export default function routers() {
   return (
     <Switch>
       <Route path="/" exact component={Main} />
-      <Route path="/login" component={Login} />
-      <Route path="/signup" component={Signup} />
-      <Route path="/intro" component={Introservice} />
-      <Route path="/findIdPassword" component={FindIdPassword} />
-      <Route path="/sns-login" component={SnsLogin} />
-      <Route path="/styletest" component={Styletest} />
-      <Route path="/styletestList" component={StyleTestList} />
-      <Route path="/changePassword" component={ChangePassword} />
-      <Route path="/styleTip" component={StyleTipList} />
+      <Route path="/login" exact component={Login} />
+      <Route path="/signup" exact component={Signup} />
+      <Route path="/intro" exact component={Introservice} />
+      <Route path="/findIdPassword" exact component={FindIdPassword} />
+      <Route path="/sns-login" exact component={SnsLogin} />
+      <Route path="/styletest" exact component={Styletest} />
+      <Route path="/testInfo" exact component={StyleTestList} />
+      <Route path="/changePassword" exact component={ChangePassword} />
+      <Route path="/styleTip" exact component={StyleTipList} />
+      <Route path="/styleTip/detail" exact component={StyleTipDetail} />
+      <Route path="/styleTestIntro" exact component={StyleTestIntro} />
       <ProvideAuth path="/mypage">
         <Mypage />
       </ProvideAuth>
