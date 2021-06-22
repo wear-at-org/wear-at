@@ -21,5 +21,8 @@ public class QueryCategory {
     private String title;
 
     @Column(length=500)
+    private String subtitle;
+
+    @Column(length=500)
     private String url;
 }
