@@ -7,11 +7,18 @@ const DragImagUpload = () => {
   const dragRef = useRef(null);
   const fileId = useRef(0);
 
-  const onChangeFiles = useCallback(
-    (e) => {
-      let selectFiles = [];
-      let tempFiles = files;
+  const blobToData = (blob) => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.readAsDataURL(blob);
+    });
+  };
 
+  const onChangeFiles = useCallback(
+    async (e) => {
+      let tempFiles = files;
+      let selectFiles = [];
       if (e.type === 'drop') {
         selectFiles = e.dataTransfer.files;
       } else {
@@ -19,15 +26,19 @@ const DragImagUpload = () => {
       }
 
       for (const file of selectFiles) {
+        let imgPath = '';
+        let reader = new FileReader();
+        imgPath = reader.result;
         tempFiles = [
           ...tempFiles,
           {
             id: fileId.current++,
             object: file,
+            imgPath: await blobToData(file),
           },
         ];
       }
-
+      console.log(tempFiles);
       setFiles(tempFiles);
     },
     [files],
@@ -100,6 +111,12 @@ const DragImagUpload = () => {
     <div className="DragDrop">
       <input type="file" id="fileUpload" style={{ display: 'none' }} multiple={true} onChange={onChangeFiles} />
 
+      <label className="mb32" htmlFor="fileUpload">
+        <div className="btn-style1 type-black b-center center width-110 mr12">
+          <p className="btn-font font-white">파일선택</p>
+        </div>
+      </label>
+
       <label className={`${isDragging ? 'DragDrop-File dragging' : 'DragDrop-File'} ${files.length > 0 && 'hidden'}`} htmlFor="fileUpload" ref={dragRef}>
         <div className="mb8">
           <img src={imgIcon} alt="" />
@@ -114,18 +131,15 @@ const DragImagUpload = () => {
       <div className="DragDrop-Files">
         {files.length > 0 &&
           files.map((file) => {
-            console.log(file);
             const {
               id,
               object: { name },
             } = file;
 
+            console.log(file);
             return (
               <div key={id}>
-                <div>{name}</div>
-                <div className="DragDrop-Files-Filter" onClick={() => handleFilterFile(id)}>
-                  X
-                </div>
+                <img src={file.imgPath} alt="" />
               </div>
             );
           })}

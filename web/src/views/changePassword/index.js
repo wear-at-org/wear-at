@@ -50,8 +50,8 @@ const FindIdPassword = () => {
               />
             </div>
 
-            <div class="">
-              <input type="submit" class="btn-style1 wid100 btn-font font-white middle" disabled={!checkPass()} value="비밀번호 변경 완료" />
+            <div className="">
+              <input type="submit" className="btn-style1 wid100 btn-font font-white middle" disabled={!checkPass()} value="비밀번호 변경 완료" />
             </div>
           </form>
         </div>

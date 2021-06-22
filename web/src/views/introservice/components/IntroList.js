@@ -30,7 +30,7 @@ const arr = [
 const IntroList = () => {
   return (
     <div className="col-12 col-center mw-900">
-      {arr.map((item, index) => {
+      {arr.map((item) => {
         return (
           <div className="intro-list-item" key={item.key}>
             <div className="">
@@ -39,8 +39,8 @@ const IntroList = () => {
               </div>
               <div className="mb25">
                 <h5 className="color-black333">
-                  {item.content.split('\n').map((line) => {
-                    return <div>{line}</div>;
+                  {item.content.split('\n').map((line, index) => {
+                    return <div key={'text' + index}>{line}</div>;
                   })}
                 </h5>
               </div>

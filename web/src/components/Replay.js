@@ -53,8 +53,8 @@ const Replay = ({ list }) => {
         </div>
       </div>
 
-      {replayArray.map((item) => {
-        return <ReplayItem item={item} />;
+      {replayArray.map((item, index) => {
+        return <ReplayItem key={'replay-' + index} item={item} />;
       })}
 
       <div className={`save-btn-container`}>

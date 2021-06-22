@@ -73,8 +73,8 @@ const StyleTestList = () => {
             </div>
 
             <div className="item-list">
-              {temp.map((item) => {
-                return <ListItem item={item} />;
+              {temp.map((item, index) => {
+                return <ListItem key={'test' + index} item={item} />;
               })}
             </div>
           </div>

@@ -22,7 +22,7 @@ const FindIdPassword = () => {
             </div>
 
             <div className="mb8">
-              <input type="text" class="input-style1 small" id="name" value="" />
+              <input type="text" className="input-style1 small" id="name" value="" />
             </div>
 
             <div className="mb8">
@@ -76,7 +76,7 @@ const FindIdPassword = () => {
             </div>
 
             <div className="mb24">
-              <input type="text" class="input-style1 small" id="name" value="" placeholder="가입 시 등록한 이메일 주소를 입력해주세요." />
+              <input type="text" className="input-style1 small" id="name" value="" placeholder="가입 시 등록한 이메일 주소를 입력해주세요." />
             </div>
             <div className="">
               <input type="submit" value="비밀번호 확인" className="btn-style1 wid100 small tc type-white btn-font color-black333 bold" />

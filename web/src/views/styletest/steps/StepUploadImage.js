@@ -16,14 +16,8 @@ const StepUploadImage = ({ item }) => {
           <h5 className="small color-8282">업로드된 사진은 회원님을 위한 스타일테스트 분석 및 결과 제공 목적으로만 사용됩니다.</h5>
         </div>
 
-        <div className="mb32">
-          <div className="btn-style1 type-black b-center center width-110 mr12">
-            <p className="btn-font font-white">파일선택</p>
-          </div>
-        </div>
+        <DragImagUpload />
       </div>
-
-      <DragImagUpload />
 
       <div className="style-next-btn">
         <div className="inner width-380">

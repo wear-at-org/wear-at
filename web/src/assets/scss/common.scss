@@ -739,12 +739,13 @@ footer {
   }
 
   &-Files {
-    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
 
     & > div {
-      width: 300px;
+      width: 80px;
+      height: 80px;
       padding: 8px;
-      border: 1px solid black;
       margin-bottom: 10px;
       display: flex;
       justify-content: space-between;
