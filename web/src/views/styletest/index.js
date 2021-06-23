@@ -6,19 +6,20 @@ import StepListImage from './steps/StepListImage';
 import StepTwoDepthItem from './steps/StepTwoDepthItem';
 import StepListBody from './steps/StepListBody';
 import StepUploadImage from './steps/StepUploadImage';
-import arrLeft from 'assets/img/arr-right.png';
-import xBtn from 'assets/img/x-btn-black.png';
+import StyleTestHeader from './steps/StyleTestHeader';
+import StepHook from 'hooks/useStepHook';
 
 const Styletest = () => {
+  const { makeStyleTestList } = StepHook();
   const history = useHistory();
   const [stepArray, setStepArray] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
-    api.get('subscribe/query').then((res) => {
-      console.log(res.data);
-      setStepArray(res.data);
+    api.get('subscribe/query').then(({ data }) => {
+      setStepArray(makeStyleTestList(data));
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -37,45 +38,25 @@ const Styletest = () => {
     if (index !== activeIndex) {
       return;
     }
-    switch (item.uiType) {
+    switch (item.type) {
       case 'U_LIST_ITEMS':
-        return <StepListItem item={item} goNextStep={goNextStep} key={'style-' + index} />;
+        return <StepListItem item={item.items} goNextStep={goNextStep} key={'style-' + index} />;
       case 'U_LIST_IMAGES':
-        return <StepListImage item={item} goNextStep={goNextStep} key={'style-' + index} />;
+        return <StepListImage item={item.items} goNextStep={goNextStep} key={'style-' + index} />;
       case 'U_LIST_2DEP_ITEMS':
-        return <StepTwoDepthItem item={item} goNextStep={goNextStep} key={'style-' + index} />;
+        return <StepTwoDepthItem item={item.items} goNextStep={goNextStep} key={'style-' + index} />;
       case 'U_LIST_BODY':
-        return <StepListBody item={item} goNextStep={goNextStep} key={'style-' + index} />;
+        return <StepListBody item={item.items} goNextStep={goNextStep} key={'style-' + index} />;
       case 'U_UPLOAD_IMAGE':
-        return <StepUploadImage item={item} goNextStep={goNextStep} key={'style-' + index} />;
+        return <StepUploadImage item={item.items} goNextStep={goNextStep} key={'style-' + index} />;
       default:
-        return <StepListItem item={item} goNextStep={goNextStep} key={'style-' + index} />;
+        return <StepListItem item={item.items} goNextStep={goNextStep} key={'style-' + index} />;
     }
   };
 
   return (
     <>
-      <div className="style-test-header">
-        <div
-          className=""
-          onClick={() => {
-            if (activeIndex !== 0) {
-              window.scrollTo(0, 0);
-              setActiveIndex(activeIndex - 1);
-            } else {
-              history.push('/styleTestIntro');
-            }
-          }}
-        >
-          <img src={arrLeft} alt="" />
-        </div>
-        <div className="">
-          <h4>스타일테스트</h4>
-        </div>
-        <div className="" onClick={() => history.push('/')}>
-          <img src={xBtn} alt="" />
-        </div>
-      </div>
+      <StyleTestHeader activeIndex={activeIndex} setActiveIndex={setActiveIndex} stepLength={stepArray.length} />
       <div className="step-wrap">
         {stepArray.map((item, index) => {
           return renderStepComponent(item, index);

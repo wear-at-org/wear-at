@@ -1,34 +1,44 @@
+import StepHook from 'hooks/useStepHook';
 import React, { useState, useEffect } from 'react';
+import NextBtn from './NextBtn';
 
 const StepListImage = ({ item, goNextStep }) => {
-  const [selectItemList, setSelectItemList] = useState([]);
+  const { selectQueryItem, makeInsertList } = StepHook();
+  const [list, setList] = useState([]);
 
   useEffect(() => {
-    const { queryItems } = item;
-    console.log(queryItems);
-    setSelectItemList(queryItems);
+    setList(makeInsertList(item));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <div className="step-container">
-      <div className="mb60">
-        <h4 className="big tc bold">{item.title}</h4>
-      </div>
-
-      <div className="style-circle-wrap">
-        {selectItemList.map((queryItem, index) => {
-          return (
-            <div className="checked-img" key={'checked-img-' + queryItem.id}>
-              <img src={queryItem.url} alt="" />
+      {list.map((items, index) => {
+        return (
+          <div key={`step-${index}`}>
+            <div className="mb30 mb-sm-60">
+              <h4 className="big tc bold">{items.title}</h4>
             </div>
-          );
-        })}
-      </div>
-      <div className="style-next-btn" onClick={goNextStep}>
-        <div className="inner width-380">
-          <input type="button" value="다음" className="btn-style1 wid100 btn-font font-white middle" />
-        </div>
-      </div>
+
+            <div className="style-circle-wrap">
+              {items.queryItems.map((queryItem) => {
+                const { isSelect, url, id } = queryItem;
+                return (
+                  <div
+                    className={`checked-img  ${isSelect && 'active'}`}
+                    key={'checked-img-' + id}
+                    onClick={() => setList(selectQueryItem(list, id, 'queryItems', index))}
+                  >
+                    <div className="img-dim"></div>
+                    <img src={url} alt="" />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })}
+      <NextBtn goNextStep={goNextStep} list={list} />
     </div>
   );
 };

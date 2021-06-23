@@ -28,7 +28,7 @@ function App() {
 
   return (
     <div className={`App ${drawerStatus && 'drawerActive'}`}>
-      {drawerStatus && <Drawer drawerStatus={drawerStatus} setDrawerStatus={setDrawerStatus} />}
+      <Drawer drawerStatus={drawerStatus} setDrawerStatus={setDrawerStatus} />
       {!pathname.includes('styletest') && <Header setDrawerStatus={setDrawerStatus} searchStatus={searchStatus} setSearchStatus={setSearchStatus} />}
       <SearchHeader searchStatus={searchStatus} setSearchStatus={setSearchStatus} />
       <Routers />

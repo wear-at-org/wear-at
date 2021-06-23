@@ -13,6 +13,7 @@ const MainParteners = () => {
   SwiperCore.use([Autoplay]);
 
   return (
+    // eslint-disable-next-line jsx-a11y/no-distracting-elements
     <marquee className="partners-container" scrollamount="2" scrolldely="50">
       <div className="inner">
         <div className="partners-item">

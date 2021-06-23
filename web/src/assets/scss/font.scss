@@ -140,3 +140,13 @@ p.more-font {
   text-decoration: underline;
   cursor: pointer;
 }
+
+@media all and(max-width:768px) {
+}
+
+@media all and(max-width:576px) {
+  h3 {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}

@@ -11,15 +11,14 @@ const Profile = ({ setSearchStatus, searchStatus }) => {
   return (
     <ul className={activeMenu ? 'profile-container active' : 'profile-container'}>
       <li className="mypage">
-        <div
+        {/* <div
           className="mr19"
           onMouseUpCapture={() => {
-            console.log(searchStatus);
             setSearchStatus(!searchStatus);
           }}
         >
           <img src={search} alt="search" style={{ width: '24px', height: '24px' }} />
-        </div>
+        </div> */}
         <div className="mr19">
           <img src={alam} alt="search" style={{ width: '24px', height: '24px' }} />
         </div>
@@ -32,9 +31,9 @@ const Profile = ({ setSearchStatus, searchStatus }) => {
         <li>
           <Link to="/testInfo">스타일테스트 내역</Link>
         </li>
-        <li>
+        {/* <li>
           <Link to="/mypage">북마크</Link>
-        </li>
+        </li> */}
         <li>
           <Link to="/mypage">개인정보</Link>
         </li>

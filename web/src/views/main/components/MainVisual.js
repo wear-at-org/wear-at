@@ -16,7 +16,7 @@ const MainVisual = () => {
             </h3>
           </div>
 
-          <div className="mb16">
+          <div className="mb16 hidden show-sm">
             <p className="visual-h3-desc">사용자의 취향분석을 통해 최적의 코디를 추천해드립니다.</p>
           </div>
 

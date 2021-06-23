@@ -3,37 +3,41 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 70px;
   }
 
-  .main-visual .inner .visual-img-container img {
-    width: 175px;
-    height: 175px;
-  }
-  
-  .card-section {
-    width: 130px;
-    height: 130px;
-  }
+  .main-visual {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    .inner {
+      flex-direction: column;
+      align-items: center;
+      .visual-img-container {
+        .card-section {
+          width: 130px;
+          height: 130px;
+        }
+        img {
+          width: 365px;
+          height: 365px;
+        }
+      }
 
-  .main-visual .inner {
-    flex-direction: column;
-    align-items: center;
-
-    .visual-img-container {
-      margin-top: 30px;
-    }
-  }
-
-  .main-bottom-container {
-    .bottom-img {
-      padding-bottom: 220px;
-      &:after {
-        bottom: -30px;
-        left: 80px;
+      .visual-img-container {
+        margin-top: 30px;
       }
     }
   }
 
+  .main-bottom-container {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+
+    .btn-row {
+      flex-direction: column;
+    }
+  }
 
   header.nav-container .web {
     display: none;
@@ -47,13 +51,12 @@
       h1 img {
         height: 56px;
       }
-      
+
       .menu img {
         height: 25px;
       }
     }
   }
-
 
   .adress-container {
     width: calc(100% - 100px);
@@ -61,6 +64,63 @@
 
   .address-btn-container {
     width: 100px;
-  }  
+  }
+
+  // 스타일 테스트
+  .style-test-header-wrap {
+    .inner {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+
+  .style-circle-wrap {
+    justify-content: space-between;
+    padding-left: 24px;
+    padding-right: 24px;
+
+    .style-circle-container {
+      width: calc(50% - 20px);
+      height: 150px;
+      margin-bottom: 30px;
+      h5.small {
+        display: none;
+      }
+    }
+  }
+  .step-container {
+    .checked-img {
+      width: calc(100% / 3 - 16px);
+    }
+  }
+
+  .style-next-btn {
+    padding-left: 24px;
+    padding-right: 24px;
+
+    .inner {
+      width: 100% !important;
+    }
+  }
+
+  .style-progress-bar {
+    width: 100%;
+    height: 2px;
+    background-color: $grayeded;
+    position: relative;
+
+    .bar {
+      position: absolute;
+      height: 100%;
+      left: 0;
+      background-color: $mainColor;
+    }
+  }
 }
 
+.intro-list-item {
+  flex-direction: column;
+  & > div {
+    text-align: center;
+  }
+}

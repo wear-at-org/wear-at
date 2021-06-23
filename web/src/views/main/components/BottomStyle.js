@@ -10,10 +10,10 @@ const MainBottom = () => (
       </div>
 
       <div className="btn-row">
-        <div className="btn-style1 type-black center middle mr12">
+        <div className="btn-style1 type-black center middle mr0 mr-sm-12 mb15 mb-sm-0">
           <p className="btn-font font-white">무료 스타일테스트 할래요</p>
         </div>
-        <div className="btn-style2 center ml12">
+        <div className="btn-style2 middle center ml0 ml-sm-12">
           <p className="btn-font color-black333 bold">궁금한게 있어요</p>
         </div>
       </div>

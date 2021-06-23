@@ -96,7 +96,7 @@ input[class*='btn-style'] {
     height: 32px;
   }
   &.middle {
-    height: 48px;
+    padding: 16px;
   }
   &.large {
     height: 60px;
@@ -305,7 +305,7 @@ input.active + .slider:before {
   background-image: url('../img/arr-bottom.png');
   background-repeat: no-repeat;
   background-position: right 10px center;
-  background-size: 10px;
+  background-size: 8px 6px;
 }
 
 select:invalid {
@@ -405,4 +405,13 @@ option {
 
 .textarea-style::placeholder {
   color: $graybdbd;
+}
+
+@media all and(max-width:768px) {
+}
+
+@media all and(max-width:576px) {
+  .btn-style1.large {
+    padding: 14px 32px;
+  }
 }
