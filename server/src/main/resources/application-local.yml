@@ -21,6 +21,7 @@ spring:
     jwt-expire-in-seconds: 604800
     callback-url: "http://localhost:8089/v1/auth/callback"
     client-redirect-url: "http://localhost:3000"
+    password-salt: "fjawliefjl769qlehw5665"
     kakao:
       code-url: "https://kauth.kakao.com/oauth/authorize"
       token-url: "https://kauth.kakao.com/oauth/token"
@@ -35,4 +36,8 @@ spring:
       logout-url: "https://nid.naver.com/oauth2.0/token	"
       client-id: "UH8jNzwn6NgNeDYlv66G"
       client-secret: "UzbURw5gd9"
-
+  aws:
+    access-key: AKIASXO7J2N2MQX3PZ5N
+    secret-key: 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
+    s3-bucket: wearat
+    s3-region: ap-northeast-2
