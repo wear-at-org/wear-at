@@ -1,4 +1,8 @@
+import  { useState } from 'react';
+
 const StepHook = () => {
+  const [anser, setAnser] = useState([])
+  
   // 스타일 테스트 리스트를 프론트 개발에 맞게 변환
   const makeStyleTestList = (list) => {
     const resultArray = [];
@@ -113,11 +117,16 @@ const StepHook = () => {
     return cnt;
   };
 
+  const beforeNextChecker = (list) => {
+
+  }
   return {
     makeInsertList,
     makeStyleTestList,
     checkSelect,
     selectQueryItem,
+    anser,
+    beforeNextChecker
   };
 };
 

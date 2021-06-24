@@ -411,6 +411,14 @@ option {
 }
 
 @media all and(max-width:576px) {
+  button[class*='btn-style'], input[class*='btn-style'] {
+    height: 48px;
+  }
+  .input-style1 {
+    height: 48px;
+  }
+  
+
   .btn-style1.large {
     padding: 14px 32px;
   }

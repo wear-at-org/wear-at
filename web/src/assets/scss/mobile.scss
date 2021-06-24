@@ -116,11 +116,26 @@
       background-color: $mainColor;
     }
   }
-}
 
-.intro-list-item {
-  flex-direction: column;
-  & > div {
-    text-align: center;
+  .intro-list-item {
+    flex-direction: column;
+    & > div {
+      text-align: center;
+    }
+  }
+
+  .social-login-container {
+    ul {
+      li {
+        width: 48px;
+        height: 48px;
+      }
+    }
+  }
+
+  .signup-container .signup-btn-wrap {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
+

@@ -4,9 +4,10 @@ import NextBtn from './NextBtn';
 
 const StepListItem = ({ item, goNextStep }) => {
   const [list, setList] = useState([]);
-  const { selectQueryItem, checkSelect, makeInsertList } = StepHook();
+  const { selectQueryItem, anser, beforeNextChecker, makeInsertList } = StepHook();
 
   useEffect(() => {
+    console.log("init")
     setList(makeInsertList(item));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

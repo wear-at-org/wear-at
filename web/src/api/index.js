@@ -44,6 +44,10 @@ Axios.interceptors.response.use(
     }
 
     // 로그인 필요 시
+    if (errorStatus === 409) {
+      showToast({ type: 'error', content: '중복 된 이메일 입니다.' });
+    }    
+    // 로그인 필요 시
     // if (errorStatus === 401) {
     //   showToast({ type: 'error', content: '로그인이 필요합니다.' });
     //   window.location = '/';

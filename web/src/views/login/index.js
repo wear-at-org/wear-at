@@ -33,8 +33,8 @@ const Login = () => {
   return (
     <div className="sub layout-sub">
       <div className="col-12 col-center mw-430 login-wrap">
-        <div className="pr15 pl15 login-container">
-          <div className="mb32 tc">
+        <div className="pr25 pl25 login-container">
+          <div className="hidden show-sm-block mb32 tc">
             <h3>로그인</h3>
           </div>
 
@@ -70,7 +70,7 @@ const Login = () => {
                 />
               </div>
             </div>
-            <div className="d-flex x-eq y-center pl8 pr8 login-utils-container">
+            <div className="pl8 pr8 login-utils-container">
               <div className="chkbox-con">
                 <input
                   type="checkbox"
