@@ -16,6 +16,7 @@ import ChangePassword from 'views/changePassword';
 import StyleTipList from 'views/styleTip';
 import StyleTipDetail from 'views/styleTip/detail';
 import StyleTestIntro from 'views/styletest/intro';
+import CompleteStyleTest from 'views/styletest/CompleteStyleTest';
 
 export default function routers() {
   return (
@@ -32,6 +33,7 @@ export default function routers() {
       <Route path="/styleTip" exact component={StyleTipList} />
       <Route path="/styleTip/detail" exact component={StyleTipDetail} />
       <Route path="/styleTestIntro" exact component={StyleTestIntro} />
+      <Route path="/completeStyleTest" exact component={CompleteStyleTest} />
       <ProvideAuth path="/mypage">
         <Mypage />
       </ProvideAuth>

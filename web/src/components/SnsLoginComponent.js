@@ -7,11 +7,14 @@ import apple from 'assets/img/apple.png';
 import api from 'api';
 import { Link } from 'react-router-dom';
 
-const SnsLoginComponent = () => {
+const SnsLoginComponent = (props) => {
   const snsLogin = async (provider) => {
     const {
       data: { url },
     } = await api.get(`auth/url?provider=${provider}`);
+    if (props.setDrawerStatus) {
+      props.setDrawerStatus(false);
+    }
     window.location.href = url;
   };
 

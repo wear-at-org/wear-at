@@ -3,7 +3,7 @@ import Address from './Address';
 import useEditUserInfo from 'hooks/useEditUserInfo';
 import Lnb from 'components/layout/Lnb';
 import { checkNicknameApi } from 'utils/UserReducer';
-import dayjs from 'dayjs';
+import ImageUpload from 'components/ImageUpload';
 
 const Mypage = () => {
   const [showPost, setShowPost] = useState(false);
@@ -11,6 +11,7 @@ const Mypage = () => {
   return (
     <div className="sub layout-sub">
       <div className="col-12 col-center mw-1034">
+        <ImageUpload />
         <form className="mypage-container pr15 pl15">
           <Lnb />
           <div className="right-container">
@@ -226,7 +227,14 @@ const Mypage = () => {
 
             <div className="mb64">
               <div className="mb16">
-                <input type="text" className="input-style1" id="name" placeholder="검색버튼을 눌러 주소를 검색해주세요." readOnly value={user.address} />
+                <input
+                  type="text"
+                  className="input-style1"
+                  id="name"
+                  placeholder="검색버튼을 눌러 주소를 검색해주세요."
+                  readOnly
+                  value={user.address}
+                />
               </div>
               <div>
                 <input

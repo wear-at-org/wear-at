@@ -1,6 +1,5 @@
 import React, { useReducer } from 'react';
 import { userReducer, initData, checkEmailApi, checkNicknameApi } from 'utils/UserReducer';
-import SnsLoginComponent from 'components/SnsLoginComponent';
 import useSignup from 'hooks/useSignup';
 
 const Signup = () => {
@@ -13,7 +12,7 @@ const Signup = () => {
 
   return (
     <div className="sub layout-sub">
-      <div className="col-12 col-center mw-610">
+      <div className="col-12 col-center mw-610 pt40 pt-sm-0">
         <form className="pr15 pl15 signup-container">
           <div className="mb32 tc">
             <h3>회원가입</h3>
@@ -28,7 +27,13 @@ const Signup = () => {
               </div>
 
               <div className="mb6">
-                <input type="text" className="input-style1" id="name" onChange={(e) => dispatch({ type: 'CHANGE_NAME', name: e.target.value })} value={user.name || ''} />
+                <input
+                  type="text"
+                  className="input-style1"
+                  id="name"
+                  onChange={(e) => dispatch({ type: 'CHANGE_NAME', name: e.target.value })}
+                  value={user.name || ''}
+                />
               </div>
 
               <div className="signup-desc-text">
@@ -162,7 +167,13 @@ const Signup = () => {
 
             <div className="signup-btn-wrap mb32">
               <div className="chkbox-con mb20">
-                <input type="checkbox" id="agreeInfoAll" className="input-style-checkbox" checked={user.allCheck} onChange={(e) => dispatch({ type: 'CHANGE_CHECK_ALL', allCheck: !user.allCheck })} />
+                <input
+                  type="checkbox"
+                  id="agreeInfoAll"
+                  className="input-style-checkbox"
+                  checked={user.allCheck}
+                  onChange={(e) => dispatch({ type: 'CHANGE_CHECK_ALL', allCheck: !user.allCheck })}
+                />
                 <div className="chk-label-container">
                   <label htmlFor="agreeInfoAll" className="all">
                     전체 약관에 동의합니다.

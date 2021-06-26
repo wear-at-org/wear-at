@@ -16,7 +16,7 @@ const ImageUpload = () => {
   };
 
   return (
-    <div className="">
+    <div className="profile-wrap">
       <div className="profile-container" onMouseUpCapture={(e) => inputRef.current.click()}>
         <img src={profileImage} alt="defaultProfile" />
       </div>

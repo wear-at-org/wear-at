@@ -49,25 +49,25 @@ const checkPasswordEqual = (val, checkPassword) => {
 };
 
 export const checkEmailApi = async (email, dispatch) => {
-  const { status } = await api.get('user/check-email', { params: { email } });
-  if (status === 200) {
+  try {
+    await api.get('user/check-email', { params: { email } });
     hideToast();
     showToast({ type: 'info', content: '사용 가능한 이메일 입니다.' });
     dispatch({ type: 'CHANGE_CHECK_EMAIL', checkEmail: true });
-  } else {
+  } catch (e) {
     hideToast();
-    showToast({ type: 'error', content: '사용 불가능한 이메일 입니다.' });
+    showToast({ type: 'error', content: '중복 된 이메일 입니다.' });
     dispatch({ type: 'CHANGE_CHECK_EMAIL', checkEmail: false });
   }
 };
 
 export const checkNicknameApi = async (nickname, dispatch) => {
-  const { status } = await api.get('user/check-nickname', { params: { nickname } });
-  if (status === 200) {
+  try {
+    const { status } = await api.get('user/check-nickname', { params: { nickname } });
     hideToast();
     showToast({ type: 'info', content: '사용 가능한 닉네임 입니다.' });
     dispatch({ type: 'CHANGE_CHECK_NICKNAME', checkNickName: true });
-  } else {
+  } catch (e) {
     hideToast();
     showToast({ type: 'error', content: '사용 불가능한 닉네임 입니다.' });
     dispatch({ type: 'CHANGE_CHECK_NICKNAME', checkNickName: false });

@@ -12,7 +12,7 @@ const SearchHeader = ({ searchStatus, setSearchStatus }) => {
     <div className={`serch-header ${searchStatus ? 'active' : ''}`}>
       <div className="inner">
         <div className="mb32">
-          <input type="text" className="input-type-header" />
+          <input type="text" className="input-type-header" placeholder="검색어를 입력해주세요" />
         </div>
 
         <div className="mb17 tc">
