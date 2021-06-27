@@ -28,81 +28,79 @@ const Drawer = ({ drawerStatus, setDrawerStatus }) => {
   return (
     <div className={drawerStatus ? 'drawer-container active' : 'drawer-container'} onClick={(e) => clickDrawerEvent(e)}>
       <div className="drawer-inner">
-        <>
-          <ul className="m-profile-container">
-            <li className="d-flex x-end common-icon-size mb24" onClick={() => setDrawerStatus(false)}>
-              <img src={xBtn} alt="" />
-            </li>
-            {loginStatus !== 'login' ? (
-              <>
-                <li className="d-flex y-center">
-                  <div className="common-icon-size2 mr10">
-                    <img src={defaultProfile} alt="" />
-                  </div>
-
-                  <h5 className="small">
-                    <div
-                      onClick={() => {
-                        setDrawerStatus(false);
-                        navigate('/login');
-                      }}
-                    >
-                      로그인이 필요합니다.
-                    </div>
-                  </h5>
-                </li>
-              </>
-            ) : (
-              <li className="mypage">
-                <div
-                  className="d-flex y-center"
-                  onClick={() => {
-                    setDrawerStatus(false);
-                    navigate('/mypage');
-                  }}
-                >
-                  <div className="common-icon-size2 mr20">
-                    <img src={defaultProfile} alt="user-img" />
-                  </div>
-
-                  <div className="">
-                    <h5 className="small">{info.nickname || ''}</h5>
-                  </div>
+        <ul className="m-profile-container">
+          <li className="d-flex x-end common-icon-size mb24" onClick={() => setDrawerStatus(false)}>
+            <img src={xBtn} alt="" />
+          </li>
+          {loginStatus !== 'login' ? (
+            <>
+              <li className="d-flex y-center">
+                <div className="common-icon-size2 mr10">
+                  <img src={defaultProfile} alt="" />
                 </div>
+
+                <h5 className="small">
+                  <div
+                    onClick={() => {
+                      setDrawerStatus(false);
+                      navigate('/login');
+                    }}
+                  >
+                    로그인이 필요합니다.
+                  </div>
+                </h5>
               </li>
-            )}
-          </ul>
-          <ul className="drawer-item-container mb16">
-            <li>
+            </>
+          ) : (
+            <li className="mypage">
               <div
-                className="item"
+                className="d-flex y-center"
                 onClick={() => {
                   setDrawerStatus(false);
-                  navigate('/intro');
+                  navigate('/mroute');
                 }}
               >
-                <div> 서비스 소개</div>
+                <div className="common-icon-size2 mr20">
+                  <img src={defaultProfile} alt="user-img" />
+                </div>
+
                 <div className="">
-                  <img src={arrRight} alt="" />
+                  <h5 className="small">{info.nickname || ''}</h5>
                 </div>
               </div>
             </li>
-            <li>
-              <div
-                className="item"
-                onClick={() => {
-                  setDrawerStatus(false);
-                  navigate('/intro');
-                }}
-              >
-                <div> 스타일 팁</div>
-                <div className="">
-                  <img src={arrRight} alt="" />
-                </div>
+          )}
+        </ul>
+        <ul className="drawer-item-container mb16">
+          <li>
+            <div
+              className="item"
+              onClick={() => {
+                setDrawerStatus(false);
+                navigate('/intro');
+              }}
+            >
+              <div> 서비스 소개</div>
+              <div className="">
+                <img src={arrRight} alt="" />
               </div>
-            </li>
-          </ul>
-        </>
+            </div>
+          </li>
+          <li>
+            <div
+              className="item"
+              onClick={() => {
+                setDrawerStatus(false);
+                navigate('/intro');
+              }}
+            >
+              <div> 스타일 팁</div>
+              <div className="">
+                <img src={arrRight} alt="" />
+              </div>
+            </div>
+          </li>
+        </ul>
         <div className="pl41 pr41">
           <div
             className="btn-style3"

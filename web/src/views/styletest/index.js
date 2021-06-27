@@ -18,7 +18,6 @@ const Styletest = () => {
 
   useEffect(() => {
     api.get('subscribe/query').then(({ data }) => {
-      console.log(data);
       setStepArray(makeStyleTestList(data));
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

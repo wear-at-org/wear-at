@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -33,6 +34,13 @@ public class ExceptionAdvice {
         this.log("forbidden", e);
         var resp = this.makeErrorResponse("forbidden", e);
         return new ResponseEntity(resp, HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(value = NoHandlerFoundException.class)
+    public ResponseEntity<ErrorResponse> handleNoHandlerFoundException(Exception e) {
+        this.log("notfound", e);
+        var resp = this.makeErrorResponse("notfound", e);
+        return new ResponseEntity(resp, HttpStatus.NOT_FOUND);
     }
 
     private ErrorResponse makeErrorResponse(String status, Exception e) {

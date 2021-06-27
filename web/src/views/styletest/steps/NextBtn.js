@@ -8,6 +8,7 @@ const NextBtn = (props) => {
       className="style-next-btn"
       onClick={() => {
         if (props.isComplete) {
+        } else {
           props.goNextStep();
         }
       }}

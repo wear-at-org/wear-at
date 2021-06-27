@@ -17,7 +17,8 @@ import StyleTipList from 'views/styleTip';
 import StyleTipDetail from 'views/styleTip/detail';
 import StyleTestIntro from 'views/styletest/intro';
 import CompleteStyleTest from 'views/styletest/CompleteStyleTest';
-
+import TestUpload from 'views/test';
+import Mroute from 'views/mypage/Mroute';
 export default function routers() {
   return (
     <Switch>
@@ -34,6 +35,13 @@ export default function routers() {
       <Route path="/styleTip/detail" exact component={StyleTipDetail} />
       <Route path="/styleTestIntro" exact component={StyleTestIntro} />
       <Route path="/completeStyleTest" exact component={CompleteStyleTest} />
+      <Route path="/login" component={Login} />
+      <Route path="/signup" component={Signup} />
+      <Route path="/intro" component={Introservice} />
+      <Route path="/findIdPassword" component={FindIdPassword} />
+      <Route path="/sns-login" component={SnsLogin} />
+      <Route path="/upload-test" component={TestUpload} />
+      <Route path="/mroute" component={Mroute} />
       <ProvideAuth path="/mypage">
         <Mypage />
       </ProvideAuth>

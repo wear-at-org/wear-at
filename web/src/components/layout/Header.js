@@ -28,10 +28,10 @@ export default function Header({ setDrawerStatus, setSearchStatus, searchStatus 
               <li className={pathname.includes('intro') ? 'active' : ''}>
                 <Link to="/intro">서비스 소개</Link>
               </li>
-              {/* <li className={pathname.includes('styleTip') ? 'active' : ''}>
+              <li className={pathname.includes('styleTip') ? 'active' : ''}>
                 <Link to="/styleTip">스타일 팁</Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/intro">커뮤니티</Link>
               </li>
               <li>

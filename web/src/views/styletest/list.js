@@ -57,7 +57,7 @@ const ListItem = ({ item }) => {
 const StyleTestList = () => {
   return (
     <div className="sub layout-sub">
-      <div className="col-12 col-center mw-1034">
+      <div className="col-12 col-center mw-1280">
         <div className="mypage-container">
           <Lnb />
           <div className="right-container">

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import api from 'api';
 
 const StepHook = () => {
   const [answers, setAnswers] = useState({ answer: [], completed: false, id: 'notComplete' });
@@ -90,7 +91,7 @@ const StepHook = () => {
     return cnt;
   };
 
-  const beforeNextChecker = (list) => {
+  const beforeNextChecker = async (list) => {
     window.scrollTo(0, 0);
     let result = [...answers.answer];
     for (let i in list) {
@@ -122,6 +123,20 @@ const StepHook = () => {
       ...answers,
       answer: [...result],
     });
+
+    const ansersArr = result.map((item) => {
+      return {
+        answer: item.answer,
+        id: item.id,
+        queryId: item.queryId,
+        queryItemId: item.queryItemId,
+      };
+    });
+    // await api.post('subscribe', {
+    //   id: list[0].id,
+    //   completed: false,
+    //   answers: ansersArr,
+    // });
   };
   return {
     makeInsertList,
