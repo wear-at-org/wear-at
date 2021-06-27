@@ -13,7 +13,7 @@ const Signup = () => {
   return (
     <div className="sub layout-sub">
       <div className="col-12 col-center mw-610 pt40 pt-sm-0">
-        <form className="pr15 pl15 signup-container">
+        <form className="pr25 pl25 signup-container">
           <div className="mb32 tc">
             <h3>회원가입</h3>
           </div>

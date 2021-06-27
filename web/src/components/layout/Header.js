@@ -4,7 +4,6 @@ import Logo from 'assets/img/logo.png';
 import Search from 'assets/img/search.png';
 import menu from 'assets/img/menu.png';
 import mLogo from 'assets/img/logo-m.png';
-import Toast from 'components/Toast';
 import { useSelector } from 'react-redux';
 import { userInfoName } from '../../store';
 import Profile from './Profile';
@@ -86,8 +85,6 @@ export default function Header({ setDrawerStatus, setSearchStatus, searchStatus 
             </li>
           </ul>
         </div>
-
-        <Toast />
       </header>
     </>
   );

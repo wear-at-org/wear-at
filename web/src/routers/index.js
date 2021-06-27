@@ -11,7 +11,7 @@ import ProvideAuth from './ProvideAuth';
 import SnsLogin from 'views/login/SnsLogin';
 import Styletest from 'views/styletest/index';
 import SignupSuccess from 'views/signup/signupSuccess';
-import StyleTestList from 'views/styletest/list';
+import StyleTestList from 'views/mypage/StyleTestList';
 import ChangePassword from 'views/changePassword';
 import StyleTipList from 'views/styleTip';
 import StyleTipDetail from 'views/styleTip/detail';
@@ -19,6 +19,8 @@ import StyleTestIntro from 'views/styletest/intro';
 import CompleteStyleTest from 'views/styletest/CompleteStyleTest';
 import TestUpload from 'views/test';
 import Mroute from 'views/mypage/Mroute';
+import StyleTestDetail from 'views/mypage/StyleTestDetail';
+
 export default function routers() {
   return (
     <Switch>
@@ -30,6 +32,7 @@ export default function routers() {
       <Route path="/sns-login" exact component={SnsLogin} />
       <Route path="/styletest" exact component={Styletest} />
       <Route path="/testInfo" exact component={StyleTestList} />
+      <Route path="/testInfo/detail" exact component={StyleTestDetail} />
       <Route path="/changePassword" exact component={ChangePassword} />
       <Route path="/styleTip" exact component={StyleTipList} />
       <Route path="/styleTip/detail" exact component={StyleTipDetail} />

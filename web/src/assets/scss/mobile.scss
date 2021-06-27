@@ -45,7 +45,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 70px;
+    margin-bottom: 50px;
   }
 
   .main-visual {
@@ -184,6 +184,8 @@
   }
   // sub
   .intro-list-item {
+    padding-left: 24px;
+    padding-right: 24px;
     flex-direction: column;
     & > div {
       text-align: center;
@@ -278,8 +280,9 @@
 
   .mypage-container .right-container {
     width: 100%;
+    padding-left: 24px;
+    padding-right: 24px;
     margin-left: 0;
-    padding: 0;
   }
 
   .sns-drawe-container {
@@ -299,8 +302,8 @@
   // only mobile
   .drawer-item-container li {
     img {
-      width: 16px;
-      height: 16px;
+      width: 24px;
+      height: 24px;
     }
     .item {
       display: flex;
@@ -338,11 +341,11 @@
   }
 
   .show-web {
-    display: none;
+    display: none !important;
   }
 
   .show-mobile {
-    display: block;
+    display: block !important;
   }
 
   .left-router {
@@ -353,5 +356,36 @@
     padding-top: 24px;
     padding-left: 24px;
     padding-right: 24px;
+  }
+
+  .item-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .item-container .inner .item-content {
+    padding-right: 0;
+
+    &::after {
+      content: none;
+    }
+
+    p {
+      white-space: normal;
+      overflow: visible;
+      text-overflow: inherit;
+    }
+  }
+
+  // popup
+  .global-popup-container {
+    .inner {
+      min-width: 80%;
+    }
+  }
+
+  .style-detail-wrap .inner {
+    width: 100%;
+    min-height: 100vh;
   }
 }

@@ -99,7 +99,7 @@ const Login = () => {
                 </div>
               </div>
               <ul className="d-flex">
-                <li className="mr0 mr-sm-0">
+                <li className="mr0 mr-sm-15">
                   <Link to="/findIdPassword">아이디/비밀번호 찾기</Link>
                 </li>
                 <li className="hidden show-sm-block">

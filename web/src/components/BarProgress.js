@@ -1,8 +1,8 @@
 import React from 'react';
 
-const BarProgress = ({ percent }) => {
+const BarProgress = ({ percent, status }) => {
   return (
-    <div className="progress-conitaner">
+    <div className={`progress-conitaner ${status}`}>
       <div className="progress-back"></div>
       <div className="progress" style={{ width: `${percent}%` }}></div>
     </div>

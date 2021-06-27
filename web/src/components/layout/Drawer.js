@@ -91,7 +91,7 @@ const Drawer = ({ drawerStatus, setDrawerStatus }) => {
               className="item"
               onClick={() => {
                 setDrawerStatus(false);
-                navigate('/intro');
+                navigate('/styleTip');
               }}
             >
               <div> 스타일 팁</div>

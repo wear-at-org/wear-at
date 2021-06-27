@@ -17,6 +17,11 @@
   display: block;
 }
 
+.block-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .App {
   position: relative;
   &.style-test {
@@ -53,7 +58,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20%;
+  flex-direction: column;
+  min-height: calc(100vh - 173px);
 }
 
 // select-arrow
@@ -121,102 +127,6 @@
         display: flex;
       }
     }
-  }
-}
-
-// loading
-.loader-container {
-  width: 100%;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.loader {
-  color: #ffffff;
-  font-size: 90px;
-  text-indent: -9999em;
-  overflow: hidden;
-  width: 1em;
-  height: 1em;
-  border-radius: 50%;
-  margin: 72px auto;
-  position: relative;
-  -webkit-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-animation: load6 1.7s infinite ease, round 1.7s infinite ease;
-  animation: load6 1.7s infinite ease, round 1.7s infinite ease;
-}
-@-webkit-keyframes load6 {
-  0% {
-    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
-  }
-  5%,
-  95% {
-    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
-  }
-  10%,
-  59% {
-    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em,
-      -0.297em -0.775em 0 -0.477em;
-  }
-  20% {
-    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
-  }
-  38% {
-    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
-  }
-  100% {
-    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
-  }
-}
-@keyframes load6 {
-  0% {
-    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
-  }
-  5%,
-  95% {
-    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
-  }
-  10%,
-  59% {
-    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em,
-      -0.297em -0.775em 0 -0.477em;
-  }
-  20% {
-    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
-  }
-  38% {
-    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
-  }
-  100% {
-    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
-  }
-}
-@-webkit-keyframes round {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-@keyframes round {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
   }
 }
 
@@ -343,57 +253,6 @@ header.nav-container {
   .mobile {
     display: none;
   }
-
-  .toast-container {
-    opacity: 0;
-    display: flex;
-    align-items: center;
-    justify-self: center;
-    top: -100%;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 20;
-    position: fixed;
-    padding: 16px 24px;
-    border-radius: 6px;
-    box-shadow: 0 6px 12px 0 rgba(117, 119, 123, 0.3);
-    background-color: $errorColor;
-    box-sizing: border-box;
-    max-width: 500px;
-    min-width: 350px;
-    transition: opacity 0.3s;
-    border-radius: 28px;
-    &.active {
-      opacity: 1;
-      top: 100px;
-      transition: opacity 0.3s;
-    }
-
-    &.error {
-      background-color: $black333;
-    }
-
-    &.info {
-      background-color: $changeColor;
-    }
-
-    .content {
-      display: flex;
-      align-items: center;
-
-      img {
-        width: 24px;
-        height: 24px;
-        margin-right: 8px;
-      }
-
-      p {
-        font-size: 16px;
-        line-height: 20px;
-        color: white;
-      }
-    }
-  }
 }
 
 .serch-header {
@@ -513,67 +372,6 @@ footer {
   }
 }
 
-.radio-wrap {
-  display: flex;
-  .radio-btn-con {
-    margin-right: 60px;
-    position: relative;
-
-    .radio-style-0 {
-      position: absolute;
-      top: calc(50% - 20px);
-      left: 0;
-      cursor: pointer;
-      width: 20px;
-      height: 20px;
-      opacity: 0;
-
-      + label {
-        font-size: 14px;
-        line-height: 20px;
-        padding-left: 28px;
-        cursor: pointer;
-        display: inline-block;
-        position: relative;
-        color: $black4A4A;
-
-        &:before {
-          content: '';
-          position: absolute;
-          width: 20px;
-          height: 20px;
-          left: 0;
-          border-radius: 50%;
-          box-sizing: border-box;
-          border: 1px solid #e8e9ea;
-        }
-      }
-
-      &:checked {
-        + label:before {
-          background-color: $mainColor;
-          border-color: $mainColor;
-        }
-        + label:after {
-          content: '';
-          position: absolute;
-          background-color: white;
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          left: 6px;
-          top: 50%;
-          transform: translateY(-50%);
-        }
-      }
-    }
-  }
-}
-
-.file-input {
-  display: none;
-}
-
 .date-birth-container {
   display: flex;
   width: calc(100% + 8px);
@@ -582,9 +380,6 @@ footer {
 
 .adress-container {
   width: calc(100% - 186px);
-}
-
-.drag-upload {
 }
 
 .address-btn-container {
@@ -779,5 +574,37 @@ footer {
 }
 
 .show-mobile {
-  display: none;
+  display: none !important;
+}
+
+.paging-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .paging-item {
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 10px;
+    margin-right: 10px;
+    transition: 0.3s;
+
+    &:hover {
+      color: $optionBlue;
+    }
+    &.active {
+      color: $optionBlue;
+    }
+
+    &.arr img {
+      width: 24px;
+      height: 24px;
+    }
+
+    &.dot img {
+      width: 20px;
+      height: 20px;
+    }
+  }
 }

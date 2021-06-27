@@ -26,7 +26,6 @@ const Profile = ({ setSearchStatus, searchStatus }) => {
             setActiveMenu(false);
             if (window.innerWidth > 768) {
               setActiveAlarm(!activeAlarm);
-            } else {
             }
           }}
         >

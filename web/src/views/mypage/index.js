@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Address from './Address';
+import Address from '../../components/Address';
 import useEditUserInfo from 'hooks/useEditUserInfo';
 import Lnb from 'components/layout/Lnb';
 import { checkNicknameApi } from 'utils/UserReducer';

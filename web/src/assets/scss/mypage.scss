@@ -81,13 +81,11 @@
   }
 }
 
-.item-list {
-}
-
 .item-container {
+  cursor: pointer;
   padding-top: 30px;
-  padding-left: 40px;
-  padding-right: 33px;
+  padding-left: 48px;
+  padding-right: 48px;
   padding-bottom: 33px;
   border-radius: 4px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12);
@@ -95,19 +93,22 @@
   position: relative;
   margin-bottom: 22px;
 
+  &:last-child {
+    margin-bottom: 0;
+  }
   .inner {
     .status {
-      padding: 4px 16px;
+      padding: 8px 16px;
       border-radius: 24px;
-      border: solid 1px $optionBlue;
+      border: solid 1px $graye0e0;
+      background-color: $grayf5f8fa;
       .status-txt {
-        color: $optionBlue;
+        color: $gray8282;
         font-size: 14px;
       }
 
       &.complete {
-        background-color: black;
-        border-color: black;
+        background-color: $optionBlue;
 
         .status-txt {
           color: white;
@@ -123,7 +124,7 @@
     }
 
     .date-txt {
-      font-size: 12px;
+      font-size: 14px;
       color: $gray8282;
     }
 
@@ -143,10 +144,16 @@
         right: 0;
         content: '';
         position: absolute;
-        background-image: url('../img/right-arr-gray.svg');
-        width: 24px;
-        height: 24px;
-        transform: translateY(-50%);
+        background-image: url('../img/circle-bottom.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 32px;
+        height: 32px;
+        transform: translateY(-50%) rotate(-90deg);
+      }
+      &.complete:after {
+        transform: translateY(-50%) rotate(0deg);
+        background-image: url('../img/arr-right-blue.png');
       }
     }
   }
@@ -165,15 +172,20 @@
     border-top-right-radius: 4px;
     height: 100%;
     width: 100%;
-    background-color: $grayD9D9;
+    background-color: $grayf5f8fa;
   }
 
+  &.complete {
+    .progress {
+      background-color: $optionBlue;
+    }
+  }
   .progress {
     height: 100%;
     position: absolute;
     top: 0;
     left: 0;
-    background-color: $optionBlue;
+    background-color: $grayD8D8;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 

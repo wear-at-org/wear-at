@@ -421,6 +421,67 @@ option {
   color: $graybdbd;
 }
 
+.radio-wrap {
+  display: flex;
+  .radio-btn-con {
+    margin-right: 60px;
+    position: relative;
+
+    .radio-style-0 {
+      position: absolute;
+      top: calc(50% - 20px);
+      left: 0;
+      cursor: pointer;
+      width: 20px;
+      height: 20px;
+      opacity: 0;
+
+      + label {
+        font-size: 14px;
+        line-height: 20px;
+        padding-left: 28px;
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        color: $black4A4A;
+
+        &:before {
+          content: '';
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          left: 0;
+          border-radius: 50%;
+          box-sizing: border-box;
+          border: 1px solid #e8e9ea;
+        }
+      }
+
+      &:checked {
+        + label:before {
+          background-color: $mainColor;
+          border-color: $mainColor;
+        }
+        + label:after {
+          content: '';
+          position: absolute;
+          background-color: white;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          left: 6px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+    }
+  }
+}
+
+.file-input {
+  display: none;
+}
+
 @media all and(max-width:768px) {
 }
 
