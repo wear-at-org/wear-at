@@ -47,7 +47,6 @@
   padding-top: 110px;
   padding-bottom: 150px;
   .inner {
-    width: 5000px;
     display: flex;
     align-items: center;
   }
@@ -64,6 +63,7 @@
     position: relative;
     cursor: pointer;
     padding-left: 73px;
+    padding-right: 32px;
     padding-top: 16px;
     padding-bottom: 16px;
     margin-bottom: 24px;
@@ -79,6 +79,23 @@
       top: calc(50%);
       font-family: 'Georgia';
       transform: translateY(-50%);
+    }
+    &:before {
+      content: '';
+      background-image: url('../img/circle-bottom.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 24px;
+      position: absolute;
+      right: 24px;
+      width: 24px;
+      height: 24px;
+      transition: 0.3s;
+    }
+    &.active {
+      &:before {
+        transform: rotate(180deg);
+      }
     }
     &:last-child {
       margin-bottom: 0;

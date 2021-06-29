@@ -12,6 +12,9 @@ import { useEffect } from 'react';
 import LogoutHook from 'hooks/useLogoutHook';
 import SearchHeader from 'components/layout/SearchHeader';
 import { useLocation } from 'react-router-dom';
+import Meta from 'components/Meta';
+import Toast from 'components/Toast';
+import PopupStyle1 from 'components/PopupStyle1';
 
 function App() {
   const [logout] = LogoutHook();
@@ -27,16 +30,23 @@ function App() {
   }, [loginStatus, logout, info]);
 
   return (
-    <div className={`App ${drawerStatus && 'drawerActive'}`}>
-      <Drawer drawerStatus={drawerStatus} setDrawerStatus={setDrawerStatus} />
-      {!pathname.includes('styletest') && <Header setDrawerStatus={setDrawerStatus} searchStatus={searchStatus} setSearchStatus={setSearchStatus} />}
-      <SearchHeader searchStatus={searchStatus} setSearchStatus={setSearchStatus} />
-      <Routers />
-      {/* <Checkbot /> */}
-      {!pathname.includes('styletest') && <Footer />}
+    <>
+      <Meta />
+      <div className={`App ${drawerStatus && 'drawerActive'}`}>
+        <PopupStyle1 />
+        <Toast />
+        <Drawer drawerStatus={drawerStatus} setDrawerStatus={setDrawerStatus} />
+        {!pathname.includes('styletest') && (
+          <Header setDrawerStatus={setDrawerStatus} searchStatus={searchStatus} setSearchStatus={setSearchStatus} />
+        )}
+        <SearchHeader searchStatus={searchStatus} setSearchStatus={setSearchStatus} />
+        <Routers />
+        {/* <Checkbot /> */}
+        {!pathname.includes('styletest') && <Footer />}
 
-      <Loader />
-    </div>
+        <Loader />
+      </div>
+    </>
   );
 }
 

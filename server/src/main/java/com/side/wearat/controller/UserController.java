@@ -1,5 +1,6 @@
 package com.side.wearat.controller;
 
+import com.google.gson.JsonObject;
 import com.side.wearat.context.ContextHolder;
 import com.side.wearat.entity.User;
 import com.side.wearat.model.user.UpdateUserRequest;
@@ -60,23 +61,21 @@ public class UserController {
     }
 
     @GetMapping(path = "/check-email")
-    public ResponseEntity<Void> checkEmailRegistered(@RequestParam("email") String email) {
-        boolean exists = this.userService.existsByEmail(email);
-        if (!exists) {
-            return ResponseEntity.ok().build();
-        } else {
-            return new ResponseEntity(HttpStatus.CONFLICT);
-        }
+    public ResponseEntity<String> checkEmailRegistered(@RequestParam("email") String email) {
+        boolean duplicated = this.userService.existsByEmail(email);
+
+        JsonObject resp = new JsonObject();
+        resp.addProperty("duplicated", duplicated);
+        return new ResponseEntity(resp.toString(), HttpStatus.OK);
     }
 
     @GetMapping(path = "/check-nickname")
-    public ResponseEntity<User> checkNicknameRegistered(@RequestParam("nickname") String nickname) {
-        boolean exists = this.userService.existsByNickname(nickname);
-        if (!exists) {
-            return ResponseEntity.ok().build();
-        } else {
-            return new ResponseEntity(HttpStatus.CONFLICT);
-        }
+    public ResponseEntity<String> checkNicknameRegistered(@RequestParam("nickname") String nickname) {
+        boolean duplicated = this.userService.existsByNickname(nickname);
+
+        JsonObject resp = new JsonObject();
+        resp.addProperty("duplicated", duplicated);
+        return new ResponseEntity(resp.toString(), HttpStatus.OK);
     }
 
     @PostMapping(path = "/find-id")

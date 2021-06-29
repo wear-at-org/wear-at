@@ -20,7 +20,7 @@ const StyleTestHeader = ({ activeIndex, setActiveIndex, stepLength }) => {
                 window.scrollTo(0, 0);
                 setActiveIndex(activeIndex - 1);
               } else {
-                history.push('/styleTestIntro');
+                if (window.confirm('정말 떠나실건가요?')) history.push('/styleTestIntro');
               }
             }}
           >
@@ -29,7 +29,12 @@ const StyleTestHeader = ({ activeIndex, setActiveIndex, stepLength }) => {
           <div className="">
             <h4>스타일테스트</h4>
           </div>
-          <div className="" onClick={() => history.push('/')}>
+          <div
+            className=""
+            onClick={() => {
+              if (window.confirm('정말 떠나실건가요?')) history.push('/styleTestIntro');
+            }}
+          >
             <img src={xBtn} alt="" />
           </div>
         </div>

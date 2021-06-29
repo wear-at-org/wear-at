@@ -32,7 +32,7 @@ const Login = () => {
 
   return (
     <div className="sub layout-sub">
-      <div className="col-12 col-center mw-430 login-wrap">
+      <div className="col-12 col-center mw-430 login-wrap pt40">
         <div className="pr25 pl25 login-container">
           <div className="hidden show-sm-block mb32 tc">
             <h3>로그인</h3>
@@ -61,17 +61,30 @@ const Login = () => {
                   autoComplete="off"
                 />
               </div>
+
+              <div className="pl8 pr8 login-utils-container mobile">
+                <div className="chkbox-con">
+                  <input
+                    type="checkbox"
+                    id="saveId"
+                    className="input-style-checkbox"
+                    checked={saveId}
+                    onChange={() => {
+                      setSaveId(!saveId);
+                    }}
+                  />
+                  <div className="chk-label-container">
+                    <label htmlFor="saveId">아이디 저장</label>
+                  </div>
+                </div>
+              </div>
+
               <div className="">
-                <input
-                  type="submit"
-                  value="로그인"
-                  className="btn-style1 wid100 btn-font font-white middle"
-                  disabled={!(email && password)}
-                />
+                <input type="submit" value="로그인" className="btn-style1 wid100 btn-font font-white middle" disabled={!(email && password)} />
               </div>
             </div>
             <div className="pl8 pr8 login-utils-container">
-              <div className="chkbox-con">
+              <div className="chkbox-con show-web">
                 <input
                   type="checkbox"
                   id="saveId"
@@ -86,13 +99,19 @@ const Login = () => {
                 </div>
               </div>
               <ul className="d-flex">
-                <li className="mr10">
+                <li className="mr0 mr-sm-15">
                   <Link to="/findIdPassword">아이디/비밀번호 찾기</Link>
                 </li>
-                <li>
+                <li className="hidden show-sm-block">
                   <Link to="/signup">회원가입</Link>
                 </li>
               </ul>
+            </div>
+            {/* only 모바일 */}
+            <div className="show-mobile">
+              <Link to="/signup" className="btn-style2 middle center mb32">
+                <p className="btn-font color-black333 bold">회원가입</p>
+              </Link>
             </div>
 
             <SnsLoginComponent />

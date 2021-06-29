@@ -2,6 +2,9 @@
   padding-bottom: 96px;
 
   .login-utils-container {
+    &.mobile {
+      display: none;
+    }
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
-import Address from './Address';
+import Address from '../../components/Address';
 import useEditUserInfo from 'hooks/useEditUserInfo';
 import Lnb from 'components/layout/Lnb';
 import { checkNicknameApi } from 'utils/UserReducer';
-import dayjs from 'dayjs';
+import ImageUpload from 'components/ImageUpload';
 
 const Mypage = () => {
   const [showPost, setShowPost] = useState(false);
   const [user, dispatch] = useEditUserInfo();
   return (
     <div className="sub layout-sub">
-      <div className="col-12 col-center mw-1034">
-        <form className="mypage-container pr15 pl15">
+      <div className="col-12 col-center mw-1280">
+        <div className="show-mobile mb24 mb-sm-0">
+          <ImageUpload isMypage={true} />
+        </div>
+
+        <form className="mypage-container pr24 pl24">
           <Lnb />
           <div className="right-container">
             <h5 className="mb20 bold">기본정보</h5>
@@ -24,7 +28,15 @@ const Mypage = () => {
               </div>
 
               <div className="mb6">
-                <input readOnly={true} value={user.email || ''} type="text" className="input-style1" id="name" placeholder="scot@sample.com" />
+                <input
+                  readOnly={true}
+                  disabled={true}
+                  value={user.email || ''}
+                  type="text"
+                  className="input-style1"
+                  id="name"
+                  placeholder="scot@sample.com"
+                />
               </div>
             </div>
 
@@ -37,6 +49,8 @@ const Mypage = () => {
 
               <div className="mb6">
                 <input
+                  readOnly={true}
+                  disabled={true}
                   type="text"
                   className="input-style1"
                   id="name"
@@ -144,20 +158,6 @@ const Mypage = () => {
                   />
                   <label htmlFor="man">남자</label>
                 </div>
-                <div className="radio-btn-con">
-                  <input
-                    type="radio"
-                    id="none"
-                    className="radio-style-0"
-                    name="gender"
-                    checked={user.gender === 'none'}
-                    value={'none'}
-                    onChange={(e) => {
-                      dispatch({ type: 'CHANGE_GENDER', gender: 'none' });
-                    }}
-                  />
-                  <label htmlFor="none">선택안함</label>
-                </div>
               </div>
             </div>
 
@@ -226,7 +226,14 @@ const Mypage = () => {
 
             <div className="mb64">
               <div className="mb16">
-                <input type="text" className="input-style1" id="name" placeholder="검색버튼을 눌러 주소를 검색해주세요." readOnly value={user.address} />
+                <input
+                  type="text"
+                  className="input-style1"
+                  id="name"
+                  placeholder="검색버튼을 눌러 주소를 검색해주세요."
+                  readOnly
+                  value={user.address}
+                />
               </div>
               <div>
                 <input
@@ -243,7 +250,7 @@ const Mypage = () => {
             </div>
 
             <div className="mb36">
-              <h5 className="mb28 bold">마케팅 수신 동의에 동의합니다. </h5>
+              <h5 className="mb28 bold">웨어앳 이벤트, 프로모션 수신 </h5>
               <div className="chkbox-con mb20">
                 <input
                   type="checkbox"
@@ -257,8 +264,10 @@ const Mypage = () => {
                     })
                   }
                 />
-                <div className="chk-label-container">
-                  <label htmlFor="agreeInfoReciving">스콧에서 진행하는 이벤트, 프로모션에 관한 광고를 수신하겠습니다.</label>
+                <div class="chk-label-container">
+                  <label for="agreeInfoReciving">
+                    <span class="option-font">(선택)</span> 마케팅 목적 혜택/정보 수신 동의
+                  </label>
                 </div>
               </div>
             </div>

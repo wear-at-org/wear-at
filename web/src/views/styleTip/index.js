@@ -6,11 +6,11 @@ const StyleTipList = () => {
   return (
     <div className="sub">
       <div className="mw-1280 col-center">
-        <div className="mb40">
+        <div className="mb40 hidden show-ms">
           <h3>STYLETIP</h3>
         </div>
 
-        <div className="tip-wrap mb32">
+        <div className="tip-wrap mb32 mt20 mt-sm-0">
           <div className="tip-item-container">
             {tipStyleTag.map((item) => {
               return (
@@ -20,7 +20,7 @@ const StyleTipList = () => {
               );
             })}
           </div>
-          <div className="">
+          <div className="tip-select">
             <select name="" className="select-style2 no-border">
               <option value="">최신순</option>
               <option value="">최신순</option>

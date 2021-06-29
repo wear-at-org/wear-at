@@ -116,6 +116,16 @@ input[class*='btn-style'] {
   }
 }
 
+.btn-style3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-radius: 23px;
+  background-color: $optionBlue;
+}
+
 .input-style1 {
   width: 100%;
   height: 56px;
@@ -373,6 +383,10 @@ option {
   background-size: 27px;
   background-position: left center;
   background-repeat: no-repeat;
+
+  &::placeholder {
+    color: white;
+  }
 }
 
 .save-btn-container {
@@ -399,7 +413,7 @@ option {
   border-radius: 8px;
 }
 
-.textarea-style::-webkit-scrollbar {
+*::-webkit-scrollbar {
   display: none;
 }
 
@@ -407,17 +421,78 @@ option {
   color: $graybdbd;
 }
 
+.radio-wrap {
+  display: flex;
+  .radio-btn-con {
+    margin-right: 60px;
+    position: relative;
+
+    .radio-style-0 {
+      position: absolute;
+      top: calc(50% - 20px);
+      left: 0;
+      cursor: pointer;
+      width: 20px;
+      height: 20px;
+      opacity: 0;
+
+      + label {
+        font-size: 14px;
+        line-height: 20px;
+        padding-left: 28px;
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        color: $black4A4A;
+
+        &:before {
+          content: '';
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          left: 0;
+          border-radius: 50%;
+          box-sizing: border-box;
+          border: 1px solid #e8e9ea;
+        }
+      }
+
+      &:checked {
+        + label:before {
+          background-color: $mainColor;
+          border-color: $mainColor;
+        }
+        + label:after {
+          content: '';
+          position: absolute;
+          background-color: white;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          left: 6px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+    }
+  }
+}
+
+.file-input {
+  display: none;
+}
+
 @media all and(max-width:768px) {
 }
 
 @media all and(max-width:576px) {
-  button[class*='btn-style'], input[class*='btn-style'] {
+  button[class*='btn-style'],
+  input[class*='btn-style'] {
     height: 48px;
   }
   .input-style1 {
     height: 48px;
   }
-  
 
   .btn-style1.large {
     padding: 14px 32px;

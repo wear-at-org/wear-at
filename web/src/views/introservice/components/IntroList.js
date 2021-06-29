@@ -44,12 +44,16 @@ const IntroList = () => {
                   })}
                 </h5>
               </div>
-              <div className="btn-style2 middle center width-260">
+              <div className="btn-style2 middle center width-260 block-center show-web">
                 <p className="btn-font color-black333 bold">{item.btnTxt}</p>
               </div>
             </div>
-            <div className="">
+            <div className="mb30 mb-sm-0">
               <img src={item.img} alt="" />
+            </div>
+
+            <div className="btn-style2 middle center width-260 block-center show-mobile">
+              <p className="btn-font color-black333 bold">{item.btnTxt}</p>
             </div>
           </div>
         );

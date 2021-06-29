@@ -1,15 +1,12 @@
-import { useSelector } from 'react-redux';
 import { loginProcess } from 'store/userinfo-store';
-import store, { userInfoName } from '../store';
+import store from '../store';
 import toastHook from 'hooks/useToastHook';
 import { useHistory } from 'react-router-dom';
 
 const SnsLoginHook = () => {
   const history = useHistory();
-  const login = useSelector((state) => state[userInfoName]);
-  const { isLogin } = login;
   const { dispatch } = store;
-  const [showToast, hideToast] = toastHook({ type: '', content: '' });
+  const [showToast] = toastHook({ type: '', content: '' });
   const snsLogin = () => {
     try {
       history.push('/');
