@@ -161,7 +161,7 @@ const Mypage = () => {
               </div>
             </div>
 
-            <div className="">
+            <div>
               <h5 className="mb20 bold">추가정보</h5>
 
               <div className="mb20">

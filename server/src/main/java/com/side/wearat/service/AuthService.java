@@ -25,6 +25,8 @@ import java.util.Date;
 @Service
 public class AuthService {
 
+    private static final String PASSWORD_SALT = "fjawliefjl769qlehw5665";
+
     private final AuthConfig authConfig;
 
     private final OAuthProvider oAuthProvider;
@@ -99,7 +101,7 @@ public class AuthService {
 
     public String encryptPassword(String password) throws Exception{
         MessageDigest md = MessageDigest.getInstance("SHA-512");
-        md.update(authConfig.getPasswordSalt().getBytes(StandardCharsets.UTF_8));
+        md.update(PASSWORD_SALT.getBytes(StandardCharsets.UTF_8));
         byte[] bytes = md.digest(password.getBytes(StandardCharsets.UTF_8));
         StringBuilder sb = new StringBuilder();
         for(int i=0; i< bytes.length ;i++){

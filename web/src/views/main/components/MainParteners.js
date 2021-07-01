@@ -13,47 +13,49 @@ const MainParteners = () => {
   SwiperCore.use([Autoplay]);
 
   return (
-    // eslint-disable-next-line jsx-a11y/no-distracting-elements
-    <marquee className="partners-container" scrollamount="2" scrolldely="50">
-      <div className="inner">
-        <div className="partners-item">
-          <img src={main1} alt="" />
+    <section className="col-12">
+      {/*  eslint-disable-next-line jsx-a11y/no-distracting-elements */}
+      <marquee className="partners-container" scrollamount="2" scrolldely="50">
+        <div className="inner">
+          <div className="partners-item">
+            <img src={main1} alt="" />
+          </div>
+          <div className="partners-item">
+            <img src={main2} alt="" />
+          </div>
+          <div className="partners-item">
+            <img src={main3} alt="" />
+          </div>
+          <div className="partners-item">
+            <img src={main4} alt="" />
+          </div>
+          <div className="partners-item">
+            <img src={main1} alt="" />
+          </div>
+          <div className="partners-item">
+            <img src={main2} alt="" />
+          </div>
+          <div className="partners-item">
+            <img src={main3} alt="" />
+          </div>
+          <div className="partners-item">
+            <img src={main4} alt="" />
+          </div>
+          <div className="partners-item">
+            <img src={main1} alt="" />
+          </div>
+          <div className="partners-item">
+            <img src={main2} alt="" />
+          </div>
+          <div className="partners-item">
+            <img src={main3} alt="" />
+          </div>
+          <div className="partners-item">
+            <img src={main4} alt="" />
+          </div>
         </div>
-        <div className="partners-item">
-          <img src={main2} alt="" />
-        </div>
-        <div className="partners-item">
-          <img src={main3} alt="" />
-        </div>
-        <div className="partners-item">
-          <img src={main4} alt="" />
-        </div>
-        <div className="partners-item">
-          <img src={main1} alt="" />
-        </div>
-        <div className="partners-item">
-          <img src={main2} alt="" />
-        </div>
-        <div className="partners-item">
-          <img src={main3} alt="" />
-        </div>
-        <div className="partners-item">
-          <img src={main4} alt="" />
-        </div>
-        <div className="partners-item">
-          <img src={main1} alt="" />
-        </div>
-        <div className="partners-item">
-          <img src={main2} alt="" />
-        </div>
-        <div className="partners-item">
-          <img src={main3} alt="" />
-        </div>
-        <div className="partners-item">
-          <img src={main4} alt="" />
-        </div>
-      </div>
-    </marquee>
+      </marquee>
+    </section>
   );
 };
 

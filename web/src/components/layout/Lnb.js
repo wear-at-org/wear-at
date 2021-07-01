@@ -30,7 +30,7 @@ const Lnb = () => {
             <Link to="/changePassword">비밀번호 변경</Link>
           </li>
           <li className="logout">
-            <div className="">로그아웃</div>
+            <div>로그아웃</div>
           </li>
         </ul>
       </div>

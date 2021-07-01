@@ -79,7 +79,7 @@ const Login = () => {
                 </div>
               </div>
 
-              <div className="">
+              <div>
                 <input type="submit" value="로그인" className="btn-style1 wid100 btn-font font-white middle" disabled={!(email && password)} />
               </div>
             </div>

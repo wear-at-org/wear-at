@@ -5,7 +5,6 @@ const StepBtnWrap = ({ activeIndex, setActiveIndex }) => {
     <div className="step-btn-wrap">
       {activeIndex !== 0 ? (
         <div
-          className=""
           onClick={() => {
             window.scrollTo(0, 0);
             setActiveIndex(activeIndex - 1);
@@ -17,7 +16,6 @@ const StepBtnWrap = ({ activeIndex, setActiveIndex }) => {
         <div></div>
       )}
       <div
-        className=""
         onClick={() => {
           window.scrollTo(0, 0);
           setActiveIndex(activeIndex + 1);

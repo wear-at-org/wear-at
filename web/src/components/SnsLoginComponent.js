@@ -59,11 +59,11 @@ const SnsLoginComponent = (props) => {
           <img src={google} alt="google" />
         </li>
 
-        <li className="apple">
+        {/* <li className="apple">
           <Link to="/">
             <img src={apple} alt="apple" />
           </Link>
-        </li>
+        </li> */}
       </ul>
     </div>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 import Lnb from 'components/layout/Lnb';
 import Paginig from 'components/Paging';
 import StyleTestItem from './components/StyleTestItem';
-import { styleTestListItem } from 'assets/common/dummyData';
+import { styleTestListItem } from 'assets/common/commonData';
 import StyleDetailModal from './components/StyleDetailModal';
 
 const StyleTestList = () => {
@@ -18,7 +18,7 @@ const StyleTestList = () => {
                 <h5 className="fontweight400 hidden show-sm">
                   <span className="bold">곰돌이</span> 님의 스타일 테스트 내역입니다.
                 </h5>
-                <div className="">
+                <div>
                   <select className="select-style2" name="" id="" required onChange={(e) => console.log(e.target.value)}>
                     <option value="">최신순</option>
                     <option value="">최신순</option>
@@ -36,7 +36,7 @@ const StyleTestList = () => {
                 })}
               </div>
 
-              <div className="">
+              <div>
                 <Paginig />
               </div>
             </div>

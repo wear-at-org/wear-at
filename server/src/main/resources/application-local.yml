@@ -1,0 +1,38 @@
+spring:
+  config:
+    activate:
+      on-profile: "local"
+  datasource:
+    driver-class-name: "com.mysql.cj.jdbc.Driver"
+    url: "jdbc:mysql://localhost:3306/wearat?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false"
+    username: "wearat"
+    password: "wearat123!@#"
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        ddl-auto: create
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    generate-ddl: true
+    show-sql: true
+  auth:
+    jwt-key: "wearat_secret_j21j5j3k5i53g46g56u63g3u4h43h435ugh3"
+    jwt-expire-in-seconds: 604800
+    callback-url: "http://localhost:8089/v1/auth/callback"
+    client-redirect-url: "http://localhost:3000"
+    kakao:
+      code-url: "https://kauth.kakao.com/oauth/authorize"
+      token-url: "https://kauth.kakao.com/oauth/token"
+      user-url: "https://kapi.kakao.com/v2/user/me"
+      logout-url: "https://kapi.kakao.com/v1/user/logout"
+      client-id: "d27b18e9bec54a03247b4f05fa805d3f"
+      client-secret: "NNKvZ5HylMXGdlJ3sgQ55UwG7nXp3zLy"
+    naver:
+      code-url: "https://nid.naver.com/oauth2.0/authorize"
+      token-url: "https://nid.naver.com/oauth2.0/token"
+      user-url: "https://openapi.naver.com/v1/nid/me"
+      logout-url: "https://nid.naver.com/oauth2.0/token	"
+      client-id: "UH8jNzwn6NgNeDYlv66G"
+      client-secret: "UzbURw5gd9"
+

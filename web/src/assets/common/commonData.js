@@ -1,9 +1,38 @@
+import Intro1 from 'assets/img/intro1.png';
+import Intro2 from 'assets/img/intro2.png';
+import Intro3 from 'assets/img/intro3.png';
+
 const dummyData = {
   login: {
     id: 'test',
     password: '123',
   },
 };
+
+export const introData = [
+  {
+    key: 'list-index-1',
+    title: '나에게 딱 맞는',
+    content: `무료 스타일 테스트를 통해 나에게 어울리는 스타일을 현직 \n 전문 스타일리스트들에게 바로 추천 받아 보세요.`,
+    img: Intro1,
+    btnTxt: '스타일 테스트 하러가기',
+  },
+  {
+    key: 'list-index-2',
+    title: '다양한 스타일 PICK!',
+    content: `전문 스타일리스트가 제공하는 따근따근한 최신 패션 스타일\n 트랜드 칼럼을 매일 확인해 보세요!`,
+    img: Intro2,
+    btnTxt: '스타일팁 보러가기',
+  },
+  {
+    key: 'list-index-3',
+    title: '나에게 딱 맞는',
+    content: `무료 스타일 테스트를 통해 나에게 어울리는 스타일을 현직\n
+     전문 스타일리스트들에게 바로 추천 받아 보세요.`,
+    img: Intro3,
+    btnTxt: '스타일팁 보러가기',
+  },
+];
 
 export const tipStyleTag = [
   { label: '겨울룩', active: true },

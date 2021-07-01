@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { replyData } from 'assets/common/dummyData';
+import { replyData } from 'assets/common/commonData';
 import ReplayItem from './ReplayItem';
 
 const Replay = ({ list }) => {

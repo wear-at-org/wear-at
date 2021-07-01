@@ -1,3 +1,9 @@
+[class*='btn-style'] {
+  &:hover {
+    opacity: 0.6;
+    transition: 0.3s;
+  }
+}
 button[class*='btn-style'],
 input[class*='btn-style'] {
   height: 56px;
@@ -6,10 +12,6 @@ input[class*='btn-style'] {
   transition: 0.3s;
   display: inline-block;
   cursor: pointer;
-  &:hover {
-    opacity: 0.6;
-    transition: 0.2s;
-  }
   box-sizing: border-box;
   &:disabled {
     background-color: $grayf2f2;

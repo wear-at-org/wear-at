@@ -14,7 +14,6 @@ const StyleTestHeader = ({ activeIndex, setActiveIndex, stepLength }) => {
       <div className="inner">
         <div className="style-test-header">
           <div
-            className=""
             onClick={() => {
               if (activeIndex !== 0) {
                 window.scrollTo(0, 0);
@@ -26,11 +25,10 @@ const StyleTestHeader = ({ activeIndex, setActiveIndex, stepLength }) => {
           >
             <img src={arrLeft} alt="" />
           </div>
-          <div className="">
+          <div>
             <h4>스타일테스트</h4>
           </div>
           <div
-            className=""
             onClick={() => {
               if (window.confirm('정말 떠나실건가요?')) history.push('/styleTestIntro');
             }}

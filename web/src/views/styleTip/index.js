@@ -1,6 +1,6 @@
 import React from 'react';
 import StyleCard from 'components/CardStyle';
-import { styleTipArray, tipStyleTag } from 'assets/common/dummyData';
+import { styleTipArray, tipStyleTag } from 'assets/common/commonData';
 
 const StyleTipList = () => {
   return (

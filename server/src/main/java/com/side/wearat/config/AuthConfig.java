@@ -12,7 +12,6 @@ public class AuthConfig {
     private Integer jwtExpireInSeconds;
     private String callbackUrl;
     private String clientRedirectUrl;
-    private String passwordSalt;
     private AuthKakaoConfig kakao;
     private AuthNaverConfig naver;
 }
