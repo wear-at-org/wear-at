@@ -67,9 +67,9 @@ export default function Header({ setDrawerStatus, setSearchStatus, searchStatus 
             </li>
             <li>
               <Link to="/">
-                <h1 className="logo">
+                <h2 className="logo">
                   <img src={mLogo} alt="logo" />
-                </h1>
+                </h2>
               </Link>
             </li>
             <li>

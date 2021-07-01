@@ -8,8 +8,8 @@ const locales = {
 
 const Meta = () => {
   const lang = locales['ko'];
-  const title = 'Wear At';
-  const description = '한 손으로 전문 스타일리스트의 퍼스널 스타일링 을 받아보세요. 사용자의 취향분석을 통해 최적의 코디를 추천해드립니다.';
+  const title = '웨어앳 :: 나만의 AI스타일리스트';
+  const description = '시간들여 공들여 옷 찾지 말고, 인공지능 스타일리스트가 찾아주는 내게 꼭 맞는 옷을!';
   const image = logo;
   const type = 'website';
   const width = 400;
@@ -17,9 +17,14 @@ const Meta = () => {
 
   return (
     <Helmet titleTemplate="%s">
-      <html lang={lang} />
-      <title>{title}</title>
+      <html lang="ko_KR" />
+      <title>웨어앳 :: 나만의 AI스타일리스트</title>
+      <meta
+        name="keywords"
+        content="옷추천,스타일리스트,디자이너 브랜드,편집샵,미니멀,낫띵리튼,프라이탁,디오디너리,어나더오피스,노앙,로우로우,포터,라이플,컨버스,브렌다브랜든서울,파르티멘토,헤브어굿타임,스튜디오콘크리트,칼하트,이자벨마랑,메종키츠네,던스트,킨더살몬,아워레가시"
+      />
       <meta name="description" content={description} />
+      <meta name="author" content="wearAt" />
       {image ? <link rel="image_src" href={image} /> : null}
       {image ? <meta itemprop="image" content={image} /> : null}
 

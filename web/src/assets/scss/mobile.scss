@@ -9,14 +9,22 @@
   }
 
   header.nav-container {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 25px;
+    padding-right: 25px;
     .mobile {
       display: block;
-      padding-left: 15px;
-      padding-right: 15px;
+      padding-left: 5px;
+      padding-right: 5px;
       h1 img {
         height: auto;
       }
 
+      h2 img {
+        width: 84px;
+        height: 24px;
+      }
       .menu img {
         height: 25px;
       }
@@ -37,8 +45,13 @@
   }
 
   // main
-  .partners-container .inner {
-    min-width: 2000px;
+  .card-wrap .card-section img {
+    width: 190px;
+    height: auto;
+  }
+  .partners-container {
+    padding-top: 50px;
+    padding-bottom: 70px;
   }
 
   .visual-text {
@@ -60,8 +73,8 @@
           height: 130px;
         }
         img {
-          width: 365px;
-          height: 365px;
+          width: 320px;
+          height: auto;
         }
       }
 

@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import MainImg from 'assets/img/main.png';
 import { useHistory } from 'react-router-dom';
 
 const MainVisual = () => {
+  const [elementStart, setElementStart] = useState(false);
+  useEffect(() => {
+    setElementStart(true);
+  }, []);
   const history = useHistory();
   return (
-    <div className="col-12 main-visual">
+    <section className={`col-12 main-visual ${elementStart && 'active'}`}>
       <div className="col-12 col-center mw-1230 inner pl15 pr15">
         <div className="visual-text">
           <div className="mb16">
@@ -29,7 +33,7 @@ const MainVisual = () => {
           <img src={MainImg} alt="Main-img" />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 export default MainVisual;
