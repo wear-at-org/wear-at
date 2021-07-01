@@ -8,7 +8,7 @@ import StepListBody from './steps/StepListBody';
 import StepUploadImage from './steps/StepUploadImage';
 import StyleTestHeader from './steps/StyleTestHeader';
 import StepHook from 'hooks/useStepHook';
-import { queryList } from 'assets/common/dummyData';
+import { queryList } from 'assets/common/commonData';
 
 const Styletest = () => {
   const { makeStyleTestList } = StepHook();

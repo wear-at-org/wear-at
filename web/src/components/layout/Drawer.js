@@ -64,7 +64,7 @@ const Drawer = ({ drawerStatus, setDrawerStatus }) => {
                   <img src={defaultProfile} alt="user-img" />
                 </div>
 
-                <div className="">
+                <div>
                   <h5 className="small">{info.nickname || ''}</h5>
                 </div>
               </div>
@@ -81,7 +81,7 @@ const Drawer = ({ drawerStatus, setDrawerStatus }) => {
               }}
             >
               <div> 서비스 소개</div>
-              <div className="">
+              <div>
                 <img src={arrRight} alt="" />
               </div>
             </div>
@@ -95,7 +95,7 @@ const Drawer = ({ drawerStatus, setDrawerStatus }) => {
               }}
             >
               <div> 스타일 팁</div>
-              <div className="">
+              <div>
                 <img src={arrRight} alt="" />
               </div>
             </div>

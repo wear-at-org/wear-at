@@ -37,8 +37,10 @@
   padding-bottom: 91px;
 
   .visual-text {
+    display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
   }
 
   .inner {
@@ -137,20 +139,4 @@
 .main-bottom-container {
   padding-top: 110px;
   padding-bottom: 80px;
-}
-
-.card-animation-wrapper {
-  .card-wrap {
-    opacity: 0;
-    transition: cubic-bezier(.215,.61,.355,1) 0.9s;
-    transition-timing-function: cubic-bezier(.215,.61,.355,1);
-  }
-
-  &.active {
-    .card-wrap {
-      opacity: 1;
-      transition-timing-function: cubic-bezier(.215,.61,.355,1);
-      transition: 0.9s;
-    }
-  }
 }

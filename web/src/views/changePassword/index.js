@@ -21,7 +21,14 @@ const FindIdPassword = () => {
           <form onSubmit={findPassword}>
             <div className="mb10">
               <h5 className="mb8">새로운 비밀번호</h5>
-              <input value={paswword} type="password" placeholder="새로운 비밀번호를 입력해주세요." onChange={(e) => setPassword(e.target.value)} className="input-style1" autoComplete="on" />
+              <input
+                value={paswword}
+                type="password"
+                placeholder="새로운 비밀번호를 입력해주세요."
+                onChange={(e) => setPassword(e.target.value)}
+                className="input-style1"
+                autoComplete="on"
+              />
             </div>
 
             <div className="d-flex x-eq mb16">
@@ -50,7 +57,7 @@ const FindIdPassword = () => {
               />
             </div>
 
-            <div className="">
+            <div>
               <input type="submit" className="btn-style1 wid100 btn-font font-white middle" disabled={!checkPass()} value="비밀번호 변경 완료" />
             </div>
           </form>

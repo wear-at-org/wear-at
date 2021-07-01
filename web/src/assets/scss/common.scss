@@ -355,7 +355,7 @@ footer {
     left: -200%;
     position: relative;
     height: 100%;
-    width: calc(100% - 24px);
+    width: calc(100% - 40px);
     z-index: 101;
     background-color: white;
     transition: 0.45s;
@@ -510,10 +510,6 @@ footer {
       }
     }
   }
-}
-
-.mb120 {
-  margin-bottom: 120px;
 }
 
 .DragDrop {

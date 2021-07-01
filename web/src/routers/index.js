@@ -20,36 +20,40 @@ import CompleteStyleTest from 'views/styletest/CompleteStyleTest';
 // import TestUpload from 'views/test';
 import Mroute from 'views/mypage/Mroute';
 import StyleTestDetail from 'views/mypage/StyleTestDetail';
+import ScrollToTop from './ScrollTopRoute';
 
 export default function routers() {
   return (
-    <Switch>
-      <Route path="/" exact component={Main} />
-      <Route path="/login" exact component={Login} />
-      <Route path="/signup" exact component={Signup} />
-      <Route path="/intro" exact component={Introservice} />
-      <Route path="/findIdPasscword" exact component={FindIdPassword} />
-      <Route path="/sns-login" exact component={SnsLogin} />
-      <Route path="/styletest" exact component={Styletest} />
-      <Route path="/testInfo" exact component={StyleTestList} />
-      <Route path="/testInfo/detail" exact component={StyleTestDetail} />
-      <Route path="/changePassword" exact component={ChangePassword} />
-      <Route path="/styleTip" exact component={StyleTipList} />
-      <Route path="/styleTip/detail" exact component={StyleTipDetail} />
-      <Route path="/styleTestIntro" exact component={StyleTestIntro} />
-      <Route path="/completeStyleTest" exact component={CompleteStyleTest} />
-      <Route path="/login" component={Login} />
-      <Route path="/signup" component={Signup} />
-      <Route path="/intro" component={Introservice} />
-      <Route path="/findIdPassword" component={FindIdPassword} />
-      <Route path="/sns-login" component={SnsLogin} />
-      {/* <Route path="/upload-test" component={TestUpload} /> */}
-      <Route path="/mroute" component={Mroute} />
-      <ProvideAuth path="/mypage">
-        <Mypage />
-      </ProvideAuth>
-      <Route path="/success" component={SignupSuccess} />
-      <Route path="*" component={NotFound} />
-    </Switch>
+    <>
+      <ScrollToTop />
+      <Switch>
+        <Route path="/" exact component={Main} />
+        <Route path="/login" exact component={Login} />
+        <Route path="/signup" exact component={Signup} />
+        <Route path="/intro" exact component={Introservice} />
+        <Route path="/findIdPasscword" exact component={FindIdPassword} />
+        <Route path="/sns-login" exact component={SnsLogin} />
+        <Route path="/styletest" exact component={Styletest} />
+        <Route path="/testInfo" exact component={StyleTestList} />
+        <Route path="/testInfo/detail" exact component={StyleTestDetail} />
+        <Route path="/changePassword" exact component={ChangePassword} />
+        <Route path="/styleTip" exact component={StyleTipList} />
+        <Route path="/styleTip/detail" exact component={StyleTipDetail} />
+        <Route path="/styleTestIntro" exact component={StyleTestIntro} />
+        <Route path="/completeStyleTest" exact component={CompleteStyleTest} />
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/intro" component={Introservice} />
+        <Route path="/findIdPassword" component={FindIdPassword} />
+        <Route path="/sns-login" component={SnsLogin} />
+        {/* <Route path="/upload-test" component={TestUpload} /> */}
+        <Route path="/mroute" component={Mroute} />
+        <ProvideAuth path="/mypage">
+          <Mypage />
+        </ProvideAuth>
+        <Route path="/success" component={SignupSuccess} />
+        <Route path="*" component={NotFound} />
+      </Switch>
+    </>
   );
 }

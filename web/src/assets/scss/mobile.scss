@@ -99,6 +99,10 @@
   }
 
   // step
+  .style-intro-step-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
   .style-test-header-wrap {
     .inner {
       padding-left: 20px;
@@ -196,9 +200,20 @@
     flex-direction: column;
   }
   // sub
+
+  .intro-visual .visual-text {
+    margin-bottom: 0px;
+  }
+  .intro-visual {
+    padding-top: 60px;
+    padding-bottom: 70px;
+  }
+
   .intro-list-item {
     padding-left: 24px;
     padding-right: 24px;
+    padding-top: 64px;
+    padding-bottom: 64px;
     flex-direction: column;
     & > div {
       text-align: center;

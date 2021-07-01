@@ -16,6 +16,9 @@ const Main = () => {
 
   useEffect(() => {
     window.addEventListener('scroll', scrollEvent);
+
+    return () => window.removeEventListener('scroll', scrollEvent);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
