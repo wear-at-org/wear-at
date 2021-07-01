@@ -43,6 +43,10 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws UnAuthorizedException {
+        if ("OPTIONS".equals(request.getMethod())) {
+            return true;
+        }
+        
         String token = this.extractToken(request);
         if (!StringUtils.hasText(token)) {
             throw new UnAuthorizedException("Token is empty");
