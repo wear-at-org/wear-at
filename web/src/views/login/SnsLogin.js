@@ -1,24 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React, { useReducer, useEffect, useState } from 'react';
 import api from 'api';
-import useEditUserInfo from 'hooks/useEditUserInfo';
-import snslogin from 'hooks/useSnsLoginHook';
+import SignHook from 'hooks/useSignHook';
+import { userReducer, initData, checkEmailApi, checkNicknameApi } from 'utils/UserReducer';
 
 const SnsLogin = () => {
-  const [email, setEmail] = useState('');
-  const [nickName, setNickName] = useState('');
-  const [preSnsLogin, snsLogin] = snslogin();
+  const { signup } = SignHook();
+  const [user, dispatch] = useReducer(userReducer, initData);
+  const [snsId, setSnsId] = useState(0);
+  const signupProcess = (e) => {
+    e.preventDefault();
+    user.id = snsId;
+    const snsSignupInfo = {
+      email: user.email,
+    };
+    signup(user, true);
+  };
+
   useEffect(() => {
     const getUserData = async () => {
-      const { data } = await api.get('user');
-      console.log(data);
+      const {
+        data,
+        data: { id },
+      } = await api.get('user');
+      setSnsId(id);
+      dispatch({ type: 'CHANGE_NAME', name: data?.name || '' });
+      dispatch({ type: 'CHANGE_NICKNAME', nickname: data?.nickname || '' });
+      dispatch({ type: 'CHANGE_EMAIL', email: data?.email || '' });
+      if (data.email) {
+        dispatch({ type: 'CHANGE_CHECK_EMAIL', checkEmail: true });
+      }
+      if (data.nickname) {
+        dispatch({ type: 'CHANGE_CHECK_NICKNAME', checkNickName: true });
+      }
     };
-
     getUserData();
   }, []);
-  const [user, dispatch] = useEditUserInfo();
+
   return (
     <div className="sub layout-sub">
-      <div className="col-12 col-center ">
+      <div className="col-12 col-center pt50 pt-sm-0">
         <form className="mw-610 col-center pr15 pl15">
           <div className="right-container">
             <h3 className="mb32 bold tc">추가 정보 입력</h3>
@@ -54,19 +74,21 @@ const SnsLogin = () => {
               <div className="mb16">
                 <div className="input-container">
                   <input
+                    disabled={user.email === '' || user.checkEmail}
                     type="nickname"
                     className={'input-style1 with-button'}
                     id="nickname"
                     placeholder="wearAt"
-                    onChange={(e) => dispatch({ type: 'CHANGE_NICKNAME', nickname: e.target.value })}
+                    onChange={(e) => dispatch({ type: 'CHANGE_EMAIL', email: e.target.value })}
                     value={user.email || ''}
                   />
 
                   <button
-                    disabled={user.nickname === '' || user.checkNickName}
+                    disabled={user.email === '' || user.checkEmail}
                     className="ml16 check-btn-style1"
                     onClick={(e) => {
                       e.preventDefault();
+                      checkEmailApi(user.email, dispatch);
                     }}
                   >
                     중복확인
@@ -78,13 +100,14 @@ const SnsLogin = () => {
             <div className="mb20">
               <div className="label-container">
                 <label htmlFor="email" className="input-label-style1">
-                  닉네임 변경
+                  닉네임
                 </label>
               </div>
 
               <div className="mb16">
                 <div className="input-container">
                   <input
+                    disabled={user.nickname === '' || user.checkNickName}
                     type="nickname"
                     className={'input-style1 with-button'}
                     id="nickname"
@@ -98,6 +121,7 @@ const SnsLogin = () => {
                     className="ml16 check-btn-style1"
                     onClick={(e) => {
                       e.preventDefault();
+                      checkNicknameApi(user.nickname, dispatch);
                     }}
                   >
                     중복확인
@@ -284,7 +308,23 @@ const SnsLogin = () => {
             </div>
 
             <div className="mb15">
-              <input disabled type="button" className="width-100 btn-style1 tc white" value="회원 가입 완료" />
+              <input
+                disabled={
+                  !(
+                    user.name &&
+                    user.nickname &&
+                    !user.error.emailError.isError &&
+                    user.checkPrivacyPolicy &&
+                    user.checkServiceTerms &&
+                    user.checkEmail &&
+                    user.checkNickName
+                  )
+                }
+                type="button"
+                className="width-100 btn-style1 tc white btn-font"
+                value="회원 가입 완료"
+                onClick={(e) => signupProcess(e)}
+              />
             </div>
           </div>
         </form>

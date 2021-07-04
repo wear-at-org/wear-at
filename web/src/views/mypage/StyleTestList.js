@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Lnb from 'components/layout/Lnb';
 import Paginig from 'components/Paging';
 import StyleTestItem from './components/StyleTestItem';
@@ -6,9 +6,11 @@ import { styleTestListItem } from 'assets/common/commonData';
 import StyleDetailModal from './components/StyleDetailModal';
 
 const StyleTestList = () => {
+  const [showPop, setShowPop] = useState(false);
+  const [clickId, setClickId] = useState('');
   return (
     <>
-      {/* <StyleDetailModal /> */}
+      <StyleDetailModal showPop={showPop} setShowPop={setShowPop} clickId={clickId} />
       <div className="sub layout-sub">
         <div className="col-12 col-center mw-1280">
           <div className="mypage-container">
@@ -32,7 +34,7 @@ const StyleTestList = () => {
 
               <div className="item-list mb42">
                 {styleTestListItem.map((item, index) => {
-                  return <StyleTestItem key={'test' + index} item={item} />;
+                  return <StyleTestItem key={'test' + index} item={item} setClickId={setClickId} setShowPop={setShowPop} />;
                 })}
               </div>
 

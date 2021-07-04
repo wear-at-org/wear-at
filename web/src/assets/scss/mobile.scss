@@ -21,12 +21,19 @@
         height: auto;
       }
 
-      h2 img {
-        width: 84px;
-        height: 24px;
+      h2 {
+        line-height: 0;
+        font-size: 0;
       }
+
+      h2 img {
+        width: 75px;
+        height: auto;
+      }
+
       .menu img {
-        height: 25px;
+        width: 20px;
+        height: auto;
       }
     }
 
@@ -322,7 +329,7 @@
   }
 
   .serch-header.active {
-    top: 82px;
+    top: 55px;
     padding-left: 24px;
     padding-right: 24px;
   }

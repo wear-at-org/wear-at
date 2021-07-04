@@ -78,9 +78,9 @@ export default function Header({ setDrawerStatus, setSearchStatus, searchStatus 
                   setSearchStatus(!searchStatus);
                 }}
               >
-                <h1 className="logo">
-                  <img src={Search} alt="logo" />
-                </h1>
+                <div className="search">
+                  <img src={Search} alt="search" />
+                </div>
               </div>
             </li>
           </ul>

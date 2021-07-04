@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import search from 'assets/img/search.png';
 import alam from 'assets/img/alam.png';
 import { Link } from 'react-router-dom';
-import LogoutHook from 'hooks/useLogoutHook';
 import defaultProfile from 'assets/img/default-user.png';
+import SignHook from 'hooks/useSignHook';
 
 const Profile = ({ setSearchStatus, searchStatus }) => {
   const [activeMenu, setActiveMenu] = useState(false);
   const [activeAlarm, setActiveAlarm] = useState(false);
-  const [logout] = LogoutHook();
+  const { logout } = SignHook();
   return (
     <ul className={'profile-container'}>
       <li className="mypage">

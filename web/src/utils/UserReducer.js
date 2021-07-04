@@ -34,6 +34,9 @@ export const initData = {
       isError: false,
     },
   },
+  birthdayYear: '',
+  birthdayMonth: '',
+  birthdayDay: '',
 };
 
 const checkEmail = (val) => {
@@ -50,10 +53,18 @@ const checkPasswordEqual = (val, checkPassword) => {
 
 export const checkEmailApi = async (email, dispatch) => {
   try {
-    await api.get('user/check-email', { params: { email } });
-    hideToast();
-    showToast({ type: 'info', content: '사용 가능한 이메일 입니다.' });
-    dispatch({ type: 'CHANGE_CHECK_EMAIL', checkEmail: true });
+    const {
+      data: { duplicated },
+    } = await api.get('user/check-email', { params: { email } });
+    if (duplicated) {
+      hideToast();
+      showToast({ type: 'error', content: '중복 된 이메일 입니다.' });
+      dispatch({ type: 'CHANGE_CHECK_EMAIL', checkEmail: false });
+    } else {
+      hideToast();
+      showToast({ type: 'info', content: '사용 가능한 이메일 입니다.' });
+      dispatch({ type: 'CHANGE_CHECK_EMAIL', checkEmail: true });
+    }
   } catch (e) {
     hideToast();
     showToast({ type: 'error', content: '중복 된 이메일 입니다.' });
@@ -63,10 +74,18 @@ export const checkEmailApi = async (email, dispatch) => {
 
 export const checkNicknameApi = async (nickname, dispatch) => {
   try {
-    const { status } = await api.get('user/check-nickname', { params: { nickname } });
-    hideToast();
-    showToast({ type: 'info', content: '사용 가능한 닉네임 입니다.' });
-    dispatch({ type: 'CHANGE_CHECK_NICKNAME', checkNickName: true });
+    const {
+      data: { duplicated },
+    } = await api.get('user/check-nickname', { params: { nickname } });
+    if (duplicated) {
+      hideToast();
+      showToast({ type: 'error', content: '사용 불가능한 닉네임 입니다.' });
+      dispatch({ type: 'CHANGE_CHECK_NICKNAME', checkNickName: false });
+    } else {
+      hideToast();
+      showToast({ type: 'info', content: '사용 가능한 닉네임 입니다.' });
+      dispatch({ type: 'CHANGE_CHECK_NICKNAME', checkNickName: true });
+    }
   } catch (e) {
     hideToast();
     showToast({ type: 'error', content: '사용 불가능한 닉네임 입니다.' });
@@ -256,6 +275,21 @@ export const userReducer = (state, action) => {
       return {
         ...state,
         gender: action.gender,
+      };
+    case 'CHANHE_YEAR':
+      return {
+        ...state,
+        birthdayYear: action.year,
+      };
+    case 'CHANHE_MONTH':
+      return {
+        ...state,
+        birthdayMonth: action.month,
+      };
+    case 'CHANHE_DAY':
+      return {
+        ...state,
+        birthdayDAY: action.day,
       };
     default:
       return state;
