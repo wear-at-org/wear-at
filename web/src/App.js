@@ -9,15 +9,15 @@ import Drawer from 'components/layout/Drawer';
 import { useSelector } from 'react-redux';
 import { userInfoName } from './store';
 import { useEffect } from 'react';
-import LogoutHook from 'hooks/useLogoutHook';
 import SearchHeader from 'components/layout/SearchHeader';
 import { useLocation } from 'react-router-dom';
 import Meta from 'components/Meta';
 import Toast from 'components/Toast';
 import PopupStyle1 from 'components/PopupStyle1';
+import SignHook from 'hooks/useSignHook';
 
 function App() {
-  const [logout] = LogoutHook();
+  const { logout } = SignHook();
   const { loginStatus, info } = useSelector((state) => state[userInfoName]);
   const [drawerStatus, setDrawerStatus] = useState(false);
   const [searchStatus, setSearchStatus] = useState(false);

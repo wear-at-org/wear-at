@@ -6,10 +6,10 @@ import defaultProfile from 'assets/img/default-user.png';
 import SnsLoginComponent from 'components/SnsLoginComponent';
 import arrRight from 'assets/img/arr-right-b.png';
 import { useHistory } from 'react-router-dom';
-import LogoutHook from 'hooks/useLogoutHook';
+import SignHook from 'hooks/useSignHook';
 
 const Drawer = ({ drawerStatus, setDrawerStatus }) => {
-  const [logout] = LogoutHook();
+  const { logout } = SignHook();
   let history = useHistory();
   const { loginStatus, info } = useSelector((state) => state[userInfoName]);
   const clickDrawerEvent = useCallback(

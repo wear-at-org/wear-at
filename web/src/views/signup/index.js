@@ -1,9 +1,9 @@
 import React, { useReducer } from 'react';
 import { userReducer, initData, checkEmailApi, checkNicknameApi } from 'utils/UserReducer';
-import useSignup from 'hooks/useSignup';
+import SignHook from 'hooks/useSignHook';
 
 const Signup = () => {
-  const [signup] = useSignup();
+  const { signup } = SignHook();
   const [user, dispatch] = useReducer(userReducer, initData);
   const signupProcess = (e) => {
     e.preventDefault();
@@ -258,7 +258,9 @@ const Signup = () => {
                     !user.error.passwordError.isError &&
                     !user.error.passwordConfirmError.isError &&
                     user.checkPrivacyPolicy &&
-                    user.checkServiceTerms
+                    user.checkServiceTerms &&
+                    user.checkEmail &&
+                    user.checkNickName
                   )
                 }
               />

@@ -2,9 +2,19 @@ import React from 'react';
 import buyIcon from 'assets/img/icon-shopping.png';
 import DetailItem from './DetailItem';
 
-const StyleDetailModal = () => {
+const StyleDetailModal = ({ showPop, setShowPop }) => {
+  if (!showPop) {
+    return <></>;
+  }
   return (
-    <div className="style-detail-wrap">
+    <div
+      className="style-detail-wrap"
+      onClick={(e) => {
+        if (e.target.classList.contains('style-detail-wrap')) {
+          setShowPop(false);
+        }
+      }}
+    >
       <div className="inner">
         <div className="total mb64">
           <div className="buy-btn">

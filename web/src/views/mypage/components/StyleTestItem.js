@@ -1,9 +1,15 @@
 import BarProgress from 'components/BarProgress';
 import React from 'react';
 
-const StyleTestItem = ({ item }) => {
+const StyleTestItem = ({ item, setShowPop, setClickId }) => {
   return (
-    <div className="item-container">
+    <div
+      className="item-container"
+      onClick={() => {
+        setClickId(item.id);
+        setShowPop(true);
+      }}
+    >
       <BarProgress percent={item.percent} status={item.status} />
       <div className="inner">
         <div className="d-flex x-eq mb28">

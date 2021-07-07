@@ -1,15 +1,14 @@
 import { useSelector } from 'react-redux';
-import { loginProcess } from 'store/userinfo-store';
+import { loginProcess, logoutProcess } from 'store/userinfo-store';
 import api from 'api';
 import store, { userInfoName } from '../store';
 import toastHook from 'hooks/useToastHook';
 import { useHistory } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
-const LoginHook = () => {
+const SignHook = () => {
   const history = useHistory();
   const userInfo = useSelector((state) => state[userInfoName]);
-  const { isLogin } = userInfo;
   const { dispatch } = store;
   const [showToast, hideToast] = toastHook({ type: '', content: '' });
 
@@ -61,7 +60,50 @@ const LoginHook = () => {
       }
     }
   };
-  return [isLogin, login];
+
+  const signup = async (userInfo, isSns = false) => {
+    try {
+      if (isSns) {
+        await api.post('auth/sns-sign-up', {
+          ...userInfo,
+        });
+
+        history.push('/success');
+      } else {
+        await api.post('auth/sign-up', {
+          ...userInfo,
+        });
+
+        history.push('/success');
+      }
+    } catch (e) {
+      if (e.response && e.response.data) {
+        showToast({ type: 'error', content: e.response.data.message });
+      } else {
+        showToast({ type: 'error', content: e.message });
+      }
+    }
+  };
+
+  const logout = async () => {
+    try {
+      const { info } = userInfo;
+      await api.get(`auth/logout`, {
+        provider: info.provider,
+      });
+
+      dispatch(logoutProcess());
+      history.push('/');
+    } catch (e) {
+      if (e.response && e.response.data) {
+        showToast({ type: 'error', content: e.response.data.message });
+      } else {
+        showToast({ type: 'error', content: e.message });
+      }
+    }
+  };
+
+  return { signup, login, logout };
 };
 
-export default LoginHook;
+export default SignHook;

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import LoginHook from 'hooks/useLoginHook';
 import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import SnsLoginComponent from 'components/SnsLoginComponent';
+import SignHook from 'hooks/useSignHook';
 
 const Login = () => {
   const [saveId, setSaveId] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [_, login] = LoginHook();
+  const { login } = SignHook();
 
   const loginProcess = async (e) => {
     e.preventDefault();
