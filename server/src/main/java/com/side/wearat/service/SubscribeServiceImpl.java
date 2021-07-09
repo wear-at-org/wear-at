@@ -7,7 +7,10 @@ import com.side.wearat.entity.SubscribeAnswer;
 import com.side.wearat.model.subscribe.SubscribeRequest;
 import com.side.wearat.repository.QueryRepository;
 import com.side.wearat.repository.SubscribeRepository;
+import com.side.wearat.repository.SubscribeRepositorySupport;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,12 +24,14 @@ public class SubscribeServiceImpl implements SubscribeService{
 
     private QueryRepository queryRepository;
     private SubscribeRepository subscribeRepository;
+    private SubscribeRepositorySupport subscribeRepositorySupport;
 
 
     @Autowired
-    public SubscribeServiceImpl(QueryRepository queryRepository, SubscribeRepository subscribeRepository) {
+    public SubscribeServiceImpl(QueryRepository queryRepository, SubscribeRepository subscribeRepository, SubscribeRepositorySupport subscribeRepositorySupport) {
         this.queryRepository = queryRepository;
         this.subscribeRepository = subscribeRepository;
+        this.subscribeRepositorySupport = subscribeRepositorySupport;
     }
 
     @Override
@@ -36,35 +41,55 @@ public class SubscribeServiceImpl implements SubscribeService{
 
     @Override
     public Optional<Subscribe> getSubscribe(Long id) {
+//        Long userId = ContextHolder.getUserID();
+//        return subscribeRepository.findByIdAndUserId(id, userId);
+        // user일 경우 아이디체크, 스타일리스트는 모두 접근 가능
         return subscribeRepository.findById(id);
     }
 
     @Override
-    public List<Subscribe> getTempSubscribes() {
+    public Page<Subscribe> listSubscribes(Pageable pageable) {
         Long userId = ContextHolder.getUserID();
-        return subscribeRepository.findAllByUserIdAndCompleted(userId, false);
+        return subscribeRepository.findAllByUserId(userId, pageable);
+    }
+
+    @Override
+    public Page<Subscribe> listByStylist(Pageable pageable, Boolean recommended) {
+        Long userId = ContextHolder.getUserID();
+        return subscribeRepositorySupport.findByStylist(userId, recommended, pageable);
+    }
+
+    @Override
+    public Page<Subscribe> listNotRecommended(Pageable pageable) {
+        return subscribeRepository.findAllByRecommendedFalseAndCompletedTrue(pageable);
     }
 
     @Override
     @Transactional
-    public Subscribe subscribe(SubscribeRequest req) {
+    public Subscribe subscribe(SubscribeRequest req) throws Exception {
+        Boolean recommended = req.getRecommended();
+        if (recommended != null && recommended) {
+            throw new Exception("이미 추천 작업이 진행중입니다.");
+        }
+
         Long userId = ContextHolder.getUserID();
 
-        List<SubscribeAnswer> sas = req.getAnswers().stream().map(sar -> {
-            SubscribeAnswer sa = SubscribeAnswer.builder()
+        if (req.getId() != null) {
+            subscribeRepositorySupport.deleteSubscribeAnswer(req.getId());
+        }
+
+        List<SubscribeAnswer> sas = req.getAnswers().stream().map(sar ->
+            SubscribeAnswer.builder()
                     .queryId(sar.getQueryId())
                     .queryItemId(sar.getQueryItemId())
                     .answer(sar.getAnswer())
-                    .build();
-            if (sar.getId() != null) {
-                sa.setId(sar.getId());
-            }
-            return sa;
-        }).collect(Collectors.toList());
+                    .build()
+        ).collect(Collectors.toList());
 
         Subscribe s = Subscribe.builder()
                 .userId(userId)
                 .completed(req.getCompleted())
+                .recommended(false)
                 .subscribeAnswers(sas)
                 .subscribeAt(LocalDateTime.now())
                 .createAt(LocalDateTime.now())

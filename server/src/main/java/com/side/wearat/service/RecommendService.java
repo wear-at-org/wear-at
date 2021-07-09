@@ -9,6 +9,6 @@ import java.util.Optional;
 public interface RecommendService {
     Optional<Recommend> getRecommend(Long id);
     List<Recommend> listRecommendBySubscribe(Long subscribeId);
-    Recommend recommend(RecommendRequest req);
+    Recommend recommend(RecommendRequest req) throws Exception;
     void deleteRecommend(Long id);
 }
