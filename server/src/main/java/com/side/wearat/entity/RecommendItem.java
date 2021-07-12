@@ -1,5 +1,6 @@
 package com.side.wearat.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +17,10 @@ public class RecommendItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @JsonIgnore
+    @Column(name="recommend_id", insertable = false, updatable = false)
+    private Long recommendId;
 
     @Column(length=500)
     private String title;

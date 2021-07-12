@@ -1,5 +1,6 @@
 package com.side.wearat.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +17,10 @@ public class SubscribeAnswer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @JsonIgnore
+    @Column(name="subscribe_id", insertable = false, updatable = false)
+    private Long subscribeId;
 
     @Column(nullable = false)
     private Long queryId;

@@ -36,7 +36,7 @@ public class RecommendController {
     }
 
     @PostMapping(path = "")
-    public Recommend recommend(@RequestBody RecommendRequest req) {
+    public Recommend recommend(@RequestBody RecommendRequest req) throws Exception {
         return this.recommendService.recommend(req);
     }
 

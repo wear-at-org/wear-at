@@ -92,7 +92,7 @@ const StepHook = () => {
   };
 
   const beforeNextChecker = async (list) => {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0); 
     let result = [...answers.answer];
     for (let i in list) {
       for (let j in list[i].queryCategories) {
@@ -119,6 +119,7 @@ const StepHook = () => {
         }
       }
     }
+
     setAnswers({
       ...answers,
       answer: [...result],
