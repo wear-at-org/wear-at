@@ -23,6 +23,8 @@ public class Subscribe {
 
     private Boolean completed;
 
+    private Boolean recommendStarted;
+
     private Boolean recommended;
 
     @OneToMany(cascade = CascadeType.ALL)

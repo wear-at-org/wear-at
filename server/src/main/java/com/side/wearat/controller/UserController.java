@@ -56,6 +56,8 @@ public class UserController {
                 .nickname(u.getNickname())
                 .gender(u.getGender())
                 .birthday(u.getBirthday())
+                .birthmonth(u.getBirthmonth())
+                .birthyear(u.getBirthyear())
                 .build();
         return ResponseEntity.ok().body(result);
     }

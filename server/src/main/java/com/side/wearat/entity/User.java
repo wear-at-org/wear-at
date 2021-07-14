@@ -36,8 +36,14 @@ public class User {
     @Column(length=10)
     private String gender;
 
-    @Column(length=20)
+    @Column(length=2)
     private String birthday;
+
+    @Column(length=2)
+    private String birthmonth;
+
+    @Column(length=4)
+    private String birthyear;
 
     @Column(length=10)
     private String zipCode;

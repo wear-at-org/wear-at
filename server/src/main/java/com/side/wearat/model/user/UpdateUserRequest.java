@@ -20,6 +20,10 @@ public class UpdateUserRequest {
 
     private String birthday;
 
+    private String birthmonth;
+
+    private String birthyear;
+
     private String zipCode;
 
     private String address;

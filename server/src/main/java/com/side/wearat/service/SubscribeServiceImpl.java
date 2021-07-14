@@ -90,6 +90,7 @@ public class SubscribeServiceImpl implements SubscribeService{
                 .userId(userId)
                 .completed(req.getCompleted())
                 .recommended(false)
+                .recommendStarted(false)
                 .subscribeAnswers(sas)
                 .subscribeAt(LocalDateTime.now())
                 .createAt(LocalDateTime.now())

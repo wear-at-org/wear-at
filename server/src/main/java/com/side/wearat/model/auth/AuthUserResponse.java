@@ -26,6 +26,12 @@ public class AuthUserResponse {
     @JsonProperty("birthday")
     private String birthday;
 
+    @JsonProperty("birthmonth")
+    private String birthmonth;
+
+    @JsonProperty("birthyear")
+    private String birthyear;
+
     @JsonProperty("gender")
     private String gender;
 

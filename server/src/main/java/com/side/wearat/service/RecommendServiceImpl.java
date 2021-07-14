@@ -58,12 +58,20 @@ public class RecommendServiceImpl implements RecommendService {
             Optional<Subscribe> s = subscribeRepository.findById(req.getSubscribeId());
             if (s.isEmpty()) {
                 throw new Exception("스타일테스트 내역이 존재하지 않습니다.");
-            } else if (s.get().getRecommended()) {
+            } else if (s.get().getRecommendStarted()) {
                 throw new Exception("스타일테스트 추천이 이미 진행중입니다.");
             }
-            subscribeRepositorySupport.updateSubscribeRecommended(req.getSubscribeId());
-        } else if (req.getId() != null) {
+            subscribeRepositorySupport.updateSubscribeRecommendStarted(req.getSubscribeId());
+        } else {
             recommendRepositorySupport.deleteRecommendItem(req.getId());
+        }
+
+        Boolean completed = req.getCompleted();
+        if (completed == null) {
+            completed = false;
+        }
+        if (completed) {
+            subscribeRepositorySupport.updateSubscribeRecommended(req.getSubscribeId());
         }
 
         List<RecommendItem> items = new ArrayList<>();
@@ -78,12 +86,6 @@ public class RecommendServiceImpl implements RecommendService {
                             .build()
             ).collect(Collectors.toList());
         }
-
-        Boolean completed = req.getCompleted();
-        if (completed == null) {
-            completed = false;
-        }
-
         Recommend r = Recommend.builder()
                 .stylistId(userId)
                 .subscribeId(req.getSubscribeId())
