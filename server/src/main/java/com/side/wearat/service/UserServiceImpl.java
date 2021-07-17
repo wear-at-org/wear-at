@@ -64,6 +64,8 @@ public class UserServiceImpl implements UserService {
                 .password(req.getPassword())
                 .gender(req.getGender())
                 .birthday(req.getBirthday())
+                .birthmonth(req.getBirthmonth())
+                .birthyear(req.getBirthyear())
                 .zipCode(req.getZipCode())
                 .address(req.getAddress())
                 .detailAddress(req.getDetailAddress())
@@ -96,6 +98,12 @@ public class UserServiceImpl implements UserService {
             }
             if (StringUtils.hasText(req.getBirthday())) {
                 user.setBirthday(req.getBirthday());
+            }
+            if (StringUtils.hasText(req.getBirthmonth())) {
+                user.setBirthmonth(req.getBirthmonth());
+            }
+            if (StringUtils.hasText(req.getBirthyear())) {
+                user.setBirthyear(req.getBirthyear());
             }
             if (StringUtils.hasText(req.getZipCode())) {
                 user.setZipCode(req.getZipCode());

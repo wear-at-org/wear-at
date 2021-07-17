@@ -43,6 +43,13 @@ public class SubscribeRepositorySupport extends QuerydslRepositorySupport {
 
     }
 
+    public void updateSubscribeRecommendStarted(Long id) {
+        JPAUpdateClause update = new JPAUpdateClause(getEntityManager(), subscribe);
+        update.set(subscribe.recommendStarted, true)
+                .where(subscribe.id.eq(id))
+                .execute();
+    }
+
     public void updateSubscribeRecommended(Long id) {
         JPAUpdateClause update = new JPAUpdateClause(getEntityManager(), subscribe);
         update.set(subscribe.recommended, true)
