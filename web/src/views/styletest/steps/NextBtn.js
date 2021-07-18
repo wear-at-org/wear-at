@@ -1,15 +1,11 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 
 const NextBtn = (props) => {
-  const history = useHistory();
   return (
     <div
       className="style-next-btn"
       onClick={() => {
-        if (props.isComplete) {
-          history.push('/completeStyleTest');
-        } else {
+        if (!props.isComplete) {
           props.goNextStep();
         }
       }}

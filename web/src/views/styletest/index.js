@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import api from 'api';
-import { useHistory } from 'react-router-dom';
 import StepListItem from './steps/StepListItem';
 import StepListImage from './steps/StepListImage';
 import StepTwoDepthItem from './steps/StepTwoDepthItem';
@@ -8,7 +7,6 @@ import StepListBody from './steps/StepListBody';
 import StepUploadImage from './steps/StepUploadImage';
 import StyleTestHeader from './steps/StyleTestHeader';
 import StepHook from 'hooks/useStepHook';
-import { queryList } from 'assets/common/commonData';
 
 const Styletest = () => {
   const { makeStyleTestList } = StepHook();
@@ -17,12 +15,13 @@ const Styletest = () => {
   const hooks = StepHook();
 
   useEffect(() => {
-    // api.get('subscribe/query').then(({ data }) => {
-    //   console.log(data);
-    //   setStepArray(makeStyleTestList(data));
-    // });
+    const makeList = async () => {
+      api.get('subscribe/query').then(async ({ data }) => {
+        setStepArray(await makeStyleTestList(data));
+      });
+    };
 
-    setStepArray(makeStyleTestList(queryList));
+    makeList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

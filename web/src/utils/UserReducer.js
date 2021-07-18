@@ -34,9 +34,9 @@ export const initData = {
       isError: false,
     },
   },
-  birthdayYear: '',
-  birthdayMonth: '',
-  birthdayDay: '',
+  birthyear: '',
+  birthmonth: '',
+  birthday: '',
 };
 
 const checkEmail = (val) => {
@@ -279,17 +279,17 @@ export const userReducer = (state, action) => {
     case 'CHANHE_YEAR':
       return {
         ...state,
-        birthdayYear: action.year,
+        birthyear: action.year,
       };
     case 'CHANHE_MONTH':
       return {
         ...state,
-        birthdayMonth: action.month,
+        birthmonth: action.month,
       };
     case 'CHANHE_DAY':
       return {
         ...state,
-        birthdayDAY: action.day,
+        birthday: action.day,
       };
     default:
       return state;

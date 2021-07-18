@@ -551,12 +551,10 @@ footer {
     flex-wrap: wrap;
 
     & > div {
-      width: 80px;
-      height: 80px;
       padding: 8px;
       margin-bottom: 10px;
       display: flex;
-      justify-content: space-between;
+      align-items: center;
     }
 
     &-Filter {

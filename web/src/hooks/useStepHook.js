@@ -1,11 +1,29 @@
 import { useState, useEffect } from 'react';
 import api from 'api';
+import { useHistory } from 'react-router-dom';
 
 const StepHook = () => {
+  const history = useHistory();
+  const [id, setId] = useState('');
   const [answers, setAnswers] = useState({ answer: [], completed: false, id: 'notComplete' });
 
+  const uploadFile = async (files) => {
+    const formData = new FormData();
+    Array.from(files).forEach((f, idx) => formData.append(`files`, f));
+
+    const result = await api.post('storage/upload', formData, {
+      headers: {
+        'Content-Type': `multipart/form-data`,
+      },
+    });
+
+    return result;
+  };
+
   // 스타일 테스트 리스트를 프론트 개발에 맞게 변환
-  const makeStyleTestList = (list) => {
+  const makeStyleTestList = async (list) => {
+    const res = await api.post('subscribe');
+    setId(res.subscribeAnswers.id);
     const resultArray = [];
     list.forEach((item) => {
       const { uiType } = item;
@@ -17,6 +35,7 @@ const StepHook = () => {
       }
     });
 
+    console.log(resultArray);
     return resultArray;
   };
 
@@ -91,8 +110,8 @@ const StepHook = () => {
     return cnt;
   };
 
-  const beforeNextChecker = async (list) => {
-    window.scrollTo(0, 0); 
+  const beforeNextChecker = async (list, isLast = false) => {
+    window.scrollTo(0, 0);
     let result = [...answers.answer];
     for (let i in list) {
       for (let j in list[i].queryCategories) {
@@ -128,17 +147,22 @@ const StepHook = () => {
     const ansersArr = result.map((item) => {
       return {
         answer: item.answer,
-        id: item.id,
+        id: id,
         queryId: item.queryId,
         queryItemId: item.queryItemId,
       };
     });
-    // await api.post('subscribe', {
-    //   id: list[0].id,
-    //   completed: false,
-    //   answers: ansersArr,
-    // });
+    await api.post('subscribe', {
+      id,
+      completed: isLast ? true : false,
+      answers: ansersArr,
+    });
+
+    if (isLast) {
+      history.push('/completeStyleTest');
+    }
   };
+
   return {
     makeInsertList,
     makeStyleTestList,
@@ -147,6 +171,7 @@ const StepHook = () => {
     beforeNextChecker,
     answers,
     setAnswers,
+    uploadFile,
   };
 };
 

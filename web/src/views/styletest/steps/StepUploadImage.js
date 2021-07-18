@@ -2,10 +2,15 @@ import DragImagUpload from 'components/DragImagUpload';
 import React, { useState, useEffect } from 'react';
 import NextBtn from './NextBtn';
 
-const StepUploadImage = ({ item, goNextStep, hooks }) => {
+const StepUploadImage = ({ item, hooks }) => {
+  const [files, setFiles] = useState([]);
   const [status, setStatus] = useState('init');
-  const { makeInsertList, selectQueryItem, beforeNextChecker } = hooks;
+  const { makeInsertList, uploadFile, beforeNextChecker } = hooks;
   const [list, setList] = useState([]);
+
+  const makeList = async () => {
+    await uploadFile(files);
+  };
 
   useEffect(() => {
     setStatus('start');
@@ -28,14 +33,20 @@ const StepUploadImage = ({ item, goNextStep, hooks }) => {
               </div>
 
               <div className="pl24 pr24 ">
-                <DragImagUpload />
+                <DragImagUpload files={files} setFiles={setFiles} />
               </div>
             </div>
           );
         })}
       </div>
 
-      <NextBtn isComplete={true} />
+      <NextBtn
+        isComplete={true}
+        goNextStep={async () => {
+          await makeList();
+          await beforeNextChecker(list, true);
+        }}
+      />
     </div>
   );
 };

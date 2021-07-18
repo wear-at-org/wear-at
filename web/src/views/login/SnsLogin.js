@@ -2,6 +2,8 @@ import React, { useReducer, useEffect, useState } from 'react';
 import api from 'api';
 import SignHook from 'hooks/useSignHook';
 import { userReducer, initData, checkEmailApi, checkNicknameApi } from 'utils/UserReducer';
+import { loginProcess } from 'store/userinfo-store';
+import store from '../../store';
 
 const SnsLogin = () => {
   const { signup } = SignHook();
@@ -10,9 +12,6 @@ const SnsLogin = () => {
   const signupProcess = (e) => {
     e.preventDefault();
     user.id = snsId;
-    const snsSignupInfo = {
-      email: user.email,
-    };
     signup(user, true);
   };
 
@@ -22,15 +21,22 @@ const SnsLogin = () => {
         data,
         data: { id },
       } = await api.get('user');
+      store.dispatch(
+        loginProcess({
+          info: {
+            id: id,
+            nickname: '',
+            email: data?.email || '',
+            prividerType: data.provider,
+          },
+          loginStatus: 'login',
+        }),
+      );
       setSnsId(id);
       dispatch({ type: 'CHANGE_NAME', name: data?.name || '' });
-      dispatch({ type: 'CHANGE_NICKNAME', nickname: data?.nickname || '' });
       dispatch({ type: 'CHANGE_EMAIL', email: data?.email || '' });
       if (data.email) {
         dispatch({ type: 'CHANGE_CHECK_EMAIL', checkEmail: true });
-      }
-      if (data.nickname) {
-        dispatch({ type: 'CHANGE_CHECK_NICKNAME', checkNickName: true });
       }
     };
     getUserData();
@@ -75,9 +81,9 @@ const SnsLogin = () => {
                 <div className="input-container">
                   <input
                     disabled={user.email === '' || user.checkEmail}
-                    type="nickname"
+                    type="email"
                     className={'input-style1 with-button'}
-                    id="nickname"
+                    id="email"
                     placeholder="wearAt"
                     onChange={(e) => dispatch({ type: 'CHANGE_EMAIL', email: e.target.value })}
                     value={user.email || ''}
@@ -107,7 +113,7 @@ const SnsLogin = () => {
               <div className="mb16">
                 <div className="input-container">
                   <input
-                    disabled={user.nickname === '' || user.checkNickName}
+                    disabled={user.checkNickName}
                     type="nickname"
                     className={'input-style1 with-button'}
                     id="nickname"
@@ -117,7 +123,7 @@ const SnsLogin = () => {
                   />
 
                   <button
-                    disabled={user.nickname === '' || user.checkNickName}
+                    disabled={user.checkNickName}
                     className="ml16 check-btn-style1"
                     onClick={(e) => {
                       e.preventDefault();
@@ -177,8 +183,14 @@ const SnsLogin = () => {
 
               <div className="date-birth-container">
                 <div className="width-per-33 pl4 pr4">
-                  <select className="select-style1" name="" id="" required onChange={(e) => console.log(e.target.value)}>
-                    <option value="" disabled selected hidden>
+                  <select
+                    className="select-style1"
+                    id="year"
+                    required
+                    onChange={(e) => dispatch({ type: 'CHANHE_YEAR', year: e.target.value })}
+                    defaultValue={''}
+                  >
+                    <option value="" disabled hidden>
                       년도
                     </option>
                     {Array(60)
@@ -194,8 +206,14 @@ const SnsLogin = () => {
                   </select>
                 </div>
                 <div className="width-per-33 pl4 pr4">
-                  <select className="select-style1" name="" id="" required onChange={(e) => console.log(e.target.value)}>
-                    <option value="" disabled selected hidden>
+                  <select
+                    className="select-style1"
+                    id="month"
+                    required
+                    onChange={(e) => dispatch({ type: 'CHANHE_MONTH', month: e.target.value })}
+                    defaultValue={''}
+                  >
+                    <option value="" disabled hidden>
                       월
                     </option>
                     {Array(12)
@@ -210,8 +228,14 @@ const SnsLogin = () => {
                   </select>
                 </div>
                 <div className="width-per-33 pl4 pr4">
-                  <select className="select-style1" name="" id="" required onChange={(e) => console.log(e.target.value)}>
-                    <option value="" disabled selected hidden>
+                  <select
+                    className="select-style1"
+                    id="day"
+                    required
+                    onChange={(e) => dispatch({ type: 'CHANHE_DAY', day: e.target.value })}
+                    defaultValue={''}
+                  >
+                    <option value="" disabled hidden>
                       일
                     </option>
                     {Array(31)

@@ -57,9 +57,13 @@ input[class*='btn-style'] {
   &.wid100 {
     width: 100%;
   }
+  &.type-error {
+    background-color: $errorColor;
+    border-color: $black333;
+  }
   &.type-black {
     background-color: $black333;
-    border-color: $black333;
+    border-color: white;
   }
   &.type-white {
     background-color: white;
@@ -69,6 +73,9 @@ input[class*='btn-style'] {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  &.noneborder {
+    border-color: $errorColor;
   }
 }
 

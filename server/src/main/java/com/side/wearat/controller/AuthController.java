@@ -74,7 +74,7 @@ public class AuthController {
         }
 
         User user = userOpt.get();
-        if (!user.getEmail().isEmpty()) {
+        if (req.getEmail().isEmpty()) {
             throw new UnAuthorizedException("email정보가 입력되지 않았습니다.");
         }
 

@@ -240,3 +240,14 @@
     }
   }
 }
+
+.img-item {
+  display: flex;
+  flex-direction: column;
+  width: 32.33%;
+
+  img {
+    width: 100px;
+    height: 100px;
+  }
+}

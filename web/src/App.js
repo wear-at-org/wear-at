@@ -14,20 +14,28 @@ import { useLocation } from 'react-router-dom';
 import Meta from 'components/Meta';
 import Toast from 'components/Toast';
 import PopupStyle1 from 'components/PopupStyle1';
-import SignHook from 'hooks/useSignHook';
+import popupHook from 'hooks/usePopupHook';
 
 function App() {
-  const { logout } = SignHook();
-  const { loginStatus, info } = useSelector((state) => state[userInfoName]);
+  const [showPopup] = popupHook();
+  const {
+    loginStatus,
+    info: { nickname },
+  } = useSelector((state) => state[userInfoName]);
   const [drawerStatus, setDrawerStatus] = useState(false);
   const [searchStatus, setSearchStatus] = useState(false);
   const { pathname } = useLocation();
 
+  console.log(nickname);
   useEffect(() => {
-    if (loginStatus === 'ing' && info.nickName === null) {
-      logout();
+    if (loginStatus === 'login' && !pathname.includes('sns-login') && !pathname.includes('login') && nickname === '') {
+      showPopup({
+        title: `SNS 회원 가입을 마무리하여 주세요.`,
+        btnMsg: '회원가입',
+        goLink: '/sns-login',
+      });
     }
-  }, [loginStatus, logout, info]);
+  });
 
   return (
     <>

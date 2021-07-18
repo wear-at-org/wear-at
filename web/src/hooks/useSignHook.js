@@ -64,6 +64,7 @@ const SignHook = () => {
   const signup = async (userInfo, isSns = false) => {
     try {
       if (isSns) {
+        console.log(userInfo);
         await api.post('auth/sns-sign-up', {
           ...userInfo,
         });
