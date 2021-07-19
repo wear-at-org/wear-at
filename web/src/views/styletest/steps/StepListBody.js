@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import NextBtn from './NextBtn';
 
-const StepListBody = ({ item, goNextStep, hooks }) => {
+const StepListBody = ({ item, goNextStep, hooks, apiId }) => {
   const [list, setList] = useState([]);
   const { makeInsertList, selectQueryItem, beforeNextChecker } = hooks;
   const [status, setStatus] = useState('init');
@@ -41,7 +41,7 @@ const StepListBody = ({ item, goNextStep, hooks }) => {
 
       <NextBtn
         goNextStep={() => {
-          beforeNextChecker(list);
+          beforeNextChecker(list, apiId);
           setStatus('end');
           setTimeout(() => {
             goNextStep();

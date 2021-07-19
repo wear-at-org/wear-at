@@ -5,9 +5,7 @@ const NextBtn = (props) => {
     <div
       className="style-next-btn"
       onClick={() => {
-        if (!props.isComplete) {
-          props.goNextStep();
-        }
+        props.goNextStep();
       }}
     >
       <div className="inner width-380">

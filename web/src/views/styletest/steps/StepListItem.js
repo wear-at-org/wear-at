@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import NextBtn from './NextBtn';
 
-const StepListItem = ({ item, goNextStep, hooks }) => {
+const StepListItem = ({ item, goNextStep, hooks, apiId, activeIndex }) => {
   const { makeInsertList, selectQueryItem, beforeNextChecker } = hooks;
   const [status, setStatus] = useState('init');
   const [list, setList] = useState([]);
@@ -10,7 +10,7 @@ const StepListItem = ({ item, goNextStep, hooks }) => {
     setStatus('start');
     setList(makeInsertList(item));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [activeIndex]);
 
   return (
     <div className={`step-container ${status}`}>
@@ -28,7 +28,7 @@ const StepListItem = ({ item, goNextStep, hooks }) => {
                   <div
                     key={`queryItems-${id}`}
                     className={`style-circle-container mb64 ${answer && 'active'}`}
-                    onClick={() => setList(selectQueryItem(list, queryItem, index, true))}
+                    onClick={() => setList(selectQueryItem(list, queryItem, index, !answer))}
                   >
                     <div className="inner">
                       <div className="mb24 item-img">
@@ -49,7 +49,8 @@ const StepListItem = ({ item, goNextStep, hooks }) => {
 
       <NextBtn
         goNextStep={() => {
-          beforeNextChecker(list);
+          console.log(list);
+          beforeNextChecker(list, apiId);
           setStatus('end');
           setTimeout(() => {
             goNextStep();

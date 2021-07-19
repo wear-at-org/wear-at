@@ -1,10 +1,9 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import api from 'api';
 import { useHistory } from 'react-router-dom';
 
 const StepHook = () => {
   const history = useHistory();
-  const [id, setId] = useState('');
   const [answers, setAnswers] = useState({ answer: [], completed: false, id: 'notComplete' });
 
   const uploadFile = async (files) => {
@@ -22,10 +21,12 @@ const StepHook = () => {
 
   // 스타일 테스트 리스트를 프론트 개발에 맞게 변환
   const makeStyleTestList = async (list) => {
-    const res = await api.post('subscribe');
-    setId(res.subscribeAnswers.id);
+    const res = await api.post('subscribe', {
+      answers: [],
+      completed: false,
+    });
     const resultArray = [];
-    list.forEach((item) => {
+    await list.forEach((item) => {
       const { uiType } = item;
       const findIndex = resultArray.findIndex((findType) => findType.type === uiType);
       if (findIndex > 0) {
@@ -35,8 +36,7 @@ const StepHook = () => {
       }
     });
 
-    console.log(resultArray);
-    return resultArray;
+    return { resultArray, id: res.data.id };
   };
 
   // answer를 넣기 위해 리스트 재배열
@@ -46,17 +46,17 @@ const StepHook = () => {
       return {
         ...i,
         queryItems: queryItems.map((queryItem) => {
-          const findIndex = answers.answer.findIndex((re) => re.id === queryItem.id && re.queryId === queryItem.queryId);
+          const findItem = answers.answer.find((re) => re.id === queryItem.id && re.queryId === queryItem.queryId) || {};
           return {
             ...queryItem,
-            answer: findIndex > -1,
+            answer: findItem.answer || false,
           };
         }),
         queryCategories: queryCategories.map((queryCategory) => {
-          const findIndex = answers.answer.findIndex((re) => re.id === queryCategory.id && re.queryId === queryCategory.queryId);
+          const findItem = answers.answer.findIndex((re) => re.id === queryCategory.id && re.queryId === queryCategory.queryId) || {};
           return {
             ...queryCategory,
-            answer: findIndex > -1,
+            answer: findItem.answer || false,
           };
         }),
       };
@@ -66,7 +66,7 @@ const StepHook = () => {
   };
 
   // 클릭 시 select로 변환
-  const selectQueryItem = (list, queryItem, index, url) => {
+  const selectQueryItem = (list, queryItem, index, answer) => {
     let changeList = [...list];
     changeList = list.map((item, i) => {
       if (i === index) {
@@ -76,7 +76,7 @@ const StepHook = () => {
             if (value.id === queryItem.id && value.queryId === queryItem.queryId) {
               return {
                 ...value,
-                answer: value.answer ? false : url,
+                answer,
               };
             } else {
               return {
@@ -110,35 +110,36 @@ const StepHook = () => {
     return cnt;
   };
 
-  const beforeNextChecker = async (list, isLast = false) => {
+  const beforeNextChecker = async (list, id, isLast = false) => {
+    console.log(list);
     window.scrollTo(0, 0);
     let result = [...answers.answer];
     for (let i in list) {
       for (let j in list[i].queryCategories) {
         const queryCategoryItem = list[i].queryCategories[j];
-        if (queryCategoryItem.answer) {
-          const findIndex = result.findIndex((re) => re.id === queryCategoryItem.id && re.queryId === queryCategoryItem.queryId);
-          if (findIndex !== -1) {
-            result.push(queryCategoryItem);
-          } else {
-            result[findIndex] = { ...queryCategoryItem };
-          }
+
+        const findIndex = result.findIndex((re) => re.id === queryCategoryItem.id && re.queryId === queryCategoryItem.queryId);
+        if (findIndex !== -1) {
+          result.push(queryCategoryItem);
+        } else {
+          result[findIndex] = { ...queryCategoryItem };
         }
       }
 
       for (let k in list[i].queryItems) {
         const queryItem = list[i].queryItems[k];
-        if (queryItem.answer) {
-          const findIndex = result.findIndex((re) => re.id === queryItem.id && re.queryId === queryItem.queryId);
-          if (findIndex !== -1) {
-            result[findIndex] = { ...queryItem };
-          } else {
-            result.push(queryItem);
-          }
+
+        const findIndex = result.findIndex((re) => re.id === queryItem.id && re.queryId === queryItem.queryId);
+        if (findIndex !== -1) {
+          result[findIndex] = { ...queryItem };
+        } else {
+          result.push(queryItem);
         }
       }
     }
 
+    console.log('result');
+    console.log(result);
     setAnswers({
       ...answers,
       answer: [...result],
@@ -147,11 +148,12 @@ const StepHook = () => {
     const ansersArr = result.map((item) => {
       return {
         answer: item.answer,
-        id: id,
+        id,
         queryId: item.queryId,
         queryItemId: item.queryItemId,
       };
     });
+
     await api.post('subscribe', {
       id,
       completed: isLast ? true : false,

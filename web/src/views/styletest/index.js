@@ -9,6 +9,7 @@ import StyleTestHeader from './steps/StyleTestHeader';
 import StepHook from 'hooks/useStepHook';
 
 const Styletest = () => {
+  const [apiId, setApiId] = useState(0);
   const { makeStyleTestList } = StepHook();
   const [stepArray, setStepArray] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -17,7 +18,9 @@ const Styletest = () => {
   useEffect(() => {
     const makeList = async () => {
       api.get('subscribe/query').then(async ({ data }) => {
-        setStepArray(await makeStyleTestList(data));
+        const { resultArray, id } = await makeStyleTestList(data);
+        setApiId(id);
+        setStepArray(resultArray);
       });
     };
 
@@ -37,17 +40,18 @@ const Styletest = () => {
     }
     switch (type) {
       case 'U_LIST_ITEMS':
-        return <StepListItem item={items} hooks={hooks} goNextStep={goNextStep} key={'style-' + index} />;
+        console.log(item);
+        return <StepListItem item={items} hooks={hooks} goNextStep={goNextStep} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} />;
       case 'U_LIST_IMAGES':
-        return <StepListImage item={items} hooks={hooks} goNextStep={goNextStep} key={'style-' + index} />;
+        return <StepListImage item={items} hooks={hooks} goNextStep={goNextStep} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} />;
       case 'U_LIST_2DEP_ITEMS':
-        return <StepTwoDepthItem item={items} hooks={hooks} goNextStep={goNextStep} key={'style-' + index} />;
+        return <StepTwoDepthItem item={items} hooks={hooks} goNextStep={goNextStep} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} />;
       case 'U_LIST_BODY':
-        return <StepListBody item={items} hooks={hooks} goNextStep={goNextStep} key={'style-' + index} />;
+        return <StepListBody item={items} hooks={hooks} goNextStep={goNextStep} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} />;
       case 'U_UPLOAD_IMAGE':
-        return <StepUploadImage item={items} hooks={hooks} key={'style-' + index} />;
+        return <StepUploadImage item={items} hooks={hooks} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} />;
       default:
-        return <StepListItem item={items} goNextStep={goNextStep} key={'style-' + index} />;
+        return <StepListItem item={items} goNextStep={goNextStep} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} />;
     }
   };
 

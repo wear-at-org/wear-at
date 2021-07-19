@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import NextBtn from './NextBtn';
 
-const StepListImage = ({ item, goNextStep, hooks }) => {
+const StepListImage = ({ item, goNextStep, hooks, apiId }) => {
   const { makeInsertList, beforeNextChecker, selectQueryItem } = hooks;
   const [status, setStatus] = useState('init');
   const [list, setList] = useState([]);
@@ -28,7 +28,7 @@ const StepListImage = ({ item, goNextStep, hooks }) => {
                   <div
                     className={`checked-img  ${answer && 'active'}`}
                     key={'checked-img-' + id}
-                    onClick={() => setList(selectQueryItem(list, queryItem, index, url))}
+                    onClick={() => setList(selectQueryItem(list, queryItem, index, !answer))}
                   >
                     <div className="img-dim"></div>
                     <img src={url} alt="" />
@@ -41,7 +41,7 @@ const StepListImage = ({ item, goNextStep, hooks }) => {
       })}
       <NextBtn
         goNextStep={() => {
-          beforeNextChecker(list);
+          beforeNextChecker(list, apiId);
           setStatus('end');
           setTimeout(() => {
             goNextStep();

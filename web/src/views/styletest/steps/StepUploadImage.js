@@ -2,14 +2,16 @@ import DragImagUpload from 'components/DragImagUpload';
 import React, { useState, useEffect } from 'react';
 import NextBtn from './NextBtn';
 
-const StepUploadImage = ({ item, hooks }) => {
+const StepUploadImage = ({ item, hooks, apiId }) => {
   const [files, setFiles] = useState([]);
   const [status, setStatus] = useState('init');
   const { makeInsertList, uploadFile, beforeNextChecker } = hooks;
   const [list, setList] = useState([]);
 
   const makeList = async () => {
-    await uploadFile(files);
+    console.log(files);
+    const res = await uploadFile(files.map((i) => i.object));
+    console.log(res);
   };
 
   useEffect(() => {
@@ -32,7 +34,7 @@ const StepUploadImage = ({ item, hooks }) => {
                 <h5 className="small color-8282 tc">{items.subtitle}</h5>
               </div>
 
-              <div className="pl24 pr24 ">
+              <div>
                 <DragImagUpload files={files} setFiles={setFiles} />
               </div>
             </div>
@@ -41,10 +43,8 @@ const StepUploadImage = ({ item, hooks }) => {
       </div>
 
       <NextBtn
-        isComplete={true}
         goNextStep={async () => {
           await makeList();
-          await beforeNextChecker(list, true);
         }}
       />
     </div>
