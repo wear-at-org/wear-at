@@ -47,9 +47,14 @@ Axios.interceptors.response.use(
     }
 
     // 소셜 로그인 후 필수 항목을 입력 하지 않았을 경우
-    if (errorStatus === 403) {
-      showToast({ type: 'error', content: '필수 입력 항목을 입력해주세요.' });
-    }
+    // TODO sns login 실패했는데 쿠키가 구워지는 현상 발생 시 재논의
+    // if (errorStatus === 403) {
+    //   showPopup({
+    //     title: `SNS 회원 가입을 마무리하여 주세요.`,
+    //     btnMsg: '회원가입',
+    //     goLink: '/sns-login',
+    //   });
+    // }
 
     // 로그인 필요 시
     if (errorStatus === 409) {

@@ -188,7 +188,7 @@ const Mypage = () => {
                       className="ml16 check-btn-style1"
                       onClick={(e) => {
                         e.preventDefault();
-                        checkNicknameApi(user.nickname, dispatch);
+                        checkNicknameApi(user.id, user.nickname, dispatch);
                       }}
                     >
                       중복확인

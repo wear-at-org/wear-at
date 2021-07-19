@@ -3,38 +3,70 @@ import api from 'api';
 import SignHook from 'hooks/useSignHook';
 import { userReducer, initData, checkEmailApi, checkNicknameApi } from 'utils/UserReducer';
 import { loginProcess } from 'store/userinfo-store';
+import { useHistory } from 'react-router-dom';
 import store from '../../store';
+import Cookies from 'universal-cookie';
 
 const SnsLogin = () => {
+  const history = useHistory();
   const { signup } = SignHook();
   const [user, dispatch] = useReducer(userReducer, initData);
-  const [snsId, setSnsId] = useState(0);
-  const signupProcess = (e) => {
+  
+  const signupProcess = async (e) => {
     e.preventDefault();
-    user.id = snsId;
-    signup(user, true);
+    await signup(user, true);
+    postProcess(user);
+  };
+
+  const getUserIDFromQuery = () => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('id');
+  };
+
+  const getUserFromCookie = () => {
+    const cookies = new Cookies();
+    return cookies.get('_watu');
+  };
+
+  const isCompleteSNSUser = (u) => {
+    return u && u.nickname;
+  }
+
+  const postProcess = (u) => {
+    store.dispatch(
+      loginProcess({
+        info: {
+          id: u.id,
+          nickname: u.nickname ?? '',
+          email: u.email ?? '',
+          prividerType: u.provider ?? '',
+        },
+        loginStatus: 'login',
+      }),
+    );
+    
   };
 
   useEffect(() => {
+    const id = getUserIDFromQuery();
+    const cUser = getUserFromCookie();
+
+    if (isCompleteSNSUser(cUser)) {
+      postProcess(cUser);
+      history.push('/');
+      return;
+    }
+    
     const getUserData = async () => {
-      const {
-        data,
-        data: { id },
-      } = await api.get('user');
-      store.dispatch(
-        loginProcess({
-          info: {
-            id: id,
-            nickname: '',
-            email: data?.email || '',
-            prividerType: data.provider,
-          },
-          loginStatus: 'login',
-        }),
-      );
-      setSnsId(id);
-      dispatch({ type: 'CHANGE_NAME', name: data?.name || '' });
-      dispatch({ type: 'CHANGE_EMAIL', email: data?.email || '' });
+      const { data } = await api.get(`user/${id}/partial`);
+
+      dispatch({ type: 'CHANGE_ID', id: data.id ?? '' });
+      dispatch({ type: 'CHANGE_NAME', name: data.name ?? '' });
+      dispatch({ type: 'CHANGE_EMAIL', email: data.email ?? '' });
+      dispatch({ type: 'CHANGE_NICKNAME', nickname: data.nickname ?? '' });
+      dispatch({ type: 'CHANHE_YEAR', year: data.birthyear ?? '' });
+      dispatch({ type: 'CHANHE_MONTH', month: data.birthmonth ?? '' });
+      dispatch({ type: 'CHANHE_DAY', day: data.birthday ?? '' });
       if (data.email) {
         dispatch({ type: 'CHANGE_CHECK_EMAIL', checkEmail: true });
       }
@@ -94,7 +126,7 @@ const SnsLogin = () => {
                     className="ml16 check-btn-style1"
                     onClick={(e) => {
                       e.preventDefault();
-                      checkEmailApi(user.email, dispatch);
+                      checkEmailApi(user.id, user.email, dispatch);
                     }}
                   >
                     중복확인
@@ -127,7 +159,7 @@ const SnsLogin = () => {
                     className="ml16 check-btn-style1"
                     onClick={(e) => {
                       e.preventDefault();
-                      checkNicknameApi(user.nickname, dispatch);
+                      checkNicknameApi(user.id, user.nickname, dispatch);
                     }}
                   >
                     중복확인
@@ -188,7 +220,7 @@ const SnsLogin = () => {
                     id="year"
                     required
                     onChange={(e) => dispatch({ type: 'CHANHE_YEAR', year: e.target.value })}
-                    defaultValue={''}
+                    value={ user.birthyear ?? '' }
                   >
                     <option value="" disabled hidden>
                       년도
@@ -211,7 +243,7 @@ const SnsLogin = () => {
                     id="month"
                     required
                     onChange={(e) => dispatch({ type: 'CHANHE_MONTH', month: e.target.value })}
-                    defaultValue={''}
+                    value={ user.birthmonth ?? '' }
                   >
                     <option value="" disabled hidden>
                       월
@@ -233,7 +265,7 @@ const SnsLogin = () => {
                     id="day"
                     required
                     onChange={(e) => dispatch({ type: 'CHANHE_DAY', day: e.target.value })}
-                    defaultValue={''}
+                    value={ user.birthday ?? '' }
                   >
                     <option value="" disabled hidden>
                       일

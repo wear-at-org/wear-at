@@ -5,12 +5,12 @@ import toastHook from 'hooks/useToastHook';
 const [showToast, hideToast] = toastHook({ type: '', content: '' });
 
 export const initData = {
+  id: '',
   email: '',
   gender: '',
   password: '',
   passwordConfirm: '',
   nickname: '',
-  birthday: '',
   checkEmail: false,
   checkNickName: false,
   checkPrivacyPolicy: false,
@@ -51,11 +51,11 @@ const checkPasswordEqual = (val, checkPassword) => {
   return checkPassword === val;
 };
 
-export const checkEmailApi = async (email, dispatch) => {
+export const checkEmailApi = async (id, email, dispatch) => {
   try {
     const {
       data: { duplicated },
-    } = await api.get('user/check-email', { params: { email } });
+    } = await api.get('user/check-email', { params: { id, email } });
     if (duplicated) {
       hideToast();
       showToast({ type: 'error', content: '중복 된 이메일 입니다.' });
@@ -72,11 +72,11 @@ export const checkEmailApi = async (email, dispatch) => {
   }
 };
 
-export const checkNicknameApi = async (nickname, dispatch) => {
+export const checkNicknameApi = async (id, nickname, dispatch) => {
   try {
     const {
       data: { duplicated },
-    } = await api.get('user/check-nickname', { params: { nickname } });
+    } = await api.get('user/check-nickname', { params: { id, nickname } });
     if (duplicated) {
       hideToast();
       showToast({ type: 'error', content: '사용 불가능한 닉네임 입니다.' });
@@ -100,6 +100,11 @@ export const userReducer = (state, action) => {
         ...state,
         ...action.data,
       };
+    case 'CHANGE_ID':
+      return {
+        ...state,
+        id: action.id,
+      };  
     case 'CHANGE_NAME':
       return {
         ...state,

@@ -69,7 +69,7 @@ const SignHook = () => {
           ...userInfo,
         });
 
-        history.push('/success');
+        history.push('/');
       } else {
         await api.post('auth/sign-up', {
           ...userInfo,
