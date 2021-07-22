@@ -1,0 +1,152 @@
+.color-grayAEAE {
+  color: $grayAEAE !important;
+}
+.color-8282 {
+  color: $gray8282 !important;
+}
+.color-black333 {
+  color: $black333 !important;
+}
+.color-gray7979 {
+  color: $gray7979 !important;
+}
+.color-graya6a {
+  color: $graya6a6a6 !important;
+}
+.color-white {
+  color: white !important;
+}
+.color-blue {
+  color: $optionBlue !important;
+}
+.color-graybdbd {
+  color: $graybdbd !important;
+}
+.color-graye0e0 {
+  color: $graye0e0 !important;
+}
+.color-red {
+  color: $errorColor !important;
+}
+.font-Georgia {
+  font-family: 'Georgia';
+}
+.bold {
+  font-weight: bold !important;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 47px;
+  letter-spacing: -0.4px;
+}
+
+h3 {
+  font-size: 28px;
+  line-height: 42px;
+  letter-spacing: -0.2px;
+  font-weight: 700;
+}
+
+.visual-h3-desc {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+h4.big {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+h4 {
+  font-size: 18px;
+  line-height: 26px;
+  letter-spacing: -0.2px;
+}
+
+h5 {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+h5.small {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+h6 {
+  font-size: 12px;
+  line-height: 18px;
+}
+
+p.caption-font {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.signup-desc-text {
+  padding-left: 8px;
+  padding-right: 40px;
+  p {
+    font-size: 12px;
+    line-height: 18px;
+    color: $grayAEAE;
+  }
+}
+
+.error-container {
+  display: none;
+  margin-top: 6px;
+  padding-left: 32px;
+  padding-right: 40px;
+  position: relative;
+
+  &.active {
+    display: block;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    background-image: url('../img/error.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left center;
+    width: 16px;
+    height: 16px;
+    left: 8px;
+    top: 0;
+  }
+  .error-font {
+    font-size: 12px;
+    line-height: 18px;
+    color: $errorColor;
+  }
+}
+
+p.secession-font {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 12px;
+  line-height: 1.5;
+  color: $gray8282;
+  border-bottom: 1px solid $gray8282;
+}
+
+p.more-font {
+  font-size: 12px;
+  color: $grayAEAE;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@media all and(max-width:768px) {
+}
+
+@media all and(max-width:576px) {
+  h3 {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}

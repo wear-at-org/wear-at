@@ -5,12 +5,12 @@ import toastHook from 'hooks/useToastHook';
 const [showToast, hideToast] = toastHook({ type: '', content: '' });
 
 export const initData = {
+  id: '',
   email: '',
   gender: '',
   password: '',
   passwordConfirm: '',
   nickname: '',
-  birthday: '',
   checkEmail: false,
   checkNickName: false,
   checkPrivacyPolicy: false,
@@ -34,9 +34,9 @@ export const initData = {
       isError: false,
     },
   },
-  birthdayYear: '',
-  birthdayMonth: '',
-  birthdayDay: '',
+  birthyear: '',
+  birthmonth: '',
+  birthday: '',
 };
 
 const checkEmail = (val) => {
@@ -51,11 +51,11 @@ const checkPasswordEqual = (val, checkPassword) => {
   return checkPassword === val;
 };
 
-export const checkEmailApi = async (email, dispatch) => {
+export const checkEmailApi = async (id, email, dispatch) => {
   try {
     const {
       data: { duplicated },
-    } = await api.get('user/check-email', { params: { email } });
+    } = await api.get('user/check-email', { params: { id, email } });
     if (duplicated) {
       hideToast();
       showToast({ type: 'error', content: '중복 된 이메일 입니다.' });
@@ -72,11 +72,11 @@ export const checkEmailApi = async (email, dispatch) => {
   }
 };
 
-export const checkNicknameApi = async (nickname, dispatch) => {
+export const checkNicknameApi = async (id, nickname, dispatch) => {
   try {
     const {
       data: { duplicated },
-    } = await api.get('user/check-nickname', { params: { nickname } });
+    } = await api.get('user/check-nickname', { params: { id, nickname } });
     if (duplicated) {
       hideToast();
       showToast({ type: 'error', content: '사용 불가능한 닉네임 입니다.' });
@@ -100,6 +100,11 @@ export const userReducer = (state, action) => {
         ...state,
         ...action.data,
       };
+    case 'CHANGE_ID':
+      return {
+        ...state,
+        id: action.id,
+      };  
     case 'CHANGE_NAME':
       return {
         ...state,
@@ -279,17 +284,17 @@ export const userReducer = (state, action) => {
     case 'CHANHE_YEAR':
       return {
         ...state,
-        birthdayYear: action.year,
+        birthyear: action.year,
       };
     case 'CHANHE_MONTH':
       return {
         ...state,
-        birthdayMonth: action.month,
+        birthmonth: action.month,
       };
     case 'CHANHE_DAY':
       return {
         ...state,
-        birthdayDAY: action.day,
+        birthday: action.day,
       };
     default:
       return state;

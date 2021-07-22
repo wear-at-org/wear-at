@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import api from 'api';
-import { useHistory } from 'react-router-dom';
 import StepListItem from './steps/StepListItem';
 import StepListImage from './steps/StepListImage';
 import StepTwoDepthItem from './steps/StepTwoDepthItem';
@@ -8,21 +7,24 @@ import StepListBody from './steps/StepListBody';
 import StepUploadImage from './steps/StepUploadImage';
 import StyleTestHeader from './steps/StyleTestHeader';
 import StepHook from 'hooks/useStepHook';
-import { queryList } from 'assets/common/commonData';
 
 const Styletest = () => {
+  const [apiId, setApiId] = useState(0);
   const { makeStyleTestList } = StepHook();
   const [stepArray, setStepArray] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const hooks = StepHook();
 
   useEffect(() => {
-    // api.get('subscribe/query').then(({ data }) => {
-    //   console.log(data);
-    //   setStepArray(makeStyleTestList(data));
-    // });
+    const makeList = async () => {
+      api.get('subscribe/query').then(async ({ data }) => {
+        const { resultArray, id } = await makeStyleTestList(data);
+        setApiId(id);
+        setStepArray(resultArray);
+      });
+    };
 
-    setStepArray(makeStyleTestList(queryList));
+    makeList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -38,17 +40,18 @@ const Styletest = () => {
     }
     switch (type) {
       case 'U_LIST_ITEMS':
-        return <StepListItem item={items} hooks={hooks} goNextStep={goNextStep} key={'style-' + index} />;
+        console.log(item);
+        return <StepListItem item={items} hooks={hooks} goNextStep={goNextStep} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} />;
       case 'U_LIST_IMAGES':
-        return <StepListImage item={items} hooks={hooks} goNextStep={goNextStep} key={'style-' + index} />;
+        return <StepListImage item={items} hooks={hooks} goNextStep={goNextStep} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} />;
       case 'U_LIST_2DEP_ITEMS':
-        return <StepTwoDepthItem item={items} hooks={hooks} goNextStep={goNextStep} key={'style-' + index} />;
+        return <StepTwoDepthItem item={items} hooks={hooks} goNextStep={goNextStep} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} />;
       case 'U_LIST_BODY':
-        return <StepListBody item={items} hooks={hooks} goNextStep={goNextStep} key={'style-' + index} />;
+        return <StepListBody item={items} hooks={hooks} goNextStep={goNextStep} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} />;
       case 'U_UPLOAD_IMAGE':
-        return <StepUploadImage item={items} hooks={hooks} key={'style-' + index} />;
+        return <StepUploadImage item={items} hooks={hooks} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} />;
       default:
-        return <StepListItem item={items} goNextStep={goNextStep} key={'style-' + index} />;
+        return <StepListItem item={items} goNextStep={goNextStep} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} />;
     }
   };
 

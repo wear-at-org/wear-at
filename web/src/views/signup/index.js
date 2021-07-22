@@ -64,7 +64,7 @@ const Signup = () => {
                     className="ml16 check-btn-style1"
                     onClick={(e) => {
                       e.preventDefault();
-                      checkEmailApi(user.email, dispatch);
+                      checkEmailApi(null, user.email, dispatch);
                     }}
                   >
                     중복확인
@@ -100,7 +100,7 @@ const Signup = () => {
                     className="ml16 check-btn-style1"
                     onClick={(e) => {
                       e.preventDefault();
-                      checkNicknameApi(user.nickname, dispatch);
+                      checkNicknameApi(null, user.nickname, dispatch);
                     }}
                   >
                     중복확인

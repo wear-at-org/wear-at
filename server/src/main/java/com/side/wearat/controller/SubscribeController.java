@@ -6,6 +6,8 @@ import com.side.wearat.model.subscribe.SubscribeRequest;
 import com.side.wearat.service.SubscribeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,14 +38,26 @@ public class SubscribeController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping(path = "/temp")
-    public ResponseEntity<List<Subscribe>> listTemps() {
-        List<Subscribe> subs = this.subscribeService.getTempSubscribes();
+    @GetMapping(path = "")
+    public ResponseEntity<Page<Subscribe>> list(final Pageable pageable) {
+        Page<Subscribe> subs = this.subscribeService.listSubscribes(pageable);
+        return ResponseEntity.ok().body(subs);
+    }
+
+    @GetMapping(path = "/not-recommended")
+    public ResponseEntity<Page<Subscribe>> listNotRecommended(final Pageable pageable) {
+        Page<Subscribe> subs = this.subscribeService.listNotRecommended(pageable);
+        return ResponseEntity.ok().body(subs);
+    }
+
+    @GetMapping(path = "/stylist")
+    public ResponseEntity<Page<Subscribe>> listByStylist(@RequestParam(name="recommended", required = false) Boolean recommended, final Pageable pageable) {
+        Page<Subscribe> subs = this.subscribeService.listByStylist(pageable, recommended);
         return ResponseEntity.ok().body(subs);
     }
 
     @PostMapping(path = "")
-    public Subscribe subscribe(@RequestBody SubscribeRequest req) {
+    public Subscribe subscribe(@RequestBody SubscribeRequest req) throws Exception {
         return this.subscribeService.subscribe(req);
     }
 

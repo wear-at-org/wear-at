@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Address from '../../components/Address';
 import useEditUserInfo from 'hooks/useEditUserInfo';
 import Lnb from 'components/layout/Lnb';
@@ -8,6 +8,7 @@ import ImageUpload from 'components/ImageUpload';
 const Mypage = () => {
   const [showPost, setShowPost] = useState(false);
   const [user, dispatch] = useEditUserInfo();
+
   return (
     <div className="sub layout-sub">
       <div className="col-12 col-center mw-1280">
@@ -187,7 +188,7 @@ const Mypage = () => {
                       className="ml16 check-btn-style1"
                       onClick={(e) => {
                         e.preventDefault();
-                        checkNicknameApi(user.nickname, dispatch);
+                        checkNicknameApi(user.id, user.nickname, dispatch);
                       }}
                     >
                       중복확인

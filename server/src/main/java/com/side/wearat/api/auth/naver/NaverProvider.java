@@ -8,6 +8,7 @@ import com.side.wearat.model.auth.AuthUserResponse;
 import com.side.wearat.model.auth.TokenResponse;
 import lombok.*;
 import org.springframework.http.HttpHeaders;
+import org.springframework.util.StringUtils;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -88,12 +89,22 @@ public class NaverProvider implements IProvider {
                 .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", token))
                 .retrieve().bodyToMono(NaverAuthResponse.class).block();
 
+        String birthday = "";
+        String birthmonth = "";
+        String birth = resp.getPayload().getBirthDay();
+        if (StringUtils.hasText(birth)) {
+            birthmonth = birth.substring(0,2);
+            birthday = birth.substring(3,5);
+        }
+
         AuthUserResponse user = AuthUserResponse.builder()
                 .id(resp.getPayload().getId())
                 .nickName(resp.getPayload().getNickname())
                 .email(resp.getPayload().getEmail())
                 .age(resp.getPayload().getAge())
-                .birthday(resp.getPayload().getBirthYear()+resp.getPayload().getBirthDay())
+                .birthday(birthday)
+                .birthmonth(birthmonth)
+                .birthyear(resp.getPayload().getBirthYear())
                 .gender(resp.getPayload().getGender())
                 .profileImage(resp.getPayload().getProfileImage())
                 .build();

@@ -28,6 +28,12 @@ public class SnsSignUpRequest {
     @JsonProperty("birthday")
     private String birthday;
 
+    @JsonProperty("birthmonth")
+    private String birthmonth;
+
+    @JsonProperty("birthyear")
+    private String birthyear;
+
     @JsonProperty("checkServiceTerms")
     private Boolean checkServiceTerms;
 

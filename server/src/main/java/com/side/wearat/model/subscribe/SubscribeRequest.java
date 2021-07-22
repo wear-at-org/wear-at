@@ -15,5 +15,7 @@ public class SubscribeRequest {
 
     private Boolean completed;
 
+    private Boolean recommended;
+
     private List<SubscribeAnswerRequest> answers;
 }

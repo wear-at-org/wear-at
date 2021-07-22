@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.4.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
 group = 'com.side'
@@ -42,8 +43,30 @@ dependencies {
     compile 'io.springfox:springfox-swagger2:3.0.0'
     compile 'io.springfox:springfox-swagger-ui:3.0.0'
     compile 'io.springfox:springfox-boot-starter:3.0.0'
+    implementation platform('com.amazonaws:aws-java-sdk-bom:1.12.1')
+    implementation 'com.amazonaws:aws-java-sdk-s3'
+    implementation 'com.querydsl:querydsl-jpa'
 }
 
 test {
     useJUnitPlatform()
+}
+
+def querydslDir = "$buildDir/generated/querydsl"
+
+querydsl {
+    jpa = true
+    querydslSourcesDir = querydslDir
+}
+
+sourceSets {
+    main.java.srcDir querydslDir
+}
+
+configurations {
+    querydsl.extendsFrom compileClasspath
+}
+
+compileQuerydsl {
+    options.annotationProcessorPath = configurations.querydsl
 }

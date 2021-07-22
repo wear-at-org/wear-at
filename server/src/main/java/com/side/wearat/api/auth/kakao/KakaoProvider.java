@@ -8,6 +8,7 @@ import com.side.wearat.model.auth.AuthUserResponse;
 import com.side.wearat.model.auth.TokenResponse;
 import lombok.*;
 import org.springframework.http.HttpHeaders;
+import org.springframework.util.StringUtils;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -84,12 +85,22 @@ public class KakaoProvider implements IProvider {
                 .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", token))
                 .retrieve().bodyToMono(KakaoAuthResponse.class).block();
 
+
+        String birthday = "";
+        String birthmonth = "";
+        String birth = resp.getKakaoAccount().getBirthDay();
+        if (StringUtils.hasText(birth)) {
+            birthmonth = birth.substring(0,2);
+            birthday = birth.substring(2,4);
+        }
         AuthUserResponse user = AuthUserResponse.builder()
                 .id(resp.getId().toString())
                 .nickName(resp.getKakaoAccount().getProfile().getNickName())
                 .email(resp.getKakaoAccount().getEmail())
                 .age(resp.getKakaoAccount().getAgeRange())
-                .birthday(resp.getKakaoAccount().getBirthYear()+resp.getKakaoAccount().getBirthDay())
+                .birthday(birthday)
+                .birthmonth(birthmonth)
+                .birthyear(resp.getKakaoAccount().getBirthYear())
                 .gender(resp.getKakaoAccount().getGender())
                 .profileImage(resp.getKakaoAccount().getProfile().getProfileImage())
                 .build();

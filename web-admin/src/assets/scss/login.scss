@@ -1,0 +1,115 @@
+.login-container {
+  padding-bottom: 96px;
+
+  .login-utils-container {
+    &.mobile {
+      display: none;
+    }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid $grayeee;
+    ul > li a {
+      font-size: 14px;
+      line-height: 18px;
+      color: $grayAEAE;
+    }
+  }
+}
+
+.social-login-container {
+  ul {
+    display: flex;
+    justify-content: space-between;
+
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  }
+}
+
+.kakao {
+  background-color: #fbe750;
+  p {
+    color: rgb(62, 64, 66);
+  }
+  img {
+    width: 27px;
+    height: 30px;
+  }
+}
+
+.naver {
+  background-color: #5dc351;
+  p {
+    color: white;
+  }
+  img {
+    width: 14px;
+    height: 13px;
+  }
+}
+
+.facebook {
+  background-color: #3878ea;
+  p {
+    color: white;
+  }
+  img {
+    width: 16px;
+    height: 16px;
+  }
+}
+.google {
+  background-color: #f8f8f9;
+  p {
+    color: black;
+  }
+  img {
+    width: 26px;
+    height: 25px;
+  }
+}
+.apple {
+  background-color: #000000;
+  p {
+    color: white;
+  }
+  img {
+    margin-right: 2px;
+    width: 29px;
+    height: 27px;
+  }
+}
+
+.signup-container {
+  .agree-bottom-border {
+    padding-bottom: 24px;
+    border-bottom: 1px solid $grayeee;
+  }
+
+  .signup-btn-wrap {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+.sucess-form {
+  margin: 0 auto;
+  max-width: 430px;
+  padding-left: 15px;
+  padding-right: 15px;
+  height: calc(100vh - 173px);
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}

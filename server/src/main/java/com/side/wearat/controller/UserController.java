@@ -56,13 +56,18 @@ public class UserController {
                 .nickname(u.getNickname())
                 .gender(u.getGender())
                 .birthday(u.getBirthday())
+                .birthmonth(u.getBirthmonth())
+                .birthyear(u.getBirthyear())
                 .build();
         return ResponseEntity.ok().body(result);
     }
 
     @GetMapping(path = "/check-email")
-    public ResponseEntity<String> checkEmailRegistered(@RequestParam("email") String email) {
-        boolean duplicated = this.userService.existsByEmail(email);
+    public ResponseEntity<String> checkEmailRegistered(@RequestParam(name = "id", required = false) Long id, @RequestParam("email") String email) {
+        if (id == null) {
+            id = -999L;
+        }
+        boolean duplicated = this.userService.existsByEmail(id, email);
 
         JsonObject resp = new JsonObject();
         resp.addProperty("duplicated", duplicated);
@@ -70,8 +75,11 @@ public class UserController {
     }
 
     @GetMapping(path = "/check-nickname")
-    public ResponseEntity<String> checkNicknameRegistered(@RequestParam("nickname") String nickname) {
-        boolean duplicated = this.userService.existsByNickname(nickname);
+    public ResponseEntity<String> checkNicknameRegistered(@RequestParam(name = "id", required = false) Long id, @RequestParam("nickname") String nickname) {
+        if (id == null) {
+            id = -999L;
+        }
+        boolean duplicated = this.userService.existsByNickname(id, nickname);
 
         JsonObject resp = new JsonObject();
         resp.addProperty("duplicated", duplicated);

@@ -1,6 +1,5 @@
 package com.side.wearat.service;
 
-import com.side.wearat.context.ContextHolder;
 import com.side.wearat.entity.User;
 import com.side.wearat.model.user.CreateUserRequest;
 import com.side.wearat.model.user.UpdateUserRequest;
@@ -44,13 +43,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean existsByEmail(String email) {
-        return this.userRepository.existsByEmail(email);
+    public boolean existsByEmail(Long id, String email) {
+        return this.userRepository.existsByIdNotAndEmail(id, email);
     }
 
     @Override
-    public boolean existsByNickname(String nickname) {
-        return this.userRepository.existsByNickname(nickname);
+    public boolean existsByNickname(Long id, String nickname) {
+        return this.userRepository.existsByIdNotAndNickname(id, nickname);
     }
 
     @Override
@@ -64,6 +63,8 @@ public class UserServiceImpl implements UserService {
                 .password(req.getPassword())
                 .gender(req.getGender())
                 .birthday(req.getBirthday())
+                .birthmonth(req.getBirthmonth())
+                .birthyear(req.getBirthyear())
                 .zipCode(req.getZipCode())
                 .address(req.getAddress())
                 .detailAddress(req.getDetailAddress())
@@ -79,7 +80,6 @@ public class UserServiceImpl implements UserService {
     }
 
     public void updateUser(UpdateUserRequest req) {
-        Long userId = ContextHolder.getUserID();
         Optional<User> userOpt = this.getUser(req.getId());
         userOpt.ifPresent(user -> {
             if (StringUtils.hasText(req.getName())) {
@@ -96,6 +96,12 @@ public class UserServiceImpl implements UserService {
             }
             if (StringUtils.hasText(req.getBirthday())) {
                 user.setBirthday(req.getBirthday());
+            }
+            if (StringUtils.hasText(req.getBirthmonth())) {
+                user.setBirthmonth(req.getBirthmonth());
+            }
+            if (StringUtils.hasText(req.getBirthyear())) {
+                user.setBirthyear(req.getBirthyear());
             }
             if (StringUtils.hasText(req.getZipCode())) {
                 user.setZipCode(req.getZipCode());
@@ -115,7 +121,7 @@ public class UserServiceImpl implements UserService {
             if (req.getCheckServiceTerms() != null) {
                 user.setCheckReceivingConsent(req.getCheckReceivingConsent());
             }
-            user.setUpdateUser(userId.toString());
+            user.setUpdateUser(req.getId().toString());
             user.setUpdateAt(LocalDateTime.now());
             this.userRepository.save(user);
         });

@@ -23,6 +23,10 @@ public class Subscribe {
 
     private Boolean completed;
 
+    private Boolean recommendStarted;
+
+    private Boolean recommended;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="subscribe_id", nullable = false)
     private List<SubscribeAnswer> subscribeAnswers;

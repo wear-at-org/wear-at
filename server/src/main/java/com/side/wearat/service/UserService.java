@@ -16,9 +16,9 @@ public interface UserService {
 
     Optional<User> getUserByProvider(String provider, String providerId);
 
-    boolean existsByEmail(String email);
+    boolean existsByEmail(Long id, String email);
 
-    boolean existsByNickname(String nickname);
+    boolean existsByNickname(Long id, String nickname);
 
     User createUser(CreateUserRequest req);
 

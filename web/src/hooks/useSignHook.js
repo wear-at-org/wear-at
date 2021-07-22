@@ -64,11 +64,12 @@ const SignHook = () => {
   const signup = async (userInfo, isSns = false) => {
     try {
       if (isSns) {
+        console.log(userInfo);
         await api.post('auth/sns-sign-up', {
           ...userInfo,
         });
 
-        history.push('/success');
+        history.push('/');
       } else {
         await api.post('auth/sign-up', {
           ...userInfo,

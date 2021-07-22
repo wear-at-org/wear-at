@@ -1,9 +1,8 @@
 import React, { useCallback, useRef, useState, useEffect } from 'react';
 import imgIcon from 'assets/img/img-icon.svg';
-const DragImagUpload = () => {
+const DragImagUpload = ({ files, setFiles }) => {
   const [isDragging, setIsDragging] = useState(false);
-  const [files, setFiles] = useState([]);
-
+  const [delFiles, setDelFiles] = useState([]);
   const dragRef = useRef(null);
   const fileId = useRef(0);
 
@@ -26,9 +25,7 @@ const DragImagUpload = () => {
       }
 
       for (const file of selectFiles) {
-        let imgPath = '';
         let reader = new FileReader();
-        imgPath = reader.result;
         tempFiles = [
           ...tempFiles,
           {
@@ -41,15 +38,21 @@ const DragImagUpload = () => {
       console.log(tempFiles);
       setFiles(tempFiles);
     },
-    [files],
+    [files, setFiles],
   );
 
   const handleFilterFile = useCallback(
     (id) => {
       setFiles(files.filter((file) => file.id !== id));
     },
-    [files],
+    [files, setFiles],
   );
+
+  const deleteFiles = () => {
+    delFiles.forEach((item) => {
+      handleFilterFile(item.id);
+    });
+  };
 
   const handleDragIn = useCallback((e) => {
     e.preventDefault();
@@ -111,13 +114,29 @@ const DragImagUpload = () => {
     <div className="DragDrop">
       <input type="file" id="fileUpload" style={{ display: 'none' }} multiple={true} onChange={onChangeFiles} />
 
-      <label className="mb32" htmlFor="fileUpload">
-        <div className="btn-style1 type-black b-center center width-110 mr12">
-          <p className="btn-font font-white">파일선택</p>
+      <div className={`d-flex mb32 width-100 ${files.length > 0 ? 'x-eq' : 'x-center'}`}>
+        <div className="">
+          <label htmlFor="fileUpload">
+            <div className="btn-style1 type-black b-center center width-110 mr12">
+              <p className="btn-font font-white">파일선택</p>
+            </div>
+          </label>
         </div>
-      </label>
 
-      <label className={`${isDragging ? 'DragDrop-File dragging' : 'DragDrop-File'} ${files.length > 0 && 'hidden'}`} htmlFor="fileUpload" ref={dragRef}>
+        {files.length > 0 && (
+          <div className="" onClick={deleteFiles}>
+            <div className="btn-style1 type-error b-center center width-110 mr12 noneborder">
+              <p className="btn-font font-white">선택삭제</p>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <label
+        className={`${isDragging ? 'DragDrop-File dragging' : 'DragDrop-File'} ${files.length > 0 && 'hidden'}`}
+        htmlFor="fileUpload"
+        ref={dragRef}
+      >
         <div className="mb8">
           <img src={imgIcon} alt="" />
         </div>
@@ -131,16 +150,32 @@ const DragImagUpload = () => {
       <div className="DragDrop-Files">
         {files.length > 0 &&
           files.map((file) => {
-            const {
-              id,
-              object: { name },
-            } = file;
+            const { id } = file;
 
-            console.log(file);
             return (
-              <div key={id}>
-                <img src={file.imgPath} alt="" />
-              </div>
+              <>
+                <div className="img-item mb20" key={id}>
+                  <div className="mb20">
+                    <img src={file.imgPath} alt="" />
+                  </div>
+
+                  <div className="chkbox-con">
+                    {file.id}
+                    <input
+                      type="checkbox"
+                      className="input-style-checkbox"
+                      checked={delFiles.findIndex((i) => i.id === file.id) > -1}
+                      onChange={() => {
+                        console.log(delFiles);
+                        console.log(file.id);
+                        delFiles.findIndex((i) => i.id === file.id) === -1
+                          ? setDelFiles([...delFiles, file])
+                          : setDelFiles([...delFiles.filter((i) => i.id !== file.id)]);
+                      }}
+                    />
+                  </div>
+                </div>
+              </>
             );
           })}
       </div>
