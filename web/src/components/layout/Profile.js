@@ -4,15 +4,21 @@ import alam from 'assets/img/alam.png';
 import { Link } from 'react-router-dom';
 import defaultProfile from 'assets/img/default-user.png';
 import SignHook from 'hooks/useSignHook';
+import { useHistory } from 'react-router-dom';
 
 const Profile = ({ setSearchStatus, searchStatus }) => {
+  let history = useHistory();
   const [activeMenu, setActiveMenu] = useState(false);
   const [activeAlarm, setActiveAlarm] = useState(false);
   const { logout } = SignHook();
+  const navigate = (params) => {
+    history.push(params);
+  };
+
   return (
     <ul className={'profile-container'}>
       <li className="mypage">
-        <div
+        {/* <div
           className="mr19 common-icon-size"
           onMouseUpCapture={() => {
             setSearchStatus(!searchStatus);
@@ -30,7 +36,7 @@ const Profile = ({ setSearchStatus, searchStatus }) => {
           }}
         >
           <img src={alam} alt="search" />
-        </div>
+        </div> */}
         <div onMouseUpCapture={() => setActiveMenu(!activeMenu)}>
           <img src={defaultProfile} alt="user-img" />
         </div>

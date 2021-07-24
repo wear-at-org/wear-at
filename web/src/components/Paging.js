@@ -1,25 +1,20 @@
 import React from 'react';
-import arrRight from 'assets/img/arr-right-b.png';
-import arrLeft from 'assets/img/arr-left-b.png';
-import dotV from 'assets/img/dot-v.png';
+import ReactPaginate from 'react-paginate';
 
-const Paginig = () => {
+const Paginig = ({ setFilter, filter, totalPages }) => {
   return (
-    <div className="paging-container">
-      <div className="paging-item arr">
-        <img src={arrLeft} alt="" />
-      </div>
-      <div className="paging-item active">1</div>
-      <div className="paging-item">2</div>
-      <div className="paging-item">3</div>
-      <div className="paging-item">4</div>
-      <div className="paging-item dot">
-        <img src={dotV} alt="" />
-      </div>
-      <div className="paging-item arr">
-        <img src={arrRight} alt="" />
-      </div>
-    </div>
+    <ReactPaginate
+      previousLabel={''}
+      nextLabel={''}
+      breakLabel={'...'}
+      breakClassName={'break-me'}
+      pageCount={totalPages}
+      marginPagesDisplayed={2}
+      pageRangeDisplayed={5}
+      onPageChange={({ selected }) => setFilter({ ...filter, page: selected * 1 })}
+      containerClassName={'paging-container'}
+      activeClassName={'active'}
+    />
   );
 };
 

@@ -2,22 +2,22 @@ import React, { useState, useEffect } from 'react';
 import Lnb from 'components/layout/Lnb';
 import Paginig from 'components/Paging';
 import StyleTestItem from './components/StyleTestItem';
-import { styleTestListItem } from 'assets/common/commonData';
 import StyleDetailModal from './components/StyleDetailModal';
 import useStepHook from 'hooks/useStepHook';
 
 const StyleTestList = () => {
   const [showPop, setShowPop] = useState(false);
   const [clickId, setClickId] = useState('');
-  const { getStyleTestList } = useStepHook();
+  const { getStyleTestList, stylesTestList } = useStepHook();
   const [filter, setFilter] = useState({
     pageSize: 10,
-    pageNumber: 0,
+    page: 0,
   });
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     getStyleTestList({ ...filter });
-  }, []);
+  }, [filter]);
 
   return (
     <>
@@ -34,23 +34,18 @@ const StyleTestList = () => {
                 <div>
                   <select className="select-style2" name="" id="" required onChange={(e) => console.log(e.target.value)}>
                     <option value="">최신순</option>
-                    <option value="">최신순</option>
-                    <option value="">최신순</option>
-                    <option value="">최신순</option>
-                    <option value="">최신순</option>
-                    <option value="">최신순</option>
                   </select>
                 </div>
               </div>
 
               <div className="item-list mb42">
-                {styleTestListItem.map((item, index) => {
+                {stylesTestList.content.map((item, index) => {
                   return <StyleTestItem key={'test' + index} item={item} setClickId={setClickId} setShowPop={setShowPop} />;
                 })}
               </div>
 
               <div>
-                <Paginig />
+                <Paginig setFilter={setFilter} filter={filter} pagingInfo={stylesTestList.pageable} totalPages={stylesTestList.totalPages} />
               </div>
             </div>
           </div>

@@ -2,6 +2,7 @@ package com.side.wearat.service;
 
 import com.side.wearat.entity.User;
 import com.side.wearat.model.user.CreateUserRequest;
+import com.side.wearat.model.user.PasswordRequest;
 import com.side.wearat.model.user.UpdateUserRequest;
 
 import java.util.List;
@@ -16,11 +17,15 @@ public interface UserService {
 
     Optional<User> getUserByProvider(String provider, String providerId);
 
-    boolean existsByEmail(Long id, String email);
+    Optional<User> getUserByNameAndBirth(String name, String year, String month, String day);
+
+    boolean existsByEmail(String email);
 
     boolean existsByNickname(Long id, String nickname);
 
     User createUser(CreateUserRequest req);
 
     void updateUser(UpdateUserRequest req);
+
+    void updatePassword(long id, String password);
 }

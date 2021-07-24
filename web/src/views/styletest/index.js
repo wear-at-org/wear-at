@@ -9,25 +9,50 @@ import StyleTestHeader from './steps/StyleTestHeader';
 import StepHook from 'hooks/useStepHook';
 
 const Styletest = (props) => {
-  console.log(props);
   const [apiId, setApiId] = useState(0);
-  const { makeStyleTestList } = StepHook();
+  const { makeStyleTestList, setAnswers, answers } = StepHook();
   const [stepArray, setStepArray] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const hooks = StepHook();
 
   useEffect(() => {
-    const makeList = async () => {
-      api.get('subscribe/query').then(async ({ data }) => {
-        const { resultArray, id } = await makeStyleTestList(data);
-        setApiId(id);
-        setStepArray(resultArray);
+    if (props.location.state) {
+      const answerParams = props.location.state.params.answer;
+      setAnswers({
+        ...answers,
+        id: 'ing',
+        answer: answerParams.map((i) => {
+          return {
+            id: i.queryItemId,
+            queryId: i.queryId,
+            answer: i.answer,
+          };
+        }),
       });
-    };
-
-    makeList();
+    } else {
+      setAnswers({ ...answers, id: 'ing', answer: [] });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    const makeList = async () => {
+      api.get('subscribe/query').then(async ({ data }) => {
+        let idParams = false;
+        console.log(props.location.state);
+        if (props.location.state) {
+          idParams = props.location.state.params.id;
+        }
+        makeStyleTestList(data, idParams).then((res) => {
+          setApiId(res.id);
+          setStepArray(res.resultArray);
+        });
+      });
+    };
+    if (answers.id !== 'init') {
+      makeList();
+    }
+  }, [answers]);
 
   const goNextStep = () => {
     const insertStep = activeIndex + 1;
@@ -41,18 +66,57 @@ const Styletest = (props) => {
     }
     switch (type) {
       case 'U_LIST_ITEMS':
-        console.log(item);
-        return <StepListItem item={items} hooks={hooks} goNextStep={goNextStep} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} />;
+        return (
+          <StepListItem
+            item={items}
+            hooks={hooks}
+            goNextStep={goNextStep}
+            key={'style-' + index}
+            apiId={apiId}
+            activeIndex={activeIndex}
+            answers={answers}
+          />
+        );
       case 'U_LIST_IMAGES':
-        return <StepListImage item={items} hooks={hooks} goNextStep={goNextStep} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} />;
+        return (
+          <StepListImage
+            item={items}
+            hooks={hooks}
+            goNextStep={goNextStep}
+            key={'style-' + index}
+            apiId={apiId}
+            activeIndex={activeIndex}
+            answers={answers}
+          />
+        );
       case 'U_LIST_2DEP_ITEMS':
-        return <StepTwoDepthItem item={items} hooks={hooks} goNextStep={goNextStep} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} />;
+        return (
+          <StepTwoDepthItem
+            item={items}
+            hooks={hooks}
+            goNextStep={goNextStep}
+            key={'style-' + index}
+            apiId={apiId}
+            activeIndex={activeIndex}
+            answers={answers}
+          />
+        );
       case 'U_LIST_BODY':
-        return <StepListBody item={items} hooks={hooks} goNextStep={goNextStep} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} />;
+        return (
+          <StepListBody
+            item={items}
+            hooks={hooks}
+            goNextStep={goNextStep}
+            key={'style-' + index}
+            apiId={apiId}
+            activeIndex={activeIndex}
+            answers={answers}
+          />
+        );
       case 'U_UPLOAD_IMAGE':
-        return <StepUploadImage item={items} hooks={hooks} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} />;
+        return <StepUploadImage item={items} hooks={hooks} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} answers={answers} />;
       default:
-        return <StepListItem item={items} goNextStep={goNextStep} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} />;
+        return <StepListItem item={items} goNextStep={goNextStep} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} answers={answers} />;
     }
   };
 

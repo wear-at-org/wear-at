@@ -577,7 +577,32 @@ footer {
   align-items: center;
   justify-content: center;
 
-  .paging-item {
+  li.next a {
+    background-image: url('../img/arr-right-b.png');
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    display: block;
+  }
+
+  li.previous a {
+    background-image: url('../img/arr-left-b.png');
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    display: block;
+  }
+
+  li.active {
+    a {
+      color: $optionBlue;
+    }
+  }
+  li a {
     cursor: pointer;
     font-size: 14px;
     font-weight: 600;
@@ -588,18 +613,10 @@ footer {
     &:hover {
       color: $optionBlue;
     }
-    &.active {
-      color: $optionBlue;
-    }
 
     &.arr img {
       width: 24px;
       height: 24px;
-    }
-
-    &.dot img {
-      width: 20px;
-      height: 20px;
     }
   }
 }

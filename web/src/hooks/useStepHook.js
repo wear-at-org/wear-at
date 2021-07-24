@@ -4,8 +4,22 @@ import { useHistory } from 'react-router-dom';
 
 const StepHook = () => {
   const history = useHistory();
-  const [answers, setAnswers] = useState({ answer: [], completed: false, id: 'notComplete' });
+  const [answers, setAnswers] = useState({ answer: [], completed: false, id: 'init' });
+  const [stylesTestList, setStyleTestList] = useState({
+    content: [],
+    totalElements: 0,
+    totalPages: 0,
+    pageable: {
+      offset: 0,
+      pageNumber: 0,
+      pageSize: 10,
+      paged: true,
+    },
+  });
 
+  useEffect(() => {
+    console.log(answers);
+  }, [answers]);
   // 파일 업로드
   const uploadFile = async (files) => {
     const formData = new FormData();
@@ -22,16 +36,20 @@ const StepHook = () => {
 
   const getStyleTestList = async ({ size = 10, page = 0 }) => {
     const res = await api.get(`subscribe?size=${size}&page=${page}`);
-    console.log(res);
+    setStyleTestList(res.data ? res.data : {});
   };
 
   // 스타일 테스트 리스트를 프론트 개발에 맞게 변환
-  const makeStyleTestList = async (list) => {
-    const res = await api.post('subscribe', {
-      answers: [],
-      completed: false,
-    });
-    const resultArray = [];
+  const makeStyleTestList = async (list, id) => {
+    let resultArray = [];
+    let insertId = id;
+    if (!id) {
+      const res = await api.post('subscribe', {
+        answers: [],
+        completed: false,
+      });
+      insertId = res.data.id;
+    }
     await list.forEach((item) => {
       const { uiType } = item;
       const findIndex = resultArray.findIndex((findType) => findType.type === uiType);
@@ -42,11 +60,12 @@ const StepHook = () => {
       }
     });
 
-    return { resultArray, id: res.data.id };
+    return { resultArray, id: insertId };
   };
 
   // answer를 넣기 위해 리스트 재배열
-  const makeInsertList = (list) => {
+  const makeInsertList = (list, answers) => {
+    console.log(answers);
     const insertList = list.map((i) => {
       const { queryItems, queryCategories } = i;
       return {
@@ -148,14 +167,16 @@ const StepHook = () => {
       answer: [...result],
     });
 
-    const ansersArr = result.map((item) => {
+    let ansersArr = result.map((item) => {
       return {
         answer: item.answer,
         id,
         queryId: item.queryId,
-        queryItemId: item.queryItemId,
+        queryItemId: item.id,
       };
     });
+
+    ansersArr = ansersArr.filter((i) => i.answer);
 
     await api.post('subscribe', {
       id,
@@ -178,6 +199,7 @@ const StepHook = () => {
     setAnswers,
     uploadFile,
     getStyleTestList,
+    stylesTestList,
   };
 };
 

@@ -35,6 +35,7 @@ Axios.interceptors.response.use(
     // 추후 403, 400, 500등 에러 발생시 에러처리
     // 토큰 재발급도 이곳에서
     dispatch(minusAsyncCountValue());
+    console.log(error.response);
     const errorStatus = error.response.status;
 
     // 소셜 로그인 후 필수 항목을 입력 하지 않았을 경우

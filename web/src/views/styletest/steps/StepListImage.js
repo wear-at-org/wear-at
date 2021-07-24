@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import NextBtn from './NextBtn';
 
-const StepListImage = ({ item, goNextStep, hooks, apiId }) => {
+const StepListImage = ({ item, goNextStep, hooks, apiId, answers }) => {
   const { makeInsertList, beforeNextChecker, selectQueryItem } = hooks;
   const [status, setStatus] = useState('init');
   const [list, setList] = useState([]);
 
   useEffect(() => {
     setStatus('start');
-    setList(makeInsertList(item));
+    setList(makeInsertList(item, answers));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [answers]);
 
   return (
     <div className={`step-container ${status}`}>

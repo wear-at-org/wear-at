@@ -27,7 +27,7 @@ public class UserServiceTest {
 
     @Test
     public void testUser() {
-        UserService userService = new UserServiceImpl(userRepository);
+        UserService userService = new UserServiceImpl(userRepository,null);
 
         List<User> users1 = userService.listUsers();
 

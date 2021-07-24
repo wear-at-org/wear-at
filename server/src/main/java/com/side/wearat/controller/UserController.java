@@ -67,7 +67,7 @@ public class UserController {
         if (id == null) {
             id = -999L;
         }
-        boolean duplicated = this.userService.existsByEmail(id, email);
+        boolean duplicated = this.userService.existsByEmail(email);
 
         JsonObject resp = new JsonObject();
         resp.addProperty("duplicated", duplicated);
@@ -84,13 +84,5 @@ public class UserController {
         JsonObject resp = new JsonObject();
         resp.addProperty("duplicated", duplicated);
         return new ResponseEntity(resp.toString(), HttpStatus.OK);
-    }
-
-    @PostMapping(path = "/find-id")
-    public void find() {
-    }
-
-    @PostMapping(path = "/find-password")
-    public void findPassword() {
     }
 }

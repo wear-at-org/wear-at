@@ -13,7 +13,26 @@ const useEditUserInfo = () => {
     getMydata();
   }, []);
 
-  return [user, dispatch];
+  const updateUserInfo = async () => {
+    console.log(user);
+    await api.put('user', {
+      address: user.address,
+      birthday: user.birthday,
+      birthmonth: user.birthmonth,
+      birthyear: user.birthyear,
+      checkPrivacyPolicy: user.checkPrivacyPolicy,
+      checkReceivingConsent: user.checkReceivingConsent,
+      checkServiceTerms: user.checkServiceTerms,
+      detailAddress: user.detailAddress,
+      email: user.email,
+      gender: user.gender,
+      id: user.id,
+      name: user.name,
+      nickname: user.nickname,
+      zipCode: user.zipCode,
+    });
+  };
+  return { user, dispatch, updateUserInfo };
 };
 
 export default useEditUserInfo;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import NextBtn from './NextBtn';
 
-const StepTwoDepthItem = ({ item, goNextStep, hooks, apiId }) => {
+const StepTwoDepthItem = ({ item, goNextStep, hooks, apiId, answers }) => {
   const { makeInsertList, beforeNextChecker, selectQueryItem } = hooks;
   const [selectQueryId, setSelectQueryId] = useState('');
   const [status, setStatus] = useState('init');
@@ -9,9 +9,9 @@ const StepTwoDepthItem = ({ item, goNextStep, hooks, apiId }) => {
 
   useEffect(() => {
     setStatus('start');
-    setList(makeInsertList(item));
+    setList(makeInsertList(item, answers));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [answers]);
 
   return (
     <div className={`step-container ${status}`}>

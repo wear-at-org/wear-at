@@ -11,7 +11,7 @@ const SnsLogin = () => {
   const history = useHistory();
   const { signup } = SignHook();
   const [user, dispatch] = useReducer(userReducer, initData);
-  
+
   const signupProcess = async (e) => {
     e.preventDefault();
     await signup(user, true);
@@ -30,7 +30,7 @@ const SnsLogin = () => {
 
   const isCompleteSNSUser = (u) => {
     return u && u.nickname;
-  }
+  };
 
   const postProcess = (u) => {
     store.dispatch(
@@ -44,7 +44,6 @@ const SnsLogin = () => {
         loginStatus: 'login',
       }),
     );
-    
   };
 
   useEffect(() => {
@@ -56,7 +55,7 @@ const SnsLogin = () => {
       history.push('/');
       return;
     }
-    
+
     const getUserData = async () => {
       const { data } = await api.get(`user/${id}/partial`);
 
@@ -182,7 +181,6 @@ const SnsLogin = () => {
                     className="radio-style-0"
                     name="gender"
                     checked={user.gender === 'w'}
-                    value={'w'}
                     onChange={(e) => {
                       dispatch({ type: 'CHANGE_GENDER', gender: 'w' });
                     }}
@@ -196,7 +194,6 @@ const SnsLogin = () => {
                     className="radio-style-0"
                     name="gender"
                     checked={user.gender === 'm'}
-                    value={'m'}
                     onChange={(e) => {
                       dispatch({ type: 'CHANGE_GENDER', gender: 'm' });
                     }}
@@ -220,7 +217,7 @@ const SnsLogin = () => {
                     id="year"
                     required
                     onChange={(e) => dispatch({ type: 'CHANHE_YEAR', year: e.target.value })}
-                    value={ user.birthyear ?? '' }
+                    value={user.birthyear || ''}
                   >
                     <option value="" disabled hidden>
                       년도
@@ -243,7 +240,7 @@ const SnsLogin = () => {
                     id="month"
                     required
                     onChange={(e) => dispatch({ type: 'CHANHE_MONTH', month: e.target.value })}
-                    value={ user.birthmonth ?? '' }
+                    value={user.birthmonth || ''}
                   >
                     <option value="" disabled hidden>
                       월
@@ -265,7 +262,7 @@ const SnsLogin = () => {
                     id="day"
                     required
                     onChange={(e) => dispatch({ type: 'CHANHE_DAY', day: e.target.value })}
-                    value={ user.birthday ?? '' }
+                    value={user.birthday || ''}
                   >
                     <option value="" disabled hidden>
                       일
