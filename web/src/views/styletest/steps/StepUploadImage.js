@@ -9,9 +9,26 @@ const StepUploadImage = ({ item, hooks, apiId }) => {
   const [list, setList] = useState([]);
 
   const makeList = async () => {
-    console.log(files);
-    const res = await uploadFile(files.map((i) => i.object));
-    console.log(res);
+    const {
+      data: { urls },
+    } = await uploadFile(files.map((i) => i.object));
+    console.log(urls);
+    const resultItem = await urls.map((url) => {
+      return {
+        answer: url,
+        queryId: apiId,
+      };
+    });
+    console.log(resultItem);
+    const insertList = [
+      {
+        id: apiId,
+        queryCategories: [],
+        queryItems: resultItem,
+      },
+    ];
+
+    await beforeNextChecker(insertList, apiId, true);
   };
 
   useEffect(() => {

@@ -160,7 +160,6 @@ const DragImagUpload = ({ files, setFiles }) => {
                   </div>
 
                   <div className="chkbox-con">
-                    {file.id}
                     <input
                       type="checkbox"
                       className="input-style-checkbox"

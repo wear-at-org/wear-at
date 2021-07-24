@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Lnb from 'components/layout/Lnb';
 import Paginig from 'components/Paging';
 import StyleTestItem from './components/StyleTestItem';
 import { styleTestListItem } from 'assets/common/commonData';
 import StyleDetailModal from './components/StyleDetailModal';
+import useStepHook from 'hooks/useStepHook';
 
 const StyleTestList = () => {
   const [showPop, setShowPop] = useState(false);
   const [clickId, setClickId] = useState('');
+  const { getStyleTestList } = useStepHook();
+  const [filter, setFilter] = useState({
+    pageSize: 10,
+    pageNumber: 0,
+  });
+
+  useEffect(() => {
+    getStyleTestList({ ...filter });
+  }, []);
+
   return (
     <>
       <StyleDetailModal showPop={showPop} setShowPop={setShowPop} clickId={clickId} />

@@ -6,6 +6,7 @@ const StepHook = () => {
   const history = useHistory();
   const [answers, setAnswers] = useState({ answer: [], completed: false, id: 'notComplete' });
 
+  // 파일 업로드
   const uploadFile = async (files) => {
     const formData = new FormData();
     Array.from(files).forEach((f, idx) => formData.append(`files`, f));
@@ -17,6 +18,11 @@ const StepHook = () => {
     });
 
     return result;
+  };
+
+  const getStyleTestList = async ({ size = 10, page = 0 }) => {
+    const res = await api.get(`subscribe?size=${size}&page=${page}`);
+    console.log(res);
   };
 
   // 스타일 테스트 리스트를 프론트 개발에 맞게 변환
@@ -111,7 +117,6 @@ const StepHook = () => {
   };
 
   const beforeNextChecker = async (list, id, isLast = false) => {
-    console.log(list);
     window.scrollTo(0, 0);
     let result = [...answers.answer];
     for (let i in list) {
@@ -138,8 +143,6 @@ const StepHook = () => {
       }
     }
 
-    console.log('result');
-    console.log(result);
     setAnswers({
       ...answers,
       answer: [...result],
@@ -174,6 +177,7 @@ const StepHook = () => {
     answers,
     setAnswers,
     uploadFile,
+    getStyleTestList,
   };
 };
 

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Intro0 from 'assets/img/intro0.png';
+import { useHistory } from 'react-router-dom';
 
 const IntroVisual = () => {
+  const history = useHistory();
   const [start, setStart] = useState(false);
 
   useEffect(() => {
@@ -40,7 +42,7 @@ const IntroVisual = () => {
           <img src={Intro0} alt="Main-img" />
         </div>
 
-        <div className="btn-style1 large width-fit">
+        <div className="btn-style1 large width-fit" onClick={() => history.push('/styleTestIntro')}>
           <p className="btn-font font-white d-flex y-center">30초만에 무료 스타일테스트 진행하기</p>
         </div>
       </div>

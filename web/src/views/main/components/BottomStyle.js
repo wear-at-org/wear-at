@@ -1,6 +1,9 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
-const MainBottom = () => (
+const MainBottom = () => {
+  const history = useHistory();
+  return (
   <div className="main-bottom-container">
     <div className="col-12 col-center mw-520">
       <div className="tc mb24">
@@ -10,7 +13,7 @@ const MainBottom = () => (
       </div>
 
       <div className="btn-row">
-        <div className="btn-style1 type-black center middle mr0 mr-sm-12 mb15 mb-sm-0">
+        <div className="btn-style1 type-black center middle mr0 mr-sm-12 mb15 mb-sm-0" onClick={() => history.push('/styleTestIntro')}>
           <p className="btn-font font-white">무료 스타일테스트 할래요</p>
         </div>
         <div className="btn-style2 middle center ml0 ml-sm-12">
@@ -19,6 +22,6 @@ const MainBottom = () => (
       </div>
     </div>
   </div>
-);
+)};
 
 export default MainBottom;

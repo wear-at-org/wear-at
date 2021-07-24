@@ -8,7 +8,8 @@ import StepUploadImage from './steps/StepUploadImage';
 import StyleTestHeader from './steps/StyleTestHeader';
 import StepHook from 'hooks/useStepHook';
 
-const Styletest = () => {
+const Styletest = (props) => {
+  console.log(props);
   const [apiId, setApiId] = useState(0);
   const { makeStyleTestList } = StepHook();
   const [stepArray, setStepArray] = useState([]);
