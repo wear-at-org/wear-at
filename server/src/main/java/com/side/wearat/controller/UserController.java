@@ -79,12 +79,4 @@ public class UserController {
         resp.addProperty("duplicated", duplicated);
         return new ResponseEntity(resp.toString(), HttpStatus.OK);
     }
-
-    @PostMapping(path = "/find-id")
-    public void find() {
-    }
-
-    @PostMapping(path = "/find-password")
-    public void findPassword() {
-    }
 }

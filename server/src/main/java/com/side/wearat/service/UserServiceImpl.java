@@ -5,22 +5,29 @@ import com.side.wearat.entity.User;
 import com.side.wearat.model.user.CreateUserRequest;
 import com.side.wearat.model.user.UpdateUserRequest;
 import com.side.wearat.repository.UserRepository;
+import com.side.wearat.repository.UserRepositorySupport;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
 
+    private UserRepositorySupport userRepositorySupport;
+
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, UserRepositorySupport userRepositorySupport) {
         this.userRepository = userRepository;
+        this.userRepositorySupport = userRepositorySupport;
     }
 
     @Override
@@ -41,6 +48,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> getUserByProvider(String provider, String providerId) {
         return this.userRepository.findByProviderAndProviderId(provider, providerId);
+    }
+
+    @Override
+    public Optional<User> getUserByNameAndBirth(String name, String year, String month, String day) {
+        return this.userRepository.findByNameAndBirthyearAndBirthmonthAndBirthday(name, year, month, day);
     }
 
     @Override
@@ -80,6 +92,7 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.save(user);
     }
 
+    @Override
     public void updateUser(UpdateUserRequest req) {
         Long userId = ContextHolder.getUserID();
         Optional<User> userOpt = this.getUser(req.getId());
@@ -127,5 +140,11 @@ public class UserServiceImpl implements UserService {
             user.setUpdateAt(LocalDateTime.now());
             this.userRepository.save(user);
         });
+    }
+
+    @Override
+    @Transactional
+    public void updatePassword(long id, String password) {
+        userRepositorySupport.updateUserPassword(id, password);
     }
 }

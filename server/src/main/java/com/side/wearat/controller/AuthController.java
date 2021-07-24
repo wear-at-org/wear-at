@@ -6,6 +6,7 @@ import com.side.wearat.entity.User;
 import com.side.wearat.exception.UnAuthorizedException;
 import com.side.wearat.model.auth.*;
 import com.side.wearat.model.user.CreateUserRequest;
+import com.side.wearat.model.user.PasswordRequest;
 import com.side.wearat.model.user.UpdateUserRequest;
 import com.side.wearat.service.AuthService;
 import com.side.wearat.service.UserService;
@@ -168,6 +169,42 @@ public class AuthController {
         String redirectUrl = String.format("%s/sns-login?id=%d", this.authConfig.getClientRedirectUrl(), u.getId());
         headers.add("Location", redirectUrl);
         return new ResponseEntity<>(headers,HttpStatus.TEMPORARY_REDIRECT);
+    }
+
+    @PostMapping(path = "/find-email")
+    public ResponseEntity<String> findEmail(@RequestBody FindEmailRequest req) throws Exception {
+        Optional<User> user = userService.getUserByNameAndBirth(req.getName(), req.getBirthyear(), req.getBirthmonth(), req.getBirthday());
+        if (user.isEmpty()) {
+            throw new Exception("가입된 이메일을 찾을 수 없습니다.");
+        }
+
+        JsonObject resp = new JsonObject();
+        resp.addProperty("email", user.get().getEmail());
+        return new ResponseEntity(resp.toString(), HttpStatus.OK);
+    }
+
+    @PostMapping(path = "/find-password")
+    public ResponseEntity<Void> findPassword(@RequestBody FindPasswordRequest req) throws Exception {
+        Optional<User> user = userService.getUserByEmail(req.getEmail());
+        if (user.isEmpty()) {
+            throw new Exception("가입된 이메일을 찾을 수 없습니다.");
+        }
+        User u = user.get();
+
+        authService.sendPasswordEmail(u);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping(path = "/update-password")
+    public ResponseEntity<Void> updatePassword(@RequestBody PasswordRequest req) throws Exception {
+        UserPasswordClaim claim = authService.parsePasswordToken(req.getToken());
+
+        long id = claim.getId();
+        String password = authService.encryptPassword(req.getPassword());
+        userService.updatePassword(id, password);
+
+        return ResponseEntity.ok().build();
     }
 
     private boolean isSNSAuthCompletely(User u) {

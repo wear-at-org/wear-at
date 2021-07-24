@@ -34,9 +34,7 @@ public class WebConfig implements WebMvcConfigurer {
                     "/v1/auth/**",
                     "/v1/user/*/partial",
                     "/v1/user/check-email",
-                    "/v1/user/check-nickname",
-                    "/v1/user/find-id",
-                    "/v1/user/find-password"
+                    "/v1/user/check-nickname"
                 );
     }
 }
