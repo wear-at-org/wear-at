@@ -4,9 +4,7 @@ export default function Swich(props) {
   const { active } = props;
   const [isActive, setIsActive] = useState(active);
   const clcikEvent = () => {
-    console.log('click');
     setIsActive(!isActive);
-    console.log(isActive);
     props.clickEvent(!isActive);
   };
   return (

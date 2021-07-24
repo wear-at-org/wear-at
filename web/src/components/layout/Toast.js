@@ -7,12 +7,10 @@ const ToastAlertGroup = () => {
   const dispatch = useDispatch();
   const { alertList } = useSelector((state) => state[toastAlertName]);
 
-  return (
-    alertList.map(({ key, title }) => (
-      <div className="toast" onClick={() => dispatch(removeToast({ key }))}>
-        { title}
-      </div>
-    ))
-  );
+  return alertList.map(({ key, title }) => (
+    <div className="toast" onClick={() => dispatch(removeToast({ key }))}>
+      {title}
+    </div>
+  ));
 };
 export default ToastAlertGroup;

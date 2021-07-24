@@ -1,6 +1,5 @@
 package com.side.wearat.service;
 
-import com.side.wearat.context.ContextHolder;
 import com.side.wearat.entity.User;
 import com.side.wearat.model.user.CreateUserRequest;
 import com.side.wearat.model.user.UpdateUserRequest;
@@ -61,8 +60,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean existsByNickname(String nickname) {
-        return this.userRepository.existsByNickname(nickname);
+    public boolean existsByNickname(Long id, String nickname) {
+        return this.userRepository.existsByIdNotAndNickname(id, nickname);
     }
 
     @Override
@@ -94,7 +93,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(UpdateUserRequest req) {
-        Long userId = ContextHolder.getUserID();
         Optional<User> userOpt = this.getUser(req.getId());
         userOpt.ifPresent(user -> {
             if (StringUtils.hasText(req.getName())) {
@@ -136,7 +134,7 @@ public class UserServiceImpl implements UserService {
             if (req.getCheckServiceTerms() != null) {
                 user.setCheckReceivingConsent(req.getCheckReceivingConsent());
             }
-            user.setUpdateUser(userId.toString());
+            user.setUpdateUser(req.getId().toString());
             user.setUpdateAt(LocalDateTime.now());
             this.userRepository.save(user);
         });

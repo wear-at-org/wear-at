@@ -1,54 +1,27 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import Address from './Address';
-import api from 'api';
+import React, { useState, useEffect } from 'react';
+import Address from '../../components/Address';
+import useEditUserInfo from 'hooks/useEditUserInfo';
+import Lnb from 'components/layout/Lnb';
+import { checkNicknameApi } from 'utils/UserReducer';
 import ImageUpload from 'components/ImageUpload';
 
 const Mypage = () => {
-  useEffect(() => {
-    const getMydata = async () => {
-      const { data } = await api.get('user');
-      console.log(data);
-    };
-    getMydata();
-  }, []);
   const [showPost, setShowPost] = useState(false);
-  const [post, setPost] = useState({});
-  const [user, setUser] = useState({});
+  const { user, dispatch, updateUserInfo } = useEditUserInfo();
+
+  const onChangeAdress = (e) => {};
 
   return (
     <div className="sub layout-sub">
-      <div className="col-12 col-center mw-1034">
-        <form className="mypage-container pr15 pl15">
-          <div className="left-router">
-            <h4 className="mb24 fontweight700">안녕하세요 {user.nickName}</h4>
+      <div className="col-12 col-center mw-1280">
+        <div className="show-mobile mb24 mb-sm-0">
+          <ImageUpload isMypage={true} />
+        </div>
 
-            <ImageUpload />
-
-            <div className="left-link-container">
-              <ul>
-                <li>
-                  <Link>스타일테스트 내역</Link>
-                </li>
-                <li>
-                  <Link>북마크</Link>
-                </li>
-                <li>
-                  <Link>작성한 글</Link>
-                </li>
-                <li className="active">
-                  <Link>프로필 수정</Link>
-                </li>
-                <li>
-                  <Link>비밀번호 변경</Link>
-                </li>
-                <li className="logout">로그아웃</li>
-              </ul>
-            </div>
-          </div>
-
+        <form className="mypage-container pr24 pl24">
+          <Lnb />
           <div className="right-container">
-            <h5 className="mb20 fontweight700">기본정보</h5>
+            <h5 className="mb20 bold">기본정보</h5>
 
             <div className="mb20">
               <div className="label-container">
@@ -59,6 +32,9 @@ const Mypage = () => {
 
               <div className="mb6">
                 <input
+                  readOnly={true}
+                  disabled={true}
+                  value={user.email || ''}
                   type="text"
                   className="input-style1"
                   id="name"
@@ -75,7 +51,18 @@ const Mypage = () => {
               </div>
 
               <div className="mb6">
-                <input type="text" className="input-style1" id="name" placeholder="홍길동" />
+                <input
+                  readOnly={true}
+                  disabled={true}
+                  type="text"
+                  className="input-style1"
+                  id="name"
+                  placeholder="홍길동"
+                  value={user.name || ''}
+                  onChange={(e) => {
+                    dispatch({ type: 'CHANGE_NAME', name: e.target.value });
+                  }}
+                />
               </div>
             </div>
 
@@ -88,30 +75,70 @@ const Mypage = () => {
 
               <div className="date-birth-container">
                 <div className="width-per-33 pl4 pr4">
-                  <select className="select-style1" name="" id="" required>
-                    <option value="" disabled selected hidden>
+                  <select
+                    className="select-style1"
+                    id="year"
+                    required
+                    onChange={(e) => dispatch({ type: 'CHANHE_YEAR', year: e.target.value })}
+                    value={user.birthyear || ''}
+                  >
+                    <option value="" disabled hidden>
                       년도
                     </option>
-                    <option value="aa">aa</option>
+                    {Array(60)
+                      .fill(0)
+                      .map((n, i) => {
+                        const startYear = new Date().getFullYear();
+                        return (
+                          <option value={startYear - i} key={startYear - i + 'year'}>
+                            {startYear - i}
+                          </option>
+                        );
+                      })}
                   </select>
                 </div>
                 <div className="width-per-33 pl4 pr4">
-                  <select className="select-style1" name="" id="" required>
-                    <option value="" disabled selected hidden>
+                  <select
+                    className="select-style1"
+                    id="month"
+                    required
+                    onChange={(e) => dispatch({ type: 'CHANHE_MONTH', month: e.target.value })}
+                    value={user.birthmonth || ''}
+                  >
+                    <option value="" disabled hidden>
                       월
                     </option>
-                    <option value="bb">bb</option>
+                    {Array(12)
+                      .fill(0)
+                      .map((n, i) => {
+                        return (
+                          <option value={i + 1} key={i + 1 + 'moment'}>
+                            {i + 1}
+                          </option>
+                        );
+                      })}
                   </select>
                 </div>
                 <div className="width-per-33 pl4 pr4">
-                  <select className="select-style1" name="" id="" required>
-                    <option value="" disabled selected hidden>
+                  <select
+                    className="select-style1"
+                    id="day"
+                    required
+                    onChange={(e) => dispatch({ type: 'CHANHE_DAY', day: e.target.value })}
+                    value={user.birthday || ''}
+                  >
+                    <option value="" disabled hidden>
                       일
                     </option>
-                    <option value="cc">cc</option>
-                    <option value="cc">cc</option>
-                    <option value="cc">cc</option>
-                    <option value="cc">cc</option>
+                    {Array(31)
+                      .fill(0)
+                      .map((n, i) => {
+                        return (
+                          <option value={i + 1} key={i + 1 + 'day'}>
+                            {i + 1}
+                          </option>
+                        );
+                      })}
                   </select>
                 </div>
               </div>
@@ -125,37 +152,66 @@ const Mypage = () => {
               </div>
               <div className="radio-wrap">
                 <div className="radio-btn-con">
-                  <input type="radio" id="woman" className="radio-style-0" name="gender" checked />
+                  <input
+                    type="radio"
+                    id="woman"
+                    className="radio-style-0"
+                    name="gender"
+                    checked={user.gender === 'w'}
+                    onChange={(e) => {
+                      dispatch({ type: 'CHANGE_GENDER', gender: 'w' });
+                    }}
+                  />
                   <label htmlFor="woman">여자</label>
                 </div>
                 <div className="radio-btn-con">
-                  <input type="radio" id="man" className="radio-style-0" name="gender" />
+                  <input
+                    type="radio"
+                    id="man"
+                    className="radio-style-0"
+                    name="gender"
+                    checked={user.gender === 'm'}
+                    onChange={(e) => {
+                      dispatch({ type: 'CHANGE_GENDER', gender: 'm' });
+                    }}
+                  />
                   <label htmlFor="man">남자</label>
-                </div>
-                <div className="radio-btn-con">
-                  <input type="radio" id="none" className="radio-style-0" name="gender" />
-                  <label htmlFor="none">선택안함</label>
                 </div>
               </div>
             </div>
 
-            <div className="">
-              <h5 className="mb20 fontweight700">추가정보</h5>
+            <div>
+              <h5 className="mb20 bold">추가정보</h5>
 
               <div className="mb20">
                 <div className="label-container">
-                  <label htmlFor="name" className="input-label-style1">
+                  <label htmlFor="email" className="input-label-style1">
                     닉네임 변경
                   </label>
                 </div>
 
-                <div className="mb6">
-                  <input
-                    type="text"
-                    className="input-style1"
-                    id="name"
-                    placeholder="소소한다람쥐"
-                  />
+                <div className="mb16">
+                  <div className="input-container">
+                    <input
+                      type="nickname"
+                      className={'input-style1 with-button'}
+                      id="nickname"
+                      placeholder="wearAt"
+                      onChange={(e) => dispatch({ type: 'CHANGE_NICKNAME', nickname: e.target.value })}
+                      value={user.nickname || ''}
+                    />
+
+                    <button
+                      disabled={user.nickname === '' || user.checkNickName}
+                      className="ml16 check-btn-style1"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        checkNicknameApi(user.id, user.nickname, dispatch);
+                      }}
+                    >
+                      중복확인
+                    </button>
+                  </div>
                 </div>
               </div>
 
@@ -168,21 +224,11 @@ const Mypage = () => {
 
                 <div className="d-flex">
                   <div className="adress-container pr8">
-                    <input
-                      type="text"
-                      className="input-style1"
-                      id="name"
-                      placeholder="우편번호"
-                      readOnly
-                    />
+                    <input type="text" className="input-style1" id="name" placeholder="우편번호" readOnly value={user.zipCode || ''} />
                   </div>
 
                   <div className="address-btn-container">
-                    <div className="width-100 btn-style1">
-                      <p className="btn-font font-white tc" onClick={() => setShowPost(!showPost)}>
-                        주소검색
-                      </p>
-                    </div>
+                    <input readOnly value="주소검색" className="btn-style1 wid100 btn-font font-white" onClick={() => setShowPost(!showPost)} />
                   </div>
                 </div>
               </div>
@@ -191,8 +237,9 @@ const Mypage = () => {
             <Address
               showPost={showPost}
               setShowPost={setShowPost}
-              onChange={(value) => {
-                console.log(value);
+              onChange={({ address, zipCode }) => {
+                dispatch({ type: 'CHANGE_ADDRESS', address });
+                dispatch({ type: 'CHANGE_ZIPCODE', zipCode });
               }}
             />
 
@@ -204,6 +251,7 @@ const Mypage = () => {
                   id="name"
                   placeholder="검색버튼을 눌러 주소를 검색해주세요."
                   readOnly
+                  value={user.address || ''}
                 />
               </div>
               <div>
@@ -212,31 +260,43 @@ const Mypage = () => {
                   className="input-style1"
                   id="name"
                   placeholder="상세주소를 입력해주세요."
+                  value={user.detailAddress || ''}
+                  onChange={(e) => {
+                    dispatch({ type: 'CHANGE_DETAIL_ADDRESS', detailAddress: e.target.value });
+                  }}
                 />
               </div>
             </div>
 
             <div className="mb36">
-              <h5 className="mb28 fontweight700">마케팅 수신 동의에 동의합니다. </h5>
+              <h5 className="mb28 bold">웨어앳 이벤트, 프로모션 수신 </h5>
               <div className="chkbox-con mb20">
-                <input type="checkbox" id="agreeInfo" className="input-style-checkbox" />
-                <label htmlFor="agreeInfo">
-                  스콧에서 진행하는 이벤트, 프로모션에 관한 광고를 수신하겠습니다.
-                </label>
+                <input
+                  type="checkbox"
+                  id="agreeInfoReciving"
+                  className="input-style-checkbox"
+                  checked={user.checkReceivingConsent}
+                  onChange={() =>
+                    dispatch({
+                      type: 'CHAHNE_RECEIVING_CONSENT',
+                      checkReceivingConsent: !user.checkReceivingConsent,
+                    })
+                  }
+                />
+                <div className="chk-label-container">
+                  <label htmlFor="agreeInfoReciving">
+                    <span className="option-font">(선택)</span> 마케팅 목적 혜택/정보 수신 동의
+                  </label>
+                </div>
               </div>
             </div>
 
             <div className="mb15">
-              <input
-                disabled
-                type="button"
-                className="width-100 btn-style1 tc white"
-                value="정보 수정 완료"
-              />
+              <input type="button" className="width-100 btn-style1 tc white" value="정보 수정 완료" onClick={updateUserInfo} />
             </div>
 
             <div>
-              <p className="secession-font">탈퇴하기</p>
+              <p className="more-font">탈퇴하기</p>
             </div>
           </div>
         </form>

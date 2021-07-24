@@ -90,8 +90,8 @@ public class KakaoProvider implements IProvider {
         String birthmonth = "";
         String birth = resp.getKakaoAccount().getBirthDay();
         if (StringUtils.hasText(birth)) {
-            birthday = birth.substring(0,2);
-            birthmonth = birth.substring(2,4);
+            birthmonth = birth.substring(0,2);
+            birthday = birth.substring(2,4);
         }
         AuthUserResponse user = AuthUserResponse.builder()
                 .id(resp.getId().toString())

@@ -19,7 +19,7 @@ const Toast = () => {
   return (
     <div className={isActive ? `toast-container active ${type}` : 'toast-container'}>
       <div className="content">
-        <div className="">
+        <div>
           <img src={errorWhite} alt="error-white" />
         </div>
         <p>{content}</p>

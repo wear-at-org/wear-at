@@ -1,14 +1,15 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from 'assets/img/logo.png';
+import Search from 'assets/img/search.png';
 import menu from 'assets/img/menu.png';
+import mLogo from 'assets/img/logo-m.png';
 import { useSelector } from 'react-redux';
-import Toast from 'components/Toast';
 import { userInfoName } from '../../store';
 import Profile from './Profile';
 
-export default function Header({ setDrawerStatus }) {
-  const { isLogin } = useSelector((state) => state[userInfoName]);
+export default function Header({ setDrawerStatus, setSearchStatus, searchStatus }) {
+  const { loginStatus } = useSelector((state) => state[userInfoName]);
   const { pathname } = useLocation();
   return (
     <>
@@ -26,35 +27,33 @@ export default function Header({ setDrawerStatus }) {
               <li className={pathname.includes('intro') ? 'active' : ''}>
                 <Link to="/intro">서비스 소개</Link>
               </li>
-              <li>
-                <Link to="/intro" className="styleTip">
-                  STYLE TIP
-                </Link>
-              </li>
-              <li>
+              {/* <li className={pathname.includes('styleTip') ? 'active' : ''}>
+                <Link to="/styleTip">스타일 팁</Link>
+              </li> */}
+              {/* <li>
                 <Link to="/intro">커뮤니티</Link>
               </li>
               <li>
                 <Link to="/intro">고객센터</Link>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="right-nav">
-            {!isLogin ? (
+            {loginStatus !== 'login' ? (
               <ul>
                 <li>
                   <Link to="/login">로그인</Link>
                 </li>
                 <li>
-                  <Link to="/intro">
+                  <Link to="/styleTestIntro">
                     <div className="btn-style1">
-                      <p className="btn-font font-white">지금 시작하기</p>
+                      <p className="btn-font font-white small">지금 시작하기</p>
                     </div>
                   </Link>
                 </li>
               </ul>
             ) : (
-              <Profile />
+              <Profile setSearchStatus={setSearchStatus} searchStatus={searchStatus} />
             )}
           </div>
         </div>
@@ -62,22 +61,30 @@ export default function Header({ setDrawerStatus }) {
         <div className="mobile">
           <ul className="d-flex x-eq y-center">
             <li>
-              <Link to="/">
-                <h1 className="logo">
-                  <img src={Logo} alt="logo" />
-                </h1>
-              </Link>
-            </li>
-
-            <li>
               <div className="menu" onClick={() => setDrawerStatus(true)}>
                 <img src={menu} alt="menu" />
               </div>
             </li>
+            <li>
+              <Link to="/">
+                <h2 className="logo">
+                  <img src={mLogo} alt="logo" />
+                </h2>
+              </Link>
+            </li>
+            <li>
+              {/* <div
+                onMouseUpCapture={() => {
+                  setSearchStatus(!searchStatus);
+                }}
+              >
+                <div className="search">
+                  <img src={Search} alt="search" />
+                </div>
+              </div> */}
+            </li>
           </ul>
         </div>
-
-        <Toast />
       </header>
     </>
   );

@@ -2,22 +2,30 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const { name, reducer, actions } = createSlice({
   name: 'userinfo',
-  initialState: { 
-    isLogin: false, 
+  initialState: {
+    loginStatus: '',
     info: {
       userId: '',
       nickname: '',
       email: '',
-      prividerType: '',
-    } 
+      provider: '',
+    },
   },
   reducers: {
-    loginProcess(state, payload) {
-      return { ...state, isLogin: true, info: payload.payload };
+    loginProcess(state, { payload }) {
+      return { ...state, loginStatus: payload.loginStatus, info: payload.info };
     },
-    logoutProcess(state, payload) {
-      console.log(payload);
-      return { ...state, isLogin: false, info: { userId: '', nickname: '', email: '' } };
+    logoutProcess(state) {
+      return {
+        ...state,
+        loginStatus: '',
+        info: {
+          userId: '',
+          nickname: '',
+          email: '',
+          provider: '',
+        },
+      };
     },
   },
   extraReducers: {},

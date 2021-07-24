@@ -13,90 +13,49 @@ const MainParteners = () => {
   SwiperCore.use([Autoplay]);
 
   return (
-    <div className="partners-container">
-      <h4 className="tc mb32">
-        <span className="fontweight700">
-          Our Partners
-        </span>
-      </h4>
-      <Swiper
-        autoplay={{ delay: 5000 }}
-        spaceBetween={50}
-        slidesPerView={10}
-        breakpoints={{
-          768: {
-            slidesPerView: 6,
-          },
-          640: {
-            slidesPerView: 4,
-          },
-          360: {
-            slidesPerView: 3,
-          },
-        }}
-      >
-        <SwiperSlide>
-          <div className="swiper-inner">
+    <section className="col-12">
+      {/*  eslint-disable-next-line jsx-a11y/no-distracting-elements */}
+      <marquee className="partners-container" scrollamount="2" scrolldely="50">
+        <div className="inner">
+          <div className="partners-item">
             <img src={main1} alt="" />
           </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="swiper-inner">
+          <div className="partners-item">
             <img src={main2} alt="" />
           </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="swiper-inner">
+          <div className="partners-item">
             <img src={main3} alt="" />
           </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="swiper-inner">
+          <div className="partners-item">
             <img src={main4} alt="" />
           </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="swiper-inner">
+          <div className="partners-item">
             <img src={main1} alt="" />
           </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="swiper-inner">
+          <div className="partners-item">
             <img src={main2} alt="" />
           </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="swiper-inner">
+          <div className="partners-item">
             <img src={main3} alt="" />
           </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="swiper-inner">
+          <div className="partners-item">
             <img src={main4} alt="" />
           </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="swiper-inner">
+          <div className="partners-item">
             <img src={main1} alt="" />
           </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="swiper-inner">
+          <div className="partners-item">
             <img src={main2} alt="" />
           </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="swiper-inner">
+          <div className="partners-item">
             <img src={main3} alt="" />
           </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="swiper-inner">
+          <div className="partners-item">
             <img src={main4} alt="" />
           </div>
-        </SwiperSlide>
-      </Swiper>
-    </div>
+        </div>
+      </marquee>
+    </section>
   );
 };
 

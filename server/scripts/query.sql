@@ -8,14 +8,14 @@ INSERT INTO query (id, title, ui_type)
 VALUES (1, '어디에서 입을 옷이 필요하신가요?', 'U_LIST_ITEMS');
 
 INSERT INTO query_item (category_id, query_id, title, subtitle, url)
-VALUES (NULL, 1, '비지니스룩', '회사에서', ''),
-       (NULL, 1, '캠퍼스룩', '학교에서', ''),
-       (NULL, 1, '리조트룩', '여행지에서', ''),
-       (NULL, 1, '홈웨어', '집에서', ''),
-       (NULL, 1, '스포츠웨어', '운동할 때', ''),
-       (NULL, 1, '타운웨어', '쇼핑, 간단한 모임에서', ''),
-       (NULL, 1, '소셜웨어', '데이트나 파티에서', ''),
-       (NULL, 1, '포멀웨어', '결혼식이나 면접에서', '')
+VALUES (NULL, 1, '비지니스룩', '회사에서', 'icon://step1-1'),
+       (NULL, 1, '캠퍼스룩', '학교에서', 'icon://step1-2'),
+       (NULL, 1, '리조트룩', '여행지에서', 'icon://step1-3'),
+       (NULL, 1, '홈웨어', '집에서', 'icon://step1-4'),
+       (NULL, 1, '스포츠웨어', '운동할 때', 'icon://step1-5'),
+       (NULL, 1, '타운웨어', '쇼핑, 간단한 모임에서', 'icon://step1-6'),
+       (NULL, 1, '소셜웨어', '데이트나 파티에서', 'icon://step1-7'),
+       (NULL, 1, '포멀웨어', '결혼식이나 면접에서', 'icon://step1-8')
 ;
 
 INSERT INTO query (id, title, ui_type)
@@ -82,10 +82,10 @@ INSERT INTO query (id, title, ui_type)
 VALUES (3, '추천 받을 가격대를 골라주세요.', 'U_LIST_2DEP_ITEMS');
 
 INSERT INTO query_category (id, query_id, title, subtitle, url)
-VALUES (1, 3, '아우터', '', ''),
-       (2, 3, '상의', '', ''),
-       (3, 3, '하의', '', ''),
-       (4, 3, '원피스', '', '')
+VALUES (1, 3, '아우터', '', 'icon://step3-1'),
+       (2, 3, '상의', '', 'icon://step3-2'),
+       (3, 3, '하의', '', 'icon://step3-3'),
+       (4, 3, '원피스', '', 'icon://step3-4')
 ;
 
 INSERT INTO query_item (category_id, query_id, title, subtitle, url)

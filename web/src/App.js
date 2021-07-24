@@ -2,33 +2,38 @@ import React, { useState } from 'react';
 import Footer from 'components/layout/Footer';
 import Header from 'components/layout/Header';
 import 'assets/scss/index.scss';
-import { Provider } from 'react-redux';
-import store from 'store';
 import Loader from 'components/layout/Spinner';
 import Routers from 'routers';
-import Checkbot from 'views/checkbot';
-import { PersistGate } from 'redux-persist/integration/react';
-import {
-  persistStore,
-} from 'redux-persist';
 import Drawer from 'components/layout/Drawer';
+import SearchHeader from 'components/layout/SearchHeader';
+import { useLocation } from 'react-router-dom';
+import Meta from 'components/Meta';
+import Toast from 'components/Toast';
+import PopupStyle1 from 'components/PopupStyle1';
 
 function App() {
   const [drawerStatus, setDrawerStatus] = useState(false);
-  const persistor = persistStore(store);
+  const [searchStatus, setSearchStatus] = useState(false);
+  const { pathname } = useLocation();
+
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <div className={drawerStatus ? 'App drawerActive' : 'App'}>
-          <Drawer drawerStatus={drawerStatus} setDrawerStatus={setDrawerStatus} />
-          <Header setDrawerStatus={setDrawerStatus} />
-          <Routers />
-          <Checkbot />
-          <Footer />
-        </div>
+    <>
+      <Meta />
+      <div className={`App ${drawerStatus && 'drawerActive'}`}>
+        <PopupStyle1 />
+        <Toast />
+        <Drawer drawerStatus={drawerStatus} setDrawerStatus={setDrawerStatus} />
+        {!pathname.includes('styletest') && (
+          <Header setDrawerStatus={setDrawerStatus} searchStatus={searchStatus} setSearchStatus={setSearchStatus} />
+        )}
+        <SearchHeader searchStatus={searchStatus} setSearchStatus={setSearchStatus} />
+        <Routers />
+        {/* <Checkbot /> */}
+        {!pathname.includes('styletest') && <Footer />}
+
         <Loader />
-      </PersistGate>
-    </Provider>
+      </div>
+    </>
   );
 }
 

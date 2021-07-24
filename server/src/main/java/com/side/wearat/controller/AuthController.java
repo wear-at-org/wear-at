@@ -75,7 +75,7 @@ public class AuthController {
         }
 
         User user = userOpt.get();
-        if (!user.getEmail().isEmpty()) {
+        if (!StringUtils.hasText(req.getEmail())) {
             throw new UnAuthorizedException("email정보가 입력되지 않았습니다.");
         }
 
@@ -158,7 +158,6 @@ public class AuthController {
             user = Optional.of(this.userService.createUser(req));
         }
         User u = user.get();
-
         if (isSNSAuthCompletely(u)) {
             String jwtToken = this.createJWTFromUser(user.get());
             this.createTokenCookie(response, jwtToken);

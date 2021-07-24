@@ -21,7 +21,7 @@ public interface UserService {
 
     boolean existsByEmail(String email);
 
-    boolean existsByNickname(String nickname);
+    boolean existsByNickname(Long id, String nickname);
 
     User createUser(CreateUserRequest req);
 

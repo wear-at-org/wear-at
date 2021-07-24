@@ -1,0 +1,606 @@
+* {
+  box-sizing: border-box;
+}
+
+.common-icon-size img {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+.common-icon-size2 img {
+  width: 46px !important;
+  height: 46px !important;
+}
+
+.link-width-100 {
+  width: 100%;
+  display: block;
+}
+
+.block-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.App {
+  position: relative;
+  &.style-test {
+    min-height: 100vh;
+    padding-bottom: 0;
+  }
+}
+
+.App.drawerActive {
+  position: fixed !important;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.width-per-33 {
+  width: 33.33%;
+}
+
+.sub {
+  min-height: calc(100vh - 173px);
+  padding: 80px 0;
+}
+
+// tast
+.toast {
+  position: fixed;
+  width: 200px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+// 페이지를 찾을 수 없음
+.not-found {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: calc(100vh - 173px);
+}
+
+// select-arrow
+.select-arrow {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  margin-top: -5px;
+  transform: rotate(45deg) translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-bottom: 1px solid rgb(0, 0, 0);
+  border-right: 1px solid rgb(0, 0, 0);
+  transition: 0.3s;
+}
+
+.select-arrow.open {
+  transform: rotate(225deg) translate(-50%);
+  transition: 0.3s;
+}
+
+// 팝업common
+.noscroll {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.scroll {
+  height: auto;
+  overflow: visible;
+}
+
+.dim {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.popup-wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 11;
+
+  .popup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    .inner {
+      width: 80%;
+      height: 80%;
+      background-color: white;
+      padding: 10% 15%;
+      overflow: scroll;
+
+      .row {
+        display: flex;
+      }
+    }
+  }
+}
+
+// nav
+header.nav-container {
+  max-width: 1800px;
+  padding-top: 26px;
+  padding-bottom: 26px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  .web {
+    ul {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      .hover-menu {
+        transition: opacity 0.5s;
+        opacity: 0;
+        transform: scale(0);
+        width: 150px;
+        height: auto;
+        z-index: 10;
+        position: absolute;
+        right: 0px;
+        top: 50px;
+        background-color: white;
+        border-radius: 4px;
+        box-shadow: 0 6px 12px 0 rgba(117, 119, 123, 0.3);
+        padding: 12px 16px;
+        box-sizing: border-box;
+
+        &.active {
+          transition: opacity 0.5s;
+          transform: scale(1);
+          opacity: 1;
+          display: block;
+        }
+        li {
+          margin-right: 0 !important;
+
+          &.logout {
+            cursor: pointer;
+            font-size: 14px;
+            line-height: 40px;
+            color: $grayColorCDCD;
+          }
+          a {
+            font-size: 14px;
+            line-height: 40px;
+            color: $black333;
+          }
+        }
+      }
+
+      li {
+        margin-right: 45px;
+        &.active {
+          a {
+            color: $mainColor;
+          }
+        }
+
+        &.mypage {
+          display: flex;
+          align-items: center;
+          margin-right: 0px !important;
+          cursor: pointer;
+
+          .mypage-nickname {
+            font-size: 14px;
+            color: $grayAEAE;
+            margin-right: 8px;
+          }
+          img {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+          }
+        }
+        h1.logo img {
+          width: 69px;
+          height: 18px;
+        }
+
+        a {
+          display: block;
+          font-size: 16px;
+          line-height: 16px;
+          font-weight: 400;
+          transition: 0.2s;
+          color: $textGray;
+
+          &:hover {
+            color: $mainColor;
+            transition: 0.2s;
+          }
+        }
+
+        a.styleTip {
+          font-weight: 500;
+          color: $mainColor;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .right-nav {
+      ul > li {
+        margin-right: 24px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  .mobile {
+    display: none;
+  }
+}
+
+.serch-header {
+  width: 100%;
+  position: absolute;
+  background-color: $mainColor;
+  padding-top: 30px;
+  padding-bottom: 50px;
+  transition: opacity 0.5s;
+  z-index: 999;
+  opacity: 0;
+  transform: scale(0);
+  &.active {
+    top: 92px;
+    transition: opacity 0.5s;
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .inner {
+    margin: auto;
+    max-width: 1000px;
+  }
+}
+
+footer {
+  padding-top: 32px;
+  padding-bottom: 32px;
+  width: 100%;
+  background-color: #f5f8fa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  ul {
+    display: flex;
+    & > li {
+      position: relative;
+      color: $gray8282;
+      padding-right: 20px;
+
+      &.bold {
+        a {
+          font-weight: 600;
+        }
+      }
+      a {
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 18px;
+      }
+
+      &:after {
+        top: 2px;
+        position: absolute;
+        right: 8px;
+        content: '|';
+      }
+      &:last-child {
+        &:after {
+          content: none;
+        }
+        padding-right: 0;
+      }
+    }
+  }
+
+  .copy-font {
+    font-size: 14px;
+    line-height: 18px;
+    color: $black333;
+    margin-bottom: 8px;
+  }
+}
+
+.icon-container {
+  img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.checkbot-container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+.drawer-container {
+  position: fixed;
+  top: 0;
+  left: -200%;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+
+  .drawer-inner {
+    left: -200%;
+    position: relative;
+    height: 100%;
+    width: calc(100% - 40px);
+    z-index: 101;
+    background-color: white;
+    transition: 0.45s;
+  }
+
+  &.active {
+    left: 0;
+
+    .drawer-inner {
+      left: 0;
+      opacity: 1;
+      transition: 0.45s;
+    }
+  }
+}
+
+.date-birth-container {
+  display: flex;
+  width: calc(100% + 8px);
+  margin-left: -4px;
+}
+
+.adress-container {
+  width: calc(100% - 186px);
+}
+
+.address-btn-container {
+  width: 186px;
+}
+
+.b-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.width-110 {
+  width: 110px;
+}
+
+.width-100 {
+  width: 100%;
+}
+
+.width-320 {
+  width: 320px !important;
+}
+
+.width-380 {
+  width: 380px !important;
+}
+
+.width-280 {
+  width: 280px !important;
+}
+
+.width-260 {
+  width: 260px !important;
+}
+
+.width-fit {
+  width: fit-content;
+}
+
+.option-font {
+  color: $optionBlue;
+}
+
+.replay-wrap {
+  padding-top: 24px;
+  padding-bottom: 24px;
+
+  .btn-container {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 24px;
+  }
+  .info-img {
+    margin-right: 15px;
+    img {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  .re-replay-container {
+    display: flex;
+    align-items: center;
+    .anser {
+      p {
+        cursor: pointer;
+        font-size: 12px;
+        color: $textGray;
+        margin-right: 8px;
+      }
+    }
+
+    .dot-container {
+      position: relative;
+      cursor: pointer;
+      img {
+        width: 20px;
+        height: 20px;
+      }
+
+      .dot-mod-item {
+        display: none;
+        padding: 8px 18px;
+        position: absolute;
+        background: #ffffff;
+        opacity: 0.8;
+        border: 1px solid $graye0e0;
+        box-sizing: border-box;
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+        border-radius: 4px;
+        &.active {
+          display: block;
+        }
+        &:hover {
+          background-color: $grayf5f8fa;
+        }
+        p {
+          width: 23px;
+          font-size: 12px;
+          line-height: 18px;
+          color: $black333;
+        }
+      }
+    }
+  }
+  .me {
+    padding-top: 18px;
+    padding-bottom: 18px;
+    background-color: $grayf5f8fa;
+  }
+  .replay-container {
+    padding-left: 8px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+
+    & .left-contnet {
+      display: flex;
+      flex: 1;
+      padding-right: 20px;
+      .text-wrap {
+        flex: 1;
+      }
+      .top-container {
+        display: flex;
+        margin-bottom: 2px;
+      }
+    }
+  }
+}
+
+.DragDrop {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &-File {
+    background-color: white;
+    width: 100%;
+    height: 240px;
+    border: 2px dashed $graybdbd;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    &.dragging {
+      border-color: black;
+    }
+
+    &.hidden {
+      display: none;
+    }
+
+    &-Dragging {
+      background-color: black;
+      color: white;
+    }
+  }
+
+  &-Files {
+    display: flex;
+    flex-wrap: wrap;
+
+    & > div {
+      width: 80px;
+      height: 80px;
+      padding: 8px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &-Filter {
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+}
+
+.show-mobile {
+  display: none !important;
+}
+
+.paging-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .paging-item {
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 10px;
+    margin-right: 10px;
+    transition: 0.3s;
+
+    &:hover {
+      color: $optionBlue;
+    }
+    &.active {
+      color: $optionBlue;
+    }
+
+    &.arr img {
+      width: 24px;
+      height: 24px;
+    }
+
+    &.dot img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}

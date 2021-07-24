@@ -93,8 +93,8 @@ public class NaverProvider implements IProvider {
         String birthmonth = "";
         String birth = resp.getPayload().getBirthDay();
         if (StringUtils.hasText(birth)) {
-            birthday = birth.substring(0,2);
-            birthmonth = birth.substring(3,5);
+            birthmonth = birth.substring(0,2);
+            birthday = birth.substring(3,5);
         }
 
         AuthUserResponse user = AuthUserResponse.builder()
