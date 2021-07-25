@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.security.Keys;
+import org.springframework.util.StringUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -183,4 +184,13 @@ public class AuthService {
             </html>
         """;
     }
+
+    public boolean isSNSAuthCompletely(User u) {
+        return StringUtils.hasText(u.getEmail())
+                && StringUtils.hasText(u.getNickname())
+                && StringUtils.hasText(u.getName())
+                && (u.getCheckPrivacyPolicy() != null && u.getCheckPrivacyPolicy())
+                && (u.getCheckServiceTerms() != null && u.getCheckServiceTerms());
+    }
+
 }

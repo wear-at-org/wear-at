@@ -60,7 +60,7 @@ public class AuthInterceptor implements HandlerInterceptor {
             ContextHolder.set(ContextHolder.ContextKey.UserID, claim.getId());
 
             Optional<User> userOpt = this.userService.getUser(claim.getId());
-            if (userOpt.isEmpty() || !isSNSAuthCompletely(userOpt.get())) {
+            if (userOpt.isEmpty() || !authService.isSNSAuthCompletely(userOpt.get())) {
                 throw new ForbiddenException("SNS user must required input.");
             }
             // TODO token refresh

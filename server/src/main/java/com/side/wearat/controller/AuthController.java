@@ -158,7 +158,7 @@ public class AuthController {
             user = Optional.of(this.userService.createUser(req));
         }
         User u = user.get();
-        if (isSNSAuthCompletely(u)) {
+        if (authService.isSNSAuthCompletely(u)) {
             String jwtToken = this.createJWTFromUser(user.get());
             this.createTokenCookie(response, jwtToken);
             this.createUserCookie(response, u.getId().toString(), u.getNickname());
@@ -204,10 +204,6 @@ public class AuthController {
         userService.updatePassword(id, password);
 
         return ResponseEntity.ok().build();
-    }
-
-    private boolean isSNSAuthCompletely(User u) {
-        return StringUtils.hasText(u.getEmail()) && StringUtils.hasText(u.getNickname());
     }
 
     private String createJWTFromUser(User user) {
