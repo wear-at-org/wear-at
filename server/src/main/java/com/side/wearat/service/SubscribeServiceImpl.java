@@ -8,6 +8,7 @@ import com.side.wearat.model.subscribe.SubscribeRequest;
 import com.side.wearat.repository.QueryRepository;
 import com.side.wearat.repository.SubscribeRepository;
 import com.side.wearat.repository.SubscribeRepositorySupport;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,10 +16,12 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class SubscribeServiceImpl implements SubscribeService{
 
@@ -44,13 +47,35 @@ public class SubscribeServiceImpl implements SubscribeService{
 //        Long userId = ContextHolder.getUserID();
 //        return subscribeRepository.findByIdAndUserId(id, userId);
         // user일 경우 아이디체크, 스타일리스트는 모두 접근 가능
-        return subscribeRepository.findById(id);
+        Optional<Subscribe> subOpt = subscribeRepository.findById(id);
+        if (subOpt.isPresent()) {
+            Subscribe s = subOpt.get();
+            s.setProgress(getProgress(s));
+        }
+        return subOpt;
     }
 
     @Override
     public Page<Subscribe> listSubscribes(Pageable pageable) {
         Long userId = ContextHolder.getUserID();
-        return subscribeRepository.findAllByUserId(userId, pageable);
+
+        Page<Subscribe> res = subscribeRepository.findAllByUserId(userId, pageable);
+        res.get().forEach((s) -> {
+            s.setProgress(getProgress(s));
+        });
+        return res;
+    }
+
+    private int getProgress(Subscribe s) {
+        if (s.getCompleted()) {
+            return 100;
+        } else {
+            HashSet<Long> queryIdSet = new HashSet<>();
+            for (SubscribeAnswer sa: s.getSubscribeAnswers()) {
+                queryIdSet.add(sa.getQueryId());
+            }
+            return (int)((float)(queryIdSet.size()) / 6 * 100);
+        }
     }
 
     @Override
