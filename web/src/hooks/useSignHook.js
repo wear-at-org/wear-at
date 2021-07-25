@@ -103,7 +103,19 @@ const SignHook = () => {
     }
   };
 
-  return { signup, login, logout };
+  const changePassword = async (password) => {
+    await api.post('auth/update-password', { password });
+  };
+
+  const findPassword = async (password) => {
+    await api.post('auth/find-password', { password });
+  };
+
+  const findEmail = async ({ birthday, birthmonth, birthyear, name }) => {
+    await api.post('auth/find-email', { birthday, birthmonth, birthyear, name });
+  };
+
+  return { signup, login, logout, changePassword, findPassword, findEmail };
 };
 
 export default SignHook;

@@ -1,14 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { checkSpecial, checkLetter } from 'utils';
+import SignHook from 'hooks/useSignHook';
+import Cookies from 'universal-cookie';
 
-const FindIdPassword = () => {
+const ChangwPassword = () => {
+  const cookies = new Cookies();
+  const { changePassword } = SignHook();
   const [paswword, setPassword] = useState('');
   const [paswwordCheck, setPasswordCheck] = useState('');
-  const findPassword = () => {};
+  const changwPassword = (e) => {
+    e.preventDefault();
+    changePassword(paswword);
+  };
 
   const checkPass = () => {
     return checkLetter(paswword) && checkSpecial(paswword) && paswword.length > 7 && paswword.length < 21 && paswword === paswwordCheck;
   };
+
+  useEffect(() => {
+    const token = cookies.get('_watt');
+    console.log(token);
+  }, []);
 
   return (
     <div className="sub layout-sub">
@@ -18,7 +30,7 @@ const FindIdPassword = () => {
             <h3>비밀번호 변경하기</h3>
           </div>
 
-          <form onSubmit={findPassword}>
+          <form onSubmit={changwPassword}>
             <div className="mb10">
               <h5 className="mb8">새로운 비밀번호</h5>
               <input
@@ -67,4 +79,4 @@ const FindIdPassword = () => {
   );
 };
 
-export default FindIdPassword;
+export default ChangwPassword;

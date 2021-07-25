@@ -21,6 +21,8 @@ import TestUpload from 'views/test';
 import Mroute from 'views/mypage/Mroute';
 import StyleTestDetail from 'views/mypage/StyleTestDetail';
 import ScrollToTop from './ScrollTopRoute';
+import PrivacyPolicy from 'views/privacy/privacyPolicy';
+import TermsofService from 'views/privacy/termsofService';
 
 export default function routers() {
   return (
@@ -31,7 +33,6 @@ export default function routers() {
         <Route path="/login" exact component={Login} />
         <Route path="/signup" exact component={Signup} />
         <Route path="/intro" exact component={Introservice} />
-        <Route path="/findIdPasscword" exact component={FindIdPassword} />
         <Route path="/styletest" exact component={Styletest} />
         <Route path="/testInfo" exact component={StyleTestList} />
         <Route path="/testInfo/detail" exact component={StyleTestDetail} />
@@ -51,6 +52,8 @@ export default function routers() {
           <Mypage />
         </ProvideAuth>
         <Route path="/success" component={SignupSuccess} />
+        <Route path="/privacyPolicy" component={PrivacyPolicy} />
+        <Route path="/termsofService" component={TermsofService} />
         <Route path="*" component={NotFound} />
       </Switch>
     </>

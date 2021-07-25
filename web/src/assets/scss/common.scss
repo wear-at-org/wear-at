@@ -169,17 +169,20 @@ header.nav-container {
         }
         li {
           margin-right: 0 !important;
+          font-size: 14px;
+          line-height: 40px;
+          color: $black333;
+          cursor: pointer;
 
+          &:hover {
+            transition: 0.35s;
+            color: $mainColor;
+          }
           &.logout {
             cursor: pointer;
             font-size: 14px;
             line-height: 40px;
             color: $grayColorCDCD;
-          }
-          a {
-            font-size: 14px;
-            line-height: 40px;
-            color: $black333;
           }
         }
       }
@@ -187,9 +190,7 @@ header.nav-container {
       li {
         margin-right: 45px;
         &.active {
-          a {
-            color: $mainColor;
-          }
+          color: $mainColor;
         }
 
         &.mypage {

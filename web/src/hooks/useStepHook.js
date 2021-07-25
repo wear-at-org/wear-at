@@ -8,7 +8,7 @@ const StepHook = () => {
   const [stylesTestList, setStyleTestList] = useState({
     content: [],
     totalElements: 0,
-    totalPages: 0,
+    totalPages: 1,
     pageable: {
       offset: 0,
       pageNumber: 0,
@@ -17,9 +17,6 @@ const StepHook = () => {
     },
   });
 
-  useEffect(() => {
-    console.log(answers);
-  }, [answers]);
   // 파일 업로드
   const uploadFile = async (files) => {
     const formData = new FormData();
@@ -36,7 +33,24 @@ const StepHook = () => {
 
   const getStyleTestList = async ({ size = 10, page = 0 }) => {
     const res = await api.get(`subscribe?size=${size}&page=${page}`);
-    setStyleTestList(res.data ? res.data : {});
+    new Promise(async (resolve) => {
+      await res.data.content.forEach(async (i, index) => {
+        if (i.recommended) {
+          const recommended = await api.get(`recommend?subscribeId=${i.id}`);
+          res.data.content[index].recommendItems = recommended.data[0].recommendItems;
+          res.data.content[index].recommendItemsId = recommended.data[0].id;
+        }
+      });
+      resolve(res.data);
+    }).then((re) => {
+      console.log(re);
+      setStyleTestList(re ? re : {});
+    });
+  };
+
+  const getRecommendDetail = async (id) => {
+    const { data } = await api.get(`recommend/${id}`);
+    return data;
   };
 
   // 스타일 테스트 리스트를 프론트 개발에 맞게 변환
@@ -200,6 +214,7 @@ const StepHook = () => {
     uploadFile,
     getStyleTestList,
     stylesTestList,
+    getRecommendDetail,
   };
 };
 

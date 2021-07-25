@@ -141,6 +141,12 @@ p.more-font {
   cursor: pointer;
 }
 
+.font-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 @media all and(max-width:768px) {
 }
 

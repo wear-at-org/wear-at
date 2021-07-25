@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import search from 'assets/img/search.png';
-import alam from 'assets/img/alam.png';
 import { Link } from 'react-router-dom';
 import defaultProfile from 'assets/img/default-user.png';
 import SignHook from 'hooks/useSignHook';
@@ -13,6 +11,7 @@ const Profile = ({ setSearchStatus, searchStatus }) => {
   const { logout } = SignHook();
   const navigate = (params) => {
     history.push(params);
+    setActiveMenu(!activeMenu);
   };
 
   return (
@@ -58,15 +57,11 @@ const Profile = ({ setSearchStatus, searchStatus }) => {
       </ul>
 
       <ul className={`hover-menu ${activeMenu && 'active'}`}>
-        <li>
-          <Link to="/testInfo">스타일테스트 내역</Link>
-        </li>
+        <li onMouseUpCapture={() => navigate('/testInfo')}>스타일테스트 내역</li>
         {/* <li>
           <Link to="/mypage">북마크</Link>
         </li> */}
-        <li>
-          <Link to="/mypage">개인정보</Link>
-        </li>
+        <li onMouseUpCapture={() => navigate('/mypage')}>개인정보</li>
         <li className="logout" onMouseUpCapture={() => logout()} onClick={() => logout()}>
           로그아웃
         </li>

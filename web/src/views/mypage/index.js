@@ -9,8 +9,6 @@ const Mypage = () => {
   const [showPost, setShowPost] = useState(false);
   const { user, dispatch, updateUserInfo } = useEditUserInfo();
 
-  const onChangeAdress = (e) => {};
-
   return (
     <div className="sub layout-sub">
       <div className="col-12 col-center mw-1280">

@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import defaultProfile from 'assets/img/default-user.png';
 
 const ImageUpload = (props) => {
+  console.log(props);
   const inputRef = useRef(null);
   const [profileImage, setProfileImage] = useState(defaultProfile);
   const uploadImage = (event) => {
@@ -17,7 +18,7 @@ const ImageUpload = (props) => {
 
   return (
     <div className="profile-wrap">
-      <div className="profile-container" onMouseUpCapture={(e) => props.isMypage && inputRef.current.click()}>
+      <div className="profile-container" onMouseUpCapture={(e) => inputRef.current.click()}>
         <img src={profileImage} alt="defaultProfile" />
       </div>
       <input className="file-input" type="file" name="docx" ref={inputRef} onChange={uploadImage} />

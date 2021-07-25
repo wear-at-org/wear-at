@@ -4,8 +4,10 @@ import Paginig from 'components/Paging';
 import StyleTestItem from './components/StyleTestItem';
 import StyleDetailModal from './components/StyleDetailModal';
 import useStepHook from 'hooks/useStepHook';
+import { useHistory } from 'react-router-dom';
 
 const StyleTestList = () => {
+  const history = useHistory();
   const [showPop, setShowPop] = useState(false);
   const [clickId, setClickId] = useState('');
   const { getStyleTestList, stylesTestList } = useStepHook();
@@ -38,15 +40,23 @@ const StyleTestList = () => {
                 </div>
               </div>
 
-              <div className="item-list mb42">
-                {stylesTestList.content.map((item, index) => {
-                  return <StyleTestItem key={'test' + index} item={item} setClickId={setClickId} setShowPop={setShowPop} />;
-                })}
-              </div>
-
-              <div>
-                <Paginig setFilter={setFilter} filter={filter} pagingInfo={stylesTestList.pageable} totalPages={stylesTestList.totalPages} />
-              </div>
+              {stylesTestList.content.length === 0 ? (
+                <div className={'pt80 pb80 tc'}>
+                  <h4 className="mb30">스타일 테스트 내역이 없습니다.</h4>
+                  <div class="btn-style1 large width-fit block-center" onClick={() => history.push('/styleTestIntro')}>
+                    <p class="btn-font font-white d-flex y-center">30초만에 무료 스타일테스트 진행하기</p>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <div className="item-list mb42">
+                    {stylesTestList.content.map((item, index) => {
+                      return <StyleTestItem key={'test' + index} item={item} setClickId={setClickId} setShowPop={setShowPop} />;
+                    })}
+                  </div>
+                  <Paginig setFilter={setFilter} filter={filter} pagingInfo={stylesTestList.pageable} totalPages={stylesTestList.totalPages} />
+                </>
+              )}
             </div>
           </div>
         </div>
