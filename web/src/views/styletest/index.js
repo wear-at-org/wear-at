@@ -10,36 +10,15 @@ import StepHook from 'hooks/useStepHook';
 
 const Styletest = (props) => {
   const [apiId, setApiId] = useState(0);
-  const { makeStyleTestList, setAnswers, answers } = StepHook();
+  const { makeStyleTestList } = StepHook();
   const [stepArray, setStepArray] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const hooks = StepHook();
 
   useEffect(() => {
-    if (props.location.state) {
-      const answerParams = props.location.state.params.answer;
-      setAnswers({
-        ...answers,
-        id: 'ing',
-        answer: answerParams.map((i) => {
-          return {
-            id: i.queryItemId,
-            queryId: i.queryId,
-            answer: i.answer,
-          };
-        }),
-      });
-    } else {
-      setAnswers({ ...answers, id: 'ing', answer: [] });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
     const makeList = async () => {
       api.get('subscribe/query').then(async ({ data }) => {
         let idParams = false;
-        console.log(props.location.state);
         if (props.location.state) {
           idParams = props.location.state.params.id;
         }
@@ -49,10 +28,8 @@ const Styletest = (props) => {
         });
       });
     };
-    if (answers.id !== 'init') {
-      makeList();
-    }
-  }, [answers]);
+    makeList();
+  }, []);
 
   const goNextStep = () => {
     const insertStep = activeIndex + 1;
@@ -66,63 +43,23 @@ const Styletest = (props) => {
     }
     switch (type) {
       case 'U_LIST_ITEMS':
-        return (
-          <StepListItem
-            item={items}
-            hooks={hooks}
-            goNextStep={goNextStep}
-            key={'style-' + index}
-            apiId={apiId}
-            activeIndex={activeIndex}
-            answers={answers}
-          />
-        );
+        return <StepListItem item={items} hooks={hooks} goNextStep={goNextStep} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} />;
       case 'U_LIST_IMAGES':
-        return (
-          <StepListImage
-            item={items}
-            hooks={hooks}
-            goNextStep={goNextStep}
-            key={'style-' + index}
-            apiId={apiId}
-            activeIndex={activeIndex}
-            answers={answers}
-          />
-        );
+        return <StepListImage item={items} hooks={hooks} goNextStep={goNextStep} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} />;
       case 'U_LIST_2DEP_ITEMS':
-        return (
-          <StepTwoDepthItem
-            item={items}
-            hooks={hooks}
-            goNextStep={goNextStep}
-            key={'style-' + index}
-            apiId={apiId}
-            activeIndex={activeIndex}
-            answers={answers}
-          />
-        );
+        return <StepTwoDepthItem item={items} hooks={hooks} goNextStep={goNextStep} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} />;
       case 'U_LIST_BODY':
-        return (
-          <StepListBody
-            item={items}
-            hooks={hooks}
-            goNextStep={goNextStep}
-            key={'style-' + index}
-            apiId={apiId}
-            activeIndex={activeIndex}
-            answers={answers}
-          />
-        );
+        return <StepListBody item={items} hooks={hooks} goNextStep={goNextStep} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} />;
       case 'U_UPLOAD_IMAGE':
-        return <StepUploadImage item={items} hooks={hooks} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} answers={answers} />;
+        return <StepUploadImage item={items} hooks={hooks} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} />;
       default:
-        return <StepListItem item={items} goNextStep={goNextStep} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} answers={answers} />;
+        return <StepListItem item={items} hooks={hooks} goNextStep={goNextStep} key={'style-' + index} apiId={apiId} activeIndex={activeIndex} />;
     }
   };
 
   return (
     <>
-      <StyleTestHeader activeIndex={activeIndex} setActiveIndex={setActiveIndex} stepLength={stepArray.length} />
+      <StyleTestHeader activeIndex={activeIndex} setActiveIndex={setActiveIndex} stepLength={stepArray.length} apiId={apiId} hooks={hooks} />
       <div className="step-wrap">
         {stepArray.map((item, index) => {
           return renderStepComponent(item, index);

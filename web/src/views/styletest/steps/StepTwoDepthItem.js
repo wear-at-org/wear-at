@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import NextBtn from './NextBtn';
 
-const StepTwoDepthItem = ({ item, goNextStep, hooks, apiId, answers }) => {
-  const { makeInsertList, beforeNextChecker, selectQueryItem } = hooks;
+const StepTwoDepthItem = ({ item, goNextStep, hooks, apiId, activeIndex }) => {
+  const { makeInsertList, beforeNextChecker, selectQueryItem, checkLength } = hooks;
   const [selectQueryId, setSelectQueryId] = useState('');
   const [status, setStatus] = useState('init');
   const [list, setList] = useState([]);
 
   useEffect(() => {
-    setStatus('start');
-    setList(makeInsertList(item, answers));
+    const makeList = async () => {
+      setStatus('start');
+      setList(await makeInsertList(item, apiId));
+    };
+    makeList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [answers]);
+  }, [activeIndex]);
 
   return (
     <div className={`step-container ${status}`}>
@@ -49,14 +52,13 @@ const StepTwoDepthItem = ({ item, goNextStep, hooks, apiId, answers }) => {
 
             <div className="price-item-container mb34 mb-sm-46">
               {items.queryItems.map((item) => {
-                console.log(selectQueryId);
                 if (item.categoryId !== selectQueryId) return false;
                 return (
                   <div
                     className={`price-item ${item.answer && 'active'}`}
                     key={'selectItemList' + item.id}
                     onClick={() => {
-                      setList(selectQueryItem(list, item, index, true));
+                      setList(selectQueryItem(list, item, index, !item.answer));
                     }}
                   >
                     {item.title}
@@ -69,6 +71,7 @@ const StepTwoDepthItem = ({ item, goNextStep, hooks, apiId, answers }) => {
       })}
 
       <NextBtn
+        disabled={checkLength(list) === 0}
         goNextStep={() => {
           beforeNextChecker(list, apiId);
           setStatus('end');

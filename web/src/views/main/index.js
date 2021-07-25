@@ -23,7 +23,7 @@ const Main = () => {
 
   return (
     <>
-      <main onScroll={(e) => console.log(e)}>
+      <main>
         <MainVisual />
         <MainParteners />
         <section ref={cardRef}>

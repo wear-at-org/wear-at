@@ -9,7 +9,12 @@ const NextBtn = (props) => {
       }}
     >
       <div className="inner width-380">
-        <input type="button" value={`${props.isComplete ? '완료' : '다음'}`} className="btn-style1 wid100 btn-font font-white middle" />
+        <input
+          type="button"
+          value={`${props.isComplete ? '완료' : '다음'}`}
+          className="btn-style1 wid100 btn-font font-white middle"
+          disabled={props.disabled}
+        />
       </div>
     </div>
   );

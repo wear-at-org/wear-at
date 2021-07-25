@@ -43,8 +43,8 @@ const StyleTestList = () => {
               {stylesTestList.content.length === 0 ? (
                 <div className={'pt80 pb80 tc'}>
                   <h4 className="mb30">스타일 테스트 내역이 없습니다.</h4>
-                  <div class="btn-style1 large width-fit block-center" onClick={() => history.push('/styleTestIntro')}>
-                    <p class="btn-font font-white d-flex y-center">30초만에 무료 스타일테스트 진행하기</p>
+                  <div className="btn-style1 large width-fit block-center" onClick={() => history.push('/styleTestIntro')}>
+                    <p className="btn-font font-white d-flex y-center">30초만에 무료 스타일테스트 진행하기</p>
                   </div>
                 </div>
               ) : (

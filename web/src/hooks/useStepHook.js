@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 
 const StepHook = () => {
   const history = useHistory();
-  const [answers, setAnswers] = useState({ answer: [], completed: false, id: 'init' });
   const [stylesTestList, setStyleTestList] = useState({
     content: [],
     totalElements: 0,
@@ -78,21 +77,31 @@ const StepHook = () => {
   };
 
   // answer를 넣기 위해 리스트 재배열
-  const makeInsertList = (list, answers) => {
-    console.log(answers);
+  const makeInsertList = async (list, apiId) => {
+    const {
+      data: { subscribeAnswers },
+    } = await api.get(`subscribe/${apiId}`);
+    const findAnswerList = subscribeAnswers.map((i) => {
+      return {
+        id: i.queryItemId,
+        queryId: i.queryId,
+        answer: i.answer,
+      };
+    });
+
     const insertList = list.map((i) => {
       const { queryItems, queryCategories } = i;
       return {
         ...i,
         queryItems: queryItems.map((queryItem) => {
-          const findItem = answers.answer.find((re) => re.id === queryItem.id && re.queryId === queryItem.queryId) || {};
+          const findItem = findAnswerList.find((re) => re.id === queryItem.id && re.queryId === queryItem.queryId) || {};
           return {
             ...queryItem,
             answer: findItem.answer || false,
           };
         }),
         queryCategories: queryCategories.map((queryCategory) => {
-          const findItem = answers.answer.findIndex((re) => re.id === queryCategory.id && re.queryId === queryCategory.queryId) || {};
+          const findItem = findAnswerList.findIndex((re) => re.id === queryCategory.id && re.queryId === queryCategory.queryId) || {};
           return {
             ...queryCategory,
             answer: findItem.answer || false,
@@ -101,6 +110,7 @@ const StepHook = () => {
       };
     });
 
+    console.log(insertList);
     return insertList;
   };
 
@@ -150,8 +160,18 @@ const StepHook = () => {
   };
 
   const beforeNextChecker = async (list, id, isLast = false) => {
+    const {
+      data: { subscribeAnswers },
+    } = await api.get(`subscribe/${id}`);
+    const findAnswerList = subscribeAnswers.map((i) => {
+      return {
+        id: i.queryItemId,
+        queryId: i.queryId,
+        answer: i.answer,
+      };
+    });
     window.scrollTo(0, 0);
-    let result = [...answers.answer];
+    let result = [...findAnswerList];
     for (let i in list) {
       for (let j in list[i].queryCategories) {
         const queryCategoryItem = list[i].queryCategories[j];
@@ -176,11 +196,6 @@ const StepHook = () => {
       }
     }
 
-    setAnswers({
-      ...answers,
-      answer: [...result],
-    });
-
     let ansersArr = result.map((item) => {
       return {
         answer: item.answer,
@@ -203,18 +218,27 @@ const StepHook = () => {
     }
   };
 
+  const checkLength = (list) => {
+    let cnt = 0;
+    list.forEach((item) => {
+      item.queryItems.forEach((queryItem) => {
+        if (queryItem.answer) cnt++;
+      });
+    });
+    return cnt;
+  };
+
   return {
     makeInsertList,
     makeStyleTestList,
     checkSelect,
     selectQueryItem,
     beforeNextChecker,
-    answers,
-    setAnswers,
     uploadFile,
     getStyleTestList,
     stylesTestList,
     getRecommendDetail,
+    checkLength,
   };
 };
 

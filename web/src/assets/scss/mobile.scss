@@ -167,20 +167,6 @@
     }
   }
 
-  .style-progress-bar {
-    width: 100%;
-    height: 2px;
-    background-color: $grayeded;
-    position: relative;
-
-    .bar {
-      position: absolute;
-      height: 100%;
-      left: 0;
-      background-color: $mainColor;
-    }
-  }
-
   .img-item img {
     height: 100px;
   }

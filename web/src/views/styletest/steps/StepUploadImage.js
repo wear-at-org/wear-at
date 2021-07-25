@@ -2,7 +2,7 @@ import DragImagUpload from 'components/DragImagUpload';
 import React, { useState, useEffect } from 'react';
 import NextBtn from './NextBtn';
 
-const StepUploadImage = ({ item, hooks, apiId, answers }) => {
+const StepUploadImage = ({ item, hooks, apiId, activeIndex }) => {
   const [files, setFiles] = useState([]);
   const [status, setStatus] = useState('init');
   const { makeInsertList, uploadFile, beforeNextChecker } = hooks;
@@ -32,10 +32,13 @@ const StepUploadImage = ({ item, hooks, apiId, answers }) => {
   };
 
   useEffect(() => {
-    setStatus('start');
-    setList(makeInsertList(item, answers));
+    const makeList = async () => {
+      setStatus('start');
+      setList(await makeInsertList(item, apiId));
+    };
+    makeList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [answers]);
+  }, [activeIndex]);
 
   return (
     <div className={`step-container ${status}`}>

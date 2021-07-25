@@ -18,8 +18,8 @@ const DetailItem = ({ item }) => {
           <h5 className="small color-blue">₩{item.price.toLocaleString('ko-KR')}</h5>
         </div>
         <a href={item.linkUrl} target="_blank" rel="noreferrer" className="info-price">
-          <div class="btn-style2 middle center">
-            <p class="btn-font color-black333 bold">바로 구매하기</p>
+          <div className="btn-style2 middle center">
+            <p className="btn-font color-black333 bold">바로 구매하기</p>
           </div>
         </a>
       </div>
