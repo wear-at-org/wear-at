@@ -34,7 +34,7 @@ export default function routers() {
         <Route path="/signup" exact component={Signup} />
         <Route path="/intro" exact component={Introservice} />
         <Route path="/styletest" exact component={Styletest} />
-        <Route path="/testInfo" exact component={StyleTestList} />
+        <Route path="/styleTestList" exact component={StyleTestList} />
         <Route path="/testInfo/detail" exact component={StyleTestDetail} />
         <Route path="/changePassword" exact component={ChangePassword} />
         <Route path="/styleTip" exact component={StyleTipList} />

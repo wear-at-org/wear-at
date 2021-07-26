@@ -43,7 +43,7 @@ const Profile = ({ setSearchStatus, searchStatus }) => {
 
       <ul className={`hover-menu ${activeAlarm && 'active'}`}>
         <li>
-          <Link to="/testInfo">스타일테스트 내역</Link>
+          <Link to="/styleTestList">스타일테스트 내역</Link>
         </li>
         {/* <li>
           <Link to="/mypage">북마크</Link>
@@ -57,7 +57,7 @@ const Profile = ({ setSearchStatus, searchStatus }) => {
       </ul>
 
       <ul className={`hover-menu ${activeMenu && 'active'}`}>
-        <li onMouseUpCapture={() => navigate('/testInfo')}>스타일테스트 내역</li>
+        <li onMouseUpCapture={() => navigate('/styleTestList')}>스타일테스트 내역</li>
         {/* <li>
           <Link to="/mypage">북마크</Link>
         </li> */}
