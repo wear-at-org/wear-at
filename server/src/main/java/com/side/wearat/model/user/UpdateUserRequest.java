@@ -28,6 +28,8 @@ public class UpdateUserRequest {
 
     private String address;
 
+    private String profileImage;
+
     private String detailAddress;
 
     private Boolean checkServiceTerms;

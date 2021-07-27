@@ -80,6 +80,7 @@ public class UserServiceImpl implements UserService {
                 .zipCode(req.getZipCode())
                 .address(req.getAddress())
                 .detailAddress(req.getDetailAddress())
+                .profileImage(req.getProfileImage())
                 .checkReceivingConsent(req.getCheckReceivingConsent())
                 .checkPrivacyPolicy(req.getCheckPrivacyPolicy())
                 .checkServiceTerms(req.getCheckServiceTerms())
@@ -124,6 +125,9 @@ public class UserServiceImpl implements UserService {
             }
             if (StringUtils.hasText(req.getDetailAddress())) {
                 user.setDetailAddress(req.getDetailAddress());
+            }
+            if (StringUtils.hasText(req.getProfileImage())) {
+                user.setProfileImage(req.getProfileImage());
             }
             if (req.getCheckServiceTerms() != null) {
                 user.setCheckServiceTerms(req.getCheckServiceTerms());
