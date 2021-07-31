@@ -23,6 +23,7 @@ import StyleTestDetail from 'views/mypage/StyleTestDetail';
 import ScrollToTop from './ScrollTopRoute';
 import PrivacyPolicy from 'views/privacy/privacyPolicy';
 import TermsofService from 'views/privacy/termsofService';
+import FindEmailSucess from 'views/login/FindEmailSucess';
 
 export default function routers() {
   return (
@@ -35,19 +36,20 @@ export default function routers() {
         <Route path="/intro" exact component={Introservice} />
         <Route path="/styletest" exact component={Styletest} />
         <Route path="/styleTestList" exact component={StyleTestList} />
-        <Route path="/testInfo/detail" exact component={StyleTestDetail} />
+        <Route path="/styleTestList/detail/:id" component={StyleTestDetail} />
         <Route path="/changePassword" exact component={ChangePassword} />
         <Route path="/styleTip" exact component={StyleTipList} />
         <Route path="/styleTip/detail" exact component={StyleTipDetail} />
         <Route path="/styleTestIntro" exact component={StyleTestIntro} />
         <Route path="/completeStyleTest" exact component={CompleteStyleTest} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
-        <Route path="/intro" component={Introservice} />
-        <Route path="/findIdPassword" component={FindIdPassword} />
-        <Route path="/sns-login" component={SnsLogin} />
-        <Route path="/upload-test" component={TestUpload} />
-        <Route path="/mroute" component={Mroute} />
+        <Route path="/login" exact component={Login} />
+        <Route path="/signup" exact component={Signup} />
+        <Route path="/intro" exact component={Introservice} />
+        <Route path="/findIdPassword" exact component={FindIdPassword} />
+        <Route path="/findEmailSucess" exact component={FindEmailSucess} />
+        <Route path="/sns-login" exact component={SnsLogin} />
+        <Route path="/upload-test" exact component={TestUpload} />
+        <Route path="/mroute" exact component={Mroute} />
         <ProvideAuth path="/mypage">
           <Mypage />
         </ProvideAuth>

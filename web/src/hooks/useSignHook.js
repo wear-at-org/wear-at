@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
 const SignHook = () => {
-  const history = useHistory();
+  let history = useHistory();
   const userInfo = useSelector((state) => state[userInfoName]);
   const { dispatch } = store;
   const [showToast, hideToast] = toastHook({ type: '', content: '' });
@@ -22,7 +22,7 @@ const SignHook = () => {
     cookies.set('saveEmail', email, { path: '/' });
   };
 
-  const login = async (email, password, saveId) => {
+  const login = async (email, password, saveId, callbackUrl) => {
     try {
       await api.post('auth/sign-in', {
         email,
@@ -41,6 +41,7 @@ const SignHook = () => {
             nickname: user.nickname,
             email: email,
             prividerType: 'web',
+            profileImage: user.profileImage,
           },
           loginStatus: 'login',
         }),
@@ -50,8 +51,13 @@ const SignHook = () => {
         saveEmail(email);
       }
 
-      hideToast();
-      history.push('/');
+      if (callbackUrl) {
+        hideToast();
+        history.replace(callbackUrl);
+      } else {
+        hideToast();
+        history.push('/');
+      }
     } catch (e) {
       if (e.response && e.response.data) {
         showToast({ type: 'error', content: e.response.data.message });
@@ -107,12 +113,19 @@ const SignHook = () => {
     await api.post('auth/update-password', { password });
   };
 
-  const findPassword = async (password) => {
-    await api.post('auth/find-password', { password });
+  const findPassword = async (password, token) => {
+    await api.post('auth/find-password', { password, token });
   };
 
   const findEmail = async ({ birthday, birthmonth, birthyear, name }) => {
-    await api.post('auth/find-email', { birthday, birthmonth, birthyear, name });
+    try {
+      const {
+        data: { email },
+      } = await api.post('auth/find-email', { birthday, birthmonth, birthyear, name });
+      history.push('/findEmailSucess', { params: { email } });
+    } catch (e) {
+      showToast({ type: 'error', content: e.response.data.message });
+    }
   };
 
   return { signup, login, logout, changePassword, findPassword, findEmail };

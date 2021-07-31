@@ -42,7 +42,6 @@ const StepHook = () => {
       });
       resolve(res.data);
     }).then((re) => {
-      console.log(re);
       setStyleTestList(re ? re : {});
     });
   };

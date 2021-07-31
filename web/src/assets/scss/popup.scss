@@ -156,8 +156,10 @@
   z-index: 300;
   align-items: center;
   justify-content: center;
+  transition: 0.3s;
 
   &.active {
+    transition: 0.3s;
     display: flex;
   }
 
@@ -177,32 +179,12 @@
 }
 
 .style-detail-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 600;
-  top: 0;
-
-  .inner {
-    position: absolute;
-    background-color: white;
-    width: 80%;
-    min-height: 80%;
-    max-height: calc(100vh - 30px);
-    overflow-y: scroll;
-  }
-
   .total {
     position: relative;
     display: flex;
     flex-wrap: wrap;
     padding-left: 20%;
     padding-right: 20%;
-    padding-top: 80px;
     padding-bottom: 70px;
     border-bottom: 1px solid $grayeee;
 

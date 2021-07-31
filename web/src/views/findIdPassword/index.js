@@ -50,8 +50,8 @@ const FindIdPassword = () => {
                   </option>
                   {[...Array(60)].map((_, index) => {
                     return (
-                      <option key={`year-${index}`} value={new Date().getFullYear() - index}>
-                        {new Date().getFullYear() - index}년
+                      <option key={`year-${index}`} value={new Date().getFullYear() - index - 10}>
+                        {new Date().getFullYear() - index - 10}년
                       </option>
                     );
                   })}

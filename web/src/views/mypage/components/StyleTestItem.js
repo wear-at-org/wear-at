@@ -3,22 +3,21 @@ import React, { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import { useHistory } from 'react-router-dom';
 
-const StyleTestItem = ({ item, setShowPop, setClickId }) => {
+const StyleTestItem = ({ item }) => {
   const history = useHistory();
   const [recommendItems, setRecommendItems] = useState([]);
   useEffect(() => {
     if (item.recommended) {
       setRecommendItems(item.recommendItems || []);
-      setClickId(item.recommendItemsId);
     }
-  }, [item, recommendItems, setClickId]);
+  }, [item, recommendItems]);
 
   return (
     <div
       className="item-container"
       onClick={() => {
         if (item.recommended) {
-          setShowPop(true);
+          history.push(`styleTestList/detail/${item.recommendItemsId}`);
         } else {
           if (!item.completed) {
             history.push('/styletest', { params: { id: item.id, answer: item.subscribeAnswers } });

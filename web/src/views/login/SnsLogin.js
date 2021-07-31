@@ -40,6 +40,7 @@ const SnsLogin = () => {
           nickname: u.nickname ?? '',
           email: u.email ?? '',
           prividerType: u.provider ?? '',
+          profileImage: u.profileImage ?? '',
         },
         loginStatus: 'login',
       }),

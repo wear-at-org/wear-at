@@ -13,10 +13,10 @@ const Mypage = () => {
     <div className="sub layout-sub">
       <div className="col-12 col-center mw-1280">
         <div className="show-mobile mb24 mb-sm-0">
-          <ImageUpload isMypage={true} />
+          <ImageUpload />
         </div>
 
-        <form className="mypage-container pr24 pl24">
+        <form className="mypage-container">
           <Lnb />
           <div className="right-container">
             <h5 className="mb20 bold">기본정보</h5>
@@ -290,7 +290,7 @@ const Mypage = () => {
             </div>
 
             <div className="mb15">
-              <input type="button" className="width-100 btn-style1 tc white" value="정보 수정 완료" onClick={updateUserInfo} />
+              <input type="button" className="width-100 btn-style1 tc white btn-font" value="정보 수정 완료" onClick={updateUserInfo} />
             </div>
 
             <div>

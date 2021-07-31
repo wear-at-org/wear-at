@@ -2,14 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Lnb from 'components/layout/Lnb';
 import Paginig from 'components/Paging';
 import StyleTestItem from './components/StyleTestItem';
-import StyleDetailModal from './components/StyleDetailModal';
 import useStepHook from 'hooks/useStepHook';
 import { useHistory } from 'react-router-dom';
 
 const StyleTestList = () => {
   const history = useHistory();
-  const [showPop, setShowPop] = useState(false);
-  const [clickId, setClickId] = useState('');
   const { getStyleTestList, stylesTestList } = useStepHook();
   const [filter, setFilter] = useState({
     pageSize: 10,
@@ -23,7 +20,6 @@ const StyleTestList = () => {
 
   return (
     <>
-      <StyleDetailModal showPop={showPop} setShowPop={setShowPop} clickId={clickId} />
       <div className="sub layout-sub">
         <div className="col-12 col-center mw-1280">
           <div className="mypage-container">
@@ -51,7 +47,7 @@ const StyleTestList = () => {
                 <>
                   <div className="item-list mb42">
                     {stylesTestList.content.map((item, index) => {
-                      return <StyleTestItem key={'test' + index} item={item} setClickId={setClickId} setShowPop={setShowPop} />;
+                      return <StyleTestItem key={'test' + index} item={item} />;
                     })}
                   </div>
                   <Paginig setFilter={setFilter} filter={filter} pagingInfo={stylesTestList.pageable} totalPages={stylesTestList.totalPages} />

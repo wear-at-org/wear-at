@@ -9,6 +9,7 @@ const { name, reducer, actions } = createSlice({
       nickname: '',
       email: '',
       provider: '',
+      profileImage: '',
     },
   },
   reducers: {
@@ -24,6 +25,7 @@ const { name, reducer, actions } = createSlice({
           nickname: '',
           email: '',
           provider: '',
+          profileImage: '',
         },
       };
     },

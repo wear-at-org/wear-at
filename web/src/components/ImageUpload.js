@@ -1,29 +1,38 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { memo, useRef } from 'react';
+import api from 'api';
+import useEditUserInfo from 'hooks/useEditUserInfo';
 import defaultProfile from 'assets/img/default-user.png';
 
-const ImageUpload = (props) => {
-  console.log(props);
+const ImageUpload = () => {
+  const { dispatch, user, updateUserProfile } = useEditUserInfo();
   const inputRef = useRef(null);
-  const [profileImage, setProfileImage] = useState(defaultProfile);
-  const uploadImage = (event) => {
-    let reader = new FileReader();
-    let file = event.target.files[0];
-    if (file) {
-      reader.onloadend = () => {
-        setProfileImage(reader.result);
-      };
-      reader.readAsDataURL(file);
+  const uploadImage = async (event) => {
+    const formData = new FormData();
+    Array.from(event.target.files).forEach((f) => formData.append(`files`, f));
+
+    try {
+      const {
+        data: { urls },
+      } = await api.post('storage/upload', formData, {
+        headers: {
+          'Content-Type': `multipart/form-data`,
+        },
+      });
+      await updateUserProfile(urls[0]);
+      dispatch({ type: 'CHANGE_PROFILE_URL', profileImage: urls[0] });
+    } catch (e) {
+      console.log(e);
     }
   };
 
   return (
     <div className="profile-wrap">
       <div className="profile-container" onMouseUpCapture={(e) => inputRef.current.click()}>
-        <img src={profileImage} alt="defaultProfile" />
+        <img src={user.profileImage || defaultProfile} alt="defaultProfile" />
       </div>
       <input className="file-input" type="file" name="docx" ref={inputRef} onChange={uploadImage} />
     </div>
   );
 };
 
-export default ImageUpload;
+export default memo(ImageUpload);

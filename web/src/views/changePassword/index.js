@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { checkSpecial, checkLetter } from 'utils';
 import SignHook from 'hooks/useSignHook';
-import Cookies from 'universal-cookie';
 
 const ChangwPassword = () => {
-  const cookies = new Cookies();
-  const { changePassword } = SignHook();
+  const [token, setToken] = useState('');
+  const { changePassword, findPassword } = SignHook();
   const [paswword, setPassword] = useState('');
   const [paswwordCheck, setPasswordCheck] = useState('');
   const changwPassword = (e) => {
     e.preventDefault();
-    changePassword(paswword);
+    if (token) {
+      console.log('find');
+      findPassword(paswword, token);
+    } else {
+      console.log(token);
+      changePassword(paswword);
+    }
   };
 
   const checkPass = () => {
@@ -18,8 +23,11 @@ const ChangwPassword = () => {
   };
 
   useEffect(() => {
-    const token = cookies.get('_watt');
-    console.log(token);
+    const pramsToken = document.location.href.split('token=')[1];
+    console.log(pramsToken);
+    if (pramsToken) {
+      setToken(pramsToken);
+    }
   }, []);
 
   return (
