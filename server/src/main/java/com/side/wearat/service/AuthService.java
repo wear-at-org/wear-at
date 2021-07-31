@@ -126,7 +126,7 @@ public class AuthService {
 
     private String makePasswordUrl(User u) {
         String token = createPasswordToken(u);
-        return authConfig.getClientRedirectUrl() + "/password?token=" + token;
+        return authConfig.getClientRedirectUrl() + "/changePassword?token=" + token;
     }
 
     private String createPasswordToken(User u) {

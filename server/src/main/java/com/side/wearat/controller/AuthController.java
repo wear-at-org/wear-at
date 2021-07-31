@@ -154,6 +154,7 @@ public class AuthController {
                     .birthday(authUser.getBirthday())
                     .birthmonth(authUser.getBirthmonth())
                     .birthyear(authUser.getBirthyear())
+                    .profileImage(authUser.getProfileImage())
                     .build();
             user = Optional.of(this.userService.createUser(req));
         }
