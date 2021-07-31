@@ -1,18 +1,18 @@
 package com.side.wearat.service;
 
+import com.side.wearat.api.email.IEmail;
+import com.side.wearat.config.AuthConfig;
 import com.side.wearat.context.ContextHolder;
 import com.side.wearat.entity.Recommend;
 import com.side.wearat.entity.RecommendItem;
 import com.side.wearat.entity.Subscribe;
+import com.side.wearat.entity.User;
 import com.side.wearat.model.recommend.RecommendRequest;
-import com.side.wearat.repository.RecommendRepository;
-import com.side.wearat.repository.RecommendRepositorySupport;
-import com.side.wearat.repository.SubscribeRepository;
-import com.side.wearat.repository.SubscribeRepositorySupport;
+import com.side.wearat.repository.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
@@ -31,12 +31,21 @@ public class RecommendServiceImpl implements RecommendService {
     private SubscribeRepository subscribeRepository;
     private SubscribeRepositorySupport subscribeRepositorySupport;
 
+    private UserRepository userRepository;
+
+    private final IEmail emailClient;
+
+    private final AuthConfig authConfig;
+
     @Autowired
-    public RecommendServiceImpl(RecommendRepository recommendRepository, SubscribeRepositorySupport subscribeRepositorySupport, RecommendRepositorySupport recommendRepositorySupport, SubscribeRepository subscribeRepository) {
+    public RecommendServiceImpl(RecommendRepository recommendRepository, SubscribeRepositorySupport subscribeRepositorySupport, RecommendRepositorySupport recommendRepositorySupport, SubscribeRepository subscribeRepository, UserRepository userRepository, @Qualifier("email_ses") IEmail emailClient, AuthConfig authConfig) {
         this.recommendRepository = recommendRepository;
         this.recommendRepositorySupport = recommendRepositorySupport;
         this.subscribeRepository = subscribeRepository;
         this.subscribeRepositorySupport = subscribeRepositorySupport;
+        this.userRepository = userRepository;
+        this.emailClient = emailClient;
+        this.authConfig = authConfig;
     }
 
     @Override
@@ -54,11 +63,14 @@ public class RecommendServiceImpl implements RecommendService {
     public Recommend recommend(RecommendRequest req) throws Exception {
         Long userId = ContextHolder.getUserID();
 
+        Optional<Subscribe> subOpt = subscribeRepository.findById(req.getSubscribeId());
+        if (subOpt.isEmpty()) {
+            throw new Exception("스타일테스트 내역이 존재하지 않습니다.");
+        }
+        Subscribe s = subOpt.get();
+
         if (req.getId() == null) {
-            Optional<Subscribe> s = subscribeRepository.findById(req.getSubscribeId());
-            if (s.isEmpty()) {
-                throw new Exception("스타일테스트 내역이 존재하지 않습니다.");
-            } else if (s.get().getRecommendStarted()) {
+            if (s.getRecommendStarted()) {
                 throw new Exception("스타일테스트 추천이 이미 진행중입니다.");
             }
             subscribeRepositorySupport.updateSubscribeRecommendStarted(req.getSubscribeId());
@@ -69,9 +81,6 @@ public class RecommendServiceImpl implements RecommendService {
         Boolean completed = req.getCompleted();
         if (completed == null) {
             completed = false;
-        }
-        if (completed) {
-            subscribeRepositorySupport.updateSubscribeRecommended(req.getSubscribeId());
         }
 
         List<RecommendItem> items = new ArrayList<>();
@@ -100,11 +109,45 @@ public class RecommendServiceImpl implements RecommendService {
         if (req.getId() != null) {
             r.setId(req.getId());
         }
-        return recommendRepository.save(r);
+        Recommend result = recommendRepository.save(r);
+
+        if (completed) {
+            subscribeRepositorySupport.updateSubscribeRecommended(req.getSubscribeId());
+            sendRecommendEmail(s.getUserId(), s.getId());
+        }
+        return result;
+    }
+
+    private void sendRecommendEmail(Long userId, Long subscribeId) throws Exception {
+        Optional<User> u = userRepository.findById(userId);
+        if (u.isEmpty()) {
+            throw new Exception("user " + userId + " doesn't exists");
+        }
+
+        String receiver = u.get().getEmail();
+        String subject = "[WEAR-AT] 스타일테스트 추천이 완료되었습니다.";
+        String body = makeEmailTemplate().formatted(makeRecommendUrl(subscribeId));
+        emailClient.send(receiver, subject, body);
     }
 
     @Override
     public void deleteRecommend(Long id) {
         recommendRepository.deleteById(id);
+    }
+
+    private String makeRecommendUrl(Long subscribeId) {
+        return authConfig.getClientRedirectUrl() + "/styleTestList?id=" + subscribeId;
+    }
+
+    private String makeEmailTemplate() {
+        return """
+            <html>
+                <body>
+                   recommend completely
+                   <br>
+                   %s
+                </body>
+            </html>
+        """;
     }
 }
