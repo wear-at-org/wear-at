@@ -82,12 +82,4 @@ public class AuthInterceptor implements HandlerInterceptor {
         }
         return token;
     }
-
-    private boolean isSNSAuthCompletely(User u) {
-        if (!StringUtils.hasText(u.getProvider())) {
-            return true;
-        }
-        return StringUtils.hasText(u.getEmail()) && StringUtils.hasText(u.getNickname());
-    }
-
 }
