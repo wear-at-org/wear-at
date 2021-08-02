@@ -1,0 +1,21 @@
+{
+  "editor.tabSize": 2,
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.associations": {
+    "*.js": "javascriptreact"
+  },
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "all",
+  "prettier.eslintIntegration": true,
+  "prettier.arrowParens": "always",
+  "prettier.printWidth": 100,
+  "javascript.format.enable": false,
+  "eslint.alwaysShowStatus": true,
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "react-native.packager.port": 19001,
+  "git.ignoreLimitWarning": true,
+  "typescript.validate.enable": false,
+}
