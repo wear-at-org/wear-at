@@ -3,7 +3,10 @@ package com.side.wearat.controller;
 import com.google.gson.JsonObject;
 import com.side.wearat.context.ContextHolder;
 import com.side.wearat.entity.User;
+import com.side.wearat.model.auth.UserPasswordClaim;
+import com.side.wearat.model.user.PasswordRequest;
 import com.side.wearat.model.user.UpdateUserRequest;
+import com.side.wearat.service.AuthService;
 import com.side.wearat.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +22,12 @@ import java.util.Optional;
 public class UserController {
 
     private final UserService userService;
+    private final AuthService authService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, AuthService authService) {
         this.userService = userService;
+        this.authService = authService;
     }
 
     @GetMapping(path = "")
@@ -84,5 +89,15 @@ public class UserController {
         JsonObject resp = new JsonObject();
         resp.addProperty("duplicated", duplicated);
         return new ResponseEntity(resp.toString(), HttpStatus.OK);
+    }
+
+    @PostMapping(path = "/update-password")
+    public ResponseEntity<Void> updatePassword(@RequestBody PasswordRequest req) throws Exception {
+        Long userId = ContextHolder.getUserID();
+
+        String password = authService.encryptPassword(req.getPassword());
+        userService.updatePassword(userId, password);
+
+        return ResponseEntity.ok().build();
     }
 }

@@ -56,7 +56,7 @@ public class AuthController {
 
         String jwtToken = this.createJWTFromUser(user);
         this.createTokenCookie(response, jwtToken);
-        this.createUserCookie(response, user.getId().toString(), user.getNickname());
+        this.createUserCookie(response, user);
 
         return ResponseEntity.ok().build();
     }
@@ -96,7 +96,7 @@ public class AuthController {
 
         String jwtToken = this.createJWTFromUser(user);
         this.createTokenCookie(response, jwtToken);
-        this.createUserCookie(response, user.getId().toString(), user.getNickname());
+        this.createUserCookie(response, user);
 
         return ResponseEntity.ok().build();
     }
@@ -162,7 +162,7 @@ public class AuthController {
         if (authService.isSNSAuthCompletely(u)) {
             String jwtToken = this.createJWTFromUser(user.get());
             this.createTokenCookie(response, jwtToken);
-            this.createUserCookie(response, u.getId().toString(), u.getNickname());
+            this.createUserCookie(response, u);
         }
 
         HttpHeaders headers = new HttpHeaders();
@@ -217,7 +217,7 @@ public class AuthController {
 
     private void createTokenCookie(HttpServletResponse response, String token) {
         Cookie tokenCookie = new Cookie(COOKIE_TOKEN, token);
-        tokenCookie.setMaxAge(60*60*24);
+        tokenCookie.setMaxAge(60*60*24*7 + 600);
         tokenCookie.setPath("/");
         tokenCookie.setHttpOnly(true);
         response.addCookie(tokenCookie);
@@ -231,13 +231,14 @@ public class AuthController {
         response.addCookie(cookie);
     }
 
-    private void createUserCookie(HttpServletResponse response, String userId, String nickname) throws Exception {
+    private void createUserCookie(HttpServletResponse response, User user) throws Exception {
         JsonObject userInfo = new JsonObject();
-        userInfo.addProperty("id", userId);
-        userInfo.addProperty("nickname", nickname);
+        userInfo.addProperty("id", user.getId().toString());
+        userInfo.addProperty("nickname", user.getNickname());
+        userInfo.addProperty("profile_image", user.getProfileImage());
 
         Cookie userCookie = new Cookie(COOKIE_USER, URLEncoder.encode(userInfo.toString(), "UTF-8"));
-        userCookie.setMaxAge(60*60*24);
+        userCookie.setMaxAge(60*60*24*7  + 600);
         userCookie.setPath("/");
         response.addCookie(userCookie);
     }
