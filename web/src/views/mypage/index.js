@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Address from '../../components/Address';
 import useEditUserInfo from 'hooks/useEditUserInfo';
 import Lnb from 'components/layout/Lnb';
@@ -9,16 +9,14 @@ const Mypage = () => {
   const [showPost, setShowPost] = useState(false);
   const { user, dispatch, updateUserInfo } = useEditUserInfo();
 
-  const onChangeAdress = (e) => {};
-
   return (
     <div className="sub layout-sub">
       <div className="col-12 col-center mw-1280">
         <div className="show-mobile mb24 mb-sm-0">
-          <ImageUpload isMypage={true} />
+          <ImageUpload />
         </div>
 
-        <form className="mypage-container pr24 pl24">
+        <form className="mypage-container">
           <Lnb />
           <div className="right-container">
             <h5 className="mb20 bold">기본정보</h5>
@@ -292,12 +290,12 @@ const Mypage = () => {
             </div>
 
             <div className="mb15">
-              <input type="button" className="width-100 btn-style1 tc white" value="정보 수정 완료" onClick={updateUserInfo} />
+              <input type="button" className="width-100 btn-style1 tc white btn-font" value="정보 수정 완료" onClick={updateUserInfo} />
             </div>
 
-            <div>
+            {/* <div>
               <p className="more-font">탈퇴하기</p>
-            </div>
+            </div> */}
           </div>
         </form>
       </div>

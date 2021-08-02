@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import logo from 'assets/img/logo.png';
+import opengraph from 'assets/img/opengraph.png';
 const locales = {
   en: 'en_US',
   ko: 'ko_KR',
@@ -10,7 +10,7 @@ const Meta = () => {
   const lang = locales['ko'];
   const title = '웨어앳 :: 나만의 AI스타일리스트';
   const description = '시간들여 공들여 옷 찾지 말고, 인공지능 스타일리스트가 찾아주는 내게 꼭 맞는 옷을!';
-  const image = logo;
+  const image = opengraph;
   const type = 'website';
   const width = 400;
   const height = 400;
@@ -25,15 +25,15 @@ const Meta = () => {
       />
       <meta name="description" content={description} />
       <meta name="author" content="wearAt" />
-      {image ? <link rel="image_src" href={image} /> : null}
-      {image ? <meta itemprop="image" content={image} /> : null}
+      {image ? <link rel="image_src" href={opengraph} /> : null}
+      {image ? <meta itemprop="image" content={opengraph} /> : null}
 
       <meta property="og:site_name" content="Weat At" />
       <meta property="og:title" content={title} />
       {description ? <meta property="og:description" content={description} /> : null}
       <meta property="og:locale" content={locales[lang]} />
       <meta property="og:type" content={type} />
-      {image ? <meta property="og:image" content={image} /> : null}
+      {image ? <meta property="og:image" content={opengraph} /> : null}
       {width ? <meta property="og:image:width" content={width} /> : null}
       {height ? <meta property="og:image:height" content={height} /> : null}
     </Helmet>

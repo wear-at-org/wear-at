@@ -1,14 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { checkSpecial, checkLetter } from 'utils';
+import SignHook from 'hooks/useSignHook';
 
-const FindIdPassword = () => {
+const ChangwPassword = () => {
+  const [token, setToken] = useState('');
+  const { changePassword } = SignHook();
   const [paswword, setPassword] = useState('');
   const [paswwordCheck, setPasswordCheck] = useState('');
-  const findPassword = () => {};
+  const changwPassword = (e) => {
+    e.preventDefault();
+    if (token) {
+      changePassword(paswword, token);
+    } else {
+      changePassword(paswword);
+    }
+  };
 
   const checkPass = () => {
     return checkLetter(paswword) && checkSpecial(paswword) && paswword.length > 7 && paswword.length < 21 && paswword === paswwordCheck;
   };
+
+  useEffect(() => {
+    const pramsToken = document.location.href.split('token=')[1];
+    console.log(pramsToken);
+    if (pramsToken) {
+      setToken(pramsToken);
+    }
+  }, []);
 
   return (
     <div className="sub layout-sub">
@@ -18,7 +36,7 @@ const FindIdPassword = () => {
             <h3>비밀번호 변경하기</h3>
           </div>
 
-          <form onSubmit={findPassword}>
+          <form onSubmit={changwPassword}>
             <div className="mb10">
               <h5 className="mb8">새로운 비밀번호</h5>
               <input
@@ -67,4 +85,4 @@ const FindIdPassword = () => {
   );
 };
 
-export default FindIdPassword;
+export default ChangwPassword;

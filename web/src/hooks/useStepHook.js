@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import api from 'api';
 import { useHistory } from 'react-router-dom';
 
 const StepHook = () => {
   const history = useHistory();
-  const [answers, setAnswers] = useState({ answer: [], completed: false, id: 'init' });
   const [stylesTestList, setStyleTestList] = useState({
     content: [],
     totalElements: 0,
-    totalPages: 0,
+    totalPages: 1,
     pageable: {
       offset: 0,
       pageNumber: 0,
@@ -17,9 +16,6 @@ const StepHook = () => {
     },
   });
 
-  useEffect(() => {
-    console.log(answers);
-  }, [answers]);
   // 파일 업로드
   const uploadFile = async (files) => {
     const formData = new FormData();
@@ -36,7 +32,23 @@ const StepHook = () => {
 
   const getStyleTestList = async ({ size = 10, page = 0 }) => {
     const res = await api.get(`subscribe?size=${size}&page=${page}`);
-    setStyleTestList(res.data ? res.data : {});
+    new Promise(async (resolve) => {
+      await res.data.content.forEach(async (i, index) => {
+        if (i.recommended) {
+          const recommended = await api.get(`recommend?subscribeId=${i.id}`);
+          res.data.content[index].recommendItems = recommended.data[0].recommendItems;
+          res.data.content[index].recommendItemsId = recommended.data[0].id;
+        }
+      });
+      resolve(res.data);
+    }).then((re) => {
+      setStyleTestList(re ? re : {});
+    });
+  };
+
+  const getRecommendDetail = async (id) => {
+    const { data } = await api.get(`recommend/${id}`);
+    return data;
   };
 
   // 스타일 테스트 리스트를 프론트 개발에 맞게 변환
@@ -64,21 +76,31 @@ const StepHook = () => {
   };
 
   // answer를 넣기 위해 리스트 재배열
-  const makeInsertList = (list, answers) => {
-    console.log(answers);
+  const makeInsertList = async (list, apiId) => {
+    const {
+      data: { subscribeAnswers },
+    } = await api.get(`subscribe/${apiId}`);
+    const findAnswerList = subscribeAnswers.map((i) => {
+      return {
+        id: i.queryItemId,
+        queryId: i.queryId,
+        answer: i.answer,
+      };
+    });
+
     const insertList = list.map((i) => {
       const { queryItems, queryCategories } = i;
       return {
         ...i,
         queryItems: queryItems.map((queryItem) => {
-          const findItem = answers.answer.find((re) => re.id === queryItem.id && re.queryId === queryItem.queryId) || {};
+          const findItem = findAnswerList.find((re) => re.id === queryItem.id && re.queryId === queryItem.queryId) || {};
           return {
             ...queryItem,
             answer: findItem.answer || false,
           };
         }),
         queryCategories: queryCategories.map((queryCategory) => {
-          const findItem = answers.answer.findIndex((re) => re.id === queryCategory.id && re.queryId === queryCategory.queryId) || {};
+          const findItem = findAnswerList.findIndex((re) => re.id === queryCategory.id && re.queryId === queryCategory.queryId) || {};
           return {
             ...queryCategory,
             answer: findItem.answer || false,
@@ -87,6 +109,7 @@ const StepHook = () => {
       };
     });
 
+    console.log(insertList);
     return insertList;
   };
 
@@ -136,8 +159,18 @@ const StepHook = () => {
   };
 
   const beforeNextChecker = async (list, id, isLast = false) => {
+    const {
+      data: { subscribeAnswers },
+    } = await api.get(`subscribe/${id}`);
+    const findAnswerList = subscribeAnswers.map((i) => {
+      return {
+        id: i.queryItemId,
+        queryId: i.queryId,
+        answer: i.answer,
+      };
+    });
     window.scrollTo(0, 0);
-    let result = [...answers.answer];
+    let result = [...findAnswerList];
     for (let i in list) {
       for (let j in list[i].queryCategories) {
         const queryCategoryItem = list[i].queryCategories[j];
@@ -162,11 +195,6 @@ const StepHook = () => {
       }
     }
 
-    setAnswers({
-      ...answers,
-      answer: [...result],
-    });
-
     let ansersArr = result.map((item) => {
       return {
         answer: item.answer,
@@ -189,17 +217,27 @@ const StepHook = () => {
     }
   };
 
+  const checkLength = (list) => {
+    let cnt = 0;
+    list.forEach((item) => {
+      item.queryItems.forEach((queryItem) => {
+        if (queryItem.answer) cnt++;
+      });
+    });
+    return cnt;
+  };
+
   return {
     makeInsertList,
     makeStyleTestList,
     checkSelect,
     selectQueryItem,
     beforeNextChecker,
-    answers,
-    setAnswers,
     uploadFile,
     getStyleTestList,
     stylesTestList,
+    getRecommendDetail,
+    checkLength,
   };
 };
 

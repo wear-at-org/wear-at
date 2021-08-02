@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import bottomCircle from 'assets/img/bottom-circle.svg';
 import bottomImg from 'assets/img/style-test-Intro-bottom.png';
 import { useHistory } from 'react-router-dom';

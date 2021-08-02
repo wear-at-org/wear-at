@@ -37,3 +37,5 @@ export const isMobile = () => {
     return true;
   }
 };
+
+export const currentRoute = document.location.href.split(document.location.origin)[1];

@@ -1,8 +1,10 @@
 import api from 'api';
 import { useEffect, useReducer } from 'react';
 import { userReducer } from 'utils/UserReducer';
+import toastHook from 'hooks/useToastHook';
 
 const useEditUserInfo = () => {
+  const [showToast, hideToast] = toastHook({ type: '', content: '' });
   const [user, dispatch] = useReducer(userReducer, {});
 
   useEffect(() => {
@@ -14,7 +16,6 @@ const useEditUserInfo = () => {
   }, []);
 
   const updateUserInfo = async () => {
-    console.log(user);
     await api.put('user', {
       address: user.address,
       birthday: user.birthday,
@@ -31,8 +32,21 @@ const useEditUserInfo = () => {
       nickname: user.nickname,
       zipCode: user.zipCode,
     });
+    window.scrollTo(0, 0);
+    hideToast();
+    showToast({ type: 'info', content: '수정 되었습니다.' });
   };
-  return { user, dispatch, updateUserInfo };
+
+  const updateUserProfile = async (profileImage) => {
+    await api.put('user', {
+      profileImage,
+    });
+    window.scrollTo(0, 0);
+    hideToast();
+    showToast({ type: 'info', content: '수정 되었습니다.' });
+  };
+
+  return { user, dispatch, updateUserInfo, updateUserProfile };
 };
 
 export default useEditUserInfo;

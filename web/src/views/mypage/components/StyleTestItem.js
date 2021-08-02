@@ -1,26 +1,31 @@
 import BarProgress from 'components/BarProgress';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import { useHistory } from 'react-router-dom';
 
-const StyleTestItem = ({ item, setShowPop, setClickId }) => {
+const StyleTestItem = ({ item }) => {
   const history = useHistory();
+  const [recommendItems, setRecommendItems] = useState([]);
+  useEffect(() => {
+    if (item.recommended) {
+      setRecommendItems(item.recommendItems || []);
+    }
+  }, [item, recommendItems]);
+
   return (
     <div
       className="item-container"
       onClick={() => {
         if (item.recommended) {
-          setClickId(item.id);
-          setShowPop(true);
+          history.push(`styleTestList/detail/${item.recommendItemsId}`);
         } else {
           if (!item.completed) {
-            console.log(item);
             history.push('/styletest', { params: { id: item.id, answer: item.subscribeAnswers } });
           }
         }
       }}
     >
-      <BarProgress percent={item.completed ? 100 : 10} status={item.completed} />
+      <BarProgress percent={item.progress} status={item.completed} />
       <div className="inner">
         <div className="d-flex x-eq mb28">
           <div className="width-100 d-flex x-eq y-center">
@@ -28,7 +33,7 @@ const StyleTestItem = ({ item, setShowPop, setClickId }) => {
               <p className="status-txt">
                 {!item.completed ? (
                   <>
-                    <span className="bold">{item.percent}</span>% 진행 중
+                    <span className="bold">{item.progress}</span>% 진행 중
                   </>
                 ) : item.recommended ? (
                   '완료 됨'
@@ -43,16 +48,20 @@ const StyleTestItem = ({ item, setShowPop, setClickId }) => {
 
         {!item.completed ? (
           <div className="item-content">
-            <p>거의 완료되었어요! 스타일 테스트를 완료하고 전문 스타일리스트의 추천을 받아보세요 😇</p>
+            <p className="no-ellipsis">거의 완료되었어요! 스타일 테스트를 완료하고 전문 스타일리스트의 추천을 받아보세요 😇</p>
           </div>
         ) : item.recommended ? (
           <div className="item-content complete">
-            <p className="mb20 mb-sm-0">매칭 아이템 : {item.matachingItem}</p>
-            <p>매칭 브랜드 : {item.matchingBrand}</p>
+            <p>
+              매칭 아이템 :{` [총 ${recommendItems.length}개] `} {recommendItems.map((i) => i.title).join(',')}
+            </p>
+            <p>
+              매칭 브랜드 :{` [총 ${recommendItems.length}개] `} {recommendItems.map((i) => i.brand).join(',')}
+            </p>
           </div>
         ) : (
           <div className="item-content">
-            <p>스타일리스트가 옷을 고르고 있어요 😇</p>
+            <p className="no-ellipsis">스타일리스트가 옷을 고르고 있어요 😇</p>
           </div>
         )}
         <div className="mb16 mb-sm-0"></div>

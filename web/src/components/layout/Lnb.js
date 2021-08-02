@@ -1,9 +1,11 @@
 import ImageUpload from 'components/ImageUpload';
-import React from 'react';
+import React, { memo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import SignHook from 'hooks/useSignHook';
 
 const Lnb = () => {
   const { pathname } = useLocation();
+  const { logout } = SignHook();
   return (
     <div className="left-router">
       <ImageUpload />
@@ -16,7 +18,7 @@ const Lnb = () => {
             </Link>
           </li>
           <li>
-            <Link to="/testInfo" className={pathname.includes('testInfo') ? 'active' : ''}>
+            <Link to="/styleTestList" className={pathname.includes('styleTestList') ? 'active' : ''}>
               스타일테스트 내역
             </Link>
           </li>
@@ -29,7 +31,7 @@ const Lnb = () => {
           <li>
             <Link to="/changePassword">비밀번호 변경</Link>
           </li>
-          <li className="logout">
+          <li className="logout" onMouseUpCapture={() => logout()} onClick={() => logout()}>
             <div>로그아웃</div>
           </li>
         </ul>
@@ -38,4 +40,4 @@ const Lnb = () => {
   );
 };
 
-export default Lnb;
+export default memo(Lnb);

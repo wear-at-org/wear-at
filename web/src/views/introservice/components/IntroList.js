@@ -57,17 +57,17 @@ const IntroList = ({ scrollPostion }) => {
                     : item.content}
                 </h5>
               </div>
-              <div className="btn-style2 middle center width-260 block-center show-web">
+              {/* <div className="btn-style2 middle center width-260 block-center show-web">
                 <p className="btn-font color-black333 bold">{item.btnTxt}</p>
-              </div>
+              </div> */}
             </div>
             <div className="mb30 mb-sm-0 intro-right-img">
               <img src={item.img} alt="" />
             </div>
 
-            <div className="btn-style2 middle center width-260 block-center show-mobile">
+            {/* <div className="btn-style2 middle center width-260 block-center show-mobile">
               <p className="btn-font color-black333 bold">{item.btnTxt}</p>
-            </div>
+            </div> */}
           </div>
         );
       })}

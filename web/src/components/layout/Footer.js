@@ -9,16 +9,18 @@ export default function Footer() {
       </div>
       <ul>
         <li>
-          <Link to="/">이용약관</Link>
+          <Link to="/termsofService">이용약관</Link>
         </li>
         <li className="bold">
-          <Link to="/">개인정보처리방침</Link>
+          <Link to="/privacyPolicy">개인정보처리방침</Link>
         </li>
         <li>
           <Link to="/">고객센터</Link>
         </li>
         <li>
-          <Link to="/">제휴/광고문의</Link>
+          <a target="_blank" href="https://forms.gle/b1jtbeXSsGMHhckJ8" rel="noreferrer">
+            제휴/광고문의
+          </a>
         </li>
       </ul>
     </footer>

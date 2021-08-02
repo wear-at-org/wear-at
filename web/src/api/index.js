@@ -35,15 +35,15 @@ Axios.interceptors.response.use(
     // 추후 403, 400, 500등 에러 발생시 에러처리
     // 토큰 재발급도 이곳에서
     dispatch(minusAsyncCountValue());
-    console.log(error.response);
     const errorStatus = error.response.status;
 
     // 소셜 로그인 후 필수 항목을 입력 하지 않았을 경우
-    if (errorStatus === 401) {
+    const currentRoute = document.location.href.split(document.location.origin)[1];
+    if (errorStatus === 401 && !currentRoute.includes('/login')) {
       showPopup({
         title: `로그인을 하시면 더 많은 콘텐츠를 \n 구경도 스크랩도 하실 수 있어요.`,
         btnMsg: '회원가입 및 로그인',
-        goLink: '/login',
+        goLink: `/login?callbackUrl=${currentRoute}`,
       });
     }
 
@@ -66,6 +66,11 @@ Axios.interceptors.response.use(
     //   showToast({ type: 'error', content: '로그인이 필요합니다.' });
     //   window.location = '/';
     // }
+
+    // 로그인 필요 시
+    if (errorStatus === 500) {
+      showToast({ type: 'error', content: error.response.data.message });
+    }
 
     return Promise.reject(error);
   },

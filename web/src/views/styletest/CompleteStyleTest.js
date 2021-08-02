@@ -19,7 +19,7 @@ const CompleteStyleTest = () => {
         </h4>
       </div>
 
-      <Link to="/styleTestIntro" className="link-width-100">
+      <Link to="/styleTestList" className="link-width-100">
         <div className="btn-style1 middle wid100 tc type-black">
           <p className="btn-font font-white">확인</p>
         </div>

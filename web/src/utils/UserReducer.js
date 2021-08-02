@@ -1,7 +1,7 @@
 import { regCheckPassword, regCheckEmail } from 'utils';
 import api from 'api';
 import toastHook from 'hooks/useToastHook';
-
+import defaultProfile from 'assets/img/default-user.png';
 const [showToast, hideToast] = toastHook({ type: '', content: '' });
 
 export const initData = {
@@ -20,6 +20,7 @@ export const initData = {
   address: null,
   detailAddress: null,
   allCheck: false,
+  profileImage: defaultProfile,
   error: {
     emailError: {
       content: '',
@@ -96,6 +97,7 @@ export const checkNicknameApi = async (id, nickname, dispatch) => {
 export const userReducer = (state, action) => {
   switch (action.type) {
     case 'INIT':
+      console.log(action.data);
       return {
         ...state,
         ...action.data,
@@ -104,7 +106,7 @@ export const userReducer = (state, action) => {
       return {
         ...state,
         id: action.id,
-      };  
+      };
     case 'CHANGE_NAME':
       return {
         ...state,
@@ -295,6 +297,11 @@ export const userReducer = (state, action) => {
       return {
         ...state,
         birthday: action.day,
+      };
+    case 'CHANGE_PROFILE_URL':
+      return {
+        ...state,
+        profileImage: action.profileImage,
       };
     default:
       return state;

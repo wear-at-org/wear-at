@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect, useState } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import api from 'api';
 import SignHook from 'hooks/useSignHook';
 import { userReducer, initData, checkEmailApi, checkNicknameApi } from 'utils/UserReducer';
@@ -40,6 +40,7 @@ const SnsLogin = () => {
           nickname: u.nickname ?? '',
           email: u.email ?? '',
           prividerType: u.provider ?? '',
+          profileImage: u.profileImage ?? '',
         },
         loginStatus: 'login',
       }),

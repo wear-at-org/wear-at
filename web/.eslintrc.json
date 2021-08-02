@@ -1,45 +1,11 @@
 {
-  "extends": [
-    "react-app",
-    "react-app/jest"
-  ],
+  "extends": ["react-app", "react-app/jest"],
   "rules": {
     "no-console": 0,
-    "no-underscore-dangle": 0,
-    "no-unused-vars": [
-      "off",
-      {
-        "argsIgnorePattern": "next"
-      }
-    ],
-    "jsx-a11y/label-has-associated-control": "off",
-    "no-use-before-define": [
-      "error",
-      {
-        "variables": false
-      }
-    ],
-    "no-alert": "off",
-    "no-useless-escape": "off",
-    "no-multi-str": 0,
-    "react/jsx-filename-extension": [
-      1,
-      {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ]
-      }
-    ],
-    "object-curly-newline": 0,
-    "import/no-unresolved": "off",
-    "linebreak-style": 0,
     "import/prefer-default-export": "off",
-    "jsx-a11y/control-has-associated-label": "off",
-    "jsx-a11y/no-static-element-interactions": "off",
-    "jsx-a11y/click-events-have-key-events": "off",
     "react/prop-types": "off",
-    "react/jsx-props-no-spreading": "off"
+    "react-hooks/exhaustive-deps": "off",
+    "no-useless-escape": "off"
   },
   "env": {
     "node": true,

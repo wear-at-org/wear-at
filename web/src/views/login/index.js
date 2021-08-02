@@ -5,6 +5,7 @@ import SnsLoginComponent from 'components/SnsLoginComponent';
 import SignHook from 'hooks/useSignHook';
 
 const Login = () => {
+  const [callbackUrl, setCallbackUrl] = useState(null);
   const [saveId, setSaveId] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -12,7 +13,7 @@ const Login = () => {
 
   const loginProcess = async (e) => {
     e.preventDefault();
-    login(email, password, saveId);
+    login(email, password, saveId, callbackUrl);
   };
 
   const handleKeyPress = (e) => {
@@ -22,6 +23,7 @@ const Login = () => {
   };
 
   useEffect(() => {
+    setCallbackUrl(document.location.href.split('callbackUrl=')[1]);
     const cookies = new Cookies();
     const saveEmailCookie = cookies.get('saveEmail');
     if (saveEmailCookie) {

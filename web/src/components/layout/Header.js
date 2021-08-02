@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from 'assets/img/logo.png';
-import Search from 'assets/img/search.png';
 import menu from 'assets/img/menu.png';
 import mLogo from 'assets/img/logo-m.png';
 import { useSelector } from 'react-redux';

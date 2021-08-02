@@ -1,20 +1,26 @@
-import React, { useState } from 'react';
-import search from 'assets/img/search.png';
-import alam from 'assets/img/alam.png';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import defaultProfile from 'assets/img/default-user.png';
 import SignHook from 'hooks/useSignHook';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { userInfoName } from 'store';
 
 const Profile = ({ setSearchStatus, searchStatus }) => {
+  const { info } = useSelector((state) => state[userInfoName]);
   let history = useHistory();
   const [activeMenu, setActiveMenu] = useState(false);
-  const [activeAlarm, setActiveAlarm] = useState(false);
+  const [activeAlarm] = useState(false);
   const { logout } = SignHook();
   const navigate = (params) => {
     history.push(params);
+    setActiveMenu(!activeMenu);
   };
 
+  useEffect(() => {
+    console.log('Profile');
+    console.log(info);
+  }, [info]);
   return (
     <ul className={'profile-container'}>
       <li className="mypage">
@@ -38,13 +44,13 @@ const Profile = ({ setSearchStatus, searchStatus }) => {
           <img src={alam} alt="search" />
         </div> */}
         <div onMouseUpCapture={() => setActiveMenu(!activeMenu)}>
-          <img src={defaultProfile} alt="user-img" />
+          <img src={info.profileImage || defaultProfile} alt="user-img" />
         </div>
       </li>
 
       <ul className={`hover-menu ${activeAlarm && 'active'}`}>
         <li>
-          <Link to="/testInfo">스타일테스트 내역</Link>
+          <Link to="/styleTestList">스타일테스트 내역</Link>
         </li>
         {/* <li>
           <Link to="/mypage">북마크</Link>
@@ -58,15 +64,11 @@ const Profile = ({ setSearchStatus, searchStatus }) => {
       </ul>
 
       <ul className={`hover-menu ${activeMenu && 'active'}`}>
-        <li>
-          <Link to="/testInfo">스타일테스트 내역</Link>
-        </li>
+        <li onMouseUpCapture={() => navigate('/styleTestList')}>스타일테스트 내역</li>
         {/* <li>
           <Link to="/mypage">북마크</Link>
         </li> */}
-        <li>
-          <Link to="/mypage">개인정보</Link>
-        </li>
+        <li onMouseUpCapture={() => navigate('/mypage')}>개인정보</li>
         <li className="logout" onMouseUpCapture={() => logout()} onClick={() => logout()}>
           로그아웃
         </li>
