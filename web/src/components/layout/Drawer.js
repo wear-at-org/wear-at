@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import xBtn from 'assets/img/x-btn-black.png';
 import { useSelector } from 'react-redux';
 import { userInfoName } from '../../store';

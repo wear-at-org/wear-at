@@ -3,7 +3,6 @@ import store from 'store';
 import { addAsyncCountValue, minusAsyncCountValue } from 'store/spinner-store';
 import toastHook from 'hooks/useToastHook';
 import popupHook from 'hooks/usePopupHook';
-import { currentRoute } from 'utils';
 
 const BASE_URL = process.env.REACT_APP_API;
 const { dispatch } = store;
@@ -39,6 +38,7 @@ Axios.interceptors.response.use(
     const errorStatus = error.response.status;
 
     // 소셜 로그인 후 필수 항목을 입력 하지 않았을 경우
+    const currentRoute = document.location.href.split(document.location.origin)[1];
     if (errorStatus === 401 && !currentRoute.includes('/login')) {
       showPopup({
         title: `로그인을 하시면 더 많은 콘텐츠를 \n 구경도 스크랩도 하실 수 있어요.`,
@@ -69,7 +69,7 @@ Axios.interceptors.response.use(
 
     // 로그인 필요 시
     if (errorStatus === 500) {
-      showToast({ type: 'error', content: '가입된 이메일을 찾을 수 없습니다.' });
+      showToast({ type: 'error', content: error.response.data.message });
     }
 
     return Promise.reject(error);

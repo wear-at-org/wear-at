@@ -23,7 +23,8 @@ import StyleTestDetail from 'views/mypage/StyleTestDetail';
 import ScrollToTop from './ScrollTopRoute';
 import PrivacyPolicy from 'views/privacy/privacyPolicy';
 import TermsofService from 'views/privacy/termsofService';
-import FindEmailSucess from 'views/login/FindEmailSucess';
+import FindEmailSucess from 'views/findIdPassword/FindEmailSucess';
+import FindPasswordSucess from 'views/findIdPassword/FindPasswordSucess';
 
 export default function routers() {
   return (
@@ -47,6 +48,7 @@ export default function routers() {
         <Route path="/intro" exact component={Introservice} />
         <Route path="/findIdPassword" exact component={FindIdPassword} />
         <Route path="/findEmailSucess" exact component={FindEmailSucess} />
+        <Route path="/findPasswordSucess" exact component={FindPasswordSucess} />
         <Route path="/sns-login" exact component={SnsLogin} />
         <Route path="/upload-test" exact component={TestUpload} />
         <Route path="/mroute" exact component={Mroute} />

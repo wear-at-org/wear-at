@@ -1,5 +1,5 @@
 import SignHook from 'hooks/useSignHook';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const FindIdPassword = () => {
   const { findPassword, findEmail } = SignHook();

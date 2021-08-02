@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import buyIcon from 'assets/img/icon-shopping.png';
 import DetailItem from './components/DetailItem';
 import useStepHook from 'hooks/useStepHook';
-import xBtn from 'assets/img/x-btn-black.png';
 import { useParams } from 'react-router-dom';
 
 const StyleTestDetail = () => {

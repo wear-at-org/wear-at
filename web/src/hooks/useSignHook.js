@@ -34,6 +34,8 @@ const SignHook = () => {
         throw new Error("user cookie doesn't exist");
       }
 
+      console.log(user);
+
       dispatch(
         loginProcess({
           info: {
@@ -41,7 +43,7 @@ const SignHook = () => {
             nickname: user.nickname,
             email: email,
             prividerType: 'web',
-            profileImage: user.profileImage,
+            profileImage: user.profile_image,
           },
           loginStatus: 'login',
         }),
@@ -109,12 +111,29 @@ const SignHook = () => {
     }
   };
 
-  const changePassword = async (password) => {
-    await api.post('auth/update-password', { password });
+  const changePassword = async (password, token) => {
+    try {
+      if (token) {
+        await api.post('auth/update-password', { password, token });
+        showToast({ type: 'info', content: '비밀번호가 변경 되었습니다.' });
+        history.push('/login');
+      } else {
+        await api.post('user/update-password', { password });
+        showToast({ type: 'info', content: '비밀번호가 변경 되었습니다.' });
+        history.push('/');
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
-  const findPassword = async (password, token) => {
-    await api.post('auth/find-password', { password, token });
+  const findPassword = async ({ email }) => {
+    try {
+      await api.post('auth/find-password', { email });
+      history.push('/findPasswordSucess');
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const findEmail = async ({ birthday, birthmonth, birthyear, name }) => {

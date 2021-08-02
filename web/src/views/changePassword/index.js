@@ -4,16 +4,14 @@ import SignHook from 'hooks/useSignHook';
 
 const ChangwPassword = () => {
   const [token, setToken] = useState('');
-  const { changePassword, findPassword } = SignHook();
+  const { changePassword } = SignHook();
   const [paswword, setPassword] = useState('');
   const [paswwordCheck, setPasswordCheck] = useState('');
   const changwPassword = (e) => {
     e.preventDefault();
     if (token) {
-      console.log('find');
-      findPassword(paswword, token);
+      changePassword(paswword, token);
     } else {
-      console.log(token);
       changePassword(paswword);
     }
   };

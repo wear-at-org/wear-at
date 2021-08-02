@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Address from '../../components/Address';
 import useEditUserInfo from 'hooks/useEditUserInfo';
 import Lnb from 'components/layout/Lnb';
@@ -293,9 +293,9 @@ const Mypage = () => {
               <input type="button" className="width-100 btn-style1 tc white btn-font" value="정보 수정 완료" onClick={updateUserInfo} />
             </div>
 
-            <div>
+            {/* <div>
               <p className="more-font">탈퇴하기</p>
-            </div>
+            </div> */}
           </div>
         </form>
       </div>

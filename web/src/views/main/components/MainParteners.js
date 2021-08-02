@@ -1,6 +1,5 @@
 import React from 'react';
 import SwiperCore, { Autoplay } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.scss';
 import 'swiper/components/effect-fade/effect-fade.scss';
 import 'swiper/swiper-bundle.css';

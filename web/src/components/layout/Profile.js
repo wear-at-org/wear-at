@@ -3,22 +3,24 @@ import { Link } from 'react-router-dom';
 import defaultProfile from 'assets/img/default-user.png';
 import SignHook from 'hooks/useSignHook';
 import { useHistory } from 'react-router-dom';
-import { loginProcess } from 'store/userinfo-store';
 import { useSelector } from 'react-redux';
 import { userInfoName } from 'store';
 
 const Profile = ({ setSearchStatus, searchStatus }) => {
   const { info } = useSelector((state) => state[userInfoName]);
-  console.log(info);
   let history = useHistory();
   const [activeMenu, setActiveMenu] = useState(false);
-  const [activeAlarm, setActiveAlarm] = useState(false);
+  const [activeAlarm] = useState(false);
   const { logout } = SignHook();
   const navigate = (params) => {
     history.push(params);
     setActiveMenu(!activeMenu);
   };
 
+  useEffect(() => {
+    console.log('Profile');
+    console.log(info);
+  }, [info]);
   return (
     <ul className={'profile-container'}>
       <li className="mypage">

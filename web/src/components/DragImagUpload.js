@@ -25,7 +25,6 @@ const DragImagUpload = ({ files, setFiles }) => {
       }
 
       for (const file of selectFiles) {
-        let reader = new FileReader();
         tempFiles = [
           ...tempFiles,
           {

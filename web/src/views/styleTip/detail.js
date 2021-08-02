@@ -2,7 +2,6 @@ import Replay from 'components/Replay';
 import React, { useEffect } from 'react';
 import like from 'assets/img/full-like.png';
 import link from 'assets/img/link.png';
-import bookmark from 'assets/img/bookmark.png';
 import bookmarkActive from 'assets/img/bookmark-active.png';
 
 const StyleTipDetail = (props) => {

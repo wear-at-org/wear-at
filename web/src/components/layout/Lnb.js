@@ -1,5 +1,5 @@
 import ImageUpload from 'components/ImageUpload';
-import React from 'react';
+import React, { memo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import SignHook from 'hooks/useSignHook';
 
@@ -40,4 +40,4 @@ const Lnb = () => {
   );
 };
 
-export default Lnb;
+export default memo(Lnb);

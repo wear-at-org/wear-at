@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import mainIcon1 from 'assets/img/main-icon1.png';
 import mainIcon2 from 'assets/img/main-icon2.png';
 import mainIcon3 from 'assets/img/main-icon3.png';
