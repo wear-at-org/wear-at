@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 const { name, reducer, actions } = createSlice({
   name: 'userinfo',
@@ -9,6 +9,7 @@ const { name, reducer, actions } = createSlice({
       nickname: '',
       email: '',
       provider: '',
+      profileImage: '',
     },
   },
   reducers: {
@@ -24,13 +25,22 @@ const { name, reducer, actions } = createSlice({
           nickname: '',
           email: '',
           provider: '',
+          profileImage: '',
+        },
+      };
+    },
+    changeProfile(state, { payload }) {
+      return {
+        ...state,
+        info: {
+          ...state.info,
+          profileImage: payload.profileImage,
         },
       };
     },
   },
-  extraReducers: {},
 });
 
-const { loginProcess, logoutProcess } = actions;
+const { loginProcess, logoutProcess, changeProfile } = actions;
 export default reducer;
-export { name, loginProcess, logoutProcess };
+export { name, loginProcess, logoutProcess, changeProfile };

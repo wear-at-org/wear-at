@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "웨어앳",
+  "name": "웨어앳 :: 나만의 AI스타일리스트",
   "icons": [
     {
       "src": "favicon.ico",
@@ -18,8 +18,9 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#000000",
+  "description" : "시간들여 공들여 옷 찾지 말고, 인공지능 스타일리스트가 찾아주는 내게 꼭 맞는 옷을!",
   "background_color": "#ffffff"
 }

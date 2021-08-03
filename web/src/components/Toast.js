@@ -22,7 +22,7 @@ const Toast = () => {
         <div>
           <img src={errorWhite} alt="error-white" />
         </div>
-        <p>{content}</p>
+        <p>{content || ''}</p>
       </div>
     </div>
   );

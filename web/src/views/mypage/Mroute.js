@@ -16,7 +16,7 @@ const Mroute = () => {
             </Link>
           </li>
           <li>
-            <Link to="/testInfo" className={pathname.includes('testInfo') ? 'active' : ''}>
+            <Link to="/styleTestList" className={pathname.includes('styleTestList') ? 'active' : ''}>
               스타일테스트 내역
             </Link>
           </li>

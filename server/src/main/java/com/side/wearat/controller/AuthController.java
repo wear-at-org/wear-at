@@ -6,6 +6,7 @@ import com.side.wearat.entity.User;
 import com.side.wearat.exception.UnAuthorizedException;
 import com.side.wearat.model.auth.*;
 import com.side.wearat.model.user.CreateUserRequest;
+import com.side.wearat.model.user.PasswordRequest;
 import com.side.wearat.model.user.UpdateUserRequest;
 import com.side.wearat.service.AuthService;
 import com.side.wearat.service.UserService;
@@ -55,7 +56,7 @@ public class AuthController {
 
         String jwtToken = this.createJWTFromUser(user);
         this.createTokenCookie(response, jwtToken);
-        this.createUserCookie(response, user.getId().toString(), user.getNickname());
+        this.createUserCookie(response, user);
 
         return ResponseEntity.ok().build();
     }
@@ -95,7 +96,7 @@ public class AuthController {
 
         String jwtToken = this.createJWTFromUser(user);
         this.createTokenCookie(response, jwtToken);
-        this.createUserCookie(response, user.getId().toString(), user.getNickname());
+        this.createUserCookie(response, user);
 
         return ResponseEntity.ok().build();
     }
@@ -153,14 +154,15 @@ public class AuthController {
                     .birthday(authUser.getBirthday())
                     .birthmonth(authUser.getBirthmonth())
                     .birthyear(authUser.getBirthyear())
+                    .profileImage(authUser.getProfileImage())
                     .build();
             user = Optional.of(this.userService.createUser(req));
         }
         User u = user.get();
-        if (isSNSAuthCompletely(u)) {
+        if (authService.isSNSAuthCompletely(u)) {
             String jwtToken = this.createJWTFromUser(user.get());
             this.createTokenCookie(response, jwtToken);
-            this.createUserCookie(response, u.getId().toString(), u.getNickname());
+            this.createUserCookie(response, u);
         }
 
         HttpHeaders headers = new HttpHeaders();
@@ -169,8 +171,40 @@ public class AuthController {
         return new ResponseEntity<>(headers,HttpStatus.TEMPORARY_REDIRECT);
     }
 
-    private boolean isSNSAuthCompletely(User u) {
-        return StringUtils.hasText(u.getEmail()) && StringUtils.hasText(u.getNickname());
+    @PostMapping(path = "/find-email")
+    public ResponseEntity<String> findEmail(@RequestBody FindEmailRequest req) throws Exception {
+        Optional<User> user = userService.getUserByNameAndBirth(req.getName(), req.getBirthyear(), req.getBirthmonth(), req.getBirthday());
+        if (user.isEmpty()) {
+            throw new Exception("가입된 이메일을 찾을 수 없습니다.");
+        }
+
+        JsonObject resp = new JsonObject();
+        resp.addProperty("email", user.get().getEmail());
+        return new ResponseEntity(resp.toString(), HttpStatus.OK);
+    }
+
+    @PostMapping(path = "/find-password")
+    public ResponseEntity<Void> findPassword(@RequestBody FindPasswordRequest req) throws Exception {
+        Optional<User> user = userService.getUserByEmail(req.getEmail());
+        if (user.isEmpty()) {
+            throw new Exception("가입된 이메일을 찾을 수 없습니다.");
+        }
+        User u = user.get();
+
+        authService.sendPasswordEmail(u);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping(path = "/update-password")
+    public ResponseEntity<Void> updatePassword(@RequestBody PasswordRequest req) throws Exception {
+        UserPasswordClaim claim = authService.parsePasswordToken(req.getToken());
+
+        long id = claim.getId();
+        String password = authService.encryptPassword(req.getPassword());
+        userService.updatePassword(id, password);
+
+        return ResponseEntity.ok().build();
     }
 
     private String createJWTFromUser(User user) {
@@ -183,7 +217,7 @@ public class AuthController {
 
     private void createTokenCookie(HttpServletResponse response, String token) {
         Cookie tokenCookie = new Cookie(COOKIE_TOKEN, token);
-        tokenCookie.setMaxAge(60*60*24);
+        tokenCookie.setMaxAge(60*60*24*7 + 600);
         tokenCookie.setPath("/");
         tokenCookie.setHttpOnly(true);
         response.addCookie(tokenCookie);
@@ -197,13 +231,14 @@ public class AuthController {
         response.addCookie(cookie);
     }
 
-    private void createUserCookie(HttpServletResponse response, String userId, String nickname) throws Exception {
+    private void createUserCookie(HttpServletResponse response, User user) throws Exception {
         JsonObject userInfo = new JsonObject();
-        userInfo.addProperty("id", userId);
-        userInfo.addProperty("nickname", nickname);
+        userInfo.addProperty("id", user.getId().toString());
+        userInfo.addProperty("nickname", user.getNickname());
+        userInfo.addProperty("profile_image", user.getProfileImage());
 
         Cookie userCookie = new Cookie(COOKIE_USER, URLEncoder.encode(userInfo.toString(), "UTF-8"));
-        userCookie.setMaxAge(60*60*24);
+        userCookie.setMaxAge(60*60*24*7  + 600);
         userCookie.setPath("/");
         response.addCookie(userCookie);
     }

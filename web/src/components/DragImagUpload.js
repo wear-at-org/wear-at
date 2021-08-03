@@ -25,7 +25,6 @@ const DragImagUpload = ({ files, setFiles }) => {
       }
 
       for (const file of selectFiles) {
-        let reader = new FileReader();
         tempFiles = [
           ...tempFiles,
           {
@@ -160,7 +159,6 @@ const DragImagUpload = ({ files, setFiles }) => {
                   </div>
 
                   <div className="chkbox-con">
-                    {file.id}
                     <input
                       type="checkbox"
                       className="input-style-checkbox"

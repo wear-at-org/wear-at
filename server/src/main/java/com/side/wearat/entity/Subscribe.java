@@ -1,5 +1,6 @@
 package com.side.wearat.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import javax.persistence.*;
@@ -38,4 +39,9 @@ public class Subscribe {
     private LocalDateTime updateAt;
 
     private Long updateUser;
+
+    @JsonInclude()
+    @Transient
+    private int progress;
 }
+

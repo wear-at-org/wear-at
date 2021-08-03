@@ -2,23 +2,43 @@ import DragImagUpload from 'components/DragImagUpload';
 import React, { useState, useEffect } from 'react';
 import NextBtn from './NextBtn';
 
-const StepUploadImage = ({ item, hooks, apiId }) => {
+const StepUploadImage = ({ item, hooks, apiId, activeIndex }) => {
   const [files, setFiles] = useState([]);
   const [status, setStatus] = useState('init');
   const { makeInsertList, uploadFile, beforeNextChecker } = hooks;
   const [list, setList] = useState([]);
 
   const makeList = async () => {
-    console.log(files);
-    const res = await uploadFile(files.map((i) => i.object));
-    console.log(res);
+    const {
+      data: { urls },
+    } = await uploadFile(files.map((i) => i.object));
+    const resultItem = await urls.map((url, index) => {
+      return {
+        id: index * 1,
+        answer: url,
+        queryId: apiId,
+        queryItemId: index * 1,
+      };
+    });
+    const insertList = [
+      {
+        id: apiId,
+        queryCategories: [],
+        queryItems: resultItem,
+      },
+    ];
+
+    await beforeNextChecker(insertList, apiId, true);
   };
 
   useEffect(() => {
-    setStatus('start');
-    setList(makeInsertList(item));
+    const makeList = async () => {
+      setStatus('start');
+      setList(await makeInsertList(item, apiId));
+    };
+    makeList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [activeIndex]);
 
   return (
     <div className={`step-container ${status}`}>

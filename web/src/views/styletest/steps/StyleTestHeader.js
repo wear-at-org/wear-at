@@ -3,11 +3,12 @@ import { useHistory } from 'react-router-dom';
 import arrLeft from 'assets/img/arr-right.png';
 import xBtn from 'assets/img/x-btn-black.png';
 
-const StyleTestHeader = ({ activeIndex, setActiveIndex, stepLength }) => {
+const StyleTestHeader = ({ activeIndex, setActiveIndex, stepLength, apiId, hooks }) => {
+  const { beforeNextChecker } = hooks;
   const history = useHistory();
 
   const checkPercent = () => {
-    return `${((activeIndex + 1) / stepLength) * 100}%`;
+    return `${(activeIndex / stepLength) * 100}%`;
   };
   return (
     <div className="style-test-header-wrap">
@@ -28,12 +29,28 @@ const StyleTestHeader = ({ activeIndex, setActiveIndex, stepLength }) => {
           <div>
             <h4>스타일테스트</h4>
           </div>
-          <div
-            onClick={() => {
-              if (window.confirm('정말 떠나실건가요?')) history.push('/styleTestIntro');
-            }}
-          >
-            <img src={xBtn} alt="" />
+          <div className="d-flex y-center">
+            {activeIndex === 3 || activeIndex === 4 ? (
+              <div
+                className="mr20 cursor-pointer"
+                onClick={() => {
+                  if (activeIndex !== stepLength - 1) {
+                    setActiveIndex(activeIndex + 1);
+                  } else {
+                    beforeNextChecker([], apiId, true);
+                  }
+                }}
+              >
+                <h5 className="color-graybdbd">SKIP</h5>
+              </div>
+            ) : null}
+            <img
+              src={xBtn}
+              alt=""
+              onClick={() => {
+                if (window.confirm('정말 떠나실건가요?')) history.push('/styleTestIntro');
+              }}
+            />
           </div>
         </div>
       </div>

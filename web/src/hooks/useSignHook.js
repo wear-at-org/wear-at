@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
 const SignHook = () => {
-  const history = useHistory();
+  let history = useHistory();
   const userInfo = useSelector((state) => state[userInfoName]);
   const { dispatch } = store;
   const [showToast, hideToast] = toastHook({ type: '', content: '' });
@@ -22,7 +22,7 @@ const SignHook = () => {
     cookies.set('saveEmail', email, { path: '/' });
   };
 
-  const login = async (email, password, saveId) => {
+  const login = async (email, password, saveId, callbackUrl) => {
     try {
       await api.post('auth/sign-in', {
         email,
@@ -34,6 +34,8 @@ const SignHook = () => {
         throw new Error("user cookie doesn't exist");
       }
 
+      console.log(user);
+
       dispatch(
         loginProcess({
           info: {
@@ -41,6 +43,7 @@ const SignHook = () => {
             nickname: user.nickname,
             email: email,
             prividerType: 'web',
+            profileImage: user.profile_image,
           },
           loginStatus: 'login',
         }),
@@ -50,8 +53,13 @@ const SignHook = () => {
         saveEmail(email);
       }
 
-      hideToast();
-      history.push('/');
+      if (callbackUrl) {
+        hideToast();
+        history.replace(callbackUrl);
+      } else {
+        hideToast();
+        history.push('/');
+      }
     } catch (e) {
       if (e.response && e.response.data) {
         showToast({ type: 'error', content: e.response.data.message });
@@ -64,7 +72,6 @@ const SignHook = () => {
   const signup = async (userInfo, isSns = false) => {
     try {
       if (isSns) {
-        console.log(userInfo);
         await api.post('auth/sns-sign-up', {
           ...userInfo,
         });
@@ -104,7 +111,43 @@ const SignHook = () => {
     }
   };
 
-  return { signup, login, logout };
+  const changePassword = async (password, token) => {
+    try {
+      if (token) {
+        await api.post('auth/update-password', { password, token });
+        showToast({ type: 'info', content: '비밀번호가 변경 되었습니다.' });
+        history.push('/login');
+      } else {
+        await api.post('user/update-password', { password });
+        showToast({ type: 'info', content: '비밀번호가 변경 되었습니다.' });
+        history.push('/');
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const findPassword = async ({ email }) => {
+    try {
+      await api.post('auth/find-password', { email });
+      history.push('/findPasswordSucess');
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const findEmail = async ({ birthday, birthmonth, birthyear, name }) => {
+    try {
+      const {
+        data: { email },
+      } = await api.post('auth/find-email', { birthday, birthmonth, birthyear, name });
+      history.push('/findEmailSucess', { params: { email } });
+    } catch (e) {
+      showToast({ type: 'error', content: e.response.data.message });
+    }
+  };
+
+  return { signup, login, logout, changePassword, findPassword, findEmail };
 };
 
 export default SignHook;

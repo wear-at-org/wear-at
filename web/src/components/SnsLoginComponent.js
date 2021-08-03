@@ -3,9 +3,7 @@ import kakao from 'assets/img/kakao.png';
 import naver from 'assets/img/naver.png';
 import facebook from 'assets/img/facebook.png';
 import google from 'assets/img/google.png';
-import apple from 'assets/img/apple.png';
 import api from 'api';
-import { Link } from 'react-router-dom';
 
 const SnsLoginComponent = (props) => {
   const snsLogin = async (provider) => {

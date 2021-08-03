@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from 'assets/img/logo.png';
-import Search from 'assets/img/search.png';
 import menu from 'assets/img/menu.png';
 import mLogo from 'assets/img/logo-m.png';
 import { useSelector } from 'react-redux';
@@ -27,9 +26,9 @@ export default function Header({ setDrawerStatus, setSearchStatus, searchStatus 
               <li className={pathname.includes('intro') ? 'active' : ''}>
                 <Link to="/intro">서비스 소개</Link>
               </li>
-              <li className={pathname.includes('styleTip') ? 'active' : ''}>
+              {/* <li className={pathname.includes('styleTip') ? 'active' : ''}>
                 <Link to="/styleTip">스타일 팁</Link>
-              </li>
+              </li> */}
               {/* <li>
                 <Link to="/intro">커뮤니티</Link>
               </li>
@@ -73,7 +72,7 @@ export default function Header({ setDrawerStatus, setSearchStatus, searchStatus 
               </Link>
             </li>
             <li>
-              <div
+              {/* <div
                 onMouseUpCapture={() => {
                   setSearchStatus(!searchStatus);
                 }}
@@ -81,7 +80,7 @@ export default function Header({ setDrawerStatus, setSearchStatus, searchStatus 
                 <div className="search">
                   <img src={Search} alt="search" />
                 </div>
-              </div>
+              </div> */}
             </li>
           </ul>
         </div>

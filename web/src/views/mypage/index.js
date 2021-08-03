@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Address from '../../components/Address';
 import useEditUserInfo from 'hooks/useEditUserInfo';
 import Lnb from 'components/layout/Lnb';
@@ -7,16 +7,16 @@ import ImageUpload from 'components/ImageUpload';
 
 const Mypage = () => {
   const [showPost, setShowPost] = useState(false);
-  const [user, dispatch] = useEditUserInfo();
+  const { user, dispatch, updateUserInfo } = useEditUserInfo();
 
   return (
     <div className="sub layout-sub">
       <div className="col-12 col-center mw-1280">
         <div className="show-mobile mb24 mb-sm-0">
-          <ImageUpload isMypage={true} />
+          <ImageUpload />
         </div>
 
-        <form className="mypage-container pr24 pl24">
+        <form className="mypage-container">
           <Lnb />
           <div className="right-container">
             <h5 className="mb20 bold">기본정보</h5>
@@ -73,8 +73,14 @@ const Mypage = () => {
 
               <div className="date-birth-container">
                 <div className="width-per-33 pl4 pr4">
-                  <select className="select-style1" name="" id="" required onChange={(e) => console.log(e.target.value)}>
-                    <option value="" disabled selected hidden>
+                  <select
+                    className="select-style1"
+                    id="year"
+                    required
+                    onChange={(e) => dispatch({ type: 'CHANHE_YEAR', year: e.target.value })}
+                    value={user.birthyear || ''}
+                  >
+                    <option value="" disabled hidden>
                       년도
                     </option>
                     {Array(60)
@@ -90,8 +96,14 @@ const Mypage = () => {
                   </select>
                 </div>
                 <div className="width-per-33 pl4 pr4">
-                  <select className="select-style1" name="" id="" required onChange={(e) => console.log(e.target.value)}>
-                    <option value="" disabled selected hidden>
+                  <select
+                    className="select-style1"
+                    id="month"
+                    required
+                    onChange={(e) => dispatch({ type: 'CHANHE_MONTH', month: e.target.value })}
+                    value={user.birthmonth || ''}
+                  >
+                    <option value="" disabled hidden>
                       월
                     </option>
                     {Array(12)
@@ -106,8 +118,14 @@ const Mypage = () => {
                   </select>
                 </div>
                 <div className="width-per-33 pl4 pr4">
-                  <select className="select-style1" name="" id="" required onChange={(e) => console.log(e.target.value)}>
-                    <option value="" disabled selected hidden>
+                  <select
+                    className="select-style1"
+                    id="day"
+                    required
+                    onChange={(e) => dispatch({ type: 'CHANHE_DAY', day: e.target.value })}
+                    value={user.birthday || ''}
+                  >
+                    <option value="" disabled hidden>
                       일
                     </option>
                     {Array(31)
@@ -138,7 +156,6 @@ const Mypage = () => {
                     className="radio-style-0"
                     name="gender"
                     checked={user.gender === 'w'}
-                    value={'w'}
                     onChange={(e) => {
                       dispatch({ type: 'CHANGE_GENDER', gender: 'w' });
                     }}
@@ -152,7 +169,6 @@ const Mypage = () => {
                     className="radio-style-0"
                     name="gender"
                     checked={user.gender === 'm'}
-                    value={'m'}
                     onChange={(e) => {
                       dispatch({ type: 'CHANGE_GENDER', gender: 'm' });
                     }}
@@ -206,11 +222,11 @@ const Mypage = () => {
 
                 <div className="d-flex">
                   <div className="adress-container pr8">
-                    <input type="text" className="input-style1" id="name" placeholder="우편번호" readOnly value={user.zipCode} />
+                    <input type="text" className="input-style1" id="name" placeholder="우편번호" readOnly value={user.zipCode || ''} />
                   </div>
 
                   <div className="address-btn-container">
-                    <input type="submit" value="주소검색" className="btn-style1 wid100 btn-font font-white" onClick={() => setShowPost(!showPost)} />
+                    <input readOnly value="주소검색" className="btn-style1 wid100 btn-font font-white" onClick={() => setShowPost(!showPost)} />
                   </div>
                 </div>
               </div>
@@ -233,7 +249,7 @@ const Mypage = () => {
                   id="name"
                   placeholder="검색버튼을 눌러 주소를 검색해주세요."
                   readOnly
-                  value={user.address}
+                  value={user.address || ''}
                 />
               </div>
               <div>
@@ -265,21 +281,21 @@ const Mypage = () => {
                     })
                   }
                 />
-                <div class="chk-label-container">
-                  <label for="agreeInfoReciving">
-                    <span class="option-font">(선택)</span> 마케팅 목적 혜택/정보 수신 동의
+                <div className="chk-label-container">
+                  <label htmlFor="agreeInfoReciving">
+                    <span className="option-font">(선택)</span> 마케팅 목적 혜택/정보 수신 동의
                   </label>
                 </div>
               </div>
             </div>
 
             <div className="mb15">
-              <input disabled type="button" className="width-100 btn-style1 tc white" value="정보 수정 완료" />
+              <input type="button" className="width-100 btn-style1 tc white btn-font" value="정보 수정 완료" onClick={updateUserInfo} />
             </div>
 
-            <div>
+            {/* <div>
               <p className="more-font">탈퇴하기</p>
-            </div>
+            </div> */}
           </div>
         </form>
       </div>

@@ -52,6 +52,9 @@ public class User {
     private String address;
 
     @Column(length=500)
+    private String profileImage;
+
+    @Column(length=500)
     private String detailAddress;
 
     private Boolean checkServiceTerms;

@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import buyIcon from 'assets/img/icon-shopping.png';
 import DetailItem from './DetailItem';
+import useStepHook from 'hooks/useStepHook';
+import xBtn from 'assets/img/x-btn-black.png';
 
-const StyleDetailModal = ({ showPop, setShowPop }) => {
+const StyleDetailModal = ({ showPop, setShowPop, clickId }) => {
+  const [detailItem, setDetailItem] = useState({ recommendItems: [] });
+  const { getRecommendDetail } = useStepHook();
+
+  useEffect(() => {
+    const getDetailItem = async () => {
+      const res = await getRecommendDetail(clickId);
+      setDetailItem(res);
+    };
+    if (clickId && showPop) {
+      getDetailItem();
+    }
+  }, [clickId, showPop]);
+
   if (!showPop) {
     return <></>;
   }
@@ -16,59 +31,43 @@ const StyleDetailModal = ({ showPop, setShowPop }) => {
       }}
     >
       <div className="inner">
-        <div className="total mb64">
-          <div className="buy-btn">
-            <img src={buyIcon} alt="" />
-            <h5 className="color-white small ml10 hover-txt">제품 상세보기</h5>
-          </div>
-          <div className="item">
-            <img src="https://wooilsin.co.kr/web/product/big/202011/03e1483ad7df44f8e4ab0dc0e8bd6fb7.jpg" alt="" />
-            <div className="info-price">
-              <div className="mb4">
-                <h5>텍스트 티셔츠</h5>
-              </div>
-              <div className="price-value">
-                <h5 className="small color-blue">₩10,000</h5>
-              </div>
+        <div className="mb64">
+          <div className="total">
+            <div
+              className="x-btn-container"
+              onClick={() => {
+                setShowPop(false);
+              }}
+            >
+              <img src={xBtn} alt="" />
             </div>
-          </div>
-          <div className="item">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk2ZRouiCp-A35Udmex3dbQaOA-7GYPjjMZQ&usqp=CAU" alt="" />
-            <div className="info-price">
-              <div className="mb4">
-                <h5>텍스트 티셔츠</h5>
-              </div>
-              <div className="price-value">
-                <h5 className="small color-blue">₩10,000</h5>
-              </div>
+            <div className="buy-btn">
+              <img src={buyIcon} alt="" />
+              <h5 className="color-white small ml10 hover-txt">제품 상세보기</h5>
             </div>
-          </div>
-          <div className="item">
-            <img src="http://image.auction.co.kr/itemimage/20/eb/12/20eb123656.jpg" alt="" />
-            <div className="info-price">
-              <div className="mb4">
-                <h5>텍스트 티셔츠</h5>
-              </div>
-              <div className="price-value">
-                <h5 className="small color-blue">₩10,000</h5>
-              </div>
-            </div>
-          </div>
-          <div className="item">
-            <img src="https://image.msscdn.net/images/goods_img/20201217/1725492/1725492_5_500.jpg" alt="" />
-            <div className="info-price">
-              <div className="mb4">
-                <h5>텍스트 티셔츠</h5>
-              </div>
-              <div className="price-value">
-                <h5 className="small color-blue">₩10,000</h5>
-              </div>
-            </div>
+            {detailItem.recommendItems.map((item) => {
+              return (
+                <div className="item">
+                  <img src={item.imageUrl} alt={item.imageUrl} />
+
+                  <a href={item.linkUrl} target="_blank" rel="noreferrer" className="info-price">
+                    <div className="mb4">
+                      <h5>{item.title}</h5>
+                    </div>
+                    <div className="price-value">
+                      <h5 className="small color-blue">₩{item.price.toLocaleString('ko-KR')}</h5>
+                    </div>
+                  </a>
+                </div>
+              );
+            })}
           </div>
         </div>
 
         <div className="style-item-list">
-          <DetailItem />
+          {detailItem.recommendItems.map((item) => {
+            return <DetailItem item={item} />;
+          })}
         </div>
       </div>
     </div>

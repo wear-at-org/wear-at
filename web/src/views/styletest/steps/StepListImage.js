@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import NextBtn from './NextBtn';
 
-const StepListImage = ({ item, goNextStep, hooks, apiId }) => {
-  const { makeInsertList, beforeNextChecker, selectQueryItem } = hooks;
+const StepListImage = ({ item, goNextStep, hooks, apiId, activeIndex }) => {
+  const { makeInsertList, beforeNextChecker, selectQueryItem, checkLength } = hooks;
   const [status, setStatus] = useState('init');
   const [list, setList] = useState([]);
 
   useEffect(() => {
-    setStatus('start');
-    setList(makeInsertList(item));
+    const makeList = async () => {
+      setStatus('start');
+      setList(await makeInsertList(item, apiId));
+    };
+    makeList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [activeIndex]);
 
   return (
     <div className={`step-container ${status}`}>
@@ -40,6 +43,7 @@ const StepListImage = ({ item, goNextStep, hooks, apiId }) => {
         );
       })}
       <NextBtn
+        disabled={checkLength(list) < 3 || checkLength(list) > 10}
         goNextStep={() => {
           beforeNextChecker(list, apiId);
           setStatus('end');

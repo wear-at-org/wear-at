@@ -22,7 +22,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOriginPatterns("http://localhost:3*")
-                .allowedMethods(HttpMethod.GET.name(), HttpMethod.POST.name(), HttpMethod.OPTIONS.name())
+                .allowedMethods(HttpMethod.GET.name(), HttpMethod.POST.name(), HttpMethod.PUT.name(), HttpMethod.OPTIONS.name())
                 .allowCredentials(true);
     }
 
@@ -34,9 +34,7 @@ public class WebConfig implements WebMvcConfigurer {
                     "/v1/auth/**",
                     "/v1/user/*/partial",
                     "/v1/user/check-email",
-                    "/v1/user/check-nickname",
-                    "/v1/user/find-id",
-                    "/v1/user/find-password"
+                    "/v1/user/check-nickname"
                 );
     }
 }
