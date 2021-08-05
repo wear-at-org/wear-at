@@ -1,3 +1,4 @@
+use wearat;
 
 truncate table query_category;
 truncate table query_item;

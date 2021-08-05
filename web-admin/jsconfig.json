@@ -1,0 +1,13 @@
+{
+	"compilerOptions": {
+		"baseUrl": "./src",
+		"paths": {
+			"./src/assets*": ["assets/*"]
+		},
+		"target": "esnext",
+		"module": "commonjs",
+		"allowSyntheticDefaultImports": true,
+		"checkJs": false,
+		"jsx": "react-native"
+	}
+}

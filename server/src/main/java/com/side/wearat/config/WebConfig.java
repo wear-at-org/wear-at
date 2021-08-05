@@ -4,9 +4,7 @@ import com.side.wearat.interceptor.AuthInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
@@ -32,9 +30,15 @@ public class WebConfig implements WebMvcConfigurer {
                 .addPathPatterns("/v1/**")
                 .excludePathPatterns(
                     "/v1/auth/**",
+                    "/v1/debug/**",
                     "/v1/user/*/partial",
                     "/v1/user/check-email",
                     "/v1/user/check-nickname"
                 );
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/**") .addResourceLocations("file:/wearat/static/");
     }
 }
