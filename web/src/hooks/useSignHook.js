@@ -78,8 +78,15 @@ const SignHook = () => {
 
         history.push('/');
       } else {
+        console.log(userInfo);
         await api.post('auth/sign-up', {
-          ...userInfo,
+          checkServiceTerms: userInfo.checkServiceTerms,
+          checkPrivacyPolicy: userInfo.checkPrivacyPolicy,
+          checkReceivingConsent: userInfo.checkReceivingConsent,
+          name: userInfo.name,
+          email: userInfo.email,
+          nickname: userInfo.nickname,
+          password: userInfo.password,
         });
 
         history.push('/success');
