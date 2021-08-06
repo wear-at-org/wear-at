@@ -25,11 +25,27 @@ COPY ./web .
 RUN yarn build:${BUILD_ENV}
 
 
+# web admin build
+FROM node:14.17.4-alpine as webAdminBuilder
+
+ARG BUILD_ENV
+
+WORKDIR /wearat/web-admin
+
+# 패키지 설치는 변경사항이 있을때만 하도록 분리
+COPY ./web-admin/package*.json ./
+RUN yarn install
+
+COPY ./web-admin .
+
+RUN yarn build:${BUILD_ENV}
+
 # dist
 FROM openjdk:15-jdk-alpine
 
 COPY --from=appBuilder /wearat/build/libs/*.jar /wearat/app.jar
-COPY --from=webBuilder /wearat/web/build /wearat/static/
+COPY --from=webBuilder /wearat/web/build /wearat/static/web
+COPY --from=webAdminBuilder /wearat/web-admin/build /wearat/static/admin
 
 WORKDIR /wearat
 
