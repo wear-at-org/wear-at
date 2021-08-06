@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> getUserByNameAndBirth(String name, String year, String month, String day) {
-        return this.userRepository.findByNameAndBirthyearAndBirthmonthAndBirthday(name, year, month, day);
+        return this.userRepository.findFirstByNameAndBirthyearAndBirthmonthAndBirthday(name, year, month, day);
     }
 
     @Override

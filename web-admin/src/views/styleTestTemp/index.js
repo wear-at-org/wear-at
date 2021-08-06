@@ -158,6 +158,7 @@ const StyleTest = () => {
 						fieldProps={{
 							autoSize:{ minRows: 20, maxRows: 20 },
 							value: itemsStr,
+							onChange: (e) => setItemsStr(e.target.value)
 						}}	
 						placeholder="data"
 					/>

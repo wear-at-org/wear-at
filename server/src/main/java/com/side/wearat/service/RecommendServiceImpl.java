@@ -113,12 +113,12 @@ public class RecommendServiceImpl implements RecommendService {
 
         if (completed) {
             subscribeRepositorySupport.updateSubscribeRecommended(req.getSubscribeId());
-            sendRecommendEmail(s.getUserId(), s.getId());
+            sendRecommendEmail(s.getUserId(), result.getId());
         }
         return result;
     }
 
-    private void sendRecommendEmail(Long userId, Long subscribeId) throws Exception {
+    private void sendRecommendEmail(Long userId, Long recommendID) throws Exception {
         Optional<User> u = userRepository.findById(userId);
         if (u.isEmpty()) {
             throw new Exception("user " + userId + " doesn't exists");
@@ -126,7 +126,7 @@ public class RecommendServiceImpl implements RecommendService {
 
         String receiver = u.get().getEmail();
         String subject = "[WEAR-AT] 스타일테스트 추천이 완료되었습니다.";
-        String body = makeEmailTemplate().formatted(makeRecommendUrl(subscribeId));
+        String body = makeEmailTemplate().formatted(makeRecommendUrl(recommendID));
         emailClient.send(receiver, subject, body);
     }
 
@@ -135,8 +135,8 @@ public class RecommendServiceImpl implements RecommendService {
         recommendRepository.deleteById(id);
     }
 
-    private String makeRecommendUrl(Long subscribeId) {
-        return authConfig.getClientRedirectUrl() + "/styleTestList?id=" + subscribeId;
+    private String makeRecommendUrl(Long recommendID) {
+        return authConfig.getClientRedirectUrl() + "/styleTestList/detail/" + recommendID;
     }
 
     private String makeEmailTemplate() {
