@@ -3,6 +3,7 @@ import buyIcon from 'assets/img/icon-shopping.png';
 import DetailItem from './components/DetailItem';
 import useStepHook from 'hooks/useStepHook';
 import { useParams } from 'react-router-dom';
+import MobileHeader from 'components/MobileHeader';
 
 const StyleTestDetail = () => {
   const { id } = useParams();
@@ -20,6 +21,10 @@ const StyleTestDetail = () => {
 
   return (
     <div className="sub layout-sub">
+      <div className="pl25 pr25">
+        <MobileHeader />
+      </div>
+
       <div className="style-detail-wrap">
         <div className="total mb64">
           <div className="buy-btn">
