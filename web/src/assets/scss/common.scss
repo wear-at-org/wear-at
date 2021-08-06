@@ -2,6 +2,26 @@
   box-sizing: border-box;
 }
 
+.mobile-header-wrap {
+  width: 100%;
+  z-index: 100;
+  background-color: white;
+  .inner {
+    .mobile-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+
+      img {
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+}
+
 .common-icon-size img {
   width: 24px !important;
   height: 24px !important;
@@ -352,9 +372,10 @@ footer {
   top: 0;
   left: -200%;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 100;
+  min-height: -webkit-fill-available;
 
   .drawer-inner {
     left: -200%;

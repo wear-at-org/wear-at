@@ -66,6 +66,7 @@ const StepUploadImage = ({ item, hooks, apiId, activeIndex }) => {
       </div>
 
       <NextBtn
+        isComplete={true}
         goNextStep={async () => {
           await makeList();
         }}
