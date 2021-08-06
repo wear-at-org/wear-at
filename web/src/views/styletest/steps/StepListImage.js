@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import NextBtn from './NextBtn';
+import LazyImage from 'components/LazyImage';
 
 const StepListImage = ({ item, goNextStep, hooks, apiId, activeIndex }) => {
   const { makeInsertList, beforeNextChecker, selectQueryItem, checkLength } = hooks;
@@ -34,7 +35,7 @@ const StepListImage = ({ item, goNextStep, hooks, apiId, activeIndex }) => {
                     onClick={() => setList(selectQueryItem(list, queryItem, index, !answer))}
                   >
                     <div className="img-dim"></div>
-                    <img src={url} alt="" />
+                    <LazyImage src={url} />
                   </div>
                 );
               })}

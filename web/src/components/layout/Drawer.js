@@ -86,34 +86,42 @@ const Drawer = ({ drawerStatus, setDrawerStatus }) => {
               </div>
             </div>
           </li>
-          <li>
-            <div
-              className="item"
-              onClick={() => {
-                setDrawerStatus(false);
-                navigate('/styleTestList');
-              }}
-            >
-              <div>스타일테스트 내역</div>
-              <div>
-                <img src={arrRight} alt="" />
-              </div>
-            </div>
-          </li>
-          <li>
-            <div
-              className="item"
-              onClick={() => {
-                setDrawerStatus(false);
-                navigate('/mypage');
-              }}
-            >
-              <div>프로필 수정</div>
-              <div>
-                <img src={arrRight} alt="" />
-              </div>
-            </div>
-          </li>
+
+          {loginStatus !== 'login' ? (
+            <></>
+          ) : (
+            <>
+              <li>
+                <div
+                  className="item"
+                  onClick={() => {
+                    setDrawerStatus(false);
+                    navigate('/styleTestList');
+                  }}
+                >
+                  <div>스타일테스트 내역</div>
+                  <div>
+                    <img src={arrRight} alt="" />
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div
+                  className="item"
+                  onClick={() => {
+                    setDrawerStatus(false);
+                    navigate('/mypage');
+                  }}
+                >
+                  <div>프로필 수정</div>
+                  <div>
+                    <img src={arrRight} alt="" />
+                  </div>
+                </div>
+              </li>
+            </>
+          )}
+
           {/* <li>
             <div
               className="item"
