@@ -39,7 +39,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/_admin/**") .addResourceLocations("file:/wearat/static/admin/");
         registry.addResourceHandler("/**") .addResourceLocations("file:/wearat/static/web/");
+        registry.addResourceHandler("/_admin/**") .addResourceLocations("file:/wearat/static/admin/");
     }
 }
