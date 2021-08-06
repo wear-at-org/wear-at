@@ -639,3 +639,56 @@ footer {
     background-color: $mainColor;
   }
 }
+
+.marquee {
+  width: 100%;
+  overflow: hidden;
+}
+
+.marquee-content {
+  display: flex;
+  list-style: none;
+  animation: scrolling 40s linear infinite;
+  padding-top: 200px;
+  padding-bottom: 200px;
+}
+
+.marquee-item {
+  display: flex;
+  align-items: center;
+  width: 200px;
+  flex-shrink: 0;
+  margin-right: 40px;
+}
+
+.marquee-image {
+  object-fit: cover;
+}
+
+@keyframes scrolling {
+  0% {
+    transform: translateX(1500px);
+  }
+  100% {
+    transform: translatex(-1500px);
+  }
+}
+
+.pulse {
+  animation: pulse 1.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+.loadable {
+  overflow: hidden;
+  margin: 0 auto;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}

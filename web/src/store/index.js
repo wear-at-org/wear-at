@@ -5,6 +5,7 @@ import spinner, { name as spinnerName } from './spinner-store';
 import toast, { name as toastName } from './toast-store';
 import userinfo, { name as userInfoName } from './userinfo-store';
 import globalpopup, { name as globalPopupName } from './globalpopup-store';
+import layout, { name as layoutName } from './layout-store';
 
 const persistConfig = {
   key: 'root',
@@ -17,11 +18,12 @@ export const reducer = combineReducers({
   [toastName]: toast,
   [userInfoName]: userinfo,
   [globalPopupName]: globalpopup,
+  [layoutName]: layout,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);
 
-export { spinnerName, userInfoName, toastName, globalPopupName };
+export { spinnerName, userInfoName, toastName, globalPopupName, layoutName };
 
 export default configureStore({
   reducer: persistedReducer,

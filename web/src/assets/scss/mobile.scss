@@ -453,4 +453,21 @@
       }
     }
   }
+
+  .marquee-content {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+  .marquee-item {
+    width: 100px;
+  }
+
+  @keyframes scrolling {
+    0% {
+      transform: translateX(300px);
+    }
+    100% {
+      transform: translatex(-1000px);
+    }
+  }
 }

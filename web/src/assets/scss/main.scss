@@ -63,11 +63,13 @@
     align-items: center;
   }
   .partners-item {
-    width: 150px;
+    width: 200px;
     height: 100px;
     flex-shrink: 0;
     margin-left: 10px;
     margin-right: 10px;
+    align-items: center;
+    display: flex;
   }
 }
 
