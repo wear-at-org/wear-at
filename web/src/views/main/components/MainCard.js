@@ -37,9 +37,9 @@ const MainCard = ({ cardIsActive }) => {
               <img src={mainIcon3} alt="mainIcon1" />
             </div>
             <div className="detail-text">
-              <h4>패션에 대한 모든 것</h4>
+              <h4>미처 몰랐던 새로운 브랜드도</h4>
               <h5>
-                이벤트, 세일, OOTD 등 다양한 패션
+                내 스타일의 새로운 디자이너 브랜드들을 만나보세요!
                 <br />
                 정보를 확인하실 수 있어요.
               </h5>
