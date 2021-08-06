@@ -11,7 +11,7 @@ const Main = () => {
   const scrollEvent = (e) => {
     const scrollTop = ('scroll', e.srcElement.scrollingElement.scrollTop);
     const positionCard = cardRef.current.getBoundingClientRect().top;
-    if (scrollTop - 400 > positionCard && !cardIsActive) setCardIsActive(true);
+    if (scrollTop - 200 > positionCard && !cardIsActive) setCardIsActive(true);
   };
 
   useEffect(() => {

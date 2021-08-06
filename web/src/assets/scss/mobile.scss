@@ -453,4 +453,17 @@
       }
     }
   }
+
+  .marquee-item {
+    width: 150px;
+  }
+
+  @keyframes scrolling {
+    0% {
+      transform: translateX(200px);
+    }
+    100% {
+      transform: translatex(-2000px);
+    }
+  }
 }

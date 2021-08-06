@@ -14,9 +14,9 @@ export default function Footer() {
         <li className="bold">
           <Link to="/privacyPolicy">개인정보처리방침</Link>
         </li>
-        <li>
+        {/* <li>
           <Link to="/">고객센터</Link>
-        </li>
+        </li> */}
         <li>
           <a target="_blank" href="https://forms.gle/b1jtbeXSsGMHhckJ8" rel="noreferrer">
             제휴/광고문의

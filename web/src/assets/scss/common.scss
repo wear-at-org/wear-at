@@ -639,3 +639,37 @@ footer {
     background-color: $mainColor;
   }
 }
+
+.marquee {
+  width: 100%;
+  overflow: hidden;
+}
+
+.marquee-content {
+  display: flex;
+  list-style: none;
+  animation: scrolling 40s linear infinite;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.marquee-item {
+  display: flex;
+  align-items: center;
+  width: 200px;
+  flex-shrink: 0;
+  margin-right: 40px;
+}
+
+.marquee-image {
+  object-fit: cover;
+}
+
+@keyframes scrolling {
+  0% {
+    transform: translateX(1000px);
+  }
+  100% {
+    transform: translatex(-2000px);
+  }
+}
