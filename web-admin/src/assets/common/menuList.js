@@ -1,9 +1,8 @@
 import React from 'react';
-import { CrownOutlined } from '@ant-design/icons';
+import { CrownOutlined, LikeOutlined } from '@ant-design/icons';
 
 const menuList = {
 	route: {
-		path: '/styleTest',
 		routes: [
 			{
 				path: '/styleTest',
@@ -11,11 +10,14 @@ const menuList = {
 				icon: <CrownOutlined />,
 				component: 'views/styleTest',
 			},
+			{
+				path: '/styleTestTemp',
+				name: '추천 [임시]',
+				icon: <LikeOutlined />,
+				component: 'views/styleTestTemp',
+			},
 		],
-	},
-	location: {
-		pathname: '/styleTest',
-	},
+	}
 };
 
 export default menuList;

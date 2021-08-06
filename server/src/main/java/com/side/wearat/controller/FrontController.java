@@ -7,8 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class FrontController {
-    @RequestMapping(value = { "/", "/{x:[\\w\\-]+}", "/{x:^(?!v1$).*$}/**/{y:[\\w\\-]+}" })
-    public String getIndex(HttpServletRequest request) {
+    @RequestMapping(value = { "/", "/{x:[\\w\\-]+}", "/{x:^(?!v1$).*$}/**/{y:[\\w\\-]+}", "/{x:^(?!_admin$).*$}/**/{y:[\\w\\-]+}" })
+    public String getWebIndex(HttpServletRequest request) {
         return "/index.html";
+    }
+
+    @RequestMapping(value = { "/_admin", "/_admin/{x:[\\w\\-]+}", "/_admin/**/{y:[\\w\\-]+}"})
+    public String getAdminWebIndex(HttpServletRequest request) {
+        return "/_admin/index.html";
     }
 }
