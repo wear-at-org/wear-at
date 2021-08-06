@@ -11,9 +11,6 @@ import { render, hydrate } from 'react-dom';
 
 const rootElement = document.getElementById('root');
 const persistor = persistStore(store);
-if(process.env.NODE_ENV !== 'development') {
-  console.log = null
-}
 
 if (rootElement.hasChildNodes()) {
   hydrate(
