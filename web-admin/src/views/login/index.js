@@ -4,24 +4,45 @@ import ProForm, { ProFormText } from '@ant-design/pro-form';
 import { CoffeeOutlined, MailOutlined } from '@ant-design/icons';
 import logo from 'assets/img/logo.png';
 import { useHistory } from 'react-router-dom';
-
-const waitTime = (time = 100) => {
-	return new Promise((resolve) => {
-		setTimeout(() => {
-			resolve(true);
-		}, time);
-	});
-};
+import api from 'api';
+import { user } from 'api/user';
+import Cookies from 'universal-cookie';
 
 const Login = () => {
 	let history = useHistory();
+
+	const getUserFromCookie = () => {
+    const cookies = new Cookies();
+    return cookies.get('_watu');
+  };
+
+	const login = async (email, password) => {
+		try {
+      await api.post('auth/sign-in', {
+        email,
+        password,
+      });
+
+			const u = getUserFromCookie();
+      if (!u) {
+        throw new Error("user cookie doesn't exist");
+      }
+			user.setUserId(u.id);
+
+			message.success('로그인 성공');
+			
+			history.push('/');
+
+    } catch (e) {
+			message.error(e.response && e.response.data ? e.response.data.message : e.message);
+    }
+	};
+
 	return (
 		<div className="admin-login">
 			<ProForm
-				onFinish={async () => {
-					await waitTime(1000);
-					message.success('로그인 성공');
-					history.push('/styleTest');
+				onFinish={(values) => {
+					login(values.email, values.password);
 				}}
 				submitter={{
 					searchConfig: {
@@ -61,6 +82,7 @@ const Login = () => {
 					퍼스널 스타일링을 받아보세요
 				</div>
 				<ProFormText
+					name="email"
 					fieldProps={{
 						size: 'large',
 						prefix: <MailOutlined />,
@@ -74,6 +96,7 @@ const Login = () => {
 					]}
 				/>
 				<ProFormText.Password
+					name="password"
 					fieldProps={{
 						size: 'large',
 						prefix: <CoffeeOutlined />,

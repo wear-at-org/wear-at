@@ -1,5 +1,6 @@
 package com.side.wearat.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,6 +32,7 @@ public class User {
     private String nickname;
 
     @Column(length=255)
+    @JsonIgnore
     private String password;
 
     @Column(length=10)
@@ -63,13 +65,17 @@ public class User {
 
     private Boolean checkReceivingConsent;
 
+    @JsonIgnore
     private LocalDateTime createAt;
 
     @Column(length=100)
+    @JsonIgnore
     private String createUser;
 
+    @JsonIgnore
     private LocalDateTime updateAt;
 
     @Column(length=100)
+    @JsonIgnore
     private String updateUser;
 }

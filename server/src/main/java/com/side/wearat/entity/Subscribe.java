@@ -1,7 +1,10 @@
 package com.side.wearat.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -43,5 +46,11 @@ public class Subscribe {
     @JsonInclude()
     @Transient
     private int progress;
+
+
+    @ManyToOne
+    @JoinColumn(name = "userId", insertable = false, updatable = false, foreignKey = @javax.persistence.ForeignKey(name = "none"))
+    @NotFound(action= NotFoundAction.IGNORE)
+    private User user;
 }
 

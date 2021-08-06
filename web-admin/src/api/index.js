@@ -1,6 +1,12 @@
 import axios from 'axios';
 const BASE_URL = 'http://localhost:8089/v1/';
 
+// TODO remove, redux 활용
+let unAuthorizedCallback = () => {};
+export const setUnAuthorizedCallback = (cb) => {
+	unAuthorizedCallback = cb;
+};
+
 const Axios = axios.create({
 	baseURL: BASE_URL,
 	timeout: 5000,
@@ -22,6 +28,11 @@ Axios.interceptors.response.use(
 		return response;
 	},
 	(error) => {
+		if (error.response && error.response.status) {
+			if (error.response.status === 401) {
+				unAuthorizedCallback();
+			}
+		}
 		return Promise.reject(error);
 	},
 );
