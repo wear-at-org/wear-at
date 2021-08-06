@@ -9,24 +9,27 @@ const StepUploadImage = ({ item, hooks, apiId, activeIndex }) => {
   const [list, setList] = useState([]);
 
   const makeList = async () => {
-    const {
-      data: { urls },
-    } = await uploadFile(files.map((i) => i.object));
-    const resultItem = await urls.map((url, index) => {
-      return {
-        id: index * 1,
-        answer: url,
-        queryId: apiId,
-        queryItemId: index * 1,
-      };
-    });
-    const insertList = [
-      {
-        id: apiId,
-        queryCategories: [],
-        queryItems: resultItem,
-      },
-    ];
+    let insertList = [];
+    if (files.length > 0) {
+      const {
+        data: { urls },
+      } = await uploadFile(files.map((i) => i.object));
+      const resultItem = await urls.map((url, index) => {
+        return {
+          id: index * 1,
+          answer: url,
+          queryId: apiId,
+          queryItemId: index * 1,
+        };
+      });
+      insertList = [
+        {
+          id: apiId,
+          queryCategories: [],
+          queryItems: resultItem,
+        },
+      ];
+    }
 
     await beforeNextChecker(insertList, apiId, true);
   };
