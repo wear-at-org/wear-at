@@ -649,8 +649,8 @@ footer {
   display: flex;
   list-style: none;
   animation: scrolling 40s linear infinite;
-  padding-top: 100px;
-  padding-bottom: 100px;
+  padding-top: 200px;
+  padding-bottom: 200px;
 }
 
 .marquee-item {
@@ -667,9 +667,9 @@ footer {
 
 @keyframes scrolling {
   0% {
-    transform: translateX(1000px);
+    transform: translateX(1500px);
   }
   100% {
-    transform: translatex(-2000px);
+    transform: translatex(-1500px);
   }
 }

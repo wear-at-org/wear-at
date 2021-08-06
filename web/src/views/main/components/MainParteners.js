@@ -43,38 +43,6 @@ const MainParteners = () => {
           </li>
         </ul>
       </div>
-      {/*  eslint-disable-next-line jsx-a11y/no-distracting-elements */}
-      {/* <marquee className="partners-container" scrollamount="2" scrolldely="50">
-        <div className="inner">
-          <div className="partners-item">
-            <img src={main1} alt="logo1" />
-          </div>
-          <div className="partners-item">
-            <img src={main2} alt="logo2" />
-          </div>
-          <div className="partners-item">
-            <img src={main3} alt="logo3" />
-          </div>
-          <div className="partners-item">
-            <img src={main4} alt="logo4" />
-          </div>
-          <div className="partners-item">
-            <img src={main5} alt="logo5" />
-          </div>
-          <div className="partners-item">
-            <img src={main6} alt="logo6" />
-          </div>
-          <div className="partners-item">
-            <img src={main7} alt="logo7" />
-          </div>
-          <div className="partners-item">
-            <img src={main8} alt="logo8" />
-          </div>
-          <div className="partners-item">
-            <img src={main9} alt="logo9" />
-          </div>
-        </div>
-      </marquee> */}
     </section>
   );
 };

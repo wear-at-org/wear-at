@@ -454,16 +454,20 @@
     }
   }
 
+  .marquee-content {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
   .marquee-item {
-    width: 150px;
+    width: 100px;
   }
 
   @keyframes scrolling {
     0% {
-      transform: translateX(200px);
+      transform: translateX(300px);
     }
     100% {
-      transform: translatex(-2000px);
+      transform: translatex(-1000px);
     }
   }
 }
