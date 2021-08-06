@@ -64,7 +64,7 @@ const FindIdPassword = () => {
                   </option>
                   {[...Array(12)].map((_, index) => {
                     return (
-                      <option key={`month-${index}`} value={index + 1}>
+                      <option key={`month-${index}`} value={index + 1 > 9 ? index + 1 : '0' + (index + 1)}>
                         {index + 1}월
                       </option>
                     );
@@ -78,7 +78,7 @@ const FindIdPassword = () => {
                   </option>
                   {[...Array(31)].map((_, index) => {
                     return (
-                      <option key={`day-${index}`} value={index + 1}>
+                      <option key={`day-${index}`} value={index + 1 > 9 ? index + 1 : '0' + (index + 1)}>
                         {index + 1}일
                       </option>
                     );

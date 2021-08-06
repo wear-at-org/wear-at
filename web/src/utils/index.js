@@ -39,3 +39,15 @@ export const isMobile = () => {
 };
 
 export const currentRoute = document.location.href.split(document.location.origin)[1];
+
+export const checkMobile = () => {
+  const UA = navigator.userAgent.toLowerCase(); //userAgent 값 얻기
+
+  if (UA.indexOf('android') > -1) {
+    return 'android';
+  } else if (UA.indexOf('iphone') > -1 || UA.indexOf('ipad') > -1 || UA.indexOf('ipod') > -1) {
+    return 'ios';
+  } else {
+    return 'other';
+  }
+};
