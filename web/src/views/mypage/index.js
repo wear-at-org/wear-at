@@ -4,6 +4,7 @@ import useEditUserInfo from 'hooks/useEditUserInfo';
 import Lnb from 'components/layout/Lnb';
 import { checkNicknameApi } from 'utils/UserReducer';
 import ImageUpload from 'components/ImageUpload';
+import MobileHeader from 'components/MobileHeader';
 
 const Mypage = () => {
   const [showPost, setShowPost] = useState(false);
@@ -13,6 +14,10 @@ const Mypage = () => {
     <div className="sub layout-sub">
       <div className="col-12 col-center mw-1280">
         <div className="show-mobile mb24 mb-sm-0">
+          <div className="pl25 pr25">
+            <MobileHeader />
+          </div>
+
           <ImageUpload />
         </div>
 
@@ -110,7 +115,7 @@ const Mypage = () => {
                       .fill(0)
                       .map((n, i) => {
                         return (
-                          <option value={i + 1} key={i + 1 + 'moment'}>
+                          <option key={`month-${i}`} value={i + 1 > 9 ? i + 1 : '0' + (i + 1)}>
                             {i + 1}
                           </option>
                         );
@@ -132,7 +137,7 @@ const Mypage = () => {
                       .fill(0)
                       .map((n, i) => {
                         return (
-                          <option value={i + 1} key={i + 1 + 'day'}>
+                          <option key={`day-${i}`} value={i + 1 > 9 ? i + 1 : '0' + (i + 1)}>
                             {i + 1}
                           </option>
                         );

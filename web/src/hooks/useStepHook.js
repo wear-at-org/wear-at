@@ -30,8 +30,8 @@ const StepHook = () => {
     return result;
   };
 
-  const getStyleTestList = async ({ size = 10, page = 0 }) => {
-    const res = await api.get(`subscribe?size=${size}&page=${page}`);
+  const getStyleTestList = async ({ size = 10, page = 0, sort = 'subscribeAt,desc' }) => {
+    const res = await api.get(`subscribe?size=${size}&page=${page}&sort=${sort}`);
     new Promise(async (resolve) => {
       await res.data.content.forEach(async (i, index) => {
         if (i.recommended) {
