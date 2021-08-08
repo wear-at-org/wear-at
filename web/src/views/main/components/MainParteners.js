@@ -12,33 +12,33 @@ import main9 from 'assets/img/main9.png';
 const MainParteners = () => {
   return (
     <section className="col-12">
-      <div class="marquee">
-        <ul class="marquee-content">
-          <li class="marquee-item">
+      <div className="marquee">
+        <ul className="marquee-content">
+          <li className="marquee-item">
             <img src={main1} alt="logo1" />
           </li>
-          <li class="marquee-item">
+          <li className="marquee-item">
             <img src={main2} alt="logo1" />
           </li>
-          <li class="marquee-item">
+          <li className="marquee-item">
             <img src={main3} alt="logo1" />
           </li>
-          <li class="marquee-item">
+          <li className="marquee-item">
             <img src={main4} alt="logo1" />
           </li>
-          <li class="marquee-item">
+          <li className="marquee-item">
             <img src={main5} alt="logo1" />
           </li>
-          <li class="marquee-item">
+          <li className="marquee-item">
             <img src={main6} alt="logo1" />
           </li>
-          <li class="marquee-item">
+          <li className="marquee-item">
             <img src={main7} alt="logo1" />
           </li>
-          <li class="marquee-item">
+          <li className="marquee-item">
             <img src={main8} alt="logo1" />
           </li>
-          <li class="marquee-item">
+          <li className="marquee-item">
             <img src={main9} alt="logo1" />
           </li>
         </ul>

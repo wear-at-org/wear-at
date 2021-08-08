@@ -34,23 +34,24 @@ const DragImagUpload = ({ files, setFiles }) => {
           },
         ];
       }
-      console.log(tempFiles);
       setFiles(tempFiles);
     },
     [files, setFiles],
   );
 
   const handleFilterFile = useCallback(
-    (id) => {
-      setFiles(files.filter((file) => file.id !== id));
+    (dFiles) => {
+      let filesNew = [...files];
+      dFiles.forEach((f) => {
+        filesNew = filesNew.filter((file) => file.id !== f.id);
+      });
+      setFiles(filesNew);
     },
     [files, setFiles],
   );
 
   const deleteFiles = () => {
-    delFiles.forEach((item) => {
-      handleFilterFile(item.id);
-    });
+    handleFilterFile(delFiles);
   };
 
   const handleDragIn = useCallback((e) => {
@@ -164,11 +165,11 @@ const DragImagUpload = ({ files, setFiles }) => {
                       className="input-style-checkbox"
                       checked={delFiles.findIndex((i) => i.id === file.id) > -1}
                       onChange={() => {
-                        console.log(delFiles);
-                        console.log(file.id);
+                        console.log('change');
                         delFiles.findIndex((i) => i.id === file.id) === -1
                           ? setDelFiles([...delFiles, file])
                           : setDelFiles([...delFiles.filter((i) => i.id !== file.id)]);
+                        console.log(delFiles);
                       }}
                     />
                   </div>

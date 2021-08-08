@@ -15,6 +15,7 @@ const StyleTestHeader = ({ activeIndex, setActiveIndex, stepLength, apiId, hooks
       <div className="inner">
         <div className="style-test-header">
           <div
+            className="d-flex y-center"
             onClick={() => {
               if (activeIndex !== 0) {
                 window.scrollTo(0, 0);
@@ -24,7 +25,12 @@ const StyleTestHeader = ({ activeIndex, setActiveIndex, stepLength, apiId, hooks
               }
             }}
           >
-            <img src={arrLeft} alt="" />
+            <img src={arrLeft} alt="arr-left" />
+            {activeIndex === 3 || activeIndex === 4 ? (
+              <div className="ml20 cursor-pointer opacicy0">
+                <h5 className="color-graybdbd">SKIP</h5>
+              </div>
+            ) : null}
           </div>
           <div>
             <h4>스타일테스트</h4>
@@ -46,7 +52,7 @@ const StyleTestHeader = ({ activeIndex, setActiveIndex, stepLength, apiId, hooks
             ) : null}
             <img
               src={xBtn}
-              alt=""
+              alt="x-btn"
               onClick={() => {
                 if (window.confirm('정말 떠나실건가요?')) history.push('/styleTestIntro');
               }}

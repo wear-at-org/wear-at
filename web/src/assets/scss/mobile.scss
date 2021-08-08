@@ -150,6 +150,10 @@
       h5.small {
         display: none;
       }
+
+      &.check {
+        border-color: red;
+      }
     }
   }
   .step-container {
@@ -472,6 +476,11 @@
   }
 
   .y-sm-end {
-    justify-content:flex-end;
+    justify-content: flex-end;
+  }
+
+  .DragDrop {
+    padding-left: 25px;
+    padding-right: 25px;
   }
 }
