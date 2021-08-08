@@ -237,6 +237,10 @@
       &:nth-child(2n + 1) {
         margin-left: 4px;
       }
+
+      &.disabled {
+        opacity: 0.3;
+      }
     }
   }
 }

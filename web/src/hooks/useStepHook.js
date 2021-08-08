@@ -143,6 +143,50 @@ const StepHook = () => {
     return changeList;
   };
 
+  // 클릭 시 select로 변환
+  const selectOnlyOneQueryItem = (list, queryItem, index, answer) => {
+    console.log(queryItem);
+    let changeList = [...list];
+    changeList = list.map((item, i) => {
+      if (i === index) {
+        return {
+          ...item,
+          queryItems: item.queryItems.map((value) => {
+            if (value.categoryId === queryItem.categoryId) {
+              if (value.id === queryItem.id) {
+                console.log('value1');
+                console.log(value);
+                return {
+                  ...value,
+                  answer,
+                };
+              } else {
+                console.log('value2');
+                console.log(value);
+                return {
+                  ...value,
+                  answer: false,
+                };
+              }
+            } else {
+              console.log('value3');
+              console.log(value);
+              return {
+                ...value,
+              };
+            }
+          }),
+        };
+      } else {
+        return {
+          ...item,
+        };
+      }
+    });
+
+    return changeList;
+  };
+
   // 다음으로 넘어 갈 수 있는 지 체크
   const checkSelect = (list) => {
     let cnt = 0;
@@ -238,6 +282,7 @@ const StepHook = () => {
     stylesTestList,
     getRecommendDetail,
     checkLength,
+    selectOnlyOneQueryItem,
   };
 };
 

@@ -27,11 +27,18 @@ const StepListBody = ({ item, goNextStep, hooks, apiId, activeIndex }) => {
 
               {items.queryItems.map((queryItem, index) => {
                 const { answer } = queryItem;
+                let checkFirstCheckStatus = false;
+                if (i !== 0) {
+                  checkFirstCheckStatus = list[0].queryItems.find((i) => i.title === queryItem.title).answer;
+                }
+
                 return (
                   <div
                     key={'price-' + index}
-                    className={`price-item ${answer && 'active'}`}
-                    onClick={() => setList(selectQueryItem(list, queryItem, i, true))}
+                    className={`price-item ${answer && 'active'} ${checkFirstCheckStatus && 'disabled'}`}
+                    onClick={() => {
+                      if (!checkFirstCheckStatus) setList(selectQueryItem(list, queryItem, i, !answer));
+                    }}
                   >
                     {queryItem.title}
                   </div>

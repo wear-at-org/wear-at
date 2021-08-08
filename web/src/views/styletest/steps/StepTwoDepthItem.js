@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import NextBtn from './NextBtn';
 
 const StepTwoDepthItem = ({ item, goNextStep, hooks, apiId, activeIndex }) => {
-  const { makeInsertList, beforeNextChecker, selectQueryItem, checkLength } = hooks;
+  const { makeInsertList, beforeNextChecker, selectQueryItem, checkLength, selectOnlyOneQueryItem } = hooks;
   const [selectQueryId, setSelectQueryId] = useState('');
   const [status, setStatus] = useState('init');
   const [list, setList] = useState([]);
@@ -28,10 +28,22 @@ const StepTwoDepthItem = ({ item, goNextStep, hooks, apiId, activeIndex }) => {
             <div className="style-circle-wrap small mb0 mb-sm-48">
               {items.queryCategories.map((queryItem) => {
                 const { id, title, url } = queryItem;
+                const checkCnt = () => {
+                  let cnt = 0;
+                  items.queryItems.forEach((i) => {
+                    if (queryItem.id === i.categoryId && i.answer) {
+                      cnt++;
+                    }
+                  });
+                  console.log(title);
+                  console.log(cnt);
+                  return cnt;
+                };
+
                 return (
                   <div
                     key={'categoryList-' + id}
-                    className={`style-circle-container only-border mb24  ${selectQueryId === id && 'active'}`}
+                    className={`style-circle-container only-border mb24  ${selectQueryId === id && 'active'} ${checkCnt() > 0 && 'check'}`}
                     onClick={() => {
                       setSelectQueryId(id);
                     }}
@@ -58,7 +70,7 @@ const StepTwoDepthItem = ({ item, goNextStep, hooks, apiId, activeIndex }) => {
                     className={`price-item ${item.answer && 'active'}`}
                     key={'selectItemList' + item.id}
                     onClick={() => {
-                      setList(selectQueryItem(list, item, index, !item.answer));
+                      setList(selectOnlyOneQueryItem(list, item, index, !item.answer));
                     }}
                   >
                     {item.title}
