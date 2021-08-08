@@ -16,6 +16,8 @@ import {
 import { PlusOutlined } from '@ant-design/icons';
 import { v4 as uuidv4 } from 'uuid';
 import InputItem from 'components/InputFiled';
+import api from 'api';
+
 const { Title } = Typography;
 
 const StyleTestDetail = ({

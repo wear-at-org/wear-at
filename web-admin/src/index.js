@@ -11,6 +11,7 @@ import '@ant-design/pro-form/dist/form.css';
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 import 'assets/scss/index.scss';
 import '@ant-design/pro-list/dist/list.css';
+import '@ant-design/pro-table/dist/table.css';
 
 const rootElement = document.getElementById('root');
 const persistor = persistStore(store);
