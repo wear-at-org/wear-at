@@ -59,38 +59,37 @@ const data = [
 	),
 }));
 
+console.log('styleTest');
 const StyleTest = () => {
 	return (
-		<div>
-			<ProList
-				pagination={{
-					defaultPageSize: 10,
-					showSizeChanger: true,
-				}}
-				metas={{
-					title: {},
-					content: {},
-				}}
-				headerTitle={
-					<div className="mb10">
-						<div className="mb20">
-							<Title level={4}>스타일 테스트 리스트</Title>
-						</div>
-						<div className="d-flex x-end">
-							<Radio.Group
-								onChange={(e) => {
-									console.log(e.target.value);
-								}}
-							>
-								<Radio value={1}>신규 접수</Radio>
-								<Radio value={2}>완료</Radio>
-							</Radio.Group>
-						</div>
+		<ProList
+			pagination={{
+				defaultPageSize: 10,
+				showSizeChanger: true,
+			}}
+			metas={{
+				title: {},
+				content: {},
+			}}
+			headerTitle={
+				<div className="mb10">
+					<div className="mb20">
+						<Title level={4}>스타일 테스트 리스트</Title>
 					</div>
-				}
-				dataSource={data}
-			/>
-		</div>
+					<div className="d-flex x-end">
+						<Radio.Group
+							onChange={(e) => {
+								console.log(e.target.value);
+							}}
+						>
+							<Radio value={1}>신규 접수</Radio>
+							<Radio value={2}>완료</Radio>
+						</Radio.Group>
+					</div>
+				</div>
+			}
+			dataSource={data}
+		/>
 	);
 };
 

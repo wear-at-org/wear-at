@@ -5,37 +5,52 @@ import { CoffeeOutlined, MailOutlined } from '@ant-design/icons';
 import logo from 'assets/img/logo.png';
 import { useHistory } from 'react-router-dom';
 import api from 'api';
-import { user } from 'api/user';
 import Cookies from 'universal-cookie';
+import { loginProcess } from 'store/userinfo-store';
+import store from 'store';
 
 const Login = () => {
+	const { dispatch } = store;
 	let history = useHistory();
 
 	const getUserFromCookie = () => {
-    const cookies = new Cookies();
-    return cookies.get('_watu');
-  };
+		const cookies = new Cookies();
+		return cookies.get('_watu');
+	};
 
 	const login = async (email, password) => {
 		try {
-      await api.post('auth/sign-in', {
-        email,
-        password,
-      });
+			await api.post('auth/sign-in', {
+				email,
+				password,
+			});
 
-			const u = getUserFromCookie();
-      if (!u) {
-        throw new Error("user cookie doesn't exist");
-      }
-			user.setUserId(u.id);
+			const user = getUserFromCookie();
+			if (!user) {
+				throw new Error("user cookie doesn't exist");
+			}
 
 			message.success('로그인 성공');
-			
-			history.push('/');
 
-    } catch (e) {
-			message.error(e.response && e.response.data ? e.response.data.message : e.message);
-    }
+			dispatch(
+				loginProcess({
+					info: {
+						id: user.id,
+						nickname: user.nickname,
+						email: email,
+						prividerType: 'web',
+						profileImage: user.profile_image,
+					},
+					loginStatus: 'login',
+				}),
+			);
+
+			history.push('/styleTest');
+		} catch (e) {
+			message.error(
+				e.response && e.response.data ? e.response.data.message : e.message,
+			);
+		}
 	};
 
 	return (
