@@ -81,7 +81,7 @@ const StepTwoDepthItem = ({ item, goNextStep, hooks, apiId, activeIndex }) => {
       })}
 
       <NextBtn
-        disabled={checkLength(list) < list[0].queryCategories.length}
+        disabled={checkLength(list) < (list[0] ? list[0].queryCategories.length : 0)}
         goNextStep={() => {
           beforeNextChecker(list, apiId);
           setStatus('end');
