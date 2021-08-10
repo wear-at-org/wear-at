@@ -71,6 +71,10 @@
   .main-visual {
     padding-top: 60px;
     padding-bottom: 60px;
+
+    .visual-text {
+      margin-right: 0;
+    }
     .inner {
       flex-direction: column;
       align-items: center;

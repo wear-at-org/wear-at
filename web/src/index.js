@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { CookiesProvider } from 'react-cookie';
 import { Provider } from 'react-redux';
 import store from 'store';
 import { persistStore } from 'redux-persist';
@@ -17,9 +16,7 @@ if (rootElement.hasChildNodes()) {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter basename={process.env.PUBLIC_URL}>
-          <CookiesProvider>
-            <App />
-          </CookiesProvider>
+          <App />
         </BrowserRouter>
       </PersistGate>
     </Provider>,
@@ -30,9 +27,7 @@ if (rootElement.hasChildNodes()) {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter basename={process.env.PUBLIC_URL}>
-          <CookiesProvider>
-            <App />
-          </CookiesProvider>
+          <App />
         </BrowserRouter>
       </PersistGate>
     </Provider>,

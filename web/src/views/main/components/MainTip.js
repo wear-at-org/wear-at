@@ -17,7 +17,7 @@ const MainTip = () => {
   ];
   return (
     <div className="tip-container">
-      <h4 className="tc mb32">웨어앳 이용꿀팁</h4>
+      <h4 className="tc mb32 fontweight700">웨어앳 이용꿀팁</h4>
       <div className="col-12 col-center mw-670">
         <div className="pr15 pl15">
           <div className="mb32">
