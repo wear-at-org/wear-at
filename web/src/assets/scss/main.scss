@@ -32,6 +32,10 @@
   }
 }
 
+.gradient-back {
+  background: linear-gradient(180deg, #f8f8f8 2.03%, rgba(248, 248, 248, 0) 88.56%);
+}
+
 .main-visual {
   padding-top: 91px;
   padding-bottom: 91px;
@@ -41,11 +45,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-right: 200px;
   }
 
   .inner {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     .visual-img-container {
       img {
         width: 357px;
@@ -74,28 +79,31 @@
 }
 
 .tip-container {
-  padding: 36px 0px;
+  padding: 120px 0px;
   .tip-item {
     position: relative;
     cursor: pointer;
-    padding-left: 73px;
-    padding-right: 50px;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    margin-bottom: 24px;
-    border-bottom: 1px solid $grayeee;
-    &:after {
-      font-size: 24px;
-      content: 'Q.';
-      color: $gray8282;
-      background-repeat: no-repeat;
-      background-position: center;
-      position: absolute;
-      left: 24px;
-      top: calc(50%);
-      font-family: 'Georgia';
-      transform: translateY(-50%);
+
+    .tip-title {
+      padding-left: 73px;
+      padding-right: 50px;
+      position: relative;
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid $grayeee;
+      &:after {
+        font-size: 24px;
+        content: 'Q.';
+        color: $gray8282;
+        background-repeat: no-repeat;
+        background-position: center;
+        position: absolute;
+        left: 20px;
+        top: 0;
+        font-family: 'Georgia';
+      }
     }
+
     &:before {
       content: '';
       background-image: url('../img/circle-bottom.png');
@@ -108,7 +116,11 @@
       height: 24px;
       transition: 0.3s;
     }
+
     &.active {
+      .tip-title {
+        margin-bottom: 0px;
+      }
       &:before {
         transform: rotate(180deg);
       }
@@ -118,15 +130,21 @@
     }
 
     .tip-content {
+      padding-left: 73px;
+      padding-right: 50px;
       height: 0px;
       opacity: 0;
       transition: 0.25s;
       transform-origin: top;
+      border-bottom: 1px solid $grayeee;
       h5 {
         display: none;
       }
       &.active {
-        margin-top: 24px;
+        padding-bottom: 16px;
+        margin-bottom: 24px;
+        background-color: $grayF8F8;
+        padding-top: 24px;
         height: auto;
         opacity: 1;
         transition: 0.3s;

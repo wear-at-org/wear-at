@@ -4,6 +4,8 @@ import MainCard from './components/MainCard';
 import MainParteners from './components/MainParteners';
 import MainTip from './components/MainTip';
 import MainVisual from './components/MainVisual';
+import Footer from 'components/layout/Footer';
+import GradientBackground from './components/GradientBackground';
 
 const Main = () => {
   const cardRef = useRef();
@@ -22,18 +24,18 @@ const Main = () => {
   }, []);
 
   return (
-    <>
-      <main>
-        <MainVisual />
-        <MainParteners />
-        <section ref={cardRef}>
-          <MainCard cardIsActive={cardIsActive} />
-        </section>
-
+    <main>
+      <MainVisual />
+      <section ref={cardRef}>
+        <MainCard cardIsActive={cardIsActive} />
+      </section>
+      <MainParteners />
+      <GradientBackground>
         <MainTip />
         <BottomStyle />
-      </main>
-    </>
+        <Footer isMain={true} />
+      </GradientBackground>
+    </main>
   );
 };
 

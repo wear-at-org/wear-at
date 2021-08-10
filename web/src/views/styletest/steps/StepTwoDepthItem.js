@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import NextBtn from './NextBtn';
 
 const StepTwoDepthItem = ({ item, goNextStep, hooks, apiId, activeIndex }) => {
-  const { makeInsertList, beforeNextChecker, selectQueryItem, checkLength, selectOnlyOneQueryItem } = hooks;
+  const { makeInsertList, beforeNextChecker, checkLength, selectOnlyOneQueryItem } = hooks;
   const [selectQueryId, setSelectQueryId] = useState('');
   const [status, setStatus] = useState('init');
   const [list, setList] = useState([]);
@@ -35,8 +35,6 @@ const StepTwoDepthItem = ({ item, goNextStep, hooks, apiId, activeIndex }) => {
                       cnt++;
                     }
                   });
-                  console.log(title);
-                  console.log(cnt);
                   return cnt;
                 };
 
@@ -83,7 +81,7 @@ const StepTwoDepthItem = ({ item, goNextStep, hooks, apiId, activeIndex }) => {
       })}
 
       <NextBtn
-        disabled={checkLength(list) === 0}
+        disabled={checkLength(list) < list[0].queryCategories.length}
         goNextStep={() => {
           beforeNextChecker(list, apiId);
           setStatus('end');
