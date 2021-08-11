@@ -153,28 +153,24 @@ const DragImagUpload = ({ files, setFiles }) => {
             const { id } = file;
 
             return (
-              <>
-                <div className="img-item mb20" key={id}>
-                  <div className="mb20">
-                    <img src={file.imgPath} alt="" />
-                  </div>
-
-                  <div className="chkbox-con">
-                    <input
-                      type="checkbox"
-                      className="input-style-checkbox"
-                      checked={delFiles.findIndex((i) => i.id === file.id) > -1}
-                      onChange={() => {
-                        console.log('change');
-                        delFiles.findIndex((i) => i.id === file.id) === -1
-                          ? setDelFiles([...delFiles, file])
-                          : setDelFiles([...delFiles.filter((i) => i.id !== file.id)]);
-                        console.log(delFiles);
-                      }}
-                    />
-                  </div>
+              <div className="img-item mb20" key={id}>
+                <div className="mb20">
+                  <img src={file.imgPath} alt="" />
                 </div>
-              </>
+
+                <div className="chkbox-con">
+                  <input
+                    type="checkbox"
+                    className="input-style-checkbox"
+                    checked={delFiles.findIndex((i) => i.id === file.id) > -1}
+                    onChange={() => {
+                      delFiles.findIndex((i) => i.id === file.id) === -1
+                        ? setDelFiles([...delFiles, file])
+                        : setDelFiles([...delFiles.filter((i) => i.id !== file.id)]);
+                    }}
+                  />
+                </div>
+              </div>
             );
           })}
       </div>
