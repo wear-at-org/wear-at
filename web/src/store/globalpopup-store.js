@@ -5,7 +5,6 @@ const { name, reducer, actions } = createSlice({
   initialState: { isActive: false, title: '', btnMsg: '', goLink: '/' },
   reducers: {
     addPopup(_, { payload }) {
-      console.log(payload);
       return { isActive: true, ...payload };
     },
     removePopup(_) {

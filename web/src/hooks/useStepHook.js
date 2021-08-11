@@ -109,7 +109,6 @@ const StepHook = () => {
       };
     });
 
-    console.log(insertList);
     return insertList;
   };
 
@@ -145,7 +144,6 @@ const StepHook = () => {
 
   // 클릭 시 select로 변환
   const selectOnlyOneQueryItem = (list, queryItem, index, answer) => {
-    console.log(queryItem);
     let changeList = [...list];
     changeList = list.map((item, i) => {
       if (i === index) {
@@ -154,23 +152,17 @@ const StepHook = () => {
           queryItems: item.queryItems.map((value) => {
             if (value.categoryId === queryItem.categoryId) {
               if (value.id === queryItem.id) {
-                console.log('value1');
-                console.log(value);
                 return {
                   ...value,
                   answer,
                 };
               } else {
-                console.log('value2');
-                console.log(value);
                 return {
                   ...value,
                   answer: false,
                 };
               }
             } else {
-              console.log('value3');
-              console.log(value);
               return {
                 ...value,
               };

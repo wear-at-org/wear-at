@@ -20,7 +20,6 @@ const IntroList = ({ scrollPostion }) => {
           });
         }
       });
-      console.log(insertList);
       setActiveList(insertList);
     }, 1000);
 

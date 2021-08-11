@@ -4,7 +4,6 @@ import { addAsyncCountValue, minusAsyncCountValue } from 'store/spinner-store';
 import toastHook from 'hooks/useToastHook';
 import popupHook from 'hooks/usePopupHook';
 
-console.log(process.env);
 const BASE_URL = process.env.REACT_APP_API;
 const { dispatch } = store;
 

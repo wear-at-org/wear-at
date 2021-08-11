@@ -22,7 +22,6 @@ const ChangwPassword = () => {
 
   useEffect(() => {
     const pramsToken = document.location.href.split('token=')[1];
-    console.log(pramsToken);
     if (pramsToken) {
       setToken(pramsToken);
     }
