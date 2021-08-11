@@ -30,6 +30,8 @@ const StepListBody = ({ item, goNextStep, hooks, apiId, activeIndex }) => {
                 let checkFirstCheckStatus = false;
                 if (i !== 0) {
                   checkFirstCheckStatus = list[0].queryItems.find((i) => i.title === queryItem.title).answer;
+                } else {
+                  checkFirstCheckStatus = list[1].queryItems.find((i) => i.title === queryItem.title).answer;
                 }
 
                 return (

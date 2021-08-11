@@ -1,14 +1,15 @@
-mysql:
-  image: mysql
-  ports:
-    - "3306:3306"
-  #command: --init-file /data/application/init.sql
-  volumes:
-      - ./scripts/db_initialize.sql:/data/application/init.sql
-      - /Users/kakao/data/wearat:/var/lib/mysql
-  environment:
-    MYSQL_ROOT_USER: root
-    MYSQL_ROOT_PASSWORD: wearat123!@#
-    MYSQL_DATABASE: wearat
-    MYSQL_USER: wearat
-    MYSQL_PASSWORD: wearat123!@#
+services:
+  mysql:
+    image: mysql
+    ports:
+      - "3306:3306"
+    #command: --init-file /data/application/init.sql
+    volumes:
+        - ./scripts/db_initialize.sql:/data/application/init.sql
+        - /Users/kakao/data/wearat:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: wearat123!@#
+      MYSQL_DATABASE: wearat
+      MYSQL_USER: wearat
+      MYSQL_PASSWORD: wearat123!@#

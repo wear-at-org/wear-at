@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import api from 'api';
+import { message } from 'antd';
 
 const useStyelTest = () => {
 	const [userTestList, setUserTestList] = useState({});
 	const [subscribeInfo, setSubscribeInfo] = useState({});
+	const [recommendItems, setRecommendItems] = useState([]);
 	const makeUserTestList = async ({ subscribeId }) => {
 		const { data: queryList } = await api.get('subscribe/query');
 		const { data: info } = await api.get(`subscribe/${subscribeId}`);
@@ -60,6 +62,11 @@ const useStyelTest = () => {
 			}
 		});
 
+		if (info.recommendStarted) {
+			const { data } = await api.get(`/recommend?subscribeId=${subscribeId}`);
+			setRecommendItems(data);
+		}
+
 		setUserTestList(resultObj);
 	};
 
@@ -67,9 +74,19 @@ const useStyelTest = () => {
 		await api.post('/recommend', {
 			subscribeId: id,
 		});
+
+		await makeUserTestList({ subscribeId: id });
 	};
 
-	return { userTestList, makeUserTestList, subscribeInfo, assignMe };
+	const uploadRecommend = async ({ payload }) => {
+		try {
+			await api.post(`recommend`, payload);
+			message.info('성공적으로 처리되었습니다.');
+		} catch (e) {
+			message.error(e.response && e.response.data ? e.response.data.message : e.message);
+		}
+	};
+	return { userTestList, makeUserTestList, subscribeInfo, assignMe, recommendItems, uploadRecommend };
 };
 
 export default useStyelTest;

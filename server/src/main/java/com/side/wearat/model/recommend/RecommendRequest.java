@@ -17,5 +17,9 @@ public class RecommendRequest {
 
     private Boolean completed;
 
+    private String imageUrl;
+
+    private String description;
+
     private List<RecommendItemRequest> items;
 }

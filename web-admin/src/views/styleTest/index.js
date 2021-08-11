@@ -3,7 +3,6 @@ import { Typography, Pagination } from 'antd';
 import api from 'api';
 import { columns } from './componets/ListDataInfo';
 import { Table, Radio } from 'antd';
-
 const { Title } = Typography;
 
 const StyleTest = () => {
@@ -40,26 +39,27 @@ const StyleTest = () => {
 			preurl = `${filter.status}?size=${filter.pageSize}&page=${filter.current}`;
 		}
 		const getData = async () => {
-			const { data } = await api.get(
-				`subscribe/${preurl}${filter.status}?size=${filter.pageSize}&page=${filter.current}`,
-			);
+			const { data } = await api.get(`subscribe/${preurl}`);
 			setData(data.content);
 		};
-		console.log(data);
 		getData();
 	}, [filter]);
+
 	return (
-		<>
-			<Radio.Group
-				value={filter.status}
-				onChange={(e) => {
-					setFilter({ ...filter, status: e.target.value });
-				}}
-			>
-				<Radio value={'not-recommended'}>신규접수</Radio>
-				<Radio value={'recommended=true'}>진행중</Radio>
-				<Radio value={'recommended=false'}>완료</Radio>
-			</Radio.Group>
+		<div className="pl20 pr20">
+			<div className="pt20 pb20">
+				<Radio.Group
+					value={filter.status}
+					onChange={(e) => {
+						setFilter({ ...filter, status: e.target.value });
+					}}
+				>
+					<Radio value={'not-recommended'}>신규접수</Radio>
+					<Radio value={'recommended=true'}>진행중</Radio>
+					<Radio value={'recommended=false'}>완료</Radio>
+				</Radio.Group>
+			</div>
+
 			<div className="mb50">
 				<Table
 					pagination={false}
@@ -93,7 +93,7 @@ const StyleTest = () => {
 					}}
 				/>
 			</div>
-		</>
+		</div>
 	);
 };
 

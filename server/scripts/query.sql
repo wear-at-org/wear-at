@@ -58,25 +58,7 @@ VALUES (NULL, 2, '', '', 'https://wearat.s3.ap-northeast-2.amazonaws.com/stylete
        (NULL, 2, '', '', 'https://wearat.s3.ap-northeast-2.amazonaws.com/styletest/33.jpg'),
        (NULL, 2, '', '', 'https://wearat.s3.ap-northeast-2.amazonaws.com/styletest/34.jpg'),
        (NULL, 2, '', '', 'https://wearat.s3.ap-northeast-2.amazonaws.com/styletest/35.jpg'),
-       (NULL, 2, '', '', 'https://wearat.s3.ap-northeast-2.amazonaws.com/styletest/36.jpg'),
-       (NULL, 2, '', '', 'https://wearat.s3.ap-northeast-2.amazonaws.com/styletest/37.jpg'),
-       (NULL, 2, '', '', 'https://wearat.s3.ap-northeast-2.amazonaws.com/styletest/38.jpg'),
-       (NULL, 2, '', '', 'https://wearat.s3.ap-northeast-2.amazonaws.com/styletest/39.jpg'),
-       (NULL, 2, '', '', 'https://wearat.s3.ap-northeast-2.amazonaws.com/styletest/40.jpg'),
-       (NULL, 2, '', '', 'https://wearat.s3.ap-northeast-2.amazonaws.com/styletest/41.jpg'),
-       (NULL, 2, '', '', 'https://wearat.s3.ap-northeast-2.amazonaws.com/styletest/42.jpg'),
-       (NULL, 2, '', '', 'https://wearat.s3.ap-northeast-2.amazonaws.com/styletest/43.jpg'),
-       (NULL, 2, '', '', 'https://wearat.s3.ap-northeast-2.amazonaws.com/styletest/44.jpg'),
-       (NULL, 2, '', '', 'https://wearat.s3.ap-northeast-2.amazonaws.com/styletest/45.jpg'),
-       (NULL, 2, '', '', 'https://wearat.s3.ap-northeast-2.amazonaws.com/styletest/46.jpg'),
-       (NULL, 2, '', '', 'https://wearat.s3.ap-northeast-2.amazonaws.com/styletest/47.jpg'),
-       (NULL, 2, '', '', 'https://wearat.s3.ap-northeast-2.amazonaws.com/styletest/48.jpg'),
-       (NULL, 2, '', '', 'https://wearat.s3.ap-northeast-2.amazonaws.com/styletest/49.jpg'),
-       (NULL, 2, '', '', 'https://wearat.s3.ap-northeast-2.amazonaws.com/styletest/50.jpg'),
-       (NULL, 2, '', '', 'https://wearat.s3.ap-northeast-2.amazonaws.com/styletest/51.jpg'),
-       (NULL, 2, '', '', 'https://wearat.s3.ap-northeast-2.amazonaws.com/styletest/52.jpg'),
-       (NULL, 2, '', '', 'https://wearat.s3.ap-northeast-2.amazonaws.com/styletest/53.jpg'),
-       (NULL, 2, '', '', 'https://wearat.s3.ap-northeast-2.amazonaws.com/styletest/54.jpg')
+       (NULL, 2, '', '', 'https://wearat.s3.ap-northeast-2.amazonaws.com/styletest/36.jpg')
 ;
 
 INSERT INTO query (id, title, ui_type)

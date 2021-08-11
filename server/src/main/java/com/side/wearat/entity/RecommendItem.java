@@ -36,4 +36,7 @@ public class RecommendItem {
 
     @Column()
     private Long price;
+
+    @Column(length=1000)
+    private String description;
 }

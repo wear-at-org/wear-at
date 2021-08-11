@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Footer() {
+export default function Footer({ isMain = false }) {
   return (
-    <footer>
+    <footer className={`${isMain ? 'main' : ''}`}>
       <div>
         <p className="copy-font">(주)웨어앳 © 2021 Wear’at. All rights reserved.</p>
       </div>

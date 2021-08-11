@@ -92,6 +92,7 @@ public class RecommendServiceImpl implements RecommendService {
                             .linkUrl(item.getLinkUrl())
                             .brand(item.getBrand())
                             .price(item.getPrice())
+                            .description(item.getDescription())
                             .build()
             ).collect(Collectors.toList());
         }
@@ -101,6 +102,8 @@ public class RecommendServiceImpl implements RecommendService {
                 .recommendAt(LocalDateTime.now())
                 .completed(completed)
                 .recommendItems(items)
+                .imageUrl(req.getImageUrl())
+                .description(req.getDescription())
                 .createAt(LocalDateTime.now())
                 .createUser(userId)
                 .updateAt(LocalDateTime.now())

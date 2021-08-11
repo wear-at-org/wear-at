@@ -29,7 +29,7 @@ function App() {
         <SearchHeader searchStatus={searchStatus} setSearchStatus={setSearchStatus} />
         <Routers />
         {/* <Checkbot /> */}
-        {!pathname.includes('styletest') && <Footer />}
+        {!pathname.includes('styletest') && pathname !== '/' && <Footer />}
 
         <Loader />
       </div>

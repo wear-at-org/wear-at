@@ -4,7 +4,6 @@ import { defaultImgBase64 } from 'utils';
 import { v4 as uuidv4 } from 'uuid';
 const { Title } = Typography;
 const UUploadUmage = ({ item }) => {
-	console.log(item);
 	if (item)
 		return (
 			<>

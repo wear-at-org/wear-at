@@ -19,13 +19,13 @@ const StyleTestDetail = ({
 		params: { subscribeId },
 	},
 }) => {
-	const { makeUserTestList, userTestList, subscribeInfo, assignMe } = useStyelTest();
+	const { makeUserTestList, userTestList, subscribeInfo, assignMe, recommendItems, uploadRecommend } = useStyelTest();
 	useEffect(() => {
 		makeUserTestList({ subscribeId });
 	}, []);
 	let history = useHistory();
 
-	const [editMode, setEditMode] = useState(false);
+	const [editMode, setEditMode] = useState(subscribeInfo.recommended || false);
 	const [totalImage, setTotalImage] = useState('');
 	const [resultItemList, setResultItemList] = useState([
 		{
@@ -35,6 +35,7 @@ const StyleTestDetail = ({
 			title: '',
 			price: '',
 			linkUrl: '',
+			description: '',
 		},
 	]);
 
@@ -53,24 +54,16 @@ const StyleTestDetail = ({
 
 					<Col span={12}>
 						<div className="pl30 pr30">
-							<div className="d-flex">
-								<Title level={5} className="mr30">
-									나에게 할당
-								</Title>
-								<Switch checked={subscribeInfo.recommendStarted} onChange={() => assignMe(subscribeInfo.id)} />
-							</div>
-							{subscribeInfo.recommendStarted && (
+							{subscribeInfo.recommendStarted ? (
 								<>
 									<div className="d-flex y-center">
-										<Title level={5} className="mr30">
+										<Title level={5} className="mr30 w-130">
 											전체 이미지
 										</Title>
 										{editMode ? (
-											<Image src={totalImage} />
+											<Image src={totalImage} className={'upload-img'} alt="defaultProfile" />
 										) : (
-											<div className="">
-												<ImageUploader img={totalImage} setImg={setTotalImage} />
-											</div>
+											<ImageUploader img={totalImage} setImg={setTotalImage} />
 										)}
 									</div>
 									<Divider />
@@ -80,7 +73,7 @@ const StyleTestDetail = ({
 									</div>
 
 									<Divider />
-									{resultItemList.map((result) => {
+									{resultItemList.map((result, index) => {
 										return (
 											<InputItem
 												key={result.id}
@@ -140,13 +133,35 @@ const StyleTestDetail = ({
 													</Button>
 												</div>
 
-												<Button type="primary" size="large" onClick={() => setEditMode(true)}>
+												<Button
+													type="primary"
+													size="large"
+													onClick={() => {
+														uploadRecommend({
+															payload: {
+																subscribeId,
+																completed: true,
+																items: resultItemList.map((i) => {
+																	delete i.id;
+																	return { ...i };
+																}),
+															},
+														});
+													}}
+												>
 													작성 완료
 												</Button>
 											</div>
 										</>
 									)}
 								</>
+							) : (
+								<div className="d-flex">
+									<Title level={5} className="mr30">
+										나에게 할당
+									</Title>
+									<Switch checked={subscribeInfo.recommendStarted} onChange={() => assignMe(subscribeInfo.id)} />
+								</div>
 							)}
 						</div>
 					</Col>

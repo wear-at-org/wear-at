@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { message } from 'antd';
 import ProForm, { ProFormText } from '@ant-design/pro-form';
 import { CoffeeOutlined, MailOutlined } from '@ant-design/icons';
@@ -47,9 +47,7 @@ const Login = () => {
 
 			history.push('/styleTest');
 		} catch (e) {
-			message.error(
-				e.response && e.response.data ? e.response.data.message : e.message,
-			);
+			message.error(e.response && e.response.data ? e.response.data.message : e.message);
 		}
 	};
 

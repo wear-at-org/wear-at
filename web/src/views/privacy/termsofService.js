@@ -94,9 +94,7 @@ const TermsofService = () => {
     `;
   return (
     <div className="pr15 pl15 pb50">
-      <textarea readOnly style={{ width: '100%', height: '100vh', border: 'none', lineHeight: '24px', fontSize: '14px' }}>
-        {txt}
-      </textarea>
+      <textarea readOnly style={{ width: '100%', height: '100vh', border: 'none', lineHeight: '24px', fontSize: '14px' }} defaultValue={txt} />
     </div>
   );
 };

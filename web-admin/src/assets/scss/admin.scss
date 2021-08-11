@@ -12,6 +12,10 @@
 	width: 80px;
 }
 
+.w-130 {
+	width: 130px;
+}
+
 .w-250 {
 	width: 250px;
 }
@@ -22,6 +26,19 @@
 
 .App {
 	height: 100%;
+}
+
+.x-btn-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	left: 140px;
+	z-index: 999;
+	cursor: pointer;
+	top: -50px;
 }
 
 .admin-login {
@@ -150,6 +167,10 @@
 	display: none;
 }
 
+.upload-wrap {
+	width: 100%;
+	position: relative;
+}
 .upload-container {
 	width: 200px;
 	height: 200px;
@@ -167,10 +188,15 @@
 		border-color: rgb(24, 144, 255);
 	}
 
-	.upload-img {
-		width: 200px;
-		height: 200px;
+	&.active {
+		border-color: transparent;
+		background-color: transparent;
 	}
+}
+
+.upload-img {
+	width: 200px;
+	height: 200px;
 }
 
 [class*='btn-style'] {
@@ -229,4 +255,12 @@
 
 .color-black333 {
 	color: #333333 !important;
+}
+
+.text-style1 {
+	height: 200px;
+	width: 400px;
+	background-color: transparent;
+	border-color: transparent;
+	resize: none;
 }
