@@ -20,4 +20,6 @@ public class RecommendItemRequest {
     private String brand;
 
     private Long price;
+
+    private String description;
 }

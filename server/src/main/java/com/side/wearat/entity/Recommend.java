@@ -27,6 +27,12 @@ public class Recommend {
 
     private LocalDateTime recommendAt;
 
+    @Column(length=500)
+    private String imageUrl;
+
+    @Column(length=1000)
+    private String description;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="recommend_id", nullable = false)
     private List<RecommendItem> recommendItems;
