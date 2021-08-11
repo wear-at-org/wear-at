@@ -18,7 +18,7 @@ const StepUploadImage = ({ item, hooks, apiId, activeIndex }) => {
         return {
           id: index * 1,
           answer: url,
-          queryId: apiId,
+          queryId: list[0].id,
           queryItemId: index * 1,
         };
       });
@@ -35,11 +35,11 @@ const StepUploadImage = ({ item, hooks, apiId, activeIndex }) => {
   };
 
   useEffect(() => {
-    const makeList = async () => {
+    const makeListFun = async () => {
       setStatus('start');
       setList(await makeInsertList(item, apiId));
     };
-    makeList();
+    makeListFun();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeIndex]);
 

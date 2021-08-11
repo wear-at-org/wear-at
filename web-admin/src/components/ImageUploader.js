@@ -1,20 +1,29 @@
 import React, { useState, useRef } from 'react';
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { LoadingOutlined, PlusOutlined, MinusCircleOutlined } from '@ant-design/icons';
+import { Image } from 'antd';
+import api from 'api';
 
 const ImageUploader = ({ img, setImg }) => {
 	const inputRef = useRef(null);
 	const [loading, setLoading] = useState(false);
 
-	const uploadImage = async (e) => {
+	const uploadImage = async (event) => {
 		setLoading(true);
-		let reader = new FileReader();
-		let file = e.target.files[0];
-		if (file) {
-			reader.onloadend = () => {
-				setImg(reader.result);
-				setLoading(false);
-			};
-			reader.readAsDataURL(file);
+		const formData = new FormData();
+		Array.from(event.target.files).forEach((f) => formData.append(`files`, f));
+
+		try {
+			const {
+				data: { urls },
+			} = await api.post('storage/upload', formData, {
+				headers: {
+					'Content-Type': `multipart/form-data`,
+				},
+			});
+			await setImg(urls[0]);
+			setLoading(false);
+		} catch (e) {
+			setLoading(false);
 		}
 	};
 
@@ -27,23 +36,30 @@ const ImageUploader = ({ img, setImg }) => {
 
 	return (
 		<div className="upload-wrap">
+			{img ? (
+				<div
+					className="x-btn-container"
+					onClick={() => {
+						setImg('');
+					}}
+				>
+					<MinusCircleOutlined style={{ fontSize: '30px', color: 'red' }} />
+				</div>
+			) : (
+				<input className="file-input" type="file" name="docx" ref={inputRef} onChange={uploadImage} />
+			)}
 			<div
-				className="upload-container"
-				onMouseUpCapture={(e) => inputRef.current.click()}
+				className={`upload-container ${!!img && 'active'}`}
+				onMouseUpCapture={(e) => (img ? null : inputRef.current.click())}
 			>
 				{img ? (
-					<img className={'upload-img'} src={img} alt="defaultProfile" />
+					<div className="mr30">
+						<Image className={'upload-img'} src={img} alt="defaultProfile" />
+					</div>
 				) : (
 					<UploadButton />
 				)}
 			</div>
-			<input
-				className="file-input"
-				type="file"
-				name="docx"
-				ref={inputRef}
-				onChange={uploadImage}
-			/>
 		</div>
 	);
 };
