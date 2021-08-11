@@ -13,14 +13,13 @@ const TestUpload = () => {
 
     try {
       const formData = new FormData();
-      Array.from(files).forEach((f, idx) => formData.append(`files`, f));
+      Array.from(files).forEach((f) => formData.append(`files`, f));
 
-      const result = await Axios.post('storage/upload', formData, {
+      await Axios.post('storage/upload', formData, {
         headers: {
           'Content-Type': `multipart/form-data`,
         },
       });
-      console.log('upload successfully', result);
     } catch (e) {
       console.error('upload error', e);
     }

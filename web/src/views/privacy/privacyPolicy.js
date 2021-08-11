@@ -17,9 +17,11 @@ const PrivacyPolicy = () => {
     `;
   return (
     <div className="pr15 pl15 pb50">
-      <textarea readOnly style={{ width: '100%', height: 'calc(100vh - 250px)', border: 'none', lineHeight: '24px', fontSize: '14px' }}>
-        {txt}
-      </textarea>
+      <textarea
+        readOnly
+        style={{ width: '100%', height: 'calc(100vh - 250px)', border: 'none', lineHeight: '24px', fontSize: '14px' }}
+        defaultValue={txt}
+      ></textarea>
     </div>
   );
 };

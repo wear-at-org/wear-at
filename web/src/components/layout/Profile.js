@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import defaultProfile from 'assets/img/default-user.png';
 import SignHook from 'hooks/useSignHook';
@@ -17,10 +17,6 @@ const Profile = ({ setSearchStatus, searchStatus }) => {
     setActiveMenu(!activeMenu);
   };
 
-  useEffect(() => {
-    console.log('Profile');
-    console.log(info);
-  }, [info]);
   return (
     <ul className={'profile-container'}>
       <li className="mypage">

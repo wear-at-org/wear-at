@@ -24,7 +24,7 @@ const ImageUpload = () => {
       dispatch({ type: 'CHANGE_PROFILE_URL', profileImage: urls[0] });
       store.dispatch(changeProfile({ profileImage: urls[0] }));
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 

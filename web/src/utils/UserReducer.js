@@ -97,7 +97,6 @@ export const checkNicknameApi = async (id, nickname, dispatch) => {
 export const userReducer = (state, action) => {
   switch (action.type) {
     case 'INIT':
-      console.log(action.data);
       return {
         ...state,
         ...action.data,

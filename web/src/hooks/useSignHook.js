@@ -34,8 +34,6 @@ const SignHook = () => {
         throw new Error("user cookie doesn't exist");
       }
 
-      console.log(user);
-
       dispatch(
         loginProcess({
           info: {
@@ -78,7 +76,6 @@ const SignHook = () => {
 
         history.push('/');
       } else {
-        console.log(userInfo);
         await api.post('auth/sign-up', {
           checkServiceTerms: userInfo.checkServiceTerms,
           checkPrivacyPolicy: userInfo.checkPrivacyPolicy,
@@ -110,11 +107,8 @@ const SignHook = () => {
       dispatch(logoutProcess());
       history.push('/');
     } catch (e) {
-      if (e.response && e.response.data) {
-        showToast({ type: 'error', content: e.response.data.message });
-      } else {
-        showToast({ type: 'error', content: e.message });
-      }
+      dispatch(logoutProcess());
+      history.push('/');
     }
   };
 
@@ -130,7 +124,7 @@ const SignHook = () => {
         history.push('/');
       }
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 
@@ -139,7 +133,7 @@ const SignHook = () => {
       await api.post('auth/find-password', { email });
       history.push('/findPasswordSucess');
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 
