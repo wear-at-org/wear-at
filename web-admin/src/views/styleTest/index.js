@@ -1,52 +1,99 @@
-import React from 'react';
-import ProTable from '@ant-design/pro-table';
-import { Radio } from 'antd';
-import { Typography } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Typography, Pagination } from 'antd';
 import api from 'api';
 import { columns } from './componets/ListDataInfo';
+import { Table, Radio } from 'antd';
 
 const { Title } = Typography;
 
 const StyleTest = () => {
+	const [data, setData] = useState([]);
+	const [filter, setFilter] = useState({
+		pageSize: 20,
+		current: 0,
+		totalPages: 1,
+		status: 'not-recommended',
+	});
+	useEffect(() => {
+		const getData = async () => {
+			let preurl = '';
+			if (filter.status !== 'not-recommended') {
+				preurl = `stylelist?${filter.status}&size=${filter.pageSize}&page=${filter.current}`;
+			} else {
+				preurl = `${filter.status}?size=${filter.pageSize}&page=${filter.current}`;
+			}
+			const { data } = await api.get(`subscribe/${preurl}`);
+			setFilter({
+				...filter,
+				totalPages: data.totalPages,
+			});
+			setData(data.content);
+		};
+		getData();
+	}, []);
+
+	useEffect(() => {
+		let preurl = '';
+		if (filter.status !== 'not-recommended') {
+			preurl = `stylelist?${filter.status}&size=${filter.pageSize}&page=${filter.current}`;
+		} else {
+			preurl = `${filter.status}?size=${filter.pageSize}&page=${filter.current}`;
+		}
+		const getData = async () => {
+			const { data } = await api.get(
+				`subscribe/${preurl}${filter.status}?size=${filter.pageSize}&page=${filter.current}`,
+			);
+			setData(data.content);
+		};
+		console.log(data);
+		getData();
+	}, [filter]);
 	return (
-		<ProTable
-			pagination={{
-				pageSize: 50,
-			}}
-			columns={columns}
-			request={async (params = {}, sort, filter) => {
-				const { data } = await api.get(
-					`subscribe/not-recommended?size=${params.pageSize}&page=${
-						params.current - 1
-					}`,
-				);
-				console.log(data.content);
-				if (data.content.length > 0) {
-					return {
-						data: data.content,
-						total: data.totalElements,
-						success: true,
-					};
-				} else {
-					return { data: [], success: false };
-				}
-			}}
-			search={false}
-			toolBarRender={() => [
-				<div className="mb10">
-					<div className="mb20">
-						<Title level={4}>스타일 테스트 리스트</Title>
-					</div>
-					<div className="d-flex">
-						<Radio.Group>
-							<Radio value={1}>신규 접수</Radio>
-							<Radio value={2}>할당 됨</Radio>
-							<Radio value={3}>완료</Radio>
-						</Radio.Group>
-					</div>
-				</div>,
-			]}
-		/>
+		<>
+			<Radio.Group
+				value={filter.status}
+				onChange={(e) => {
+					setFilter({ ...filter, status: e.target.value });
+				}}
+			>
+				<Radio value={'not-recommended'}>신규접수</Radio>
+				<Radio value={'recommended=true'}>진행중</Radio>
+				<Radio value={'recommended=false'}>완료</Radio>
+			</Radio.Group>
+			<div className="mb50">
+				<Table
+					pagination={false}
+					dataSource={data}
+					rowKey="id"
+					columns={columns}
+					toolBarRender={() => [
+						<div className="mb10">
+							<div className="mb20">
+								<Title level={4}>스타일 테스트 리스트</Title>
+							</div>
+							<div className="d-flex">
+								<Radio.Group>
+									<Radio value={'not-recommended'}>신규 접수</Radio>
+									<Radio value={'false'}>할당 됨</Radio>
+									<Radio value={'true'}>완료</Radio>
+								</Radio.Group>
+							</div>
+						</div>,
+					]}
+				/>
+			</div>
+
+			<div className="d-flex x-end">
+				<Pagination
+					defaultPageSize={20}
+					current={filter.current + 1}
+					total={filter.totalPages}
+					onChange={(e) => {
+						setFilter({ ...filter, current: e - 1 });
+					}}
+				/>
+			</div>
+		</>
 	);
 };
 

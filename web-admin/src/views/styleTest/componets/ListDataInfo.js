@@ -12,16 +12,9 @@ export const columns = [
 			return (
 				<Link to={`styleTest/detail/${item.id}`}>
 					<div className="img-container">
-						{item.subscribeAnswers.map((item, index) => {
-							if (item.queryId > 6)
-								return (
-									<img
-										key={uuidv4()}
-										className="list-img-size"
-										src={item.answer}
-										alt="img"
-									/>
-								);
+						{item.subscribeAnswers.map((item) => {
+							if (item.queryId === 6)
+								return <img key={uuidv4()} className="list-img-size" src={item.answer} alt="img" />;
 						})}
 					</div>
 				</Link>
@@ -43,9 +36,7 @@ export const columns = [
 						<Title level={5}>{item.user.nickname}</Title>
 					</div>
 					<div className="mr20">
-						<Title level={5}>
-							{dayjs(item.updateAt).format('YYYY/MM/DD HH:mm')}
-						</Title>
+						<Title level={5}>{dayjs(item.updateAt).format('YYYY/MM/DD HH:mm')}</Title>
 					</div>
 				</Link>
 			);

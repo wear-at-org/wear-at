@@ -13,8 +13,12 @@ export default function routers() {
 			<ProvideAuth path="/styleTest" exact>
 				<Route path="/styleTest" exact component={StyleTest} />
 			</ProvideAuth>
-			<ProvideAuth path="/styleTest/detail/:id">
-				<Route path="/styleTest/detail/:id" exact component={StyleTestDetail} />
+			<ProvideAuth path="/styleTest/detail/:subscribeId">
+				<Route
+					path="/styleTest/detail/:subscribeId"
+					exact
+					component={StyleTestDetail}
+				/>
 			</ProvideAuth>
 			<Route path="/styleTestTemp" exact component={StyleTestTemp} />
 		</Switch>
