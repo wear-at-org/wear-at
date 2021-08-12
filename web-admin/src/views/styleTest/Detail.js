@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import ImageUploader from 'components/ImageUploader';
-import { Typography, Button, Image, PageHeader, Row, Col, Divider, Popconfirm, message, Switch } from 'antd';
+import { Typography, Button, Image, PageHeader, Row, Col, Divider, Popconfirm, message, Switch, Input } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { v4 as uuidv4 } from 'uuid';
 import InputItem from 'components/InputFiled';
@@ -11,7 +11,8 @@ import UListImages from './componets/UListImages';
 import UListItems from './componets/UListItems';
 import UList2depItems from './componets/UList2depItems';
 import UListBody from './componets/UListBody';
-
+import { defaultImgBase64 } from 'utils';
+const { TextArea } = Input;
 const { Title } = Typography;
 
 const StyleTestDetail = ({
@@ -23,21 +24,23 @@ const StyleTestDetail = ({
 	useEffect(() => {
 		makeUserTestList({ subscribeId });
 	}, []);
+
+	useEffect(() => {
+		setResultItemList(recommendItems.recommendItems || []);
+		setTotalImage(recommendItems.imageUrl);
+		setTotalDescription(recommendItems.description);
+	}, [recommendItems]);
+
+	useEffect(() => {
+		setEditMode(subscribeInfo.recommended);
+	}, [subscribeInfo]);
+
 	let history = useHistory();
 
-	const [editMode, setEditMode] = useState(subscribeInfo.recommended || false);
+	const [editMode, setEditMode] = useState(false);
 	const [totalImage, setTotalImage] = useState('');
-	const [resultItemList, setResultItemList] = useState([
-		{
-			id: uuidv4(),
-			imageUrl: '',
-			brand: '',
-			title: '',
-			price: '',
-			linkUrl: '',
-			description: '',
-		},
-	]);
+	const [totalDescription, setTotalDescription] = useState('');
+	const [resultItemList, setResultItemList] = useState();
 
 	return (
 		<div className="pb90">
@@ -56,14 +59,35 @@ const StyleTestDetail = ({
 						<div className="pl30 pr30">
 							{subscribeInfo.recommendStarted ? (
 								<>
-									<div className="d-flex y-center">
+									<div className="d-flex y-center mb30">
 										<Title level={5} className="mr30 w-130">
 											전체 이미지
 										</Title>
 										{editMode ? (
-											<Image src={totalImage} className={'upload-img'} alt="defaultProfile" />
+											<Image src={totalImage || defaultImgBase64} className={'upload-img'} alt="defaultProfile" />
 										) : (
 											<ImageUploader img={totalImage} setImg={setTotalImage} />
+										)}
+									</div>
+
+									<div className="d-flex y-center mb30">
+										<Title level={4} className="mr30 w-130">
+											description
+										</Title>
+										{editMode ? (
+											<div className="mb4">
+												<TextArea className="text-style1" readOnly value={totalDescription || '내용 없음'} />
+											</div>
+										) : (
+											<div className="w-250">
+												<TextArea
+													style={{ height: 200 }}
+													value={totalDescription}
+													onChange={(e) => {
+														setTotalDescription(e.target.value);
+													}}
+												/>
+											</div>
 										)}
 									</div>
 									<Divider />
@@ -76,11 +100,12 @@ const StyleTestDetail = ({
 									{resultItemList.map((result, index) => {
 										return (
 											<InputItem
-												key={result.id}
+												key={index + 'InputItem'}
 												editMode={editMode}
 												setResultItemList={setResultItemList}
 												resultItemList={resultItemList}
 												result={result}
+												index={index}
 											/>
 										);
 									})}
@@ -92,16 +117,6 @@ const StyleTestDetail = ({
 													수정
 												</Button>
 											</div>
-											<Popconfirm
-												title="삭제 하시겠습니까?"
-												onConfirm={() => message.success('삭제 되었습니다')}
-												okText="확인"
-												cancelText="취소"
-											>
-												<Button danger size="large">
-													삭제
-												</Button>
-											</Popconfirm>
 										</div>
 									) : (
 										<>
@@ -115,8 +130,7 @@ const StyleTestDetail = ({
 														setResultItemList([
 															...resultItemList,
 															{
-																id: uuidv4(),
-																img: '',
+																imageUrl: '',
 																brand: '',
 																title: '',
 																price: '',
@@ -128,7 +142,24 @@ const StyleTestDetail = ({
 											</div>
 											<div className="d-flex mb50">
 												<div className="mr30">
-													<Button type="default" size="large">
+													<Button
+														type="default"
+														size="large"
+														onClick={() => {
+															uploadRecommend({
+																payload: {
+																	imageUrl: totalImage,
+																	description: totalDescription,
+																	subscribeId,
+																	id: recommendItems.id,
+																	items: resultItemList.map((i) => {
+																		return { ...i };
+																	}),
+																},
+															});
+															setEditMode(true);
+														}}
+													>
 														임시 저장
 													</Button>
 												</div>
@@ -139,14 +170,17 @@ const StyleTestDetail = ({
 													onClick={() => {
 														uploadRecommend({
 															payload: {
+																imageUrl: totalImage,
+																description: totalDescription,
+																id: recommendItems.id,
 																subscribeId,
 																completed: true,
 																items: resultItemList.map((i) => {
-																	delete i.id;
 																	return { ...i };
 																}),
 															},
 														});
+														setEditMode(true);
 													}}
 												>
 													작성 완료

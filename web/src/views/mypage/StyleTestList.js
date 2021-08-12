@@ -5,7 +5,6 @@ import StyleTestItem from './components/StyleTestItem';
 import useStepHook from 'hooks/useStepHook';
 import { useHistory } from 'react-router-dom';
 import useEditUserInfo from 'hooks/useEditUserInfo';
-import MobileHeader from 'components/MobileHeader';
 
 const StyleTestList = () => {
   const { user } = useEditUserInfo();
@@ -29,7 +28,6 @@ const StyleTestList = () => {
           <div className="mypage-container">
             <Lnb />
             <div className="right-container">
-              <MobileHeader />
               <div className="d-flex x-eq y-center mb30 y-sm-end">
                 <h5 className="fontweight400 hidden show-sm">
                   <span className="bold">{user.nickname}</span> 님의 스타일 테스트 내역입니다.

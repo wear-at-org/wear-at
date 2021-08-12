@@ -14,6 +14,9 @@ const DetailItem = ({ item }) => {
         <div className="mb4">
           <h4>{item.title}</h4>
         </div>
+        <div className="mb4">
+          <h4>{item.description}</h4>
+        </div>
         <div className="price-value mb16">
           <h5 className="small color-blue">₩{item.price.toLocaleString('ko-KR')}</h5>
         </div>

@@ -18,6 +18,11 @@ const Login = () => {
 		return cookies.get('_watu');
 	};
 
+	useEffect(() => {
+		const user = getUserFromCookie();
+		if (user) history.push('/styleTest');
+	}, []);
+
 	const login = async (email, password) => {
 		try {
 			await api.post('auth/sign-in', {
@@ -29,8 +34,6 @@ const Login = () => {
 			if (!user) {
 				throw new Error("user cookie doesn't exist");
 			}
-
-			message.success('로그인 성공');
 
 			dispatch(
 				loginProcess({
@@ -46,6 +49,7 @@ const Login = () => {
 			);
 
 			history.push('/styleTest');
+			message.success('로그인 성공');
 		} catch (e) {
 			message.error(e.response && e.response.data ? e.response.data.message : e.message);
 		}

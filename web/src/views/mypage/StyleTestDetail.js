@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import buyIcon from 'assets/img/icon-shopping.png';
 import DetailItem from './components/DetailItem';
 import useStepHook from 'hooks/useStepHook';
 import { useParams } from 'react-router-dom';
-import MobileHeader from 'components/MobileHeader';
 
 const StyleTestDetail = () => {
   const { id } = useParams();
@@ -17,39 +15,27 @@ const StyleTestDetail = () => {
     };
 
     getDetailItem();
+    console.log(detailItem);
   }, []);
 
   return (
     <div className="sub layout-sub">
-      <div className="pl25 pr25">
-        <MobileHeader />
-      </div>
-
       <div className="style-detail-wrap">
-        <div className="total mb64">
-          <div className="buy-btn">
-            <img src={buyIcon} alt="" />
-            <h5 className="color-white small ml10 hover-txt">제품 상세보기</h5>
+        <div className="total mb64 y-center">
+          <div className="img-container mb30">
+            <img src={detailItem.imageUrl} alt="" />
           </div>
-          {detailItem.recommendItems.map((item, index) => {
-            return (
-              <div className="item" key={`${index}-item`}>
-                <img src={item.imageUrl} alt={item.imageUrl} />
 
-                <a href={item.linkUrl} target="_blank" rel="noreferrer" className="info-price">
-                  <div className="mb4">
-                    <h5>{item.title}</h5>
-                  </div>
-                  <div className="price-value">
-                    <h5 className="small color-blue">₩{item.price.toLocaleString('ko-KR')}</h5>
-                  </div>
-                </a>
-              </div>
-            );
-          })}
+          <div className="">
+            <h4>{detailItem.description}</h4>
+          </div>
         </div>
 
         <div className="style-item-list">
+          <div className="style-item-main-title">
+            <h5>모든 상품 자세히 보기</h5>
+          </div>
+
           {detailItem.recommendItems.map((item, index) => {
             return <DetailItem key={index + 'DetailItem'} item={item} />;
           })}
