@@ -18,7 +18,7 @@ const DetailItem = ({ item }) => {
           <h4>{item.description}</h4>
         </div>
         <div className="price-value mb16">
-          <h5 className="small color-blue">₩{item.price.toLocaleString('ko-KR')}</h5>
+          <h5 className="small color-blue">{item.price}</h5>
         </div>
         <a href={item.linkUrl} target="_blank" rel="noreferrer" className="info-price">
           <div className="btn-style2 middle center">
