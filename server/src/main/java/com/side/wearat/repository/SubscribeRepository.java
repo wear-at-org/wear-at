@@ -18,5 +18,5 @@ public interface SubscribeRepository extends JpaRepository<Subscribe, Long> {
 
     Page<Subscribe> findAllByUserId(Long userId, Pageable pageable);
 
-    Page<Subscribe> findAllByRecommendedFalseAndCompletedTrue(Pageable pageable);
+    Page<Subscribe> findAllByRecommendedFalseAndRecommendStartedFalseAndCompletedTrue(Pageable pageable);
 }

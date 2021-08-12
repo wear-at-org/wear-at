@@ -28,7 +28,7 @@ public class SubscribeRepositorySupport extends QuerydslRepositorySupport {
 
     public Page<Subscribe> findByStylist(final Long id, Boolean recommended, Pageable pageable) {
         var cond = subscribe.completed.isTrue()
-                .and(subscribe.recommended.isTrue())
+                .and(subscribe.recommendStarted.isTrue())
                 .and(recommend.stylistId.eq(id));
         if (recommended != null) {
             cond = cond.and(recommend.completed.eq(recommended));

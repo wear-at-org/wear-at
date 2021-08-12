@@ -86,7 +86,7 @@ public class SubscribeServiceImpl implements SubscribeService{
 
     @Override
     public Page<Subscribe> listNotRecommended(Pageable pageable) {
-        return subscribeRepository.findAllByRecommendedFalseAndCompletedTrue(pageable);
+        return subscribeRepository.findAllByRecommendedFalseAndRecommendStartedFalseAndCompletedTrue(pageable);
     }
 
     @Override
