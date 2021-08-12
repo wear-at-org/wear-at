@@ -5,10 +5,10 @@ import { MinusOutlined } from '@ant-design/icons';
 import { numberWithCommas } from 'utils';
 const { TextArea } = Input;
 const { Title } = Typography;
-const InputItem = ({ editMode, setResultItemList, resultItemList, result }) => {
+const InputItem = ({ editMode, setResultItemList, resultItemList, result, index }) => {
 	const setImg = (imageUrl) => {
 		const filterList = resultItemList.map((i) => {
-			if (i.id === result.id) {
+			if (i.index === result.index) {
 				return { ...i, imageUrl };
 			} else {
 				return i;
@@ -58,7 +58,7 @@ const InputItem = ({ editMode, setResultItemList, resultItemList, result }) => {
 							value={result.title}
 							onChange={(e) => {
 								const filterList = resultItemList.map((i) => {
-									if (i.id === result.id) {
+									if (i.index === result.index) {
 										return { ...i, title: e.target.value };
 									} else {
 										return i;
@@ -79,7 +79,7 @@ const InputItem = ({ editMode, setResultItemList, resultItemList, result }) => {
 							value={result.price.toLocaleString('ko-KR')}
 							onChange={(e) => {
 								const filterList = resultItemList.map((i) => {
-									if (i.id === result.id) {
+									if (i.index === result.index) {
 										return { ...i, price: e.target.value };
 									} else {
 										return i;
@@ -100,7 +100,7 @@ const InputItem = ({ editMode, setResultItemList, resultItemList, result }) => {
 							value={result.linkUrl}
 							onChange={(e) => {
 								const filterList = resultItemList.map((i) => {
-									if (i.id === result.id) {
+									if (i.index === result.index) {
 										return { ...i, linkUrl: e.target.value };
 									} else {
 										return i;
@@ -121,7 +121,7 @@ const InputItem = ({ editMode, setResultItemList, resultItemList, result }) => {
 							value={result.description}
 							onChange={(e) => {
 								const filterList = resultItemList.map((i) => {
-									if (i.id === result.id) {
+									if (i.index === result.index) {
 										return { ...i, description: e.target.value };
 									} else {
 										return i;
@@ -140,7 +140,7 @@ const InputItem = ({ editMode, setResultItemList, resultItemList, result }) => {
 					size={'large'}
 					shape="circle"
 					onClick={() => {
-						setResultItemList(resultItemList.filter((i) => i.id !== result.id));
+						setResultItemList(resultItemList.filter((i) => i.index !== result.index));
 					}}
 				/>
 				<Divider />

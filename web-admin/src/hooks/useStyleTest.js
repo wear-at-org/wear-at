@@ -62,9 +62,11 @@ const useStyelTest = () => {
 			}
 		});
 
+		console.log(info);
 		if (info.recommendStarted) {
 			const { data } = await api.get(`/recommend?subscribeId=${subscribeId}`);
-			setRecommendItems(data);
+			console.log(data);
+			setRecommendItems(data[0]);
 		}
 
 		setUserTestList(resultObj);

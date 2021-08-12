@@ -4,7 +4,6 @@ import useEditUserInfo from 'hooks/useEditUserInfo';
 import Lnb from 'components/layout/Lnb';
 import { checkNicknameApi } from 'utils/UserReducer';
 import ImageUpload from 'components/ImageUpload';
-import MobileHeader from 'components/MobileHeader';
 
 const Mypage = () => {
   const [showPost, setShowPost] = useState(false);
@@ -14,10 +13,6 @@ const Mypage = () => {
     <div className="sub layout-sub">
       <div className="col-12 col-center mw-1280">
         <div className="show-mobile mb24 mb-sm-0">
-          <div className="pl25 pr25">
-            <MobileHeader />
-          </div>
-
           <ImageUpload />
         </div>
 

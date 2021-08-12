@@ -187,6 +187,7 @@
     padding-right: 20%;
     padding-bottom: 70px;
     border-bottom: 1px solid $grayeee;
+    flex-direction: column;
 
     .x-btn-container {
       top: 30px;
@@ -290,6 +291,11 @@
   .style-item-list {
     padding-left: 20%;
     padding-right: 20%;
+
+    .style-item-main-title {
+      margin-top: 64px;
+      margin-bottom: 23px;
+    }
 
     .detail-item {
       display: flex;

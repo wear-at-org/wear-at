@@ -13,6 +13,7 @@ const StyleTest = () => {
 		totalPages: 1,
 		status: 'not-recommended',
 	});
+
 	useEffect(() => {
 		const getData = async () => {
 			let preurl = '';
@@ -22,28 +23,32 @@ const StyleTest = () => {
 				preurl = `${filter.status}?size=${filter.pageSize}&page=${filter.current}`;
 			}
 			const { data } = await api.get(`subscribe/${preurl}`);
+			setData(data.content);
 			setFilter({
 				...filter,
 				totalPages: data.totalPages,
 			});
-			setData(data.content);
 		};
 		getData();
 	}, []);
 
 	useEffect(() => {
-		let preurl = '';
-		if (filter.status !== 'not-recommended') {
-			preurl = `stylist?${filter.status}&size=${filter.pageSize}&page=${filter.current}`;
-		} else {
-			preurl = `${filter.status}?size=${filter.pageSize}&page=${filter.current}`;
-		}
 		const getData = async () => {
+			let preurl = '';
+			if (filter.status !== 'not-recommended') {
+				preurl = `stylist?${filter.status}&size=${filter.pageSize}&page=${filter.current}`;
+			} else {
+				preurl = `${filter.status}?size=${filter.pageSize}&page=${filter.current}`;
+			}
 			const { data } = await api.get(`subscribe/${preurl}`);
 			setData(data.content);
+			setFilter({
+				...filter,
+				totalPages: data.totalPages,
+			});
 		};
 		getData();
-	}, [filter]);
+	}, [filter.pageSize, filter.current, filter.status]);
 
 	return (
 		<div className="pl20 pr20">
@@ -55,8 +60,8 @@ const StyleTest = () => {
 					}}
 				>
 					<Radio value={'not-recommended'}>신규접수</Radio>
-					<Radio value={'recommended=true'}>진행중</Radio>
-					<Radio value={'recommended=false'}>완료</Radio>
+					<Radio value={'recommended=false'}>진행중</Radio>
+					<Radio value={'recommended=true'}>완료</Radio>
 				</Radio.Group>
 			</div>
 
