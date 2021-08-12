@@ -7,8 +7,8 @@ const { TextArea } = Input;
 const { Title } = Typography;
 const InputItem = ({ editMode, setResultItemList, resultItemList, result, index }) => {
 	const setImg = (imageUrl) => {
-		const filterList = resultItemList.map((i) => {
-			if (i.index === result.index) {
+		const filterList = resultItemList.map((i, ii) => {
+			if (ii === index) {
 				return { ...i, imageUrl };
 			} else {
 				return i;
@@ -36,8 +36,8 @@ const InputItem = ({ editMode, setResultItemList, resultItemList, result, index 
 							allowClear
 							value={result.brand}
 							onChange={(e) => {
-								const filterList = resultItemList.map((i) => {
-									if (i.id === result.id) {
+								const filterList = resultItemList.map((i, ii) => {
+									if (ii === index) {
 										return { ...i, brand: e.target.value };
 									} else {
 										return i;
@@ -57,8 +57,8 @@ const InputItem = ({ editMode, setResultItemList, resultItemList, result, index 
 							allowClear
 							value={result.title}
 							onChange={(e) => {
-								const filterList = resultItemList.map((i) => {
-									if (i.index === result.index) {
+								const filterList = resultItemList.map((i, ii) => {
+									if (ii === index) {
 										return { ...i, title: e.target.value };
 									} else {
 										return i;
@@ -76,10 +76,10 @@ const InputItem = ({ editMode, setResultItemList, resultItemList, result, index 
 					<div className="w-250">
 						<Input
 							allowClear
-							value={result.price.toLocaleString('ko-KR')}
+							value={result.price}
 							onChange={(e) => {
-								const filterList = resultItemList.map((i) => {
-									if (i.index === result.index) {
+								const filterList = resultItemList.map((i, ii) => {
+									if (ii === index) {
 										return { ...i, price: e.target.value };
 									} else {
 										return i;
@@ -99,8 +99,8 @@ const InputItem = ({ editMode, setResultItemList, resultItemList, result, index 
 							allowClear
 							value={result.linkUrl}
 							onChange={(e) => {
-								const filterList = resultItemList.map((i) => {
-									if (i.index === result.index) {
+								const filterList = resultItemList.map((i, ii) => {
+									if (ii === index) {
 										return { ...i, linkUrl: e.target.value };
 									} else {
 										return i;
@@ -120,8 +120,8 @@ const InputItem = ({ editMode, setResultItemList, resultItemList, result, index 
 							style={{ height: 200 }}
 							value={result.description}
 							onChange={(e) => {
-								const filterList = resultItemList.map((i) => {
-									if (i.index === result.index) {
+								const filterList = resultItemList.map((i, ii) => {
+									if (ii === index) {
 										return { ...i, description: e.target.value };
 									} else {
 										return i;
