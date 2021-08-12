@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import ImageUploader from 'components/ImageUploader';
-import { Typography, Button, Image, PageHeader, Row, Col, Divider, Popconfirm, message, Switch, Input } from 'antd';
+import { Typography, Button, Image, PageHeader, Row, Col, Divider, Switch, Input } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import { v4 as uuidv4 } from 'uuid';
 import InputItem from 'components/InputFiled';
 import useStyelTest from 'hooks/useStyleTest';
 import UUploadUmage from './componets/UUploadUmage';
