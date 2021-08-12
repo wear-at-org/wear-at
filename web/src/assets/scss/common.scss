@@ -166,6 +166,7 @@ header.nav-container {
   position: relative;
   margin-left: auto;
   margin-right: auto;
+  border-bottom: 1px solid $grayeee;
   .web {
     ul {
       height: 100%;
@@ -600,7 +601,9 @@ footer {
     }
   }
 }
-
+.show-web {
+  display: block !important;
+}
 .show-mobile {
   display: none !important;
 }

@@ -2,6 +2,9 @@ import React from 'react';
 import mainIcon1 from 'assets/img/main-icon1.png';
 import mainIcon2 from 'assets/img/main-icon2.png';
 import mainIcon3 from 'assets/img/main-icon3.png';
+import mainIcon1M from 'assets/img/main-icon1-m.png';
+import mainIcon2M from 'assets/img/main-icon2-m.png';
+import mainIcon3M from 'assets/img/main-icon3-m.png';
 
 const MainCard = ({ cardIsActive }) => {
   return (
@@ -10,7 +13,8 @@ const MainCard = ({ cardIsActive }) => {
         <div className={`col-12 d-flex f-wrap mb64 card-animation-wrapper ${cardIsActive && 'active'}`}>
           <div className="col-12 col-sm-4 mb40 mb-sm-0 d-flex x-center card-wrap">
             <div className="card-section">
-              <img src={mainIcon1} alt="mainIcon1" />
+              <img className="show-web" src={mainIcon1} alt="mainIcon1" />
+              <img className="show-mobile" src={mainIcon1M} alt="mainIcon1" />
             </div>
             <div className="detail-text">
               <h4>나에게 딱 맞는</h4>
@@ -22,7 +26,8 @@ const MainCard = ({ cardIsActive }) => {
           </div>
           <div className="col-12 col-sm-4 mb40 mb-sm-0 d-flex x-center card-wrap">
             <div className="card-section">
-              <img src={mainIcon2} alt="mainIcon1" />
+              <img className="show-web" src={mainIcon2} alt="mainIcon2" />
+              <img className="show-mobile" src={mainIcon2M} alt="mainIcon2" />
             </div>
             <div className="detail-text">
               <h4>다양한 스타일 PICK!</h4>
@@ -34,7 +39,8 @@ const MainCard = ({ cardIsActive }) => {
           </div>
           <div className="col-12 col-sm-4 mb40 mb-sm-0 d-flex x-center card-wrap">
             <div className="card-section">
-              <img src={mainIcon3} alt="mainIcon1" />
+              <img className="show-web" src={mainIcon3} alt="mainIcon3" />
+              <img className="show-mobile" src={mainIcon3M} alt="mainIcon3" />
             </div>
             <div className="detail-text">
               <h4>미처 몰랐던 새로운 브랜드도</h4>
