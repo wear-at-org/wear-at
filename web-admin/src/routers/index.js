@@ -3,7 +3,6 @@ import { Route, Switch } from 'react-router-dom';
 import Login from 'views/login';
 import StyleTest from 'views/styleTest';
 import StyleTestDetail from 'views/styleTest/Detail';
-import StyleTestTemp from 'views/styleTestTemp';
 import ProvideAuth from './ProvideAuth';
 
 export default function routers() {
@@ -20,7 +19,6 @@ export default function routers() {
 					component={StyleTestDetail}
 				/>
 			</ProvideAuth>
-			<Route path="/styleTestTemp" exact component={StyleTestTemp} />
 		</Switch>
 	);
 }
