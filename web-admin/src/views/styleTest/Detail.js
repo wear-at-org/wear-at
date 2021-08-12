@@ -22,6 +22,7 @@ const StyleTestDetail = ({
 	const { makeUserTestList, userTestList, subscribeInfo, assignMe, recommendItems, uploadRecommend } = useStyelTest();
 	useEffect(() => {
 		makeUserTestList({ subscribeId });
+		console.log(recommendItems);
 	}, []);
 	let history = useHistory();
 
@@ -116,7 +117,7 @@ const StyleTestDetail = ({
 															...resultItemList,
 															{
 																id: uuidv4(),
-																img: '',
+																imageUrl: '',
 																brand: '',
 																title: '',
 																price: '',
@@ -139,7 +140,9 @@ const StyleTestDetail = ({
 													onClick={() => {
 														uploadRecommend({
 															payload: {
-																subscribeId,
+																imageUrl: totalImage,
+																description: 'asdsad',
+																id: recommendItems[0].id,
 																completed: true,
 																items: resultItemList.map((i) => {
 																	delete i.id;

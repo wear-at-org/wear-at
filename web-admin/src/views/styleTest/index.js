@@ -17,7 +17,7 @@ const StyleTest = () => {
 		const getData = async () => {
 			let preurl = '';
 			if (filter.status !== 'not-recommended') {
-				preurl = `stylelist?${filter.status}&size=${filter.pageSize}&page=${filter.current}`;
+				preurl = `stylist?${filter.status}&size=${filter.pageSize}&page=${filter.current}`;
 			} else {
 				preurl = `${filter.status}?size=${filter.pageSize}&page=${filter.current}`;
 			}
@@ -34,7 +34,7 @@ const StyleTest = () => {
 	useEffect(() => {
 		let preurl = '';
 		if (filter.status !== 'not-recommended') {
-			preurl = `stylelist?${filter.status}&size=${filter.pageSize}&page=${filter.current}`;
+			preurl = `stylist?${filter.status}&size=${filter.pageSize}&page=${filter.current}`;
 		} else {
 			preurl = `${filter.status}?size=${filter.pageSize}&page=${filter.current}`;
 		}
