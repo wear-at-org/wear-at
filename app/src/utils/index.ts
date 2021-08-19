@@ -1,0 +1,27 @@
+// 비밀번호 정규식
+export const regCheckPassword = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+
+// 이메일 정규식
+// eslint-disable-next-line no-useless-escape
+export const regCheckEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{1,10}$/i;
+
+// 특수문자 확인
+export const checkSpecial = (str: string) => {
+  // eslint-disable-next-line no-useless-escape
+  const special_pattern = /[`~!@#$%^&*|\\\'\";:\/?]/gi;
+  if (special_pattern.test(str) === true) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+// 대소문자 확인
+export const checkLetter = (str: string) => {
+  const special_pattern = /[a-zA-z]/gi;
+  if (special_pattern.test(str) === true) {
+    return true;
+  } else {
+    return false;
+  }
+};
