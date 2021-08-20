@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useState, useEffect} from 'react';
 import api from 'api';
 import StepHook from 'hooks/useStepHook';
-import {View} from 'react-native';
+import {SafeAreaView, View} from 'react-native';
 import StepListItem from './steps/StepListItem';
 import StepListImage from './steps/StepListImage';
 import StepTwoDepthItem from './steps/StepTwoDepthItem';
@@ -70,12 +70,12 @@ const Styletest: React.FC<propsTypes> = (props) => {
   };
 
   return (
-    <View>
+    <SafeAreaView>
       <StyleTestHeader activeIndex={activeIndex} setActiveIndex={setActiveIndex} stepLength={stepArray.length} apiId={apiId} hooks={hooks} />
       {stepArray.map((item, index) => {
         return renderStepComponent(item, index);
       })}
-    </View>
+    </SafeAreaView>
   );
 };
 

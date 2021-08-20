@@ -99,12 +99,13 @@ const StepListItem: FC<reciveProps> = ({item, goNextStep, hooks, apiId, activeIn
                 }
 
                 return (
-                  <TouchableOpacity key={`queryItems-${id}`} onPress={() => setList(selectQueryItem(list, queryItem, index, !answer))}>
-                    <View style={[styles.circle, answer ? styles.circleActive : null]}>
-                      <FastImage source={img} style={styles.stepIcon} resizeMode={'contain'} />
-                      <View style={{...margin(5, 'top')}}>
-                        <SpoText style={[styles.itemTitle, answer ? styles.colorWhite : styles.colorBlack]}>{title}</SpoText>
-                      </View>
+                  <TouchableOpacity
+                    key={`queryItems-${id}`}
+                    onPress={() => setList(selectQueryItem(list, queryItem, index, !answer))}
+                    style={[styles.circle, answer ? styles.circleActive : null]}>
+                    <FastImage source={img} style={styles.stepIcon} resizeMode={'contain'} />
+                    <View style={{...margin(5, 'top')}}>
+                      <SpoText style={[styles.itemTitle, answer ? styles.colorWhite : styles.colorBlack]}>{title}</SpoText>
                     </View>
                   </TouchableOpacity>
                 );

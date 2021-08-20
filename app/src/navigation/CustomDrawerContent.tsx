@@ -33,7 +33,10 @@ const CustomDrwaer: FC<DrawerContentComponentProps> = (props) => {
           </View>
         ) : (
           <TouchableOpacity style={styles.profileInner}>
-            <FastImage source={userInfo.info.profileImage || defaultProfile} style={commonStyle.icon50} />
+            <View style={{...margin(10, 'right')}}>
+              <FastImage source={userInfo.info.profileImage || defaultProfile} style={commonStyle.icon50} />
+            </View>
+
             <View>
               <SpoText fontStyle={'M'} style={commonStyle.h5}>
                 {userInfo.info.nickname}
