@@ -37,7 +37,7 @@
     "lint:fix": "eslint . --fix",
     "deploy": "gh-pages -d build",
     "docker": "cd ../server && docker-compose up",
-    "server": "cd ../server && gradle bootrun -Dspring.profiles.active=local",
+    "server": "cd ../server && ./gradlew bootrun -Dspring.profiles.active=local",
     "postbuild": "react-snap"
   },
   "browserslist": {
@@ -62,8 +62,5 @@
     "node-sass": "^4.14.1",
     "react-snap": "^1.23.0",
     "resolve-url-loader": "^4.0.0"
-  },
-  "engines": {
-    "node": "14.x"
   }
 }

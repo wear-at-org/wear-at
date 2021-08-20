@@ -5,11 +5,11 @@ import * as React from 'react';
 import {View} from 'react-native';
 import {TouchableOpacity} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import {Image} from 'react-native-elements';
 import {ActivityIndicator} from 'react-native';
 import {styleTestListProps, reciveProps} from 'hooks/type';
 import style from '../styles';
 import {margin} from 'utils/commonStyle';
+import FastImage from 'react-native-fast-image';
 const StepListItem: FC<reciveProps> = ({item, goNextStep, hooks, apiId, activeIndex}) => {
   const styles = style();
   const {makeInsertList, selectQueryItem, beforeNextChecker, checkLength} = hooks;
@@ -101,7 +101,7 @@ const StepListItem: FC<reciveProps> = ({item, goNextStep, hooks, apiId, activeIn
                 return (
                   <TouchableOpacity key={`queryItems-${id}`} onPress={() => setList(selectQueryItem(list, queryItem, index, !answer))}>
                     <View style={[styles.circle, answer ? styles.circleActive : null]}>
-                      <Image source={img} style={styles.stepIcon} PlaceholderContent={<ActivityIndicator />} resizeMode={'contain'} />
+                      <FastImage source={img} style={styles.stepIcon} resizeMode={'contain'} />
                       <View style={{...margin(5, 'top')}}>
                         <SpoText style={[styles.itemTitle, answer ? styles.colorWhite : styles.colorBlack]}>{title}</SpoText>
                       </View>

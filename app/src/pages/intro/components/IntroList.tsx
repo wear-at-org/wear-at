@@ -3,11 +3,11 @@ import {introData} from 'assets/common/commonData';
 import FastImage from 'react-native-fast-image';
 import {View, StyleSheet} from 'react-native';
 import SpoText from 'components/SpoText';
-import {commonStyle, margin} from 'utils/commonStyle';
+import {commonStyle, margin, padding} from 'utils/commonStyle';
 
 const IntroList = () => {
   return (
-    <View style={{...margin(50, 'bottom')}}>
+    <View style={{...margin(50, 'bottom'), ...padding(80, 'top')}}>
       {introData.map((item, i: number) => {
         return (
           <View style={{...margin(50, 'bottom')}} key={item.key}>

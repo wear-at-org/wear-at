@@ -11,7 +11,14 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		2CEECF60B7E7F8871387425E /* libPods-weatAtApp-weatAtAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29ACD7D62C428208A4A8544A /* libPods-weatAtApp-weatAtAppTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		CD9AEAED26D01A4800532D1C /* SpoqaHanSansNeo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD9AEAE826D01A4800532D1C /* SpoqaHanSansNeo-Regular.ttf */; };
+		CD9AEAEE26D01A4800532D1C /* SpoqaHanSansNeo-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD9AEAE926D01A4800532D1C /* SpoqaHanSansNeo-Medium.ttf */; };
+		CD9AEAEF26D01A4800532D1C /* SpoqaHanSansNeo-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD9AEAEA26D01A4800532D1C /* SpoqaHanSansNeo-Light.ttf */; };
+		CD9AEAF026D01A4800532D1C /* SpoqaHanSansNeo-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD9AEAEB26D01A4800532D1C /* SpoqaHanSansNeo-Bold.ttf */; };
+		CD9AEAF126D01A4800532D1C /* SpoqaHanSansNeo-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD9AEAEC26D01A4800532D1C /* SpoqaHanSansNeo-Thin.ttf */; };
+		F4B817264393B9849E6A9A88 /* libPods-weatAtApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D903B86EDAF2E9AD83049D8 /* libPods-weatAtApp.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,7 +41,18 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = weatAtApp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = weatAtApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = weatAtApp/main.m; sourceTree = "<group>"; };
+		1D903B86EDAF2E9AD83049D8 /* libPods-weatAtApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-weatAtApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		29ACD7D62C428208A4A8544A /* libPods-weatAtApp-weatAtAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-weatAtApp-weatAtAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4BD9723767438CC5561EEB58 /* Pods-weatAtApp-weatAtAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weatAtApp-weatAtAppTests.debug.xcconfig"; path = "Target Support Files/Pods-weatAtApp-weatAtAppTests/Pods-weatAtApp-weatAtAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6B09E210477F72D1F11F0F0F /* Pods-weatAtApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weatAtApp.release.xcconfig"; path = "Target Support Files/Pods-weatAtApp/Pods-weatAtApp.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = weatAtApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BC1F196E34D77F80FB305F7F /* Pods-weatAtApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weatAtApp.debug.xcconfig"; path = "Target Support Files/Pods-weatAtApp/Pods-weatAtApp.debug.xcconfig"; sourceTree = "<group>"; };
+		CD9AEAE826D01A4800532D1C /* SpoqaHanSansNeo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.ttf"; sourceTree = "<group>"; };
+		CD9AEAE926D01A4800532D1C /* SpoqaHanSansNeo-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.ttf"; sourceTree = "<group>"; };
+		CD9AEAEA26D01A4800532D1C /* SpoqaHanSansNeo-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Light.ttf"; sourceTree = "<group>"; };
+		CD9AEAEB26D01A4800532D1C /* SpoqaHanSansNeo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.ttf"; sourceTree = "<group>"; };
+		CD9AEAEC26D01A4800532D1C /* SpoqaHanSansNeo-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Thin.ttf"; sourceTree = "<group>"; };
+		D50186C27D75415754E95190 /* Pods-weatAtApp-weatAtAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weatAtApp-weatAtAppTests.release.xcconfig"; path = "Target Support Files/Pods-weatAtApp-weatAtAppTests/Pods-weatAtApp-weatAtAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -43,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CEECF60B7E7F8871387425E /* libPods-weatAtApp-weatAtAppTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4B817264393B9849E6A9A88 /* libPods-weatAtApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +110,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
+				1D903B86EDAF2E9AD83049D8 /* libPods-weatAtApp.a */,
+				29ACD7D62C428208A4A8544A /* libPods-weatAtApp-weatAtAppTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -104,11 +126,13 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				CD9AEAE726D01A4800532D1C /* Fonts */,
 				13B07FAE1A68108700A75B9A /* weatAtApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* weatAtAppTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+				95FA60645C098021D746E3B6 /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -124,6 +148,29 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		95FA60645C098021D746E3B6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BC1F196E34D77F80FB305F7F /* Pods-weatAtApp.debug.xcconfig */,
+				6B09E210477F72D1F11F0F0F /* Pods-weatAtApp.release.xcconfig */,
+				4BD9723767438CC5561EEB58 /* Pods-weatAtApp-weatAtAppTests.debug.xcconfig */,
+				D50186C27D75415754E95190 /* Pods-weatAtApp-weatAtAppTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		CD9AEAE726D01A4800532D1C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				CD9AEAE826D01A4800532D1C /* SpoqaHanSansNeo-Regular.ttf */,
+				CD9AEAE926D01A4800532D1C /* SpoqaHanSansNeo-Medium.ttf */,
+				CD9AEAEA26D01A4800532D1C /* SpoqaHanSansNeo-Light.ttf */,
+				CD9AEAEB26D01A4800532D1C /* SpoqaHanSansNeo-Bold.ttf */,
+				CD9AEAEC26D01A4800532D1C /* SpoqaHanSansNeo-Thin.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -131,9 +178,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "weatAtAppTests" */;
 			buildPhases = (
+				A897CCD382591C8D2CFC64B8 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				174A16F40BB56CD1DD591CEC /* [CP] Embed Pods Frameworks */,
+				89C268BA557E5F7E7EDB0457 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -149,11 +199,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "weatAtApp" */;
 			buildPhases = (
+				63FA2EC6383E5F889969CD5A /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				9564F38C2E6FA0D64497128A /* [CP] Embed Pods Frameworks */,
+				4445FD25D96F1D394FDAAFFB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -212,7 +265,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD9AEAEF26D01A4800532D1C /* SpoqaHanSansNeo-Light.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				CD9AEAED26D01A4800532D1C /* SpoqaHanSansNeo-Regular.ttf in Resources */,
+				CD9AEAEE26D01A4800532D1C /* SpoqaHanSansNeo-Medium.ttf in Resources */,
+				CD9AEAF126D01A4800532D1C /* SpoqaHanSansNeo-Thin.ttf in Resources */,
+				CD9AEAF026D01A4800532D1C /* SpoqaHanSansNeo-Bold.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -233,6 +291,118 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
+		};
+		174A16F40BB56CD1DD591CEC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-weatAtApp-weatAtAppTests/Pods-weatAtApp-weatAtAppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-weatAtApp-weatAtAppTests/Pods-weatAtApp-weatAtAppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-weatAtApp-weatAtAppTests/Pods-weatAtApp-weatAtAppTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4445FD25D96F1D394FDAAFFB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-weatAtApp/Pods-weatAtApp-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-weatAtApp/Pods-weatAtApp-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-weatAtApp/Pods-weatAtApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		63FA2EC6383E5F889969CD5A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-weatAtApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		89C268BA557E5F7E7EDB0457 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-weatAtApp-weatAtAppTests/Pods-weatAtApp-weatAtAppTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-weatAtApp-weatAtAppTests/Pods-weatAtApp-weatAtAppTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-weatAtApp-weatAtAppTests/Pods-weatAtApp-weatAtAppTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9564F38C2E6FA0D64497128A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-weatAtApp/Pods-weatAtApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-weatAtApp/Pods-weatAtApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-weatAtApp/Pods-weatAtApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A897CCD382591C8D2CFC64B8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-weatAtApp-weatAtAppTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -286,6 +456,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4BD9723767438CC5561EEB58 /* Pods-weatAtApp-weatAtAppTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -312,6 +483,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D50186C27D75415754E95190 /* Pods-weatAtApp-weatAtAppTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -335,11 +507,14 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BC1F196E34D77F80FB305F7F /* Pods-weatAtApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
+				EXCLUDED_ARCHS = arm64;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = weatAtApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -360,10 +535,13 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B09E210477F72D1F11F0F0F /* Pods-weatAtApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				EXCLUDED_ARCHS = arm64;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = weatAtApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

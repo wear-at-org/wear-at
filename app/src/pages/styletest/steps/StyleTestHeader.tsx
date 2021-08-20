@@ -6,7 +6,6 @@ import FastImage from 'react-native-fast-image';
 import {stackNavigationProp} from 'navigation/StackNavigation';
 import {View, TouchableOpacity} from 'react-native';
 import SpoText from 'components/SpoText';
-import {Image} from 'react-native-elements';
 import style from '../styles';
 import {margin} from 'utils/commonStyle';
 
@@ -30,7 +29,7 @@ const StyleTestHeader: React.FC = ({activeIndex, setActiveIndex, stepLength, api
               navigation.goBack();
             }
           }}>
-          <Image source={arrLeft} style={styles.headerIcon} resizeMode={'contain'} />
+          <FastImage source={arrLeft} style={styles.headerIcon} resizeMode={'contain'} />
           {activeIndex === 3 || activeIndex === 4 ? (
             <View style={[{...margin(10, 'left')}]}>
               <SpoText style={{opacity: 0}}>SKIP</SpoText>
@@ -56,7 +55,7 @@ const StyleTestHeader: React.FC = ({activeIndex, setActiveIndex, stepLength, api
             </TouchableOpacity>
           ) : null}
           <TouchableOpacity onPress={() => navigation.navigate('StyleTestIntro')} style={{...margin(10, 'left')}}>
-            <Image source={xBtn} style={styles.headerIcon} resizeMode={'contain'} />
+            <FastImage source={xBtn} style={styles.headerIcon} resizeMode={'contain'} />
           </TouchableOpacity>
         </View>
       </View>

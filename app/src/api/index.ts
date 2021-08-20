@@ -3,7 +3,7 @@ import store from 'store';
 import {addAsyncCountValue, minusAsyncCountValue} from 'store/spinner-store';
 import AsyncStorage from '@react-native-community/async-storage';
 
-const BASE_URL = 'http://192.168.35.41:8089/v1/';
+const BASE_URL = 'http://34.64.199.3/v1/';
 const {dispatch} = store;
 
 console.log(BASE_URL);
