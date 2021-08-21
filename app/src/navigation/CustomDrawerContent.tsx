@@ -32,7 +32,7 @@ const CustomDrwaer: FC<DrawerContentComponentProps> = (props) => {
             </TouchableOpacity>
           </View>
         ) : (
-          <TouchableOpacity style={styles.profileInner}>
+          <TouchableOpacity style={styles.profileInner} onPress={() => navigation.navigate('Mypage')}>
             <View style={{...margin(10, 'right')}}>
               <FastImage source={userInfo.info.profileImage || defaultProfile} style={commonStyle.icon50} />
             </View>

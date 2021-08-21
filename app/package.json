@@ -11,6 +11,7 @@
     "pod": "yarn && cd ios && arch -x86_64 pod install"
   },
   "dependencies": {
+    "@actbase/react-daum-postcode": "^1.0.0",
     "@invertase/react-native-apple-authentication": "^2.1.2",
     "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/masked-view": "^0.1.11",

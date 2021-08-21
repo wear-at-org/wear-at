@@ -83,6 +83,10 @@ export const commonStyle = StyleSheet.create({
     paddingLeft: 25,
     paddingRight: 25,
   },
+  h2: {
+    fontSize: 28,
+    lineHeight: 42,
+  },
   h3: {
     fontSize: 20,
     lineHeight: 28,
@@ -119,4 +123,14 @@ export const commonStyle = StyleSheet.create({
     textAlign: 'center',
   },
   row: {flexDirection: 'row'},
+  xycenter: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  xcenter: {
+    justifyContent: 'center',
+  },
+  ycenter: {
+    alignItems: 'center',
+  },
 });

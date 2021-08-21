@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {useState, useEffect} from 'react';
 import {View, TouchableOpacity, StyleSheet, Dimensions} from 'react-native';
 import SpoText from './SpoText';
 import DocumentPicker from 'react-native-document-picker';

@@ -2,7 +2,12 @@ import {regCheckPassword, regCheckEmail} from 'utils';
 import api from 'api';
 import toastHook from 'hooks/useToastHook';
 import defaultProfile from 'assets/img/default-user.png';
-const [showToast, hideToast] = toastHook({type: '', content: ''});
+const [showToast, hideToast] = toastHook();
+
+interface errorType {
+  content: string;
+  isError: boolean;
+}
 
 export const initData = {
   id: '',
@@ -40,19 +45,19 @@ export const initData = {
   birthday: '',
 };
 
-const checkEmail = (val) => {
+const checkEmail = (val: string) => {
   return regCheckEmail.test(val);
 };
 
-const checkPassword = (val) => {
+const checkPassword = (val: string) => {
   return regCheckPassword.test(val);
 };
 
-const checkPasswordEqual = (val, checkPassword) => {
+const checkPasswordEqual = (val: string, checkPassword: string) => {
   return checkPassword === val;
 };
 
-export const checkEmailApi = async (id, email, dispatch) => {
+export const checkEmailApi = async (id: string, email: string, dispatch) => {
   try {
     const {
       data: {duplicated},
@@ -73,7 +78,7 @@ export const checkEmailApi = async (id, email, dispatch) => {
   }
 };
 
-export const checkNicknameApi = async (id, nickname, dispatch) => {
+export const checkNicknameApi = async (id: string, nickname: string, dispatch) => {
   try {
     const {
       data: {duplicated},

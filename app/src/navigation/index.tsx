@@ -10,6 +10,7 @@ import {userInfoName} from 'store';
 import {RootState} from 'store';
 import StackNavigation from './StackNavigation';
 import CustomDrawerContent from './CustomDrawerContent';
+import Mypage from 'pages/mypage';
 const {width} = Dimensions.get('window');
 const Drawer = createDrawerNavigator();
 
@@ -34,6 +35,7 @@ const Root = () => {
       <Drawer.Screen name="Main" component={Main} />
       <Drawer.Screen name="Intro" component={Intro} />
       <Drawer.Screen name="StyletestIntro" component={StyletestIntro} />
+      <Drawer.Screen name="Mypage" component={Mypage} />
       {loginStatus !== 'login' ? <Drawer.Screen name="Login" component={Login} options={{headerShown: false}} /> : <></>}
     </Drawer.Navigator>
   );
