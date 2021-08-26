@@ -422,7 +422,7 @@
       margin-top: 30px;
       padding-left: 25px;
       padding-right: 25px;
-      padding-bottom: 110px;
+      padding-bottom: 0px;
 
       .buy-btn {
         left: 50%;
@@ -449,6 +449,14 @@
       }
 
       .detail-item {
+        &:nth-child(even) {
+          padding-left: 0px;
+        }
+
+        &:nth-child(odd) {
+          padding-right: 0px;
+        }
+        width: 100%;
         display: flex;
         flex-direction: column;
         margin-bottom: 32px;

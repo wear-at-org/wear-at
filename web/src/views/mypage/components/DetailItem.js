@@ -8,23 +8,25 @@ const DetailItem = ({ item }) => {
       </div>
 
       <div className="right-info">
-        <div className="mb0">
-          <h5>{item.brand}</h5>
-        </div>
         <div className="mb4">
           <h4>{item.title}</h4>
-        </div>
-        <div className="mb4">
-          <h4>{item.description}</h4>
         </div>
         <div className="price-value mb16">
           <h5 className="small color-blue">{item.price}</h5>
         </div>
-        <a href={item.linkUrl} target="_blank" rel="noreferrer" className="info-price">
-          <div className="btn-style2 middle center">
+        <a href={item.linkUrl} target="_blank" rel="noreferrer" className="info-price mb20">
+          <div className="btn-style2 middle center ">
             <p className="btn-font color-black333 bold">바로 구매하기</p>
           </div>
         </a>
+
+        <h6 className="mb4 color-grayAEAE">코멘트</h6>
+
+        <h5 className="small">
+          <div className="mb4">
+            <h4>{item.description}</h4>
+          </div>
+        </h5>
       </div>
     </div>
   );

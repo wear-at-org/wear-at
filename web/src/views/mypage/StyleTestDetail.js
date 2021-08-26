@@ -32,13 +32,15 @@ const StyleTestDetail = () => {
         </div>
 
         <div className="style-item-list">
-          <div className="style-item-main-title">
+          <div className="style-item-main-title mb20">
             <h5>모든 상품 자세히 보기</h5>
           </div>
 
-          {detailItem.recommendItems.map((item, index) => {
-            return <DetailItem key={index + 'DetailItem'} item={item} />;
-          })}
+          <div className="detail-item-wrap">
+            {detailItem.recommendItems.map((item, index) => {
+              return <DetailItem key={index + 'DetailItem'} item={item} />;
+            })}
+          </div>
         </div>
       </div>
     </div>

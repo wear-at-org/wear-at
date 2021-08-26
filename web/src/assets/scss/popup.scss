@@ -297,16 +297,34 @@
       margin-bottom: 23px;
     }
 
-    .detail-item {
+    .detail-item-wrap {
       display: flex;
-      margin-bottom: 60px;
-      .left-img {
-        width: 50%;
-        padding-right: 60px;
+      flex-wrap: wrap;
+    }
+
+    .detail-item {
+      &:nth-child(even) {
+        padding-left: 18px;
       }
 
+      &:nth-child(odd) {
+        padding-right: 18px;
+      }
+      width: 50%;
+      display: flex;
+      margin-bottom: 60px;
+      flex-direction: column;
+
+      .left-img {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin-bottom: 20px;
+        min-height: 400px;
+        max-height: 500px;
+      }
       .right-info {
-        width: 50%;
         display: flex;
         flex-direction: column;
         justify-content: center;
