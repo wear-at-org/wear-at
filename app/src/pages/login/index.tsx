@@ -1,17 +1,28 @@
 import React, {useState} from 'react';
 import SignHook from 'hooks/useSignHook';
-import {View, TextInput, StyleSheet} from 'react-native';
+import {View, TextInput, StyleSheet, Link} from 'react-native';
 import Layout from 'components/CommonLayout';
 import {Color, margin} from 'utils/commonStyle';
 import CommonBtn from 'components/CommonBtn';
 import {ScrollView} from 'react-native-gesture-handler';
 import Footer from 'components/Footer';
 import Header from 'components/Header';
+import api from 'api';
 
 const Login = () => {
   const [email, setEmail] = useState('rnwk34@nate.com');
   const [password, setPassword] = useState('P@ssw0rd');
   const {login} = SignHook();
+
+  const snsLogin = async (provider: string) => {
+    console.log(provider);
+    const {
+      data: {url},
+    } = await api.get(`auth/url?provider=kakao`);
+
+    console.log(url);
+    await Link.openURL(url);
+  };
 
   const loginProcess = async () => {
     login(email, password, false);
@@ -42,7 +53,7 @@ const Login = () => {
             />
           </View>
           <View style={{...margin(30, 'bottom')}}>
-            <CommonBtn btnTxt={'로그인'} btnType={'type1'} onPress={loginProcess} />
+            <CommonBtn btnTxt={'로그인'} btnType={'type1'} onPress={snsLogin} />
           </View>
           <View style={{...margin(30, 'bottom')}}>
             <CommonBtn btnTxt={'회원가입'} btnType={'type2'} />

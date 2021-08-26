@@ -4,7 +4,6 @@ import api from 'api';
 import store, {userInfoName} from '../store';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
-import FastImage from 'react-native-fast-image';
 import {stackNavigationProp} from 'navigation/StackNavigation';
 import {RootState} from 'store';
 

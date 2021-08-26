@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {View, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, TouchableOpacity, StyleSheet, Dimensions} from 'react-native';
 import {DrawerContentScrollView, DrawerContentComponentProps} from '@react-navigation/drawer';
 import {DrawerActions} from '@react-navigation/native';
 import SpoText from 'components/SpoText';
@@ -9,13 +9,15 @@ import xBtn from 'assets/img/x-btn-black.png';
 import FastImage from 'react-native-fast-image';
 import defaultProfile from 'assets/img/default-user.png';
 import {Color, margin, commonStyle, padding} from 'utils/commonStyle';
+import SignHook from 'hooks/useSignHook';
 
+const {height} = Dimensions.get('window');
 const CustomDrwaer: FC<DrawerContentComponentProps> = (props) => {
+  const {logout} = SignHook();
   const {navigation} = props;
   const userInfo = useSelector((state: RootState) => state[userInfoName]);
-  console.log(props);
   return (
-    <DrawerContentScrollView {...props}>
+    <DrawerContentScrollView {...props} contentContainerStyle={styles.drawerContainer}>
       <View style={styles.profileContainer}>
         <TouchableOpacity style={styles.xbtnContainer} onPress={() => navigation.dispatch(DrawerActions.closeDrawer())}>
           <FastImage source={xBtn} style={commonStyle.icon20} />
@@ -83,6 +85,14 @@ const CustomDrwaer: FC<DrawerContentComponentProps> = (props) => {
           </TouchableOpacity>
         </View>
       </View>
+
+      {userInfo.loginStatus !== 'login' ? (
+        <></>
+      ) : (
+        <TouchableOpacity onPress={logout} style={styles.logout}>
+          <SpoText>로그아웃</SpoText>
+        </TouchableOpacity>
+      )}
     </DrawerContentScrollView>
   );
 };
@@ -119,5 +129,13 @@ const styles = StyleSheet.create({
   drawerBtnText: {
     fontSize: 14,
     color: 'white',
+  },
+  logout: {
+    position: 'absolute',
+    bottom: 10,
+    left: 25,
+  },
+  drawerContainer: {
+    minHeight: height - 70,
   },
 });
